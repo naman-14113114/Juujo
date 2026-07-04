@@ -1,0 +1,304 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Check,
+  ChevronDown,
+  Gift,
+  ShoppingBag,
+  Truck,
+} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { useCart } from "./CartProvider";
+import { CartLineItem } from "./CartLineItem";
+import { CartSummary } from "./CartSummary";
+import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
+import { FreeGiftsPanel } from "./FreeGiftsPanel";
+import { getDisplayLines, type CartLine } from "@/lib/cart";
+import { market } from "@/lib/market";
+
+const digitalGiftId = "skincare-ebook";
+
+function useCheckoutCountdown(seconds: number) {
+  const [remaining, setRemaining] = useState(seconds);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setRemaining((current) => (current <= 0 ? seconds : current - 1));
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [seconds]);
+
+  const minutes = Math.floor(remaining / 60);
+  const secs = remaining % 60;
+
+  return `${String(minutes).padStart(2, "0")}m : ${String(secs).padStart(2, "0")}s`;
+}
+
+function useDeliveryDate(daysFromToday: number) {
+  const [dateLabel, setDateLabel] = useState("");
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      const date = new Date();
+      date.setDate(date.getDate() + daysFromToday);
+
+      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
+      const day = date.getDate();
+      const month = date.toLocaleString(market.locale, { month: "long" });
+
+      setDateLabel(`${weekday} ${day} ${month}`);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [daysFromToday]);
+
+  return dateLabel;
+}
+
+export function CartPageContent({
+  initialCustomer,
+}: {
+  initialCustomer: CheckoutCustomer;
+}) {
+  const { isHydrated, lines, totals, giftMessage, setGiftMessage } = useCart();
+  const [giftMessageOpen, setGiftMessageOpen] = useState(Boolean(giftMessage));
+  const [showSaved, setShowSaved] = useState(false);
+  const timer = useCheckoutCountdown(10 * 60 - 1);
+  const deliveryDate = useDeliveryDate(3);
+  const visibleLines = useMemo(
+    () => getDisplayLines(lines),
+    [lines],
+  );
+  const digitalGift = useMemo(
+    () => lines.find((line) => line.id.includes(digitalGiftId)),
+    [lines],
+  );
+  const hasItems = totals.itemCount > 0;
+
+  if (!isHydrated) {
+    return <CartRestoringState />;
+  }
+
+  if (!hasItems) {
+    return (
+      <section className="juujo-section bg-[var(--cream)] py-28">
+        <div className="juujo-wrap max-w-2xl text-center">
+          <ShoppingBag className="mx-auto text-[var(--gold)]" size={42} />
+          <h1 className="juujo-heading mt-5">Your cart is empty.</h1>
+          <p className="juujo-copy mx-auto mt-5 max-w-lg">
+            Add the Juujo LED Mask or Red Torch to unlock current offers and
+            free shipping.
+          </p>
+          <Button asChild className="mt-8">
+            <Link href="/">Shop Juujo</Link>
+          </Button>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="juujo-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
+      <div className="juujo-wrap">
+        <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
+          {/* Mobile Layout */}
+          <div className="flex flex-col items-center gap-3 md:hidden">
+            <div className="flex items-center justify-center gap-3">
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                <Truck size={22} />
+              </span>
+              <span className="juujo-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
+                Free tracked shipping
+              </span>
+            </div>
+            <p className="juujo-display text-center text-xl leading-snug text-[var(--plum)]">
+              Order in next{" "}
+              <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
+              and receive it by{" "}
+              <span className="font-semibold text-[var(--plum)]">
+                {deliveryDate || "soon"}
+              </span>
+            </p>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                <Truck size={22} />
+              </span>
+              <p className="juujo-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
+                Order in next{" "}
+                <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
+                and receive it by{" "}
+                <span className="font-semibold text-[var(--plum)]">
+                  {deliveryDate || "soon"}
+                </span>
+              </p>
+            </div>
+            <span className="juujo-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
+              Free tracked shipping
+            </span>
+          </div>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[1fr_430px]">
+          <div className="space-y-5">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] px-5">
+              {visibleLines.map((line) => (
+                <CartLineItem key={line.id} line={line} />
+              ))}
+            </div>
+            {digitalGift ? <DigitalGiftNotice line={digitalGift} /> : null}
+          </div>
+
+          <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+            <CartSummary>
+              <span className="sr-only" id="checkout" />
+              <CheckoutForm initialCustomer={initialCustomer} />
+            </CartSummary>
+            <FreeGiftsPanel compact />
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <button
+                aria-controls="gift-message-panel"
+                aria-expanded={giftMessageOpen}
+                className="flex w-full items-center justify-between gap-4 text-left"
+                onClick={() => setGiftMessageOpen((current) => !current)}
+                type="button"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                    <Gift size={17} />
+                  </span>
+                  <span>
+                    <span className="juujo-mono block text-[var(--plum)]">
+                      Add Gift Message
+                    </span>
+                    <span className="mt-1 block text-sm text-[var(--muted)]">
+                      Price will be hidden on packing slip.
+                    </span>
+                  </span>
+                </span>
+                <span className="flex items-center gap-3">
+                  <span className="juujo-mono hidden text-[var(--gold)] sm:inline">
+                    {giftMessage.length}/300
+                  </span>
+                  <ChevronDown
+                    className={`text-[var(--gold)] transition-transform duration-300 ${
+                      giftMessageOpen ? "rotate-180" : ""
+                    }`}
+                    size={18}
+                  />
+                </span>
+              </button>
+
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                  giftMessageOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+                id="gift-message-panel"
+              >
+                <div className="overflow-hidden">
+                  <div className="mt-4 flex justify-end sm:hidden">
+                    <span className="juujo-mono text-[var(--gold)]">
+                      {giftMessage.length}/300
+                    </span>
+                  </div>
+                  <textarea
+                    className="mt-4 min-h-28 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--cream)] p-3 text-sm text-[var(--plum)] outline-none transition focus:border-[var(--plum)]"
+                    maxLength={300}
+                    onChange={(event) => {
+                      setGiftMessage(event.target.value);
+                      setShowSaved(false);
+                    }}
+                    placeholder="Write your warm wish..."
+                    value={giftMessage}
+                  />
+                  <button
+                    className="mt-3 flex items-center gap-2 text-sm font-semibold text-[var(--plum)] transition hover:text-[var(--gold)]"
+                    onClick={() => setShowSaved(true)}
+                    type="button"
+                  >
+                    {showSaved ? <Check size={16} /> : null}
+                    {showSaved ? "Gift message saved" : "Save gift message"}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {/* <PaymentTrustStrip /> */}
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CartRestoringState() {
+  return (
+    <section
+      aria-live="polite"
+      aria-busy="true"
+      className="juujo-section bg-[var(--cream)] py-28"
+    >
+      <div className="juujo-wrap max-w-2xl text-center">
+        <ShoppingBag
+          className="mx-auto animate-pulse text-[var(--gold)]"
+          size={42}
+        />
+        <h1 className="juujo-heading mt-5">Restoring your bag...</h1>
+        <p className="juujo-copy mx-auto mt-5 max-w-lg">
+          Bringing your Juujo selections back into view.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function DigitalGiftNotice({ line }: { line: CartLine }) {
+  return (
+    <div className="overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-4 md:p-5">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-start gap-4">
+          <span className="relative h-24 w-20 flex-none overflow-hidden rounded-lg bg-[var(--card)] shadow-sm">
+            <Image
+              alt={line.title}
+              className="object-cover"
+              fill
+              sizes="80px"
+              src={line.image}
+            />
+          </span>
+          <div className="flex flex-col items-start gap-2">
+            <span className="juujo-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-xs font-semibold text-[var(--plum)]">
+              Free digital reward
+            </span>
+            <p className="juujo-display text-xl leading-tight text-[var(--plum)] md:text-2xl">
+              {line.title} is sent by email after checkout.
+            </p>
+          </div>
+        </div>
+        <p className="text-sm leading-6 text-[var(--muted)]">
+          It will not appear as a shipped cart item, but it stays unlocked with
+          your mask order so your routine starts the moment your confirmation
+          email arrives.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function PaymentTrustStrip() {
+  return (
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 flex justify-center items-center">
+      <img
+        alt="Payment Options"
+        className="w-full max-w-[340px] h-auto object-contain"
+        src="/media/products/buudy-led-mask/images/payment_options.png"
+      />
+    </div>
+  );
+}

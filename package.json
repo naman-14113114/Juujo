@@ -1,0 +1,28 @@
+{
+  "name": "juujo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "dev:uk": "pnpm --filter @juujo/uk dev",
+    "dev:us": "pnpm --filter @juujo/us dev",
+    "dev:ca": "pnpm --filter @juujo/ca dev",
+    "dev:au": "pnpm --filter @juujo/au dev",
+    "build:uk": "pnpm --filter @juujo/uk build",
+    "build:us": "pnpm --filter @juujo/us build",
+    "build:ca": "pnpm --filter @juujo/ca build",
+    "build:au": "pnpm --filter @juujo/au build",
+    "lint:uk": "pnpm --filter @juujo/uk lint",
+    "lint:us": "pnpm --filter @juujo/us lint",
+    "lint:ca": "pnpm --filter @juujo/ca lint",
+    "lint:au": "pnpm --filter @juujo/au lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.8.6",
+    "typescript": "^5"
+  }
+}

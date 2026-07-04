@@ -1,0 +1,3 @@
+{
+  "extends": "@juujo/tsconfig/react-library.json"
+}

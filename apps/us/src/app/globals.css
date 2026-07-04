@@ -1,0 +1,377 @@
+@import "tailwindcss";
+
+:root {
+  /* Juujo bedding palette (OKLCH) — see DESIGN.md. Legacy token names are kept
+     as aliases so every component reading var(--plum)/var(--gold)/var(--cream)/
+     etc. reskins instantly with no component changes.
+     Meaning now: --plum = deep restful night, --gold = warm clay accent,
+     --cream = warm paper, --blush = warm linen panel. */
+  --night: oklch(26% 0.038 274);
+  --night-soft: oklch(38% 0.045 278);
+  --clay: oklch(63% 0.093 52);
+  --clay-deep: oklch(55% 0.098 46);
+  --paper: oklch(96.5% 0.011 84);
+  --sand: oklch(93% 0.02 82);
+  --linen: oklch(90% 0.026 78);
+
+  /* Legacy aliases mapped to the bedding palette */
+  --plum: var(--night);
+  --plum-soft: var(--night-soft);
+  --gold: var(--clay);
+  --cream: var(--paper);
+  --blush: var(--linen);
+  --ink: oklch(24% 0.02 280);
+  --card: oklch(97.5% 0.009 84);
+  --border: oklch(86% 0.014 80);
+  --muted: oklch(50% 0.02 285);
+  --success: oklch(60% 0.11 150);
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  /* Motion tokens (emil-design-eng) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 140ms;
+  --dur-ui: 200ms;
+  --dur-panel: 260ms;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-playfair: var(--font-playfair), serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--cream);
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  background:
+    radial-gradient(circle at top left, oklch(88% 0.03 70 / 0.32), transparent 34rem),
+    var(--cream);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: oklch(63% 0.093 52 / 0.3);
+  color: var(--plum);
+}
+
+.juujo-wrap {
+  width: calc(100% - 32px);
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.juujo-wrap > * {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .juujo-wrap {
+    width: calc(100% - 80px);
+  }
+}
+
+.juujo-section {
+  position: relative;
+  overflow: clip;
+}
+
+section.bg-\[var\(--cream\)\] + section.bg-\[var\(--cream\)\],
+section.bg-\[var\(--cream\)\] + section.bg-\[\#f6ede2\],
+section.bg-\[\#f6ede2\] + section.bg-\[var\(--cream\)\],
+section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
+  padding-top: 0 !important;
+}
+
+.juujo-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  overflow-wrap: break-word;
+}
+
+.juujo-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.juujo-italic {
+  font-style: italic;
+  font-weight: 340;
+}
+
+.juujo-eyebrow {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.juujo-heading {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  color: var(--plum);
+  font-size: clamp(2.5rem, 6vw, 4.7rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.juujo-copy {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.juujo-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: 0.22;
+}
+
+.juujo-marquee {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  gap: 2rem;
+  animation: juujo-marquee 32s linear infinite;
+}
+
+.juujo-marquee-slow {
+  animation-duration: 60s;
+}
+
+
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes juujo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes juujo-ping {
+  75%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes proxy-bundle-shine {
+  0% { transform: skewX(-20deg) translateX(-150%); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: skewX(-20deg) translateX(250%); opacity: 0; }
+}
+
+.proxy-bundle-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent calc(50% - 70px), rgba(255, 255, 255, 0.6) 50%, transparent calc(50% + 35px));
+  transform: skewX(-30deg) translateX(-150%);
+  animation: proxy-bundle-shine 4s infinite ease-in-out;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes juujo-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: juujo-fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.home-soft-lift {
+  animation: home-soft-lift 9s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
+.home-light-scan::before {
+  animation: home-light-scan 5.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(66% 0.088 86 / 0.26),
+    transparent
+  );
+  content: "";
+  inset-block: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 36%;
+}
+
+@keyframes home-soft-lift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 -10px;
+  }
+}
+
+@keyframes home-light-scan {
+  from {
+    left: -42%;
+  }
+
+  to {
+    left: 108%;
+  }
+}
+
+.juujo-cart-wipe {
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.juujo-cart-wipe::before {
+  background: linear-gradient(90deg, var(--cream) 0%, var(--blush) 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.juujo-cart-wipe:hover::before,
+.juujo-cart-wipe:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.juujo-cart-wipe:hover,
+.juujo-cart-wipe:focus-visible {
+  color: var(--ink) !important;
+}
+
+.juujo-cart-wipe:hover .juujo-cart-pulse,
+.juujo-cart-wipe:focus-visible .juujo-cart-pulse {
+  background: var(--ink);
+}
+
+.juujo-cart-wipe:hover .juujo-cart-pulse-ring,
+.juujo-cart-wipe:focus-visible .juujo-cart-pulse-ring {
+  background: oklch(17% 0.03 318 / 0.42);
+}
+
+.juujo-sticky-cart-icon {
+  color: inherit;
+}
+
+.juujo-sticky-cart-icon path {
+  stroke: currentColor !important;
+}
+
+.juujo-cart-wipe:hover .juujo-sticky-cart-icon path,
+.juujo-cart-wipe:focus-visible .juujo-sticky-cart-icon path {
+  stroke: var(--ink) !important;
+}
+
+.juujo-cart-wipe > *,
+.juujo-cart-wipe-content {
+  color: inherit;
+  opacity: 1;
+  position: relative;
+  visibility: visible;
+  z-index: 1;
+}
+
+.juujo-cart-wipe-content > * {
+  color: inherit;
+  opacity: 1;
+  visibility: visible;
+}
+
+.juujo-cart-wipe-content svg {
+  color: inherit;
+}
+
+.juujo-mask-sticky-cta footer {
+  padding-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .juujo-mask-sticky-cta footer {
+    padding-bottom: 3.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
