@@ -14,7 +14,7 @@ export function Footer() {
                 alt="Juujo"
                 className="h-auto w-44"
                 height={58}
-                src="/media/brand/juujo-logo.png"
+                src="/media/brand/juujo-logo-footer.png"
                 width={174}
               />
             </Link>
