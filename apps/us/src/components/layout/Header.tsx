@@ -143,13 +143,33 @@ export function Header() {
 
         <nav className="hidden gap-7 lg:flex" aria-label="Primary">
           {primaryNavigation.map((item) => (
-            <Link
-              className="juujo-mono text-[var(--plum)] opacity-80 transition hover:opacity-100"
-              href={item.href}
-              key={item.label}
-            >
-              {item.label}
-            </Link>
+            "items" in item ? (
+              <div key={item.label} className="relative group">
+                <button className="flex h-11 items-center gap-1 juujo-mono text-[var(--plum)] opacity-80 transition hover:opacity-100">
+                  {item.label}
+                  <ChevronDown size={14} className="transition group-hover:rotate-180" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-[var(--border)] bg-white p-2 shadow-[0_10px_40px_-15px_rgba(58,31,61,.2)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                  {item.items.map((sub) => (
+                    <Link
+                      key={sub.label}
+                      href={sub.href}
+                      className="block rounded-lg px-3 py-2 text-sm text-[var(--plum)] hover:bg-[var(--cream)]"
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                className="flex h-11 items-center juujo-mono text-[var(--plum)] opacity-80 transition hover:opacity-100"
+                href={item.href}
+                key={item.label}
+              >
+                {item.label}
+              </Link>
+            )
           ))}
         </nav>
 
@@ -316,12 +336,30 @@ export function Header() {
                   <p className="juujo-eyebrow px-2">Shop</p>
                   <nav className="mt-2" aria-label="Mobile shop">
                     {primaryNavigation.map((item) => (
-                      <MobileMenuLink
-                        href={item.href}
-                        key={item.label}
-                        label={item.label}
-                        onClick={() => setMobileMenuOpen(false)}
-                      />
+                      "items" in item ? (
+                        <div key={item.label} className="mb-2">
+                          <div className="flex min-h-11 items-center px-3 py-2 text-sm font-semibold text-[var(--plum)] opacity-60">
+                            {item.label}
+                          </div>
+                          <div className="ml-3 pl-3 flex flex-col border-l-2 border-[var(--border)] gap-1">
+                            {item.items.map((sub) => (
+                              <MobileMenuLink
+                                key={sub.label}
+                                href={sub.href}
+                                label={sub.label}
+                                onClick={() => setMobileMenuOpen(false)}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <MobileMenuLink
+                          href={item.href}
+                          key={item.label}
+                          label={item.label}
+                          onClick={() => setMobileMenuOpen(false)}
+                        />
+                      )
                     ))}
                   </nav>
 

@@ -115,24 +115,61 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity, variantId)];
 }
 
+function deriveGiftLines(lines: CartLine[]): CartLine[] {
+  const productLines = lines.filter((line) => line.type === "product");
+  const hasSheet = productLines.some((line) => {
+    const product = findProductForLine(line);
+    return product?.category === "grounding-sheets";
+  });
+
+  if (!hasSheet) return [];
+
+  const matProduct = getProductBySlug("grounding-mat");
+  if (!matProduct) return [];
+
+  const matVariant = getDefaultVariant(matProduct);
+
+  const matLine: CartLine = {
+    id: "gift-mat",
+    productId: matProduct.id,
+    slug: matProduct.slug,
+    variantId: matVariant.variantId,
+    type: "gift",
+    title: matProduct.name,
+    subtitle: "Free gift",
+    image: matProduct.cartImage,
+    unitPriceCents: 0,
+    compareAtCents: matVariant.priceCents,
+    quantity: 1,
+    locked: true,
+  };
+
+  return [matLine];
+}
+
 export function calculateCartTotals(lines: CartLine[]) {
   const productLines = lines.filter((line) => line.type === "product");
-  const subtotalCents = productLines.reduce(
+  const giftLines = deriveGiftLines(lines);
+  const displayLines = [...productLines, ...giftLines];
+
+  const subtotalCents = displayLines.reduce(
     (total, line) => total + line.unitPriceCents * line.quantity,
     0,
   );
-  const compareAtCents = productLines.reduce(
+  const compareAtCents = displayLines.reduce(
     (total, line) =>
       total + (line.compareAtCents ?? line.unitPriceCents) * line.quantity,
     0,
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
 
+  const giftValueCents = giftLines.reduce((total, line) => total + (line.compareAtCents ?? 0) * line.quantity, 0);
+
   return {
-    itemCount: productLines.reduce((total, line) => total + line.quantity, 0),
+    itemCount: displayLines.reduce((total, line) => total + line.quantity, 0),
     subtotalCents,
     compareAtCents,
-    giftValueCents: 0,
+    giftValueCents,
     savingsCents,
     shippingCents: 0,
     totalCents: subtotalCents,
@@ -140,5 +177,6 @@ export function calculateCartTotals(lines: CartLine[]) {
 }
 
 export function getDisplayLines(lines: CartLine[]): CartLine[] {
-  return lines.filter((line) => line.type === "product");
+  const productLines = lines.filter((line) => line.type === "product");
+  return [...productLines, ...deriveGiftLines(lines)];
 }

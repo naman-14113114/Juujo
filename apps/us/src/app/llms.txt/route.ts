@@ -2,21 +2,19 @@ import { market } from "@/lib/market";
 
 const body = `# Juujo UK
 
-Juujo UK sells premium bedding for better sleep: grounding sheets, weighted blankets, cooling bed sheets, and adaptive pillows.
+Juujo UK sells premium bedding for better sleep: fitted grounding sheets, flat grounding sheets, and grounding mats.
 
 ## Primary Pages
 - Home: ${market.siteUrl}
-- Grounding Sheets: ${market.siteUrl}/products/grounding-sheets
-- Weighted Blankets: ${market.siteUrl}/products/weighted-blanket
-- Cooling Bed Sheets: ${market.siteUrl}/products/cooling-bed-sheets
-- Pillows: ${market.siteUrl}/products/pillows
+- Fitted Grounding Sheet: ${market.siteUrl}/products/grounding-sheets
+- Flat Grounding Sheet: ${market.siteUrl}/products/grounding-flat-sheet
+- Grounding Mat: ${market.siteUrl}/products/grounding-mat
 - FAQs: ${market.siteUrl}/pages/faqs
 
 ## Range Summary
-- Grounding Sheet: conductive silver-threaded fitted sheet for a calmer wind-down. Organic cotton, machine washable, three colours, sizes Double / Queen / King.
-- Weighted Blanket: evenly distributed glass beads with a breathable cotton cover for a cocooned feel. Weights 5kg / 7kg / 9kg.
-- Cooling Bed Sheets: breathable, heat-wicking weave that helps warm sleepers stay comfortable. Set includes fitted, flat, and two pillowcases.
-- Adaptive Pillow: adjustable loft with a breathable, washable cover for back, side, and front sleepers.
+- Fitted Grounding Sheet: conductive silver-threaded fitted sheet for a calmer wind-down. Organic cotton, machine washable, three colours, sizes Double / Queen / King.
+- Flat Grounding Sheet: conductive silver-threaded flat sheet for a calmer wind-down. Organic cotton, machine washable, three colours, sizes Double / Queen / King.
+- Grounding Mat: versatile conductive mat for grounding at your desk, on the couch, or on the floor.
 
 ## Buyer Support
 - Every product ships free, comes with a 100-night sleep trial and easy returns.

@@ -4,9 +4,8 @@ import { market } from "@/lib/market";
 const routes = [
   { path: "/", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
   { path: "/products/grounding-sheets", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
-  { path: "/products/weighted-blanket", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
-  { path: "/products/cooling-bed-sheets", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
-  { path: "/products/pillows", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/products/grounding-flat-sheet", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
+  { path: "/products/grounding-mat", lastModified: "2026-07-03", changeFrequency: "weekly", priority: 1 },
   { path: "/cart", lastModified: "2026-07-03", changeFrequency: "monthly", priority: 0.4 },
   { path: "/pages/contact-us", lastModified: "2026-07-03", changeFrequency: "monthly", priority: 0.6 },
   { path: "/pages/about-us", lastModified: "2026-07-03", changeFrequency: "monthly", priority: 0.6 },

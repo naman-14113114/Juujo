@@ -37,6 +37,8 @@ const reviewCollections = {
   "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-sheets": groundingReviews.map(normalizeStaticReview) as ProductReview[],
+  "grounding-flat-sheet": groundingReviews.map(normalizeStaticReview) as ProductReview[],
+  "grounding-mat": groundingReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;

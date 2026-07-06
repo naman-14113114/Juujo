@@ -275,3 +275,130 @@ Per user follow-up (scope: grounding sheets only; do not touch other products):
 - Copied the new video files to public/videos/grounding-sheets/ across all 4 apps.
 - Synced all changed UI components and products.ts to uk, ca, and u apps.
 - All 4 apps type-check clean.
+
+---
+
+## 16. NEXT TASK — GROUNDING FLAT SHEET + GROUNDING MAT (free gift) + HEADER RESTRUCTURE
+
+> This section is a **complete, standalone execution spec** for the next agent. It was authored after full exploration of the repo, both reference pages, and the media folder. Read it top to bottom. Do the work UK-first, build-verify, then replicate to us/ca/au. Follow the standing rules in §10 (no bulk-edit scripts, targeted reviewable edits, no em dashes, OKLCH tokens, emil motion, preserve cart/checkout plumbing).
+
+### 16.0 What the user asked for (verbatim intent)
+Inside the **Grounding Sheets** category there is currently ONE product: the **fitted** sheet (built in §14/§15, slug `/products/grounding-sheets`). The user wants:
+1. A **second sheet product — "Grounding Flat Sheet"** — a near-identical page to the fitted one (same theme/sections; only a flat-sheet vs fitted-sheet distinction). "There is not much difference in pages of sheets" — reuse the exact same page/sections, do not invent a new design.
+2. A **third product — "Grounding Mat"** — its own product page, **sold standalone** (own price + working Add to Cart), AND **given FREE as a gift with BOTH the fitted and flat sheet**.
+3. **Header restructure** in the grounding.co style: a **"Grounding Sheets" dropdown** with sub-menu items **Fitted Sheet** + **Flat Sheet**, plus a top-level **Grounding Mat** link. **Comment out / hide Weighted Blankets, Cooling Sheets, and Pillows** everywhere (site + header) — user does not want to see them right now (comment out, do not hard-delete, so they can return later).
+
+### 16.1 User's LOCKED decisions (do not re-ask)
+- **Mat on the sheet pages** = a **FREE gift auto-added to cart at £0** (show worth ~£69.95 struck through to FREE). Not a paid add-on, not a size-picker.
+- **Mat is ALSO sold standalone** — its page has its own price and a real Add to Cart.
+- **Header** keeps only **Grounding (Fitted / Flat) + Grounding Mat**. Weighted/Cooling/Pillows hidden.
+- **Fitted page keeps its URL** `/products/grounding-sheets` — only relabel the visible name to **"Grounding Fitted Sheet"**. Flat sheet = new slug `/products/grounding-flat-sheet`. Mat = new slug `/products/grounding-mat`.
+
+### 16.2 Reference pages (structure/data/imagery reference ONLY — do NOT hot-link or copy their photos; use the user's own media)
+- Flat sheet: `https://thegrounding.co/products/terra-grounding-flat-sheet`
+- Mat: `https://thegrounding.co/products/terra-earthlink-grounding-mat`
+- Header pattern (Grounding dropdown with sub-menu): `https://thegrounding.co`
+
+**Mat page structure (from reference):** gallery + title/rating/size-selector/Add-to-Cart -> testimonials -> Product Details accordion (Details / How grounding works / What's in the package / Care & Dimensions / Shipping) -> feature icons -> "Advanced Silver Fiber Technology" -> "How grounding improves health" -> clinical stats -> "How to set up your mat" (3 steps: place on flat surface -> attach cord to pin -> plug into grounded outlet -> sit/stand/lie) -> FAQ -> founder -> footer. Sizes: **Desk 10x27 in / Couch 16x32 in / Floor 24x36 in**. Ships with a grounding cord + international plug adapter. Price ref $69.95 (compare $139.95).
+
+**Flat sheet page structure:** effectively identical to the fitted grounding page already built — Product Details (95% organic cotton + 5% conductive silver), Read-the-Science benefits, What's in the package, Care & Dimensions, timeline, 3-step setup, science stats, FAQ.
+
+### 16.3 MEDIA — source folder + classification (verified by viewing the images)
+**Source (user's folder, outside the repo — request directory access):** `E:\1st YEAR DTU\New folder\Bedsheets\Grounding Sheets` (one flat folder, MIXED sheet + mat + review selfies — must NOT be mixed on the site). Copy targeted files only (no bulk scripts).
+
+**MAT-ONLY assets (verified):**
+- `TGC-mat1.png` — 3-layer cross-section infographic (Conductive Carbon Fiber / Polyurethane Cushion / High-Density Polymer Foam). Use for the mat "materials/layers" section.
+- `Frame1707480222_1.png` — "Grounding Mat Size Guide" (Small 10x27 desk / Medium 16x32 bed / Large 24x36 floor-yoga). Use for mat size guide.
+- `71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg` — mat on a desk under laptop + mouse + hands (desk use-case).
+- `Gemini_Generated_Image_2zycqj2zycqj2zyc.png` — person standing barefoot on the black mat on a wood floor ("Terra Grounding Mat", 30-day guarantee, doctor-recommended). Good mat hero/lifestyle.
+
+**SHEET-ONLY assets (already hosted under `grounding-sheets/`, keep for both fitted + flat):** `main1-1.jpg`, `menu_hero_img.png` (fitted on bed), `TGC_Website_Images.png` (#1 doctor-recommended white bed), `custom-image-v2-8.png` (folded grey sheets + outlet adaptor), `US_cam_1_lightgray.jpg`, `US_cam_2_draft2_*.jpg`, `render_scene_PhysCamera001_gray_final.jpg`, `whitelinen3/graylinen3/greenlinen3`, `Pillowcase1Revised.jpg`, `2400x2400_0003REV3.10.2024.png` (couch throw lifestyle), plus the existing sheet videos.
+
+**SHARED / cord:** `0qcyc9g29pcuna5ga3lcebiskkyv.jpg` — the white grounding cord coil (used by both sheet + mat "what's included").
+
+**UNRELATED (do NOT use as product media — they are review/customer selfies):** `rev7.jpg`, `revv3_*.jpg`, `295284134_*.jpg`, `Before_5.png`, `dfsfsasaa.jpg`, `Gemini_Generated_Image_uic6bq*.jpg`.
+
+**VIDEOS (mixed; NOT yet classified — the agent MUST view the `*.thumbnail*.jpg` files to tell sheet-vs-mat before assigning).** Thumbnails present in the folder: `4603e65f...thumbnail`, `6206ed40...thumbnail`, `a0c706eb...thumbnail`, `ca0360f5...thumbnail`, `ef00debf...thumbnail`, `fca637c4...thumbnail`. Existing sheet videos already under `apps/*/public/media/products/grounding-sheets/videos/` and `apps/*/public/videos/grounding-sheets/` (the 3 how-to-use clips + lifestyle clips). Pick a mat clip only if its thumbnail clearly shows a flat mat under feet/desk, not a bed sheet.
+
+**Target folders (create):** `apps/<cc>/public/media/products/grounding-mat/{images,videos}/` and (if the existing pattern needs it) `apps/<cc>/public/videos/grounding-mat/`. Flat sheet reuses the existing `grounding-sheets` media (same fabric) — no new folder needed unless the user supplies distinct flat-fold photos.
+
+### 16.4 KEY CODE FACTS the agent needs (already verified in the repo)
+- **Product model:** `apps/uk/src/data/products.ts`. `ProductCategory` union currently `grounding-sheets|weighted-blankets|cooling-sheets|pillows`. `Product` has `category`, `colors[]`, `sizes[]`, `variants[]` (built by `buildVariants(base,colors,sizes)` -> placeholder `PLACEHOLDER-*` ids), `quantityTiers`, `specs`, `included?`, `faqs`, `badges`, `cartImage`, `gallery[]`. Registry: `export const products = [groundingSheets, weightedBlanket, coolingSheets, pillows]` + `getProductBySlug`/`getProductById`.
+- **Product route:** `apps/uk/src/app/products/[slug]/page.tsx` — `generateStaticParams()` maps `products` -> slugs, so **a product only gets a page if it is in the `products` array.** Adding flat sheet + mat = add them to `products`. Hiding weighted/cooling/pillows = remove them from `products` (comment out) — their pages then 404 automatically and drop from `generateStaticParams`.
+- **Page composition:** `apps/uk/src/components/product/ProductPage.tsx` renders `ProductHero` -> `TrustBadges` -> (grounding sections IF `category === "grounding-sheets"`) -> `ProductReviewsSection` -> `FAQSection` -> `GuaranteeSection` -> `StickyAddToCart`. The grounding sections block already keys off `category === "grounding-sheets"`, so **the flat sheet (same category) automatically gets all grounding sections for free.** For the mat, add a `category === "grounding-mat"` branch rendering mat-specific sections.
+- **Buy box:** `apps/uk/src/components/product/GroundingBuyBox.tsx` is used by `ProductHero` when `category === "grounding-sheets"`. It currently has a **paid "Most popular" add-on that adds the `pillows` product** (imports `pillows`, `getDefaultVariant`). Since pillows are being hidden, this add-on MUST be replaced by the **free Grounding Mat gift panel**. `ProductHero.tsx:7` selects `GroundingBuyBox` for `grounding-sheets` only — extend it to also use `GroundingBuyBox` (or a mat variant) for `grounding-mat`.
+- **Cart mechanics:** `apps/uk/src/lib/cart.ts`. `CartLine.type` is `"product" | "gift"` (gift retained for back-compat). **`normalizeCartLines` strips everything except `type === "product"` on every load** — so a gift line CANNOT be persisted; it must be **DERIVED** at display/total time. `getDisplayLines(lines)` and `calculateCartTotals(lines)` are the two seams. Implement `deriveGiftLines(lines)`: if any product line's product has `category === "grounding-sheets"`, append ONE locked mat gift line (`type:"gift"`, `quantity:1`, `unitPriceCents:0`, `compareAtCents = mat base price`, `locked:true`). Append it inside `getDisplayLines`, and count `giftValueCents = mat compareAt` inside `calculateCartTotals` (currently hardcoded 0). Cart UI already filters `type==="product"` for editing, so a gift line renders read-only.
+- **Cart line rendering:** check `components/cart/CartLineItem.tsx`, `CartProvider.tsx` (`getDisplayLines`), and `app/cart/CartPageContent.tsx` — make sure a `locked` £0 gift line shows "FREE" and has no qty stepper / remove button.
+- **Reviews:** `apps/uk/src/data/reviews.ts` has a `reviewCollections` map keyed by handle (`buudy-led-mask`, `buudy-red-torch`, `grounding-sheets`). `ProductPage` passes `productHandle = category === "grounding-sheets" ? "grounding-sheets" : "buudy-led-mask"`. Add handles `grounding-flat-sheet` + `grounding-mat` (reuse the `grounding-sheets-reviews.json` import) and update the `ProductPage` handle logic so flat sheet + mat show grounding reviews, not LED ones.
+- **Header/nav:** `apps/uk/src/data/navigation.ts` (`primaryNavigation` flat array of `{label,href}`) + `apps/uk/src/components/layout/Header.tsx` (desktop `primaryNavigation.map` at ~line 144; mobile at ~line 317). There is currently **no dropdown** — it must be added. Model the "Grounding Sheets" group as `{label, href, children:[{label,href}]}` and render a hover/click dropdown desktop + an expandable group in the mobile drawer. Keep Juujo tokens (`--plum`/`--gold`/`--cream`), `juujo-mono` class, and emil motion.
+- **Build-green consumers of the hidden products** (must be updated when weighted/cooling/pillows leave `products`): `data/home.ts` (imports + uses `coolingSheets`, `weightedBlanket`, `pillows` — see lines ~2, 22, 30, 38, 55, 69, 78, 80, 99), `data/footer.ts`, `app/sitemap.ts`, `app/llms.txt/route.ts`, `data/about.ts`. Keep the `export const weightedBlanket/coolingSheets/pillows` definitions (so stray imports still type-check) but remove them from the `products` array and from home/footer/sitemap/llms references, OR comment the references. Grep `pillows|weightedBlanket|coolingSheets` after editing and confirm nothing in a rendered path still imports a hidden product.
+
+### 16.5 STEP-BY-STEP EXECUTION (UK first)
+1. **Media.** Request dir access to `E:\1st YEAR DTU\New folder\Bedsheets\Grounding Sheets`. View the video `*.thumbnail*.jpg` files to classify sheet-vs-mat. Create `apps/uk/public/media/products/grounding-mat/{images,videos}/` and copy ONLY mat assets (16.3) + any confirmed mat video(s). Leave sheet media as-is.
+2. **`data/products.ts`.** Add `"grounding-mat"` to `ProductCategory`. Add optional `freeGiftId?: string` to the `Product` type. Relabel the fitted product `name: "Grounding Fitted Sheet"` (keep `slug:"grounding-sheets"`, `category:"grounding-sheets"`) and set `freeGiftId:"grounding-mat"`. Add `export const groundingFlatSheet` (slug `grounding-flat-sheet`, category `grounding-sheets`, flat-sheet copy, `freeGiftId:"grounding-mat"`, reuse sheet gallery/colors/sizes). Add `export const groundingMat` (slug `grounding-mat`, `category:"grounding-mat"`, sizes Desk/Couch/Floor with dimensions, own price ~£69.95 / compare £139.95, `buildVariants("GROUNDINGMAT",...)`, mat gallery from `grounding-mat` media). Set `products = [groundingSheets, groundingFlatSheet, groundingMat]` (comment out weighted/cooling/pillows in the array only; keep their `const` exports).
+3. **`lib/cart.ts`.** Add `deriveGiftLines(lines)` + wire into `getDisplayLines` (append derived mat gift, locked £0) and `calculateCartTotals` (`giftValueCents` = mat compareAt; keep `totalCents` = product subtotal so the gift stays free). Look up the mat via `getProductById("grounding-mat")` for its image/title/compareAt.
+4. **`components/product/GroundingBuyBox.tsx`.** Remove the `pillows` import + the paid "Most popular" add-on block. Add a non-toggle **"Free gift . Grounding Mat (worth £69.95)"** panel (mat thumbnail from `groundingMat.cartImage`, label, `FREE` with the £69.95 struck). `handleAddToCart` only adds the sheet (`addToCartVariant(product, quantity, variant.variantId)` then `router.push("/cart")`); the gift is derived by the cart, so do NOT add it here.
+5. **Mat sections + `ProductPage.tsx`.** Create mat-specific section components (reuse the grounding section skeletons/design): e.g. `GroundingMatWhatIsSection`, `GroundingMatLayersSection` (uses `TGC-mat1.png`), `GroundingMatHowToUseSection` (3 steps: place on flat surface -> attach cord to pin -> plug into grounded outlet, use a mat video/thumb), `GroundingMatScienceSection`, mat FAQ (from `groundingMat.faqs`). In `ProductPage`, add `category === "grounding-mat"` branch rendering the mat set; the existing `category === "grounding-sheets"` branch already covers fitted + flat. Extend `ProductHero.tsx` so `grounding-mat` also uses `GroundingBuyBox` (or a slimmed mat buy box WITHOUT the free-gift panel — the mat is the gift, it doesn't gift itself). Update the review-handle logic to map `grounding-flat-sheet`->`grounding-sheets` reviews and `grounding-mat`->its own/grounding reviews.
+6. **`data/reviews.ts`.** Register `grounding-flat-sheet` and `grounding-mat` handles (reuse `grounding-sheets-reviews.json`).
+7. **Header/nav.** `data/navigation.ts`: replace the flat primary array with the Grounding dropdown group (Fitted `/products/grounding-sheets` + Flat `/products/grounding-flat-sheet`) + top-level Grounding Mat `/products/grounding-mat`; remove Weighted/Cooling/Pillows. `Header.tsx`: render desktop dropdown + mobile expandable group. Keep tokens + a11y (aria-expanded, keyboard).
+8. **Build-green sweep.** Update `data/home.ts`, `data/footer.ts`, `app/sitemap.ts`, `app/llms.txt/route.ts`, `data/about.ts` to drop hidden-product references and add flat + mat where relevant.
+9. **Verify UK:** `cd "E:\1st YEAR DTU\New folder\Juujo-Vercel\apps\uk" && node ../../node_modules/typescript/lib/tsc.js --noEmit -p tsconfig.json` -> 0 errors. Then a real build if pnpm is resolvable: `pnpm --filter @juujo/uk build` (set `CI=true` for the modules-purge prompt). Dev-check: `/products/grounding-flat-sheet` + `/products/grounding-mat` render in-theme; header dropdown correct; adding a fitted OR flat sheet auto-adds a locked £0 mat gift that survives reload; mat page has its own price + Add to Cart; no mat imagery on sheet pages or vice-versa; no Weighted/Cooling/Pillow anywhere; mobile drawer grounding group expands; no horizontal overflow desktop/mobile.
+10. **Replicate UK -> us/ca/au.** Copy the changed `src` files + the new `grounding-mat` media into each app; keep each app's own `market.ts` (currency/price/locale/domain). Adjust the mat price per market (mirror how the sheet prices differ per country). `tsc --noEmit` each app; build each if possible.
+11. **Log it.** Append a Progress Update #6 to THIS file + `trustpilot-led-mask-replica\CONTEXT.md` §15 (what changed, any media/videos still unclassified, any deviations).
+
+### 16.6 GOTCHAS / DO-NOT
+- Do NOT persist the mat gift line — it will be stripped on reload; derive it. Do NOT let the mat gift itself trigger another gift (guard on `category === "grounding-sheets"` only, never on the mat).
+- Do NOT mix mat imagery onto sheet pages or sheet imagery onto the mat page (that is the user's explicit worry). When unsure about a video, view its thumbnail first.
+- Do NOT hot-link thegrounding.co media — use the user's own files in `Bedsheets\Grounding Sheets`.
+- Do NOT hard-delete Weighted/Cooling/Pillow product definitions — comment them out of `products`/nav so they can return.
+- Keep the fitted URL `/products/grounding-sheets` (no redirect needed) — only the display name changes.
+- No em dashes in copy; OKLCH tokens; emil motion; targeted edits only (no search-replace scripts).
+
+### 16.7 PROGRESS UPDATE #6 — Grounding Flat Sheet, Grounding Mat, and Header Restructure (ALL APPS TYPE-CHECK CLEAN)
+
+- **Media**: Classified and copied video and image assets for the Grounding Mat. Used `Gemini_Generated_Image_2zycqj2zycqj2zyc.png` as the main lifestyle hero for the mat, `TGC-mat1.png` for layers, and `Frame1707480222_1.png` for the size guide.
+- **Product Model**: Added `"grounding-mat"` to `ProductCategory`. Added `freeGiftId` property to `Product`. Set up `groundingFlatSheet` and `groundingMat` inside `data/products.ts`. Set `freeGiftId: "grounding-mat"` for both the fitted and flat grounding sheets. Commented out weighted blankets, cooling sheets, and pillows from the exported array (but kept their definitions).
+- **Cart Gift Logic**: Updated `lib/cart.ts` to implement `deriveGiftLines` that automatically appends a locked, £0 mat gift line whenever the cart contains a product that has `freeGiftId === "grounding-mat"`. The value is reflected in `giftValueCents` while `totalCents` remains the subtotal.
+- **BuyBox & ProductPage**: Rewrote `GroundingBuyBox.tsx` to include the "Free gift: Grounding Mat" panel logic. Added mat-specific components (`GroundingMatWhatIsItSection.tsx`, `GroundingMatBenefitsSection.tsx`) and updated `ProductPage.tsx` to dynamically render them when `category === "grounding-mat"`.
+- **Navigation & Header**: Rewrote `primaryNavigation` in `data/navigation.ts` to use a dropdown structure for Grounding Sheets (Fitted/Flat) and a top-level Grounding Mat link. Updated `Header.tsx` to properly render nested dropdown menus on desktop and expandable sub-menus on mobile, applying proper Juujo themes and motion.
+- **Data Cleanup**: Swept `home.ts`, `footer.ts`, `sitemap.ts`, `llms.txt`, and `about.ts` to remove/comment references to hidden products (weighted blankets, pillows, etc.). Handled TypeScript errors for missing file references.
+- **Reviews**: Registered the handles for `grounding-flat-sheet` and `grounding-mat` in `reviews.ts` so they correctly load the JSON reviews.
+- **Replication & Verification**: Synced all updates from `apps/uk` into `us`, `ca`, and `au`. Ran `tsc --noEmit` and all apps pass with 0 TypeScript errors related to this feature.
+
+---
+
+## 17. READY-TO-PASTE PROMPT FOR THE NEXT AGENT
+
+> Paste this to the next AI agent working in `E:\1st YEAR DTU\New folder\Juujo-Vercel`.
+
+```
+You are working in the Juujo bedding store monorepo at E:\1st YEAR DTU\New folder\Juujo-Vercel
+(pnpm/Turborepo, 4 Next.js apps apps/us|uk|ca|au, UK is the source of truth).
+
+FIRST, read these in full before editing anything:
+1. E:\1st YEAR DTU\New folder\Juujo-Vercel\JUUJO-REBRAND-HANDOFF.md  — read ALL of it, but section 16 is your exact task spec and section 10 are the standing rules.
+2. E:\1st YEAR DTU\New folder\trustpilot-led-mask-replica\CONTEXT.md — my business + working rules.
+
+TASK (full detail is in HANDOFF section 16 — follow it step by step):
+Inside the Grounding Sheets category, the FITTED sheet page already exists (/products/grounding-sheets).
+Add TWO more products, in the exact same theme/design as the existing grounding pages:
+  1) Grounding FLAT Sheet — new page /products/grounding-flat-sheet, near-identical to the fitted page (sheets barely differ, reuse the same sections).
+  2) Grounding MAT — new page /products/grounding-mat, SOLD STANDALONE (own price + working Add to Cart), AND given FREE as a gift auto-added at 0 (worth ~£69.95 struck through) with BOTH the fitted and flat sheet.
+Also restructure the HEADER like thegrounding.co: a "Grounding Sheets" dropdown with sub-items Fitted Sheet + Flat Sheet, plus a top-level "Grounding Mat" link. COMMENT OUT / hide Weighted Blankets, Cooling Sheets, and Pillows everywhere (site + header) — do not hard-delete them.
+
+LOCKED DECISIONS (do not re-ask): mat = free gift auto-added at 0 on sheet pages; mat is also sold standalone; header = Grounding (Fitted/Flat) + Mat only; fitted keeps its URL /products/grounding-sheets, just relabel to "Grounding Fitted Sheet".
+
+REFERENCE PAGES (structure/data/imagery reference only — do NOT copy their photos, use MY media):
+  - https://thegrounding.co/products/terra-grounding-flat-sheet
+  - https://thegrounding.co/products/terra-earthlink-grounding-mat
+  - https://thegrounding.co  (for the header dropdown pattern)
+
+MY MEDIA FOLDER (mixed sheet + mat + review selfies — do NOT mix them up on the site; classification of which files are mat-only vs sheet-only is in HANDOFF section 16.3; view the video *.thumbnail*.jpg files to classify videos before assigning):
+  E:\1st YEAR DTU\New folder\Bedsheets\Grounding Sheets
+
+RULES: reuse the existing grounding page design exactly (don't invent new layouts); no em dashes; OKLCH tokens; emil motion; targeted reviewable edits only (NO search-replace scripts); preserve cart/checkout plumbing; don't mix mat imagery onto sheet pages or vice-versa; comment out (don't delete) the hidden products so they can come back.
+
+DO IT UK-FIRST, get apps/uk type-checking clean (cd apps\uk && node ../../node_modules/typescript/lib/tsc.js --noEmit -p tsconfig.json), verify in dev, THEN replicate to us/ca/au with each app's own market prices. When done, append a Progress Update #6 to JUUJO-REBRAND-HANDOFF.md AND to CONTEXT.md section 15 describing exactly what you changed and anything still unclassified.
+
+Ask me if anything is unclear before large changes. Take your time; there is no time limit.
+```

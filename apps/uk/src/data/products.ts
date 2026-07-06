@@ -21,6 +21,7 @@ import type { FAQItem } from "./productSections";
 
 export type ProductCategory =
   | "grounding-sheets"
+  | "grounding-mat"
   | "weighted-blankets"
   | "cooling-sheets"
   | "pillows";
@@ -170,9 +171,9 @@ export const groundingSheets: Product = {
   slug: "grounding-sheets",
   category: "grounding-sheets",
   categoryLabel: "Grounding Sheets",
-  name: "Juujo Grounding Sheet",
+  name: "Juujo Grounding Fitted Sheet",
   heroTitle: "Grounding",
-  heroEmphasis: "Sheet",
+  heroEmphasis: "Fitted Sheet",
   shortDescription:
     "Conductive silver-threaded grounding sheet for calmer, more settled nights.",
   description:
@@ -259,6 +260,123 @@ export const groundingSheets: Product = {
     "Free shipping",
     "Easy returns",
     "OEKO-TEX certified fabric",
+  ],
+};
+
+export const groundingFlatSheet: Product = {
+  ...groundingSheets,
+  id: "grounding-flat-sheet",
+  sku: "JUUJO-GROUNDING-FLAT-QUEEN-GRAPHITE",
+  slug: "grounding-flat-sheet",
+  name: "Juujo Grounding Flat Sheet",
+  heroEmphasis: "Flat Sheet",
+  shortDescription:
+    "Conductive silver-threaded grounding flat sheet for calmer, more settled nights.",
+  description:
+    "A soft, breathable flat sheet woven with conductive silver threads and a grounding cord for your bed. Designed for people who want a calmer, more settled wind-down and a simple upgrade to their sleep setup.",
+  seoTitle: "Grounding Flat Sheet | Juujo Premium Bedding",
+  seoDescription:
+    "Juujo Grounding Flat Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
+  variants: buildVariants("GROUNDING-FLAT", groundingColors, groundingSizes),
+  specs: [
+    { label: "Material", value: "Organic cotton with silver fibre" },
+    { label: "Conductive thread", value: "Pure silver, evenly woven" },
+    { label: "Includes", value: "Flat sheet, grounding cord, adaptor" },
+    { label: "Thread feel", value: "Soft, breathable, 300 thread count" },
+    { label: "Care", value: "Machine washable, cold gentle cycle" },
+    { label: "Sizes", value: "Double, Queen, King" },
+  ],
+  included: [
+    { quantity: "1x", label: "Grounding flat sheet" },
+    { quantity: "1x", label: "Grounding cord" },
+    { quantity: "1x", label: "Wall adaptor" },
+    { quantity: "1x", label: "Setup guide" },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
+/* Grounding Mat                                                       */
+/* ------------------------------------------------------------------ */
+
+const matColors: ProductColor[] = [
+  { id: "black", name: "Black", hex: "#111111" },
+];
+
+const matSizes: SizePricing[] = [
+  { id: "standard", name: "Desk / Couch / Floor", dimensions: "68 x 25 cm", priceCents: 6995, compareAtCents: 13995 },
+];
+
+export const groundingMat: Product = {
+  id: "grounding-mat",
+  sku: "JUUJO-GROUNDING-MAT",
+  slug: "grounding-mat",
+  category: "grounding-mat",
+  categoryLabel: "Grounding Mat",
+  name: "Juujo Grounding Mat",
+  heroTitle: "Grounding",
+  heroEmphasis: "Mat",
+  shortDescription: "A versatile grounding mat for your desk, couch, or floor.",
+  description: "Experience the benefits of grounding wherever you are. Perfect for under your desk while working, at the couch, or on the floor. Includes grounding cord.",
+  seoTitle: "Grounding Mat | Juujo Premium",
+  seoDescription: "Juujo Grounding Mat for desk, couch, or floor. Connect to the earth's natural energy indoors.",
+  currency: market.currency,
+  priceCents: 6995,
+  compareAtCents: 13995,
+  rating: 4.8,
+  reviewCount: 1542,
+  customerCount: "40,000+",
+  cartImage: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
+  gallery: [
+    { src: productMediaAsset("6206ed4066fb4719a6fe41321145df27.HD-1080p-7.2Mbps-36900726.mp4", "grounding-mat", "videos"), alt: "Grounding mat usage video", animated: true },
+    { src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
+    { src: productMediaAsset("Frame1707480222_1.png", "grounding-mat", "images"), alt: "Grounding mat details" },
+    { src: productMediaAsset("a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4", "grounding-mat", "videos"), alt: "Grounding mat connection", animated: true },
+    { src: productMediaAsset("71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg", "grounding-mat", "images"), alt: "Grounding mat texture" },
+    { src: productMediaAsset("Gemini_Generated_Image_2zycqj2zycqj2zyc.png", "grounding-mat", "images"), alt: "Grounding mat lifestyle" },
+  ],
+  colors: matColors,
+  sizes: matSizes,
+  variants: buildVariants("MAT", matColors, matSizes),
+  quantityTiers: defaultQuantityTiers,
+  material: "Conductive carbon infused leatherette",
+  care: "Wipe clean with a damp cloth.",
+  specs: [
+    { label: "Material", value: "Conductive carbon leatherette" },
+    { label: "Includes", value: "Grounding mat, grounding cord, adaptor" },
+    { label: "Care", value: "Wipe clean" },
+    { label: "Size", value: "68 x 25 cm" },
+  ],
+  included: [
+    { quantity: "1x", label: "Grounding mat" },
+    { quantity: "1x", label: "Grounding cord" },
+    { quantity: "1x", label: "Wall adaptor" },
+  ],
+  highlights: [
+    "Conductive carbon surface",
+    "Versatile for desk or couch",
+    "Simple plug-in grounding cord",
+    "Easy to wipe clean",
+  ],
+  keyBenefits: [
+    "Calmer, more settled feeling",
+    "Connect to the earth indoors",
+    "Easy to set up anywhere",
+    "Built to last",
+  ],
+  faqs: [
+    {
+      question: "Where can I use the mat?",
+      answer: "The mat is perfect for use under your desk while working, at the couch, or on the floor.",
+    },
+    {
+      question: "How do I clean it?",
+      answer: "Simply wipe clean with a damp cloth. Do not machine wash.",
+    },
+  ],
+  badges: [
+    "100-night trial",
+    "Free shipping",
+    "Easy returns",
   ],
 };
 
@@ -578,9 +696,11 @@ export const pillows: Product = {
 
 export const products = [
   groundingSheets,
-  weightedBlanket,
-  coolingSheets,
-  pillows,
+  groundingFlatSheet,
+  groundingMat,
+  // weightedBlanket,
+  // coolingSheets,
+  // pillows,
 ];
 
 export const productsById = Object.fromEntries(

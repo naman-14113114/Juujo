@@ -1,8 +1,16 @@
-export const primaryNavigation = [
-  { label: "Grounding Sheets", href: "/products/grounding-sheets" },
-  { label: "Weighted Blankets", href: "/products/weighted-blanket" },
-  { label: "Cooling Sheets", href: "/products/cooling-bed-sheets" },
-  { label: "Pillows", href: "/products/pillows" },
+export type NavigationItem =
+  | { label: string; href: string }
+  | { label: string; items: { label: string; href: string }[] };
+
+export const primaryNavigation: NavigationItem[] = [
+  {
+    label: "Shop Grounding",
+    items: [
+      { label: "Fitted Grounding Sheet", href: "/products/grounding-sheets" },
+      { label: "Flat Grounding Sheet", href: "/products/grounding-flat-sheet" },
+      { label: "Grounding Mat", href: "/products/grounding-mat" },
+    ],
+  },
 ];
 
 export const secondaryNavigation = [

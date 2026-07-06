@@ -8,9 +8,8 @@ import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import {
-  getDefaultVariant,
+  getProductBySlug,
   getVariant,
-  pillows,
   type Product,
 } from "@/data/products";
 import { formatMoney } from "@/lib/money";
@@ -29,7 +28,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const [colorId, setColorId] = useState(product.colors[0]?.id);
   const [sizeId, setSizeId] = useState(product.sizes[0]?.id);
   const [quantity, setQuantity] = useState(1);
-  const [addBundle, setAddBundle] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
 
   const variant = useMemo(
@@ -41,14 +39,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const compareTotal = variant.compareAtCents * quantity;
   const savings = Math.max(compareTotal - lineTotal, 0);
 
-  const bundleVariant = getDefaultVariant(pillows);
+  const giftProduct = getProductBySlug("grounding-mat");
 
   function handleAddToCart() {
     setIsNavigating(true);
     addToCartVariant(product, quantity, variant.variantId);
-    if (addBundle) {
-      addToCartVariant(pillows, 1, bundleVariant.variantId);
-    }
     router.push("/cart");
   }
 
@@ -189,52 +184,35 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         </div>
       </div>
 
-      {/* Most Popular bundle add-on */}
-      <button
-        type="button"
-        onClick={() => setAddBundle((v) => !v)}
-        aria-pressed={addBundle}
-        className="relative flex items-center gap-4 rounded-2xl border p-3 text-left transition-transform duration-150 ease-out active:scale-[0.99]"
-        style={{
-          borderColor: addBundle ? "var(--gold)" : "var(--border)",
-          backgroundColor: addBundle
-            ? "color-mix(in oklch, var(--gold) 8%, var(--paper))"
-            : "var(--card)",
-        }}
-      >
-        <span
-          className="absolute -top-2 left-4 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
-          style={{ backgroundColor: "var(--gold)" }}
-        >
-          Most popular
-        </span>
-        <span
-          className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-md border"
+      {/* Free Gift */}
+      {giftProduct && (
+        <div
+          className="relative flex items-center gap-4 rounded-2xl border p-3 text-left transition-transform duration-150 ease-out"
           style={{
-            borderColor: addBundle ? "var(--gold)" : "var(--border)",
-            backgroundColor: addBundle ? "var(--gold)" : "transparent",
+            borderColor: "var(--gold)",
+            backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
           }}
         >
-          {addBundle && <span className="text-xs text-white">{"✓"}</span>}
-        </span>
-        <span className="relative h-14 w-14 flex-none overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
-          <Image src={pillows.cartImage} alt={pillows.name} fill sizes="56px" className="object-cover" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block font-medium text-[var(--ink)]">Add a {pillows.name}</span>
-          <span className="block text-sm text-[var(--muted)]">Complete your setup and save.</span>
-        </span>
-        <span className="text-right">
-          <span className="block font-semibold text-[var(--ink)]">
-            {formatMoney(bundleVariant.priceCents, pillows.currency)}
+          <span
+            className="absolute -top-2 left-4 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
+            style={{ backgroundColor: "var(--gold)" }}
+          >
+            Free gift
           </span>
-          {bundleVariant.compareAtCents > bundleVariant.priceCents && (
-            <span className="block text-sm text-[var(--muted)] line-through">
-              {formatMoney(bundleVariant.compareAtCents, pillows.currency)}
+          <span className="relative h-14 w-14 flex-none overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
+            <Image src={giftProduct.cartImage} alt={giftProduct.name} fill sizes="56px" className="object-cover" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-medium text-[var(--ink)]">{giftProduct.name}</span>
+            <span className="block text-sm text-[var(--muted)]">Worth {formatMoney(giftProduct.priceCents, giftProduct.currency)}</span>
+          </span>
+          <span className="text-right">
+            <span className="block font-semibold text-[var(--gold)] uppercase tracking-wider text-sm">
+              Free
             </span>
-          )}
-        </span>
-      </button>
+          </span>
+        </div>
+      )}
 
       {/* Add to cart */}
       <Button
@@ -249,7 +227,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               style={{ visibility: "hidden" }}
               className="relative z-20 whitespace-nowrap"
             >
-              ADD TO CART {"·"} {formatMoney(lineTotal + (addBundle ? bundleVariant.priceCents : 0), product.currency)}
+              ADD TO CART {"·"} {formatMoney(lineTotal, product.currency)}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie
@@ -261,7 +239,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </>
         ) : (
           <span className="relative z-20 whitespace-nowrap">
-            ADD TO CART {"·"} {formatMoney(lineTotal + (addBundle ? bundleVariant.priceCents : 0), product.currency)}
+            ADD TO CART {"·"} {formatMoney(lineTotal, product.currency)}
           </span>
         )}
       </Button>

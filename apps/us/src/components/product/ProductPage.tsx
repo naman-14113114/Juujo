@@ -12,6 +12,8 @@ import { GroundingComparisonSection } from "./GroundingComparisonSection";
 import { GroundingTimelineSection } from "./GroundingTimelineSection";
 import { GroundingWhatIsItSection } from "./GroundingWhatIsItSection";
 import { GroundingBenefitsVideoSection } from "./GroundingBenefitsVideoSection";
+import { GroundingMatWhatIsItSection } from "./GroundingMatWhatIsItSection";
+import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
 
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
@@ -35,9 +37,17 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingComparisonSection />
         </>
       )}
+      {product.category === "grounding-mat" && (
+        <>
+          <GroundingMatWhatIsItSection />
+          <GroundingMatBenefitsSection />
+          <GroundingTimelineSection />
+          <GroundingScienceSection />
+        </>
+      )}
       <ProductReviewsSection
         productHandle={
-          product.category === "grounding-sheets" ? "grounding-sheets" : "buudy-led-mask"
+          product.category === "grounding-sheets" || product.category === "grounding-mat" ? product.slug : "buudy-led-mask"
         }
       />
       <FAQSection faqs={product.faqs} />

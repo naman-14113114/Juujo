@@ -1,11 +1,11 @@
-import { homeAsset, productAsset } from "@/lib/media";
-import { coolingSheets, groundingSheets, pillows, weightedBlanket } from "./products";
+import { homeAsset, productAsset, productMediaAsset } from "@/lib/media";
+import { groundingFlatSheet, groundingMat, groundingSheets } from "./products";
 
 export const homeHero = {
   eyebrow: "Premium bedding for better sleep",
   title: "Sleep, softened.",
-  copy: "Considered bedding made for real rest: grounding sheets, weighted blankets, cooling sheets, and adaptive pillows. Breathable materials, honest craftsmanship, and a calmer night from the first evening.",
-  ctaLabel: "Shop bedding",
+  copy: "Considered bedding made for real rest: fitted grounding sheets, flat grounding sheets, and grounding mats. Breathable materials, honest craftsmanship, and a calmer night from the first evening.",
+  ctaLabel: "Shop grounding",
   ctaHref: `/products/${groundingSheets.slug}`,
   images: [
     { src: homeAsset("01-home-bedding-hero.webp"), alt: "Juujo bedding on a calm, made bed" },
@@ -25,35 +25,35 @@ export const homeMaskSpotlight = {
 export const homeSkincareGuideIntro = {
   eyebrow: "Find your fit",
   title: "Not sure where to start?",
-  copy: "Tell us how you sleep and we will point you to the right bedding, whether you run warm, sleep restlessly, or just want a softer, more supportive setup.",
+  copy: "Tell us how you sleep and we will point you to the right grounding setup, whether you run warm, sleep restlessly, or just want a softer, more supportive setup.",
   ctaLabel: "Explore the range",
-  ctaHref: `/products/${coolingSheets.slug}`,
+  ctaHref: `/products/${groundingFlatSheet.slug}`,
 };
 
 export const homeTechnologySpotlight = {
   eyebrow: "Materials that matter",
   title: "Breathable, honest, built to last.",
-  copy: "From heat-wicking cooling weaves to evenly distributed weighted fills, each product is made with materials chosen for comfort and durability, not shortcuts.",
-  ctaLabel: "Shop cooling sheets",
-  ctaHref: `/products/${coolingSheets.slug}`,
+  copy: "From premium silver-threaded weaves to conductive carbon mats, each product is made with materials chosen for comfort and durability, not shortcuts.",
+  ctaLabel: "Shop flat sheets",
+  ctaHref: `/products/${groundingFlatSheet.slug}`,
   image: { src: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"), alt: "Breathable cooling weave detail" },
 };
 
 export const homeFeatureCards = [
   {
     title: "Breathable by design",
-    copy: "Weaves and fills chosen to stay temperature-friendly, so you spend less of the night too warm.",
+    copy: "Weaves chosen to stay temperature-friendly, so you spend less of the night too warm.",
     image: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"),
   },
   {
     title: "Comfort you can feel",
     copy: "Soft, premium materials that stay comfortable and keep their shape wash after wash.",
-    image: productAsset("01-weighted-blanket-front.webp", "weighted-blankets"),
+    image: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"),
   },
   {
     title: "Made for every bed",
-    copy: "Multiple colours and sizes across sheets, blankets, and pillows to match your space.",
-    image: productAsset("01-pillow-front.webp", "pillows"),
+    copy: "Multiple colours and sizes across fitted and flat sheets to match your space.",
+    image: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
   },
 ];
 
@@ -66,18 +66,18 @@ export const homeLightTherapy = {
 
 export const homeYoungerYou = {
   title: "A calmer night, every night",
-  copy: "Grounding sheets to settle in, weighted blankets to feel cocooned, cooling sheets to stay comfortable, and pillows that adapt to you. Build the setup that helps you rest.",
+  copy: "Fitted grounding sheets to settle in, flat sheets for versatile comfort, and grounding mats for your desk or couch. Build the setup that helps you rest.",
   image: { src: homeAsset("09-home-collection.webp"), alt: "Juujo bedding collection" },
 };
 
 export const homeTorchSpotlight = {
-  eyebrow: "Cocooned comfort",
-  title: "The weighted blanket for settled sleep.",
-  copy: "Evenly distributed weight and a breathable cover help you feel grounded and calm as you drift off. Choose 5kg, 7kg, or 9kg to suit you.",
-  ctaLabel: "Shop weighted blankets",
-  ctaHref: `/products/${weightedBlanket.slug}`,
-  image: { src: productAsset("03-weighted-blanket-draped.webp", "weighted-blankets"), alt: "Juujo weighted blanket draped over a chair" },
-  product: weightedBlanket,
+  eyebrow: "Versatile grounding",
+  title: "The grounding mat for anywhere.",
+  copy: "Connect to the earth's natural energy field from your desk, couch, or floor. Versatile, portable, and easy to use.",
+  ctaLabel: "Shop grounding mat",
+  ctaHref: `/products/${groundingMat.slug}`,
+  image: { src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
+  product: groundingMat,
 };
 
 export const homeWavelengthMap = {
@@ -95,5 +95,5 @@ export const homeCustomerReviewsGrid = {
   image: homeAsset("10-home-reviews-collage.webp"),
 };
 
-// Kept for compatibility with the home page, now referencing bedding products.
-export { pillows };
+// Kept for compatibility with the home page, now referencing grounding products.
+export { groundingMat as pillows };

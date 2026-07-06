@@ -3,10 +3,9 @@ export const footerMenus = [
     title: "Shop",
     links: [
       { label: "Home", href: "/" },
-      { label: "Grounding Sheets", href: "/products/grounding-sheets" },
-      { label: "Weighted Blankets", href: "/products/weighted-blanket" },
-      { label: "Cooling Bed Sheets", href: "/products/cooling-bed-sheets" },
-      { label: "Pillows", href: "/products/pillows" },
+      { label: "Fitted Grounding Sheet", href: "/products/grounding-sheets" },
+      { label: "Flat Grounding Sheet", href: "/products/grounding-flat-sheet" },
+      { label: "Grounding Mat", href: "/products/grounding-mat" },
       { label: "Privacy Policy", href: "/policies/privacy-policy" },
       { label: "Return Policy", href: "/policies/return-policy" },
       { label: "Shipping Policy", href: "/policies/shipping-policy" },
