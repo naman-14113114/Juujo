@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "normalize:reviews": "node scripts/normalize-reviews.mjs",
-    "build": "next build",
+    "build": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
     "sync:assets": "node scripts/sync-product-assets.mjs",
     "start": "next start",
     "lint": "eslint",
