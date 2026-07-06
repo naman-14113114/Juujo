@@ -1,0 +1,235 @@
+<section class="juujo-force-full-width juujo-section bg-[var(--cream)] md: md: py-14 md:py-24" id="faq"><div class="juujo-wrap grid gap-8 md:gap-12 lg:grid-cols-[1fr_1.5fr]"><div class="max-w-3xl"><p class="juujo-eyebrow">FAQ</p><h2 class="juujo-display mt-4 text-[2.5rem] leading-[1.06] md:text-5xl text-[var(--plum)]">Frequently asked <em class="juujo-italic">questions</em>.</h2><p class="mt-4 leading-7 text-[var(--muted)]">Everything you might want to know before bringing Juujo home.</p></div><ul><li class="border-b border-[var(--border)]"><button aria-expanded="false" class="flex w-full items-start justify-between gap-6 py-6 text-left" type="button"><span class="juujo-display text-[1.35rem] leading-snug text-[var(--plum)]">What is a grounding sheet?</span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mt-1 flex-none text-[var(--gold)] transition" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><div class="grid transition-all duration-300 grid-rows-[0fr] opacity-0"><div class="overflow-hidden"><p class="max-w-3xl leading-7 text-[var(--muted)]">A grounding sheet is a fitted sheet woven with conductive threads and connected to your home's grounding point with an included cord. Many people use it as part of a calming wind-down routine.</p></div></div></li><li class="border-b border-[var(--border)]"><button aria-expanded="false" class="flex w-full items-start justify-between gap-6 py-6 text-left" type="button"><span class="juujo-display text-[1.35rem] leading-snug text-[var(--plum)]">Is it comfortable to sleep on?</span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mt-1 flex-none text-[var(--gold)] transition" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><div class="grid transition-all duration-300 grid-rows-[0fr] opacity-0"><div class="overflow-hidden"><p class="max-w-3xl leading-7 text-[var(--muted)]">Yes. The sheet is soft, breathable organic cotton with a 300 thread count feel, so it behaves like a premium fitted sheet.</p></div></div></li><li class="border-b border-[var(--border)]"><button aria-expanded="false" class="flex w-full items-start justify-between gap-6 py-6 text-left" type="button"><span class="juujo-display text-[1.35rem] leading-snug text-[var(--plum)]">Can I machine wash it?</span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mt-1 flex-none text-[var(--gold)] transition" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><div class="grid transition-all duration-300 grid-rows-[0fr] opacity-0"><div class="overflow-hidden"><p class="max-w-3xl leading-7 text-[var(--muted)]">Yes. Machine wash cold on a gentle cycle and tumble dry low. Avoid bleach and fabric softener to keep the conductive threads working well.</p></div></div></li><li class="border-b border-[var(--border)]"><button aria-expanded="false" class="flex w-full items-start justify-between gap-6 py-6 text-left" type="button"><span class="juujo-display text-[1.35rem] leading-snug text-[var(--plum)]">Which size should I choose?</span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mt-1 flex-none text-[var(--gold)] transition" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><div class="grid transition-all duration-300 grid-rows-[0fr] opacity-0"><div class="overflow-hidden"><p class="max-w-3xl leading-7 text-[var(--muted)]">Pick the size that matches your mattress: Double, Queen, or King. Each has a deep fitted skirt to stay secure overnight.</p></div></div></li></ul></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const faqButtons = document.querySelectorAll('#faq button');
+    faqButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !isExpanded);
+            
+            const icon = button.querySelector('svg');
+            const answerContainer = button.nextElementSibling;
+            
+            if (isExpanded) {
+                // Close
+                if(icon) icon.style.transform = 'rotate(0deg)';
+                answerContainer.classList.remove('grid-rows-[1fr]', 'opacity-100');
+                answerContainer.classList.add('grid-rows-[0fr]', 'opacity-0');
+            } else {
+                // Open
+                if(icon) icon.style.transform = 'rotate(45deg)';
+                answerContainer.classList.remove('grid-rows-[0fr]', 'opacity-0');
+                answerContainer.classList.add('grid-rows-[1fr]', 'opacity-100');
+            }
+        });
+    });
+});
+</script>
+</section><section class="juujo-force-full-width juujo-section relative overflow-hidden bg-[var(--ink)] py-14 pb-24 text-center md:py-24 md:pb-36 "><video aria-label="Juujo guarantee lifestyle background" class="block absolute inset-0 h-full w-full object-cover z-0 pointer-events-none" loop="" muted="" playsinline="" preload="metadata"><source src="https://juujo-us.vercel.app/media/products/buudy-led-mask/videos/juujo-goddess-bg.mp4" type="video/mp4"></video><div class="absolute inset-0 z-10" style="background-color:oklch(17% 0.03 318 / 42%)"></div><div class="juujo-wrap relative z-20 max-w-5xl"><p class="juujo-eyebrow">Promise</p><h2 class="juujo-display mx-auto mt-3 max-w-4xl text-[2rem] leading-[1.05] text-[var(--cream)] sm:text-[2.35rem] md:mt-4 md:text-6xl">Our <em class="juujo-italic text-[var(--gold)]">Juujo Goddess</em><br>money back guarantee.</h2><p class="mx-auto mt-6 hidden max-w-xl text-sm font-medium leading-7 text-white md:block md:text-base">Bring clinical-inspired skincare into your daily routine with Juujo. Designed for visible glow, smoother-looking skin, and effortless at-home use, Juujo gives you a premium treatment experience you can trust every time.</p></div></section>
+
+<!-- STICKY ADD TO CART BAR -->
+<style>
+
+/* PlusBase Theme Overrides */
+:root {
+  --cream: #ffffff; /* pure white background */
+  --blush: rgb(245, 245, 245); /* slightly off-white background (color-1) */
+  --ink: rgb(15, 15, 15); /* almost black (color-5) */
+  --plum: rgb(15, 15, 15); /* primary text (color-5) */
+  --gold: rgb(140, 140, 140); /* accents/muted (color-3) */
+  --card: #ffffff; 
+  --border: rgb(235, 235, 235); /* borders (color-2) */
+  --muted: rgb(140, 140, 140); /* muted text (color-3) */
+}
+
+.juujo-display, 
+.juujo-sans, 
+.juujo-eyebrow,
+.juujo-italic {
+  font-family: var(--h-font-family, 'Inter', sans-serif) !important;
+  font-style: normal !important;
+}
+
+/* Force dark buttons to match theme */
+button[class*="bg-[var(--plum)]"] {
+  background-color: rgb(15, 15, 15) !important;
+}
+button[class*="bg-[var(--plum)]"]:hover {
+  background-color: rgb(51, 51, 51) !important;
+}
+.juujo-sticky-btn {
+  background-color: rgb(15, 15, 15) !important;
+}
+
+
+  #juujo-sticky-cart {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 40;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    pointer-events: none;
+    transform: translateY(calc(100% + 2rem));
+    opacity: 0;
+  }
+  #juujo-sticky-cart.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .juujo-sticky-inner {
+    pointer-events: auto;
+    display: flex;
+    min-height: 48px;
+    width: 100%;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    padding: 4px;
+    box-shadow: 0 18px 42px -20px rgba(58,31,61,.68);
+    box-sizing: border-box;
+  }
+  .juujo-sticky-left {
+    display: none;
+    min-width: 0;
+    align-items: center;
+    gap: 16px;
+  }
+  .juujo-sticky-btn {
+    min-height: 44px;
+    width: 100%;
+    flex: none;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 11px;
+    white-space: nowrap;
+    background-color: var(--plum);
+    color: #fff;
+    border-radius: 9999px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 0;
+    transition: background-color 0.2s;
+  }
+  .juujo-sticky-btn:hover {
+    background-color: var(--gold);
+  }
+  
+  @media (min-width: 640px) {
+    #juujo-sticky-cart {
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    .juujo-sticky-inner {
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 78px;
+      max-width: 850px;
+      justify-content: space-between;
+      gap: 20px;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .juujo-sticky-left {
+      display: flex;
+    }
+    .juujo-sticky-btn {
+      min-height: 48px;
+      width: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+      font-size: 14px;
+    }
+  }
+
+/* Fix for FAQ Accordion Animation */
+.grid-rows-\[0fr\] {
+  grid-template-rows: 0fr;
+}
+.grid-rows-\[1fr\] {
+  grid-template-rows: 1fr;
+}
+
+
+
+
+/* Unified Add To Cart Button Hover */
+.juujo-cart-btn-hover {
+  transition: all 0.3s ease !important;
+}
+.juujo-cart-btn-hover:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  transform: scale(1.02) !important;
+}
+.juujo-cart-btn-hover:hover span, .juujo-cart-btn-hover:hover div, .juujo-cart-btn-hover:hover svg {
+  color: #000000 !important;
+}
+
+</style>
+
+<div id="juujo-sticky-cart">
+  <div class="juujo-sticky-inner">
+    
+    <div class="juujo-sticky-left">
+      <div style="position:relative;height:56px;width:56px;flex:none;overflow:hidden;border-radius:9999px;border:1px solid var(--border);background-color:var(--blush);">
+         <img src="https://juujo-us.vercel.app/media/products/grounding-sheets/images/main1-1.jpg" alt="Juujo Grounding Sheet" style="position: absolute; height: 100%; width: 100%; inset: 0px; object-fit: cover;">
+      </div>
+      <div style="min-width:0;">
+        <p style="margin:0;font-size:16px;font-weight:600;color:var(--plum);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Juujo Grounding Sheet</p>
+        <p style="margin:0;font-size:14px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">$129 · free shipping</p>
+      </div>
+    </div>
+    
+    <button id="sticky-add-to-cart-btn" class="juujo-sticky-btn juujo-cart-btn-hover">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span style="margin-left: 8px;">Add to cart + free shipping</span>
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stickyCart = document.getElementById('juujo-sticky-cart');
+    const heroBtn = document.getElementById('hero-cta');
+    const stickyBtn = document.getElementById('sticky-add-to-cart-btn');
+
+    if (!stickyCart) return;
+
+    function updateVisibility() {
+        if (!heroBtn) return;
+        const rect = heroBtn.getBoundingClientRect();
+        if (rect.bottom < 0) {
+            stickyCart.classList.add('is-visible');
+        } else {
+            stickyCart.classList.remove('is-visible');
+        }
+    }
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+    setTimeout(updateVisibility, 500);
+
+    if (stickyBtn) {
+        stickyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (heroBtn) {
+                heroBtn.click();
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+});
+</script>
