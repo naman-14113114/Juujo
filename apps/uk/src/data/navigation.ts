@@ -4,12 +4,15 @@ export type NavigationItem =
 
 export const primaryNavigation: NavigationItem[] = [
   {
-    label: "Shop Grounding",
+    label: "Grounding Sheets",
     items: [
       { label: "Fitted Grounding Sheet", href: "/products/grounding-sheets" },
       { label: "Flat Grounding Sheet", href: "/products/grounding-flat-sheet" },
-      { label: "Grounding Mat", href: "/products/grounding-mat" },
     ],
+  },
+  {
+    label: "Grounding Mat",
+    href: "/products/grounding-mat",
   },
 ];
 

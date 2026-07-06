@@ -8,9 +8,9 @@ export const homeHero = {
   ctaLabel: "Shop grounding",
   ctaHref: `/products/${groundingSheets.slug}`,
   images: [
-    { src: homeAsset("01-home-bedding-hero.webp"), alt: "Juujo bedding on a calm, made bed" },
-    { src: homeAsset("02-home-bedding-lifestyle.webp"), alt: "Juujo bedding in a warm bedroom" },
-    { src: homeAsset("03-home-bedding-detail.webp"), alt: "Close up of Juujo bedding texture" },
+    { src: productMediaAsset("custom-image-v2-1.png", "grounding-sheets", "images"), alt: "Juujo bedding on a calm, made bed" },
+    { src: productMediaAsset("Gemini_Generated_Image_uic6bquic6bquic6.jpg", "grounding-sheets", "images"), alt: "Juujo bedding in a warm bedroom" },
+    { src: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"), alt: "Close up of Juujo bedding texture" },
   ],
 };
 
@@ -18,7 +18,7 @@ export const homeMaskSpotlight = {
   eyebrow: "Signature comfort",
   title: "Bedding designed around how you actually sleep",
   copy: "Every Juujo piece is built for comfort first: breathable weaves, even weight, and materials that stay soft wash after wash. Choose your colour and size, then settle in.",
-  image: { src: homeAsset("04-home-spotlight.webp"), alt: "Juujo bedding product spotlight" },
+  image: { src: productMediaAsset("custom-image-v2-2.png", "grounding-sheets", "images"), alt: "Juujo bedding product spotlight" },
   product: groundingSheets,
 };
 
@@ -36,14 +36,14 @@ export const homeTechnologySpotlight = {
   copy: "From premium silver-threaded weaves to conductive carbon mats, each product is made with materials chosen for comfort and durability, not shortcuts.",
   ctaLabel: "Shop flat sheets",
   ctaHref: `/products/${groundingFlatSheet.slug}`,
-  image: { src: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"), alt: "Breathable cooling weave detail" },
+  image: { src: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images"), alt: "Breathable cooling weave detail" },
 };
 
 export const homeFeatureCards = [
   {
     title: "Breathable by design",
     copy: "Weaves chosen to stay temperature-friendly, so you spend less of the night too warm.",
-    image: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"),
+    image: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images"),
   },
   {
     title: "Comfort you can feel",
@@ -61,13 +61,13 @@ export const homeLightTherapy = {
   eyebrow: "The Juujo promise",
   title: "Better sleep, made simple.",
   copy: "We keep bedding honest: clear materials, fair pricing, and a 100-night trial so you can feel the difference at home before you commit. No hype, just rest.",
-  image: { src: homeAsset("08-home-story.webp"), alt: "Calm bedroom editorial image" },
+  image: { src: productMediaAsset("custom-image-v2-3.png", "grounding-sheets", "images"), alt: "Calm bedroom editorial image" },
 };
 
 export const homeYoungerYou = {
   title: "A calmer night, every night",
   copy: "Fitted grounding sheets to settle in, flat sheets for versatile comfort, and grounding mats for your desk or couch. Build the setup that helps you rest.",
-  image: { src: homeAsset("09-home-collection.webp"), alt: "Juujo bedding collection" },
+  image: { src: productMediaAsset("custom-image-v2-4.png", "grounding-sheets", "images"), alt: "Juujo bedding collection" },
 };
 
 export const homeTorchSpotlight = {
@@ -92,7 +92,7 @@ export const homeCustomerReviewsGrid = {
   copy: "Thousands of calmer nights, in their words.",
   ctaLabel: "About Us",
   ctaHref: "/pages/about-us",
-  image: homeAsset("10-home-reviews-collage.webp"),
+  image: productMediaAsset("custom-image-v2-5.png", "grounding-sheets", "images"),
 };
 
 // Kept for compatibility with the home page, now referencing grounding products.
