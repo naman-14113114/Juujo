@@ -1,3 +1,3 @@
-import config from "@buudy/eslint-config/next";
+import config from "@juujo/eslint-config/next";
 
 export default config;

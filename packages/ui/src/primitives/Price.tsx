@@ -1,4 +1,4 @@
-import { formatMoney, type StoreCurrency } from "@buudy/shared";
+import { formatMoney, type StoreCurrency } from "@juujo/shared";
 
 export function Price({
   cents,

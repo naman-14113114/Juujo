@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@buudy/ui", "@buudy/shared"],
+  transpilePackages: ["@juujo/ui", "@juujo/shared"],
   allowedDevOrigins: ["127.0.0.1"],
   turbopack: {
     root: path.join(process.cwd(), "../.."),

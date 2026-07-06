@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
@@ -125,9 +126,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         <fieldset className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <legend className="text-sm font-medium text-[var(--ink)]">Size</legend>
-            <a href="/pages/faqs" className="text-sm text-[var(--gold)] underline underline-offset-2">
-              Size guide
-            </a>
+            <Link href="/pages/faqs" className="text-sm text-[var(--gold)] underline underline-offset-2">
+              Have a question? Try our FAQs here
+            </Link>
           </div>
           <div className="grid grid-cols-3 gap-2">
             {product.sizes.map((size) => {
