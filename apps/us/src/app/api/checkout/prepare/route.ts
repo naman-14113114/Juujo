@@ -5,14 +5,17 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const plusbaseOrigin = "https://juujo.com";
-const maskProductId = 1000000611225890;
-const maskVariantId = 1000019092784268;
-const torchProductId = 1000000665008955;
-const torchVariantId = 1000020384558655;
+
+type CheckoutItem = {
+  productId: string | number;
+  variantId: string | number;
+  quantity?: number;
+};
 
 type CheckoutPrepareBody = {
   customerEmail?: string;
   quantity?: number;
+  items?: CheckoutItem[];
   attribution?: Record<string, string | null | undefined>;
 };
 
@@ -77,7 +80,7 @@ function appendCookies(current: string, response: Response) {
   return Array.from(cookieMap.values()).join("; ");
 }
 
-async function createPlusbaseCheckout(quantity: number) {
+async function createPlusbaseCheckout(items: CheckoutItem[]) {
   let cookie = "";
 
   const createResponse = await fetch(
@@ -134,8 +137,17 @@ async function createPlusbaseCheckout(quantity: number) {
     }
   }
 
-  await addItem(maskProductId, maskVariantId, quantity);
-  await addItem(torchProductId, torchVariantId, quantity);
+  for (const item of items) {
+    const productId = Number(item.productId);
+    const variantId = Number(item.variantId);
+    const itemQuantity = Math.max(1, Math.round(Number(item.quantity) || 1));
+
+    if (!productId || !variantId) {
+      continue;
+    }
+
+    await addItem(productId, variantId, itemQuantity);
+  }
 
   return {
     checkoutToken,
@@ -148,23 +160,32 @@ export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
 
-  try {
-    const checkout = await createPlusbaseCheckout(quantity);
+  const items = (Array.isArray(body.items) ? body.items : []).filter(
+    (item) => Number(item.productId) && Number(item.variantId),
+  );
 
-    return NextResponse.json({
-      checkoutToken: checkout.checkoutToken,
-      checkoutUrl: checkout.checkoutUrl,
-    });
-  } catch (error) {
-    console.error("Direct PlusBase checkout creation failed", error);
+  if (items.length > 0) {
+    try {
+      const checkout = await createPlusbaseCheckout(items);
+
+      return NextResponse.json({
+        checkoutToken: checkout.checkoutToken,
+        checkoutUrl: checkout.checkoutUrl,
+      });
+    } catch (error) {
+      console.error("Direct PlusBase checkout creation failed", error);
+    }
   }
+
+  const firstItem = items[0];
 
   return NextResponse.json({
     checkoutToken: token,
     checkoutUrl: buildPlusbaseCheckoutUrl({
       checkoutRef: token,
       quantity,
-      giftQuantity: quantity,
+      productId: firstItem ? String(firstItem.productId) : undefined,
+      variantId: firstItem ? String(firstItem.variantId) : undefined,
       extraParams: bridgeParams(body.attribution),
     }),
   });

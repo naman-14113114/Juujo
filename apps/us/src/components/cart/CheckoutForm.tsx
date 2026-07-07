@@ -7,7 +7,7 @@ import loadingLottie from "./loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import { attributionStorageKey } from "@/components/integrations/AttributionCapture";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
-import { promoCode } from "@/lib/cart";
+import { getDisplayLines, promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
 
 export type CheckoutCustomer = {
@@ -60,10 +60,19 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       window.removeEventListener("pageshow", handlePageShow);
     };
   }, []);
-  const maskQuantity =
-    lines.find(
-      (line) => line.type === "product" && line.productId === "buudy-led-mask",
-    )?.quantity ?? totals.itemCount;
+  // Every purchasable unit that goes to the PlusBase cart: paid sheets, the
+  // free sheet, and the free mat gift, each with its real store ids. Free items
+  // are still sent (discounts are configured on PlusBase).
+  const checkoutItems = getDisplayLines(lines)
+    .filter((line) => line.checkoutProductId && line.variantId)
+    .map((line) => ({
+      productId: line.checkoutProductId as string,
+      variantId: line.variantId as string,
+      quantity: line.quantity,
+    }));
+  const totalUnits =
+    checkoutItems.reduce((sum, item) => sum + item.quantity, 0) ||
+    totals.itemCount;
 
   function readAttribution() {
     const currentParams = new URLSearchParams(window.location.search);
@@ -126,7 +135,8 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         },
         body: JSON.stringify({
           customerEmail: initialCustomer.email,
-          quantity: maskQuantity,
+          quantity: totalUnits,
+          items: checkoutItems,
           cart: {
             lines,
             giftMessage,
@@ -142,14 +152,23 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       }
 
       const data = (await response.json()) as { checkoutUrl?: string };
+      const firstItem = checkoutItems[0];
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity }),
+        data.checkoutUrl ??
+          buildPlusbaseCheckoutUrl({
+            quantity: totalUnits,
+            productId: firstItem?.productId,
+            variantId: firstItem?.variantId,
+          }),
       );
     } catch {
       setError("Opening secure checkout...");
+      const firstItem = checkoutItems[0];
       window.location.assign(
         buildPlusbaseCheckoutUrl({
-          quantity: maskQuantity,
+          quantity: totalUnits,
+          productId: firstItem?.productId,
+          variantId: firstItem?.variantId,
           extraParams: attribution,
         }),
       );

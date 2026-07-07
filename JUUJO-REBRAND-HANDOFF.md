@@ -367,6 +367,54 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 
 ---
 
+## 16B. PROGRESS UPDATE #6 — Fitted-sheet BUNDLE offer + real variant IDs + ACTIVE checkout (US app only)
+
+> Scope this session: **US app only** (`apps/us`). Fitted grounding sheet page `/products/grounding-sheets`. Source of truth for IDs: `C:\Users\sahil\Downloads\Fitted Grounding Sheets.docx`. Reference design: `https://thegrounding.co/products/terra-grounding-bed-sheet`. All edits type-check clean (`cd apps/us && node ../../node_modules/typescript/lib/tsc.js --noEmit -p tsconfig.json` -> 0 errors).
+
+### User's locked decisions (from Q&A this session)
+- **Bundle pricing = reference EXACT** (user chose this over the "$99" note): every fitted sheet **$159.95** (compareAt **$319.90**). Buy 1 = $159.95. **Buy 2 Get 1 Free = $319.90 total for 3 sheets** (2 paid + 1 free), per-sheet $106.63, compareAt $959.70, "You save $639.80".
+- **Checkout = add EVERYTHING at full price** to PlusBase (the free 3rd sheet AND the free mat are sent at their real variant ids). The "3rd free" + "free mat" discounts are NOT applied at checkout yet — **user will configure automatic discounts on PlusBase**. Until then the customer is charged full price for all lines. (This is the user's explicit choice.)
+- **Real catalog**: colours **White / Grey / Green**; sizes **Single, Twin, Twin XL, Full, Queen, King, Cali King**. **Green Twin XL = out of stock.**
+- **US app only** for now (docx ids are the US/ShopBase store). uk/ca/au still have the OLD buy box + placeholder ids.
+
+### Real ShopBase ids wired (from the docx) — `apps/us/src/data/products.ts`
+- The ShopBase PRODUCT_ID **varies per size within a colour** (not one per product), so each variant carries its own `productId` + `variantId`. Stored in the `groundingSheetIds` map keyed `"{color}-{size}"`, built into variants by `buildGroundingVariants()`.
+- Green Twin XL has `variantId: null` -> `inStock:false` (buy box disables + blocks checkout for that combo).
+- **Free mat** real ids set explicitly on `groundingMat.variants[0]`: productId `1000000669152669`, variantId `1000020491331605`.
+- Colours use swatch images `whitelinen3_jpg-min.jpg` / `graylinen3_png-min.png` / `greenlinen3_png-min.png` (already in `public/media/products/grounding-sheets/images`).
+- Price consts `GROUNDING_SHEET_PRICE_CENTS = 15995`, `GROUNDING_SHEET_COMPARE_CENTS = 31990`. Applied to fitted sheet base + every size. (Flat sheet inherits colours/sizes but keeps PLACEHOLDER ids via `buildVariants("GROUNDING-FLAT",...)` — user only gave FITTED ids; flat checkout is NOT wired.)
+
+### Bundle UI — `apps/us/src/components/product/GroundingBuyBox.tsx` (fully rewritten)
+- Replaced the old (swatch + size grid + qty stepper + paid pillow add-on) with two selectable **tier cards**: `Buy 1` and `Buy 2, Get 1 Free!` ("Most Popular", recommended + **preselected**). Prices/compare/savings/per-sheet all computed from `product.priceCents`/`compareAtCents` so they match the reference exactly.
+- Selected tier expands **per-sheet rows** (`SheetRow`): each sheet is an independent **Colour `<select>` + Size `<select>`** (Buy 2 shows 3 rows #1/#2/#3, all default to Queen). User can mix colours/sizes per sheet.
+- A **Free Grounding Mat** card is shown below (image + "Free", worth $69.95).
+- Out-of-stock guard: if any selected combo has no real variant id, the size shows "Out of stock, pick another size" and the CTA is disabled ("SELECTED SIZE OUT OF STOCK").
+- CTA keeps `id="hero-cta"` (sticky bar tracks it). On click -> `setSheetBundle(selections, tier.freeCount)` then `router.push("/cart")`.
+
+### Cart multi-line refactor — `apps/us/src/lib/cart.ts` + `CartProvider.tsx`
+- **Problem solved:** cart used to hold ONE line per product; a Buy-2-Get-1-Free with 3 different variants needs 3 separate lines (possibly same variant). 
+- `CartLine` gained `checkoutProductId` (real ShopBase product id for checkout), `bundle` (part of a sheet bundle), `free` (the free unit).
+- New `buildSheetBundleLines(selections, freeCount)` -> one line per selected sheet, unique id `bundle-{n}-{variantId}`, last `freeCount` are `unitPriceCents:0` + `free:true` (keep compareAt for the strike-through).
+- `normalizeCartLines` now **preserves bundle lines individually** (re-derives title/image/price from the variant, respects `free`) instead of collapsing them; non-bundle lines behave as before.
+- `deriveGiftLines` (the free mat, already present from §16) now also sets `checkoutProductId` + `free:true`. Mat is DERIVED whenever any grounding-sheet line is in the cart (survives reload).
+- `CartProvider`: added `setSheetBundle(selections, freeCount)` (clears the sheet product's lines then appends the new per-sheet lines) and `removeLine(lineId)` (bundle sheets share a productId so must be removed by line id).
+
+### Cart rendering — `apps/us/src/components/cart/CartLineItem.tsx` + `CartSummary.tsx`
+- `CartLineItem`: gift + free lines show a "Free gift" / "Free sheet" tag (no stepper, not removable); bundle paid sheets show "Qty 1" + a Remove that calls `removeLine(line.id)`; normal products keep the stepper. Fixed the legacy "Unlocked xN" wording.
+- `CartSummary`: total-discount dropdown now shows **FREE GROUNDING MAT** (`totals.giftValueCents`) + **BUNDLE DISCOUNT** (`totals.savingsCents - giftValueCents`) instead of the old "FREE TORCH". Subtotal = `totals.totalCents` (e.g. $319.90 for the bundle).
+
+### ACTIVE checkout — `apps/us/src/app/api/checkout/prepare/route.ts` + `CheckoutForm.tsx`
+- `CheckoutForm` builds `checkoutItems` from `getDisplayLines(lines)` (all paid sheets + free sheet + free mat), each `{productId: line.checkoutProductId, variantId: line.variantId, quantity}`, and POSTs them as `items[]` to `/api/checkout/prepare`.
+- `prepare/route.ts` no longer hardcodes mask+torch. `createPlusbaseCheckout(items)` creates a real PlusBase cart (`POST /api/checkout/next/cart.json`) then loops `items` doing `addItem(productId, variantId, qty)` for each. Falls back to `buildPlusbaseCheckoutUrl` with the first item if the API path fails. **This is the "make checkout active" piece** — the button now sends the exact selected product/variant ids to the real juujo.com PlusBase cart.
+
+### KNOWN LIMITATIONS / NEXT
+1. **Checkout overcharges until PlusBase discounts are set** (user's explicit choice): free 3rd sheet + free mat are sent at full price. Configure an automatic "buy 2 get 1" discount + a $0/free mat on PlusBase, OR change `CheckoutForm.checkoutItems` to drop `free` lines / send only paid units.
+2. **Flat sheet** (`/products/grounding-flat-sheet`) shows the same bundle UI but still has PLACEHOLDER variant ids -> its checkout is not real. Wire real flat-sheet ids when the user provides them.
+3. **uk/ca/au NOT updated** — replicate this session's changes + per-country ids/prices when ready. (Their PlusBase store/currency differ; ids here are US.)
+4. Bundle lines are qty-fixed at 1 (no in-cart quantity editing); to change selection the user re-picks on the product page. Removing the free sheet is disabled; removing a paid sheet is allowed.
+
+---
+
 ## 17. READY-TO-PASTE PROMPT FOR THE NEXT AGENT
 
 > Paste this to the next AI agent working in `E:\1st YEAR DTU\New folder\Juujo-Vercel`.

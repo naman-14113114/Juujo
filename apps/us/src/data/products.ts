@@ -153,17 +153,78 @@ function buildVariants(
 /* Grounding Sheets                                                    */
 /* ------------------------------------------------------------------ */
 
+// Reference pricing (thegrounding.co): every fitted sheet is the same price
+// regardless of colour or size. Buy 1 = $159.95 (compare $319.90).
+const GROUNDING_SHEET_PRICE_CENTS = 15995;
+const GROUNDING_SHEET_COMPARE_CENTS = 31990;
+
 const groundingColors: ProductColor[] = [
-  { id: "graphite", name: "Graphite", hex: "#3c4048" },
-  { id: "stone", name: "Stone", hex: "#c9c1b4" },
-  { id: "midnight", name: "Midnight", hex: "#2b2f3d" },
+  { id: "white", name: "White", hex: "#f2efe8", image: productMediaAsset("whitelinen3_jpg-min.jpg", "grounding-sheets", "images") },
+  { id: "grey", name: "Grey", hex: "#9b9a95", image: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images") },
+  { id: "green", name: "Green", hex: "#5c6b52", image: productMediaAsset("greenlinen3_png-min.png", "grounding-sheets", "images") },
 ];
 
 const groundingSizes: SizePricing[] = [
-  { id: "double", name: "Double", dimensions: "137 x 191 cm", priceCents: 12900, compareAtCents: 17900 },
-  { id: "queen", name: "Queen", dimensions: "153 x 203 cm", priceCents: 14900, compareAtCents: 19900 },
-  { id: "king", name: "King", dimensions: "183 x 203 cm", priceCents: 16900, compareAtCents: 22900 },
+  { id: "single", name: "Single", dimensions: "27 x 78 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "twin", name: "Twin", dimensions: "39 x 75 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "twin-xl", name: "Twin XL", dimensions: "39 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "full", name: "Full", dimensions: "54 x 75 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "queen", name: "Queen", dimensions: "60 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "king", name: "King", dimensions: "76 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "cali-king", name: "Cali King", dimensions: "72 x 84 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
 ];
+
+// Real ShopBase/PlusBase ids for the fitted grounding sheet, keyed by
+// `${colorId}-${sizeId}`. Source: user's "Fitted Grounding Sheets" doc.
+// ShopBase assigns a distinct product id per size within a colour.
+// A null variantId means that colour+size is out of stock.
+const groundingSheetIds: Record<string, { productId: string; variantId: string | null }> = {
+  "white-single":    { productId: "1000000669114144", variantId: "1000020490757976" },
+  "white-twin":      { productId: "1000000669114547", variantId: "1000020490760779" },
+  "white-twin-xl":   { productId: "1000000669114144", variantId: "1000020490757981" },
+  "white-full":      { productId: "1000000669114547", variantId: "1000020490760780" },
+  "white-queen":     { productId: "1000000669114144", variantId: "1000020490757983" },
+  "white-king":      { productId: "1000000669114218", variantId: "1000020490759920" },
+  "white-cali-king": { productId: "1000000669114547", variantId: "1000020490760772" },
+  "grey-single":     { productId: "1000000669114144", variantId: "1000020490757995" },
+  "grey-twin":       { productId: "1000000669114547", variantId: "1000020490760803" },
+  "grey-twin-xl":    { productId: "1000000669114144", variantId: "1000020490757998" },
+  "grey-full":       { productId: "1000000669114547", variantId: "1000020490760804" },
+  "grey-queen":      { productId: "1000000669114144", variantId: "1000020490757994" },
+  "grey-king":       { productId: "1000000669114218", variantId: "1000020490759921" },
+  "grey-cali-king":  { productId: "1000000669114547", variantId: "1000020490760792" },
+  "green-single":    { productId: "1000000669114547", variantId: "1000020490760742" },
+  "green-twin":      { productId: "1000000669114547", variantId: "1000020490760739" },
+  "green-twin-xl":   { productId: "1000000669114547", variantId: null },
+  "green-full":      { productId: "1000000669114547", variantId: "1000020490760740" },
+  "green-queen":     { productId: "1000000669114547", variantId: "1000020490760729" },
+  "green-king":      { productId: "1000000669114547", variantId: "1000020490760730" },
+  "green-cali-king": { productId: "1000000669114547", variantId: "1000020490760728" },
+};
+
+/** Build the fitted-sheet variant matrix using the real store ids above. */
+function buildGroundingVariants(
+  colors: ProductColor[],
+  sizes: SizePricing[],
+): ProductVariant[] {
+  const variants: ProductVariant[] = [];
+  colors.forEach((color) => {
+    sizes.forEach((size) => {
+      const ids = groundingSheetIds[`${color.id}-${size.id}`];
+      variants.push({
+        colorId: color.id,
+        sizeId: size.id,
+        productId: ids?.productId ?? "",
+        variantId: ids?.variantId ?? "",
+        sku: `JUUJO-GROUNDING-${color.id}-${size.id}`.toUpperCase(),
+        priceCents: size.priceCents,
+        compareAtCents: size.compareAtCents,
+        inStock: Boolean(ids?.variantId),
+      });
+    });
+  });
+  return variants;
+}
 
 export const groundingSheets: Product = {
   id: "grounding-sheets",
@@ -182,8 +243,8 @@ export const groundingSheets: Product = {
   seoDescription:
     "Juujo Grounding Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   currency: market.currency,
-  priceCents: 14900,
-  compareAtCents: 19900,
+  priceCents: GROUNDING_SHEET_PRICE_CENTS,
+  compareAtCents: GROUNDING_SHEET_COMPARE_CENTS,
   rating: 4.8,
   reviewCount: 4274,
   customerCount: "40,000+",
@@ -203,7 +264,7 @@ export const groundingSheets: Product = {
   ],
   colors: groundingColors,
   sizes: groundingSizes,
-  variants: buildVariants("GROUNDING", groundingColors, groundingSizes),
+  variants: buildGroundingVariants(groundingColors, groundingSizes),
   quantityTiers: defaultQuantityTiers,
   material: "95% organic cotton, 5% conductive silver fibre",
   care: "Machine wash cold, gentle cycle. Do not bleach. Tumble dry low.",
@@ -213,7 +274,7 @@ export const groundingSheets: Product = {
     { label: "Includes", value: "Fitted sheet, grounding cord, adaptor" },
     { label: "Thread feel", value: "Soft, breathable, 300 thread count" },
     { label: "Care", value: "Machine washable, cold gentle cycle" },
-    { label: "Sizes", value: "Double, Queen, King" },
+    { label: "Sizes", value: "Single, Twin, Twin XL, Full, Queen, King, Cali King" },
   ],
   included: [
     { quantity: "1x", label: "Grounding fitted sheet" },
@@ -252,7 +313,7 @@ export const groundingSheets: Product = {
     {
       question: "Which size should I choose?",
       answer:
-        "Pick the size that matches your mattress: Double, Queen, or King. Each has a deep fitted skirt to stay secure overnight.",
+        "Pick the size that matches your mattress, from Single through to Cali King. Each has a deep fitted skirt to stay secure overnight.",
     },
   ],
   badges: [
@@ -336,7 +397,19 @@ export const groundingMat: Product = {
   ],
   colors: matColors,
   sizes: matSizes,
-  variants: buildVariants("MAT", matColors, matSizes),
+  // Real ShopBase/PlusBase ids for the free grounding mat (from the docs).
+  variants: [
+    {
+      colorId: "black",
+      sizeId: "standard",
+      productId: "1000000669152669",
+      variantId: "1000020491331605",
+      sku: "JUUJO-GROUNDING-MAT",
+      priceCents: 6995,
+      compareAtCents: 13995,
+      inStock: true,
+    },
+  ],
   quantityTiers: defaultQuantityTiers,
   material: "Conductive carbon infused leatherette",
   care: "Wipe clean with a damp cloth.",
