@@ -1,62 +1,111 @@
+"use client";
+
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
 
 export function GroundingTimelineSection() {
+  const [activeStep, setActiveStep] = useState(0);
+
   const timeline = [
     {
-      time: "Night 1",
-      title: "Immediate Calm",
-      description: "Experience a deeper, more restful sleep as your body connects to the earth's natural energy field.",
+      label: "10 Minutes",
+      title: "Blood Flow Begins Improving",
+      description: "Within minutes of using grounding sheets, blood circulation begins improving as red blood cells become less clumped together - helping your body feel calmer, warmer, and more physically relaxed.",
+      image: "/media/journey/step-3.gif",
     },
     {
-      time: "Week 1",
-      title: "Reduced Inflammation",
-      description: "Notice a reduction in daily aches, stiffness, and joint discomfort as free radicals are neutralized.",
+      label: "Night 1",
+      title: "Your Body Starts Relaxing",
+      description: "Many people report feeling calmer and more comfortable after their first night on grounding sheets. As inflammation begins settling down and circulation improves, aches, tension, and physical discomfort may become less noticeable—making it easier to stay asleep through the night.",
+      image: "/media/journey/step-5.jpg",
     },
     {
-      time: "Week 4",
-      title: "Sustained Vitality",
-      description: "Wake up feeling refreshed with improved overall energy levels and a more balanced mood throughout the day.",
+      label: "Week 1",
+      title: "Fewer Nighttime Wake-Ups",
+      description: "After a week of sleeping on grounding sheets, many people report waking up less during the night and falling back asleep more easily. As circulation improves and the body becomes more relaxed, sleep often feels deeper, more stable, and more restorative.",
+      image: "/media/journey/step-2.gif",
+    },
+    {
+      label: "Month 1",
+      title: "Chronic Pain And Inflammation Begin Settling Down",
+      description: "After several weeks of sleeping on grounding sheets, your body recovers more effectively overnight. Back pain, stiffness, and tension often become less noticeable as sleep improves and your body has more time to rest and recover.",
+      image: "/media/journey/step-1.gif",
+    },
+    {
+      label: "Month 3 & Beyond",
+      title: "Better Sleep Compounds Into Better Days",
+      description: "With consistent sleep on grounding sheets night after night, recovery improves, stress and stiffness continue settling down, and many people notice steadier energy, easier mornings, and a greater sense of well-being.",
+      image: "/media/journey/step-4.gif",
     },
   ];
 
   return (
-    <section className="juujo-section bg-[var(--cream)] py-14 md:py-24" id="timeline">
+    <section className="juujo-section bg-white py-14 md:py-24" id="timeline">
       <div className="juujo-wrap max-w-5xl">
-        <SectionHeading
-          eyebrow="What to Expect"
-          title={
-            <>
-              Your <em className="juujo-italic text-[var(--gold)]">Journey</em> with Grounding
-            </>
-          }
-          copy="While everyone is different, here is what most of our customers experience when they start sleeping grounded."
-          align="center"
-        />
+        <div className="text-center mb-12">
+          <h2 className="juujo-display text-3xl md:text-4xl text-gray-400 mb-4 font-light">
+            Your First 30 Nights <span className="text-[#3a666e] font-normal">Sleeping on Grounding Sheets</span>
+          </h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            Grounding sheets work cumulatively. Night after night, many people report deeper sleep, better recovery, and waking up feeling more refreshed - supported by emerging grounding research.
+          </p>
+        </div>
 
-        <div className="mt-16 relative">
-          {/* Desktop connecting line */}
-          <div className="hidden md:block absolute top-6 left-[10%] right-[10%] h-[2px] bg-[var(--gold)]/30"></div>
-
-          <div className="grid md:grid-cols-3 gap-12 relative z-10">
+        <div className="mt-20">
+          {/* Timeline navigation */}
+          <div className="relative mb-12 flex justify-between max-w-4xl mx-auto px-4">
+            <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-[#3a666e]"></div>
             {timeline.map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center relative group">
-                <div className="w-12 h-12 rounded-full bg-[var(--cream)] border-4 border-[var(--gold)] flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  <CheckCircle2 size={24} className="text-[var(--gold)]" />
+              <button
+                key={idx}
+                className="relative z-10 flex flex-col items-center group focus:outline-none"
+                onClick={() => setActiveStep(idx)}
+                type="button"
+              >
+                <div className="bg-white p-2">
+                  <div
+                    className={`flex h-[18px] w-[18px] items-center justify-center rounded-full transition-all duration-300 ${
+                      activeStep === idx
+                        ? "border-[2px] border-[#3a666e] scale-150"
+                        : "border-[2px] border-gray-300 group-hover:border-gray-400"
+                    }`}
+                  >
+                    {activeStep === idx && (
+                      <div className="h-2 w-2 rounded-full bg-[#3a666e]" />
+                    )}
+                  </div>
                 </div>
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-[var(--border)] w-full h-full">
-                  <span className="text-[var(--gold)] font-semibold uppercase tracking-wider text-sm mb-3 block">
-                    {item.time}
-                  </span>
-                  <h3 className="juujo-display text-xl text-[var(--plum)] mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-[var(--muted)] text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
+                <span
+                  className={`absolute top-12 whitespace-nowrap text-[13px] transition-colors duration-300 ${
+                    activeStep === idx ? "font-medium text-[#3a666e]" : "text-gray-500 group-hover:text-gray-700"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </button>
             ))}
+          </div>
+
+          <div className="mt-28 grid items-center gap-12 md:grid-cols-2 max-w-4xl mx-auto">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+              <Image
+                src={timeline[activeStep].image}
+                alt={timeline[activeStep].title}
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="mb-3 text-sm text-[#3a666e]">{timeline[activeStep].label}</span>
+              <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[#1a2f33]">
+                {timeline[activeStep].title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                {timeline[activeStep].description}
+              </p>
+            </div>
           </div>
         </div>
       </div>

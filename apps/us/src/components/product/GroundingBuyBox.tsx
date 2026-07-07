@@ -225,6 +225,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               {/* Per-sheet selectors, only for the selected tier */}
               {selected && (
                 <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
+                  <div className="text-xs text-[var(--muted)] -mb-1">Color, Size</div>
                   {Array.from({ length: t.sheets }).map((_, index) => (
                     <SheetRow
                       key={index}
@@ -342,6 +343,7 @@ function SheetRow({
 }) {
   const variant = getVariant(product, choice.colorId, choice.sizeId);
   const soldOut = !variant.inStock || !variant.variantId;
+  const selectedColor = product.colors.find((c) => c.id === choice.colorId);
 
   return (
     <div className="flex items-center gap-3">
@@ -353,21 +355,11 @@ function SheetRow({
       <label className="sr-only" htmlFor={`color-${index}`}>
         Colour for sheet {index + 1}
       </label>
-      <div className="relative flex-1">
-        <select
-          id={`color-${index}`}
-          value={choice.colorId}
-          onChange={(event) => onChange({ colorId: event.target.value })}
-          className="w-full appearance-none rounded-xl border bg-[var(--card)] px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
-          style={{ borderColor: "var(--border)" }}
-        >
-          {product.colors.map((color) => (
-            <option key={color.id} value={color.id}>
-              {color.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <ColorSelect 
+        value={choice.colorId} 
+        onChange={(val) => onChange({ colorId: val })} 
+        colors={product.colors} 
+      />
       <label className="sr-only" htmlFor={`size-${index}`}>
         Size for sheet {index + 1}
       </label>
@@ -376,7 +368,7 @@ function SheetRow({
           id={`size-${index}`}
           value={choice.sizeId}
           onChange={(event) => onChange({ sizeId: event.target.value })}
-          className="w-full appearance-none rounded-xl border bg-[var(--card)] px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+          className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-3 pr-8 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
           style={{
             borderColor: soldOut ? "var(--clay-deep)" : "var(--border)",
           }}
@@ -387,12 +379,73 @@ function SheetRow({
             </option>
           ))}
         </select>
+        <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
         {soldOut && (
           <span className="mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
             Out of stock, pick another size
           </span>
         )}
       </div>
+    </div>
+  );
+}
+
+function ColorSelect({
+  value,
+  onChange,
+  colors,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  colors: Product["colors"];
+}) {
+  const [open, setOpen] = useState(false);
+  const selected = colors.find((c) => c.id === value);
+  
+  return (
+    <div className="relative flex-1">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+        style={{ borderColor: "var(--border)" }}
+      >
+        {selected && (
+          <span
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-[3px] border"
+            style={{ backgroundColor: selected.hex, borderColor: "rgba(0,0,0,0.1)" }}
+          />
+        )}
+        {selected?.name}
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </button>
+      {open && (
+        <ul className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg" style={{ borderColor: "var(--border)" }}>
+          {colors.map((color) => (
+            <li key={color.id}>
+              <button
+                type="button"
+                onClick={() => {
+                  onChange(color.id);
+                  setOpen(false);
+                }}
+                className="flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
+              >
+                <span
+                  className="mr-2 h-4 w-4 flex-none rounded-[3px] border"
+                  style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
+                />
+                {color.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
