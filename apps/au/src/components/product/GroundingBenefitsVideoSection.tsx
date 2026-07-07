@@ -12,7 +12,7 @@ export function GroundingBenefitsVideoSection() {
             <h2 className="juujo-display text-[2.5rem] leading-[1.1] md:text-5xl text-[var(--plum)] mb-6">
               How Grounding Sheets can benefit your health?
             </h2>
-            <p className="text-[var(--muted)] text-base md:text-lg leading-relaxed max-w-lg">
+            <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base max-w-lg">
               While grounding outdoors offers great health benefits, staying grounded indoors can be challenging. That’s where our Grounding Sheets come in. Simply cover your mattress with the sheets, connect the grounding cable to an outlet, and enjoy grounding benefits every night. Consistent grounding will improve your sleep quality, reduce inflammation, boost energy levels, and lower stress.
             </p>
           </div>

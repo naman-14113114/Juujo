@@ -41,13 +41,13 @@ export function GroundingTimelineSection() {
   ];
 
   return (
-    <section className="juujo-section bg-white py-14 md:py-24" id="timeline">
+    <section className="juujo-section bg-[var(--cream)] py-14 md:py-24" id="timeline">
       <div className="juujo-wrap max-w-5xl">
         <div className="text-center mb-12">
-          <h2 className="juujo-display text-3xl md:text-4xl text-gray-400 mb-4 font-light">
+          <h2 className="juujo-display text-3xl md:text-4xl text-[var(--night)] mb-4 font-light">
             Your First 30 Nights <span className="text-[var(--clay-deep)] font-normal">Sleeping on Grounding Sheets</span>
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-[var(--muted)] leading-relaxed max-w-3xl mx-auto text-sm md:text-base">
             Grounding sheets work cumulatively. Night after night, many people report deeper sleep, better recovery, and waking up feeling more refreshed - supported by emerging grounding research.
           </p>
         </div>
@@ -63,7 +63,7 @@ export function GroundingTimelineSection() {
                 onClick={() => setActiveStep(idx)}
                 type="button"
               >
-                <div className="bg-white p-2">
+                <div className="bg-[var(--cream)] p-2">
                   <div
                     className={`flex h-[18px] w-[18px] items-center justify-center rounded-full transition-all duration-300 ${
                       activeStep === idx
@@ -78,7 +78,7 @@ export function GroundingTimelineSection() {
                 </div>
                 <span
                   className={`absolute top-12 whitespace-nowrap text-[13px] transition-colors duration-300 ${
-                    activeStep === idx ? "font-medium text-[var(--clay-deep)]" : "text-gray-500 group-hover:text-gray-700"
+                    activeStep === idx ? "font-medium text-[var(--clay-deep)]" : "text-[var(--muted)] group-hover:text-[var(--night)]"
                   }`}
                 >
                   {item.label}
@@ -102,7 +102,7 @@ export function GroundingTimelineSection() {
               <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[var(--night)]">
                 {timeline[activeStep].title}
               </h3>
-              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base">
                 {timeline[activeStep].description}
               </p>
             </div>

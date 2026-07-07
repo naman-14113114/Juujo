@@ -25,7 +25,7 @@ export function GroundingMatWhatIsItSection() {
             <h2 className="juujo-display text-[2.5rem] leading-[1.1] md:text-5xl text-[var(--plum)] mb-6">
               What is Grounding?
             </h2>
-            <p className="text-[var(--muted)] text-base md:text-lg leading-relaxed max-w-lg">
+            <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base max-w-lg">
               Beneath your feet lies a most marvelous gift from Nature − the very Earth itself, naturally equipped with extraordinary healing power that may just be the single most effective medicine available. Grounding as it is often called, connects you to this overlooked natural energy that nurtures and balances your body at the deepest levels, draining it of inflammation, pain, stress, and fatigue.
             </p>
           </div>
