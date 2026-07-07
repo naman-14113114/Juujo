@@ -13,6 +13,7 @@ import {
   getVariant,
   type Product,
 } from "@/data/products";
+import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
 
@@ -215,6 +216,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </span>
         </div>
       )}
+
+      <DeliveryTimerBox />
 
       {/* Add to cart */}
       <Button

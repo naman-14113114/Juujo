@@ -14,6 +14,7 @@ import {
   type QuantityTier,
 } from "@/data/products";
 import { market } from "@/lib/market";
+import { DeliveryTimerBox } from "./DeliveryTimerBox";
 
 function formatMoney(cents: number, currency: string) {
   return new Intl.NumberFormat(market.locale, {
@@ -264,6 +265,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
             </span>
           )}
         </div>
+
+        <DeliveryTimerBox />
 
         <Button
           id="hero-cta"
