@@ -15,6 +15,7 @@ import {
 } from "@/data/products";
 import { market } from "@/lib/market";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
+import { GroundingMatAccordions } from "./GroundingMatAccordions";
 
 function formatMoney(cents: number, currency: string) {
   return new Intl.NumberFormat(market.locale, {
@@ -250,21 +251,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
       {/* Live price + actions */}
       <div className="flex flex-col gap-3">
-        <div className="flex items-baseline gap-3">
-          <span className="text-3xl font-semibold text-[var(--ink)]">
-            {formatMoney(totalPrice, product.currency)}
-          </span>
-          {compareTotal > totalPrice && (
-            <span className="text-lg text-[var(--muted)] line-through">
-              {formatMoney(compareTotal, product.currency)}
-            </span>
-          )}
-          {savings > 0 && (
-            <span className="text-sm font-medium text-[var(--success)]">
-              Save {formatMoney(savings, product.currency)}
-            </span>
-          )}
-        </div>
 
         <DeliveryTimerBox />
 
@@ -311,6 +297,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
           ))}
         </ul>
       )}
+
+      {product.category === "grounding-mat" && <GroundingMatAccordions />}
     </div>
   );
 }

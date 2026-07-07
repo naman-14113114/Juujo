@@ -404,11 +404,7 @@ export const groundingMat: Product = {
       answer: "Simply wipe clean with a damp cloth. Do not machine wash.",
     },
   ],
-  badges: [
-    "100-night trial",
-    "Free shipping",
-    "Easy returns",
-  ],
+  badges: [],
 };
 
 /* ------------------------------------------------------------------ */
