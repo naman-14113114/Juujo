@@ -100,20 +100,17 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const giftProduct = getProductBySlug("grounding-mat");
 
   function priceForTier(t: Tier) {
-    if (t.id === tierId) {
-      // Use actual selected variant prices for the active tier
-      const paidN = t.sheets - t.freeCount;
-      return activeVariantPrices
-        .slice(0, paidN)
-        .reduce((sum, v) => sum + v.priceCents, 0);
-    }
-    return perSheet * (t.sheets - t.freeCount);
+    const tierChoices = choices.slice(0, t.sheets);
+    const paidN = t.sheets - t.freeCount;
+    return tierChoices
+      .slice(0, paidN)
+      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).priceCents, 0);
   }
+  
   function compareForTier(t: Tier) {
-    if (t.id === tierId) {
-      return activeVariantPrices.reduce((sum, v) => sum + v.compareAtCents, 0);
-    }
-    return perSheetCompare * t.sheets;
+    const tierChoices = choices.slice(0, t.sheets);
+    return tierChoices
+      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).compareAtCents, 0);
   }
 
   function updateChoice(index: number, patch: Partial<SheetChoice>) {
