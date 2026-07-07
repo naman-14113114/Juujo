@@ -461,3 +461,8 @@ DO IT UK-FIRST, get apps/uk type-checking clean (cd apps\uk && node ../../node_m
 
 Ask me if anything is unclear before large changes. Take your time; there is no time limit.
 ```
+## [2026-07-07] Color Theme Update
+- Replaced the legacy Buudy dark blue/indigo (--night) with a luxury premium forest/teal green (oklch(28% 0.04 155)) to match the new Grounding brand identity.
+- Applied across all 4 apps by modifying the root CSS tokens in globals.css.
+- Shifted --ink (primary text) and --muted (secondary text) to a green-compatible hue (155) while keeping chroma extremely low (0.015 and 0.02) to maintain near-black and neutral grey readability.
+- No components were changed; the alias system (--plum -> --night) handled the reskin instantly.

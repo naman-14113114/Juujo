@@ -49,6 +49,7 @@ export function DeliveryTimerBox() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line
     setMounted(true);
     fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
       .then((res) => res.json())

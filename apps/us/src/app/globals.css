@@ -6,8 +6,8 @@
      etc. reskins instantly with no component changes.
      Meaning now: --plum = deep restful night, --gold = warm clay accent,
      --cream = warm paper, --blush = warm linen panel. */
-  --night: oklch(26% 0.038 274);
-  --night-soft: oklch(38% 0.045 278);
+  --night: oklch(28% 0.04 155);
+  --night-soft: oklch(38% 0.05 155);
   --clay: oklch(63% 0.093 52);
   --clay-deep: oklch(55% 0.098 46);
   --paper: oklch(96.5% 0.011 84);
@@ -20,10 +20,10 @@
   --gold: var(--clay);
   --cream: var(--paper);
   --blush: var(--linen);
-  --ink: oklch(24% 0.02 280);
+  --ink: oklch(22% 0.015 155);
   --card: oklch(97.5% 0.009 84);
   --border: oklch(86% 0.014 80);
-  --muted: oklch(50% 0.02 285);
+  --muted: oklch(50% 0.02 155);
   --success: oklch(60% 0.11 150);
   --background: var(--paper);
   --foreground: var(--ink);

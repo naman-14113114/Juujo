@@ -11,10 +11,10 @@ A tired buyer at home in the evening, warm lamp light, deciding whether this is 
 Committed warm neutrals carry the surface; one warm accent for action; a deep restful indigo-night for depth bands (hero base, footer, story sections). Never pure `#000`/`#fff`. All values OKLCH, neutrals tinted toward warm.
 
 ```css
---night:      oklch(26% 0.038 274);  /* deep restful indigo, dark bands + footer (not black) */
---night-soft: oklch(38% 0.045 278);
---ink:        oklch(24% 0.02 280);   /* primary text */
---muted:      oklch(50% 0.02 285);   /* secondary text */
+--night:      oklch(28% 0.04 155);  /* deep restful luxury green, dark bands + footer */
+--night-soft: oklch(38% 0.05 155);
+--ink:        oklch(22% 0.015 155); /* primary text (near-black with green hint) */
+--muted:      oklch(50% 0.02 155);  /* secondary text */
 --paper:      oklch(96.5% 0.011 84); /* page background, warm near-white */
 --sand:       oklch(93% 0.02 82);    /* raised surface / subtle panels */
 --linen:      oklch(90% 0.026 78);   /* warmer panel */
