@@ -75,19 +75,44 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const tier = TIERS.find((t) => t.id === tierId) ?? TIERS[0];
   const activeChoices = choices.slice(0, tier.sheets);
 
+  // Compute prices from actual selected variants, not flat base price
+  const activeVariantPrices = activeChoices.map((choice) => {
+    const v = getVariant(product, choice.colorId, choice.sizeId);
+    return { priceCents: v.priceCents, compareAtCents: v.compareAtCents };
+  });
+
+  // For bundle: only the paid sheets count toward total (freeCount sheets are free)
+  // Paid items = first (sheets - freeCount) choices
+  const paidCount = tier.sheets - tier.freeCount;
+  const bundleTotal = activeVariantPrices
+    .slice(0, paidCount)
+    .reduce((sum, v) => sum + v.priceCents, 0);
+  const bundleCompare = activeVariantPrices.reduce(
+    (sum, v) => sum + v.compareAtCents,
+    0,
+  );
+  const bundleSavings = Math.max(bundleCompare - bundleTotal, 0);
+
+  // Fallback per-sheet prices from product base (used for tier cards when tier not selected)
   const perSheet = product.priceCents;
   const perSheetCompare = product.compareAtCents;
-  const paidCount = tier.sheets - tier.freeCount;
-  const bundleTotal = perSheet * paidCount;
-  const bundleCompare = perSheetCompare * tier.sheets;
-  const bundleSavings = Math.max(bundleCompare - bundleTotal, 0);
 
   const giftProduct = getProductBySlug("grounding-mat");
 
   function priceForTier(t: Tier) {
+    if (t.id === tierId) {
+      // Use actual selected variant prices for the active tier
+      const paidN = t.sheets - t.freeCount;
+      return activeVariantPrices
+        .slice(0, paidN)
+        .reduce((sum, v) => sum + v.priceCents, 0);
+    }
     return perSheet * (t.sheets - t.freeCount);
   }
   function compareForTier(t: Tier) {
+    if (t.id === tierId) {
+      return activeVariantPrices.reduce((sum, v) => sum + v.compareAtCents, 0);
+    }
     return perSheetCompare * t.sheets;
   }
 

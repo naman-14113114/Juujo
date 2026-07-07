@@ -153,25 +153,23 @@ function buildVariants(
 /* Grounding Sheets                                                    */
 /* ------------------------------------------------------------------ */
 
-// Reference pricing (thegrounding.co): every fitted sheet is the same price
-// regardless of colour or size. Buy 1 = $159.95 (compare $319.90).
-const GROUNDING_SHEET_PRICE_CENTS = 15995;
-const GROUNDING_SHEET_COMPARE_CENTS = 31990;
+// Real per-size pricing sourced from thegrounding.co product JSON.
+// Prices differ by size; compareAt is 2x the sale price (their standard display).
 
 const groundingColors: ProductColor[] = [
   { id: "white", name: "White", hex: "#f2efe8", image: productMediaAsset("whitelinen3_jpg-min.jpg", "grounding-sheets", "images") },
-  { id: "grey", name: "Grey", hex: "#9b9a95", image: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images") },
+  { id: "grey",  name: "Grey",  hex: "#9b9a95", image: productMediaAsset("graylinen3_png-min.png",  "grounding-sheets", "images") },
   { id: "green", name: "Green", hex: "#5c6b52", image: productMediaAsset("greenlinen3_png-min.png", "grounding-sheets", "images") },
 ];
 
 const groundingSizes: SizePricing[] = [
-  { id: "single", name: "Single", dimensions: "27 x 78 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "twin", name: "Twin", dimensions: "39 x 75 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "twin-xl", name: "Twin XL", dimensions: "39 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "full", name: "Full", dimensions: "54 x 75 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "queen", name: "Queen", dimensions: "60 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "king", name: "King", dimensions: "76 x 80 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
-  { id: "cali-king", name: "Cali King", dimensions: "72 x 84 in", priceCents: GROUNDING_SHEET_PRICE_CENTS, compareAtCents: GROUNDING_SHEET_COMPARE_CENTS },
+  { id: "single",    name: "Single",    dimensions: "27 x 78 in", priceCents: 10995, compareAtCents: 21990 },
+  { id: "twin",      name: "Twin",      dimensions: "39 x 75 in", priceCents: 14995, compareAtCents: 29990 },
+  { id: "twin-xl",   name: "Twin XL",   dimensions: "39 x 80 in", priceCents: 15995, compareAtCents: 31990 },
+  { id: "full",      name: "Full",      dimensions: "54 x 75 in", priceCents: 16995, compareAtCents: 33990 },
+  { id: "queen",     name: "Queen",     dimensions: "60 x 80 in", priceCents: 16995, compareAtCents: 33990 },
+  { id: "king",      name: "King",      dimensions: "76 x 80 in", priceCents: 18995, compareAtCents: 37990 },
+  { id: "cali-king", name: "Cali King", dimensions: "72 x 84 in", priceCents: 18995, compareAtCents: 37990 },
 ];
 
 // Real ShopBase/PlusBase ids for the fitted grounding sheet, keyed by
@@ -243,8 +241,8 @@ export const groundingSheets: Product = {
   seoDescription:
     "Juujo Grounding Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   currency: market.currency,
-  priceCents: GROUNDING_SHEET_PRICE_CENTS,
-  compareAtCents: GROUNDING_SHEET_COMPARE_CENTS,
+  priceCents: 16995,       // Queen price — the default selected size
+  compareAtCents: 33990,
   rating: 4.8,
   reviewCount: 4274,
   customerCount: "40,000+",
