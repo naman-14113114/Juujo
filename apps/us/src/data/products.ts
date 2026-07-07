@@ -230,7 +230,7 @@ export const groundingSheets: Product = {
   slug: "grounding-sheets",
   category: "grounding-sheets",
   categoryLabel: "Grounding Sheets",
-  name: "Juujo Grounding Fitted Sheet",
+  name: "PremiumGrounding Bed Sheet",
   heroTitle: "Grounding",
   heroEmphasis: "Fitted Sheet",
   shortDescription:

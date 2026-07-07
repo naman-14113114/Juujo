@@ -70,7 +70,7 @@ export function ProductGallery({
 
     const interval = setInterval(() => {
       goNext();
-    }, 3000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [goNext, isLightboxOpen, isPaused]);
@@ -284,9 +284,9 @@ export function ProductGallery({
               viewBox="0 0 60 30"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width="60" height="30" fill="#ff0000" />
-              <rect width="30" height="30" x="15" fill="#fff" />
-              <path d="M30,5 L33,12 L38,10 L35,16 L38,20 L33,19 L30,25 L27,19 L22,20 L25,16 L22,10 L27,12 Z" fill="#ff0000" />
+              <rect width="60" height="30" fill="#fff" />
+              <path d="M0,2.5H60M0,7.5H60M0,12.5H60M0,17.5H60M0,22.5H60M0,27.5H60" stroke="#bf0a30" strokeWidth="2.5" />
+              <rect width="24" height="16" fill="#002868" />
             </svg>
             <span className="juujo-mono leading-none">
               {market.madeInLabel}

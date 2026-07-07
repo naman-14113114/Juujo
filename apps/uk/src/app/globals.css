@@ -126,7 +126,8 @@ section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
 }
 
 .juujo-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
   overflow-wrap: break-word;
 }
 

@@ -153,10 +153,10 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </span>
         </a>
         <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
-          Premium Grounding Bed sheets
+          Premium Grounding Bed Sheets
         </h1>
         
-        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-sans text-sm lg:text-base text-[var(--plum)]">
+        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
           <li className="flex items-start gap-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
             <span className="leading-snug"><strong>Pure Silver Threads</strong> for maximum conductivity</span>
@@ -234,7 +234,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-2">
-                    <span className="text-lg font-semibold text-[var(--ink)]">
+                    <span className="font-serif text-lg font-semibold text-[var(--ink)]">
                       {t.label}
                     </span>
                     {savings > 0 && (
@@ -246,18 +246,18 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       </span>
                     )}
                   </span>
-                  <span className="mt-0.5 block text-sm text-[var(--muted)]">
+                  <span className="font-serif mt-0.5 block text-sm text-[var(--muted)]">
                     {t.freeCount > 0
                       ? `Only ${formatMoney(perUnit, product.currency)} per sheet!`
                       : `${formatMoney(perSheet, product.currency)} per sheet`}
                   </span>
                 </span>
                 <span className="flex-none text-right">
-                  <span className="block text-lg font-semibold text-[var(--ink)]">
+                  <span className="font-serif block text-lg font-semibold text-[var(--ink)]">
                     {formatMoney(total, product.currency)}
                   </span>
                   {compare > total && (
-                    <span className="block text-sm text-[var(--muted)] line-through">
+                    <span className="font-serif block text-sm text-[var(--muted)] line-through">
                       {formatMoney(compare, product.currency)}
                     </span>
                   )}
@@ -267,7 +267,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               {/* Per-sheet selectors, only for the selected tier */}
               {expandedTier === t.id && (
                 <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
-                  <div className="text-xs text-[var(--muted)] -mb-1">Color, Size</div>
+                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">Color, Size</div>
                   {Array.from({ length: t.sheets }).map((_, index) => (
                     <SheetRow
                       key={index}
@@ -380,7 +380,7 @@ function SheetRow({
   return (
     <div className="flex items-center gap-3">
       {showIndex && (
-        <span className="juujo-mono w-6 flex-none text-sm text-[var(--muted)]">
+        <span className="font-serif w-6 flex-none text-sm text-[var(--muted)]">
           #{index + 1}
         </span>
       )}
@@ -400,7 +400,7 @@ function SheetRow({
           id={`size-${index}`}
           value={choice.sizeId}
           onChange={(event) => onChange({ sizeId: event.target.value })}
-          className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-3 pr-8 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+          className="font-serif w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-3 pr-8 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
           style={{
             borderColor: soldOut ? "var(--clay-deep)" : "var(--border)",
           }}
@@ -415,7 +415,7 @@ function SheetRow({
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </div>
         {soldOut && (
-          <span className="mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
+          <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
             Out of stock, pick another size
           </span>
         )}
@@ -442,7 +442,7 @@ function ColorSelect({
         type="button"
         onClick={() => setOpen(!open)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+        className="font-serif w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
         style={{ borderColor: "var(--border)" }}
       >
         {selected && (
@@ -466,7 +466,7 @@ function ColorSelect({
                   onChange(color.id);
                   setOpen(false);
                 }}
-                className="flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
+                className="font-serif flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
               >
                 <span
                   className="mr-2 h-4 w-4 flex-none rounded-[3px] border"

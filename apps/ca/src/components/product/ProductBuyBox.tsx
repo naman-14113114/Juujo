@@ -79,7 +79,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
     <div className="flex flex-col gap-6">
       <div>
         <p className="juujo-eyebrow">{product.categoryLabel}</p>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4.5vw,2.5rem)] whitespace-nowrap tracking-tight leading-[1.02]">
+        <h1 className="font-bold text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4.5vw,2.5rem)] whitespace-nowrap tracking-tight leading-[1.02]">
           {product.name}
         </h1>
         <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">

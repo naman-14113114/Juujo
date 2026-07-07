@@ -73,7 +73,7 @@ export function DeliveryTimerBox() {
               FREE DELIVERY
             </p>
           </div>
-          <p className="font-serif mt-1.5 text-base sm:text-2xl text-[var(--ink)] font-normal leading-none whitespace-nowrap">
+          <p className="font-bold mt-1.5 text-base sm:text-2xl text-[var(--ink)] font-normal leading-none whitespace-nowrap">
             {mounted ? (deliveryDate || "soon") : "Loading..."}
           </p>
         </div>
@@ -81,7 +81,7 @@ export function DeliveryTimerBox() {
           <p className="juujo-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-widest m-0 leading-none h-5 sm:h-7 flex items-center justify-end font-bold uppercase">
             ORDER WITHIN
           </p>
-          <p className="font-serif mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--ink)] leading-none">
+          <p className="font-bold mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--ink)] leading-none">
             {mounted ? timer : "00:00"}
           </p>
         </div>

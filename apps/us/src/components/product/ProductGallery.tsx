@@ -70,7 +70,7 @@ export function ProductGallery({
 
     const interval = setInterval(() => {
       goNext();
-    }, 3000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [goNext, isLightboxOpen, isPaused]);
