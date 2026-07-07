@@ -14,6 +14,7 @@ import { GroundingWhatIsItSection } from "./GroundingWhatIsItSection";
 import { GroundingBenefitsVideoSection } from "./GroundingBenefitsVideoSection";
 import { GroundingMatWhatIsItSection } from "./GroundingMatWhatIsItSection";
 import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
+import { GroundingMatHowToUseSection } from "./GroundingMatHowToUseSection";
 
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
@@ -41,7 +42,7 @@ export function ProductPage({ product }: { product: Product }) {
         <>
           <GroundingMatWhatIsItSection />
           <GroundingMatBenefitsSection />
-          <GroundingTimelineSection />
+          <GroundingMatHowToUseSection />
           <GroundingScienceSection />
         </>
       )}
