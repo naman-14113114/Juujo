@@ -7,7 +7,7 @@ export function TrustBadges() {
       icon: "/media/products/buudy-led-mask/images/i3.png", // Truck
     },
     {
-      title: "Dermatologist Reviewed",
+      title: "Skin-Friendly Fabric",
       icon: "/media/products/buudy-led-mask/images/i4.png", // Shield
     },
     {
@@ -21,7 +21,7 @@ export function TrustBadges() {
   ];
 
   return (
-    <section className="hidden md:block bg-[#f6ede2] pt-2 md:pt-4 pb-14 md:pb-24">
+    <section className="hidden md:block bg-[var(--cream)] pt-2 md:pt-4 pb-14 md:pb-24">
       <div className="juujo-wrap">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 items-center">
           {badges.map((badge, idx) => (

@@ -10,7 +10,7 @@ export function GroundingWhatIsItSection() {
           <div className="w-full">
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl shadow-lg">
               <video
-                src={productMediaAsset("3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4", "grounding-sheets", "videos")}
+                src={productMediaAsset("juujo-what-is-grounding-video.mp4", "grounding-sheets", "videos")}
                 autoPlay
                 loop
                 muted
