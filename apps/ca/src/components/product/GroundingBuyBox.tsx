@@ -66,15 +66,17 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
   const [tierId, setTierId] = useState<Tier["id"]>("bundle");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
-  const [choices, setChoices] = useState<SheetChoice[]>([
-    defaultChoice,
-    defaultChoice,
-    defaultChoice,
-  ]);
+  const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
+    const init: Record<string, SheetChoice[]> = {};
+    for (const t of TIERS) {
+      init[t.id] = Array(t.sheets).fill(defaultChoice);
+    }
+    return init;
+  });
   const [isNavigating, setIsNavigating] = useState(false);
 
   const tier = TIERS.find((t) => t.id === tierId) ?? TIERS[0];
-  const activeChoices = choices.slice(0, tier.sheets);
+  const activeChoices = choices[tierId];
 
   // Compute prices from actual selected variants, not flat base price
   const activeVariantPrices = activeChoices.map((choice) => {
@@ -100,7 +102,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const giftProduct = getProductBySlug("grounding-mat");
 
   function priceForTier(t: Tier) {
-    const tierChoices = choices.slice(0, t.sheets);
+    const tierChoices = choices[t.id];
     const paidN = t.sheets - t.freeCount;
     return tierChoices
       .slice(0, paidN)
@@ -108,15 +110,17 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   }
   
   function compareForTier(t: Tier) {
-    const tierChoices = choices.slice(0, t.sheets);
+    const tierChoices = choices[t.id];
     return tierChoices
       .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).compareAtCents, 0);
   }
 
-  function updateChoice(index: number, patch: Partial<SheetChoice>) {
+  function updateChoice(tierIdToUpdate: string, index: number, patch: Partial<SheetChoice>) {
     setChoices((current) => {
-      const next = [...current];
-      next[index] = { ...next[index], ...patch };
+      const next = { ...current };
+      const nextChoices = [...next[tierIdToUpdate]];
+      nextChoices[index] = { ...nextChoices[index], ...patch };
+      next[tierIdToUpdate] = nextChoices;
       return next;
     });
   }
@@ -270,8 +274,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       product={product}
                       index={index}
                       showIndex={t.sheets > 1}
-                      choice={choices[index]}
-                      onChange={(patch) => updateChoice(index, patch)}
+                      choice={choices[t.id][index]}
+                      onChange={(patch) => updateChoice(t.id, index, patch)}
                     />
                   ))}
                 </div>
