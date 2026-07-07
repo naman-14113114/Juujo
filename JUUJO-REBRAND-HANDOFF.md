@@ -416,13 +416,13 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 ### 16.8 PROGRESS UPDATE #7 — Minor UI fixes (Gallery & Accordion) + Delivery Timer Extraction
 
 - **Gallery Media Update:** Replaced the wall adapter image (`0qcyc9g29pcuna5ga3lcebiskkyv.jpg`) with a new video asset (`Video_Project_34.mp4`) in `products.ts`. Set it to autoplay (`animated: true`) inside the gallery across all 4 apps.
+- **Bulk Image Addition:** Added 19 new high-quality images and infographics to the `gallery` array for `groundingSheets` (and `groundingFlatSheet` by extension) across all four applications. Skipped duplicates and fully populated the local `images/` directory in each app.
 - **Product Details Accordion:** Added a new `GroundingAccordions.tsx` component below the BuyBox to replicate the structure from groundingessentials.com. Extracted "Product Details" (with 90% cotton / 10% silver override), "What's included", and "How it works" text accurately, and integrated it into `GroundingBuyBox.tsx` for all apps.
 - **Delivery Timer Container:** The user requested to restore the "FREE DELIVERY" / "ORDER WITHIN" timer box shown on the old Buudy store. Created `DeliveryTimerBox.tsx` exactly mimicking the `Buudy-Vercel` source code:
   - Extracts the Lottie truck animation (`lottieflow-ecommerce-14-19-aa8e50-easey.json`).
   - Implements a strict 15-minute countdown (`15 * 60 - 1`), alongside a dynamic `+3 days` delivery date.
   - Matches exact background (`rgba(247,241,232,.55)`) and border styles.
   - Inserted directly above the `#hero-cta` Add to Cart button in both `GroundingBuyBox.tsx` and `ProductBuyBox.tsx` globally.
-  - *Note: These specific timer changes are verified locally and intentionally NOT pushed to GitHub per the user's request.*
 
 ---
 
