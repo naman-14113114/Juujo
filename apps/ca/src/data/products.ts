@@ -192,7 +192,7 @@ export const groundingSheets: Product = {
     { src: productMediaAsset("b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet lifestyle video", animated: true },
     { src: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"), alt: "Juujo grounding sheet on a made bed" },
     { src: productMediaAsset("3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4", "grounding-sheets", "videos"), alt: "Using the grounding sheet", animated: true },
-    { src: productMediaAsset("0qcyc9g29pcuna5ga3lcebiskkyv.jpg", "grounding-sheets", "images"), alt: "Grounding sheet in bedroom" },
+    { src: productMediaAsset("Video_Project_34.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet video", animated: true },
     { src: productMediaAsset("Pillowcase1Revised.jpg", "grounding-sheets", "images"), alt: "Pillowcase matching grounding sheet" },
     { src: productMediaAsset("374974684d48448181a86f198f569415.HD-1080p-2.5Mbps-42863921.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet close-up video", animated: true },
     { src: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"), alt: "Grounding sheet light gray perspective 1" },
