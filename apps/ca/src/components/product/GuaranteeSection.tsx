@@ -14,7 +14,7 @@ export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) 
 
       <div 
         className="absolute inset-0 z-10" 
-        style={{ backgroundColor: "oklch(17% 0.03 318 / 42%)" }}
+        style={{ backgroundColor: "color-mix(in srgb, var(--night) 42%, transparent)" }}
       />
 
       <div className="juujo-wrap relative z-20 max-w-5xl">

@@ -6,13 +6,13 @@
      etc. reskins instantly with no component changes.
      Meaning now: --plum = deep restful night, --gold = warm clay accent,
      --cream = warm paper, --blush = warm linen panel. */
-  --night: oklch(28% 0.04 155);
-  --night-soft: oklch(38% 0.05 155);
-  --clay: oklch(63% 0.093 52);
-  --clay-deep: oklch(55% 0.098 46);
-  --paper: oklch(96.5% 0.011 84);
-  --sand: oklch(93% 0.02 82);
-  --linen: oklch(90% 0.026 78);
+  --night: #18371f;
+  --night-soft: lab(27.6696% 3.7626 -16.2792);
+  --clay: #3cb14f;
+  --clay-deep: #219937;
+  --paper: lab(95.9814% 0.383854 4.19061);
+  --sand: lab(91.9428% 0.991732 7.62984);
+  --linen: lab(88.4547% 1.94991 9.84371);
 
   /* Legacy aliases mapped to the bedding palette */
   --plum: var(--night);
@@ -20,11 +20,11 @@
   --gold: var(--clay);
   --cream: var(--paper);
   --blush: var(--linen);
-  --ink: oklch(22% 0.015 155);
-  --card: oklch(97.5% 0.009 84);
-  --border: oklch(86% 0.014 80);
-  --muted: oklch(50% 0.02 155);
-  --success: oklch(60% 0.11 150);
+  --ink: lab(11.663% 1.69302 -7.26162);
+  --card: lab(97.1342% 0.308365 3.42491);
+  --border: lab(83.7988% 0.836581 5.29816);
+  --muted: lab(41.8195% 2.01775 -7.22043);
+  --success: lab(55.0026% -33.033 21.5821);
   --background: var(--paper);
   --foreground: var(--ink);
 
@@ -61,7 +61,7 @@ body {
   width: 100%;
   max-width: 100%;
   background:
-    radial-gradient(circle at top left, oklch(88% 0.03 70 / 0.32), transparent 34rem),
+    radial-gradient(circle at top left, color-mix(in srgb, var(--linen) 32%, transparent), transparent 34rem),
     var(--cream);
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -93,7 +93,7 @@ video {
 }
 
 ::selection {
-  background: oklch(63% 0.093 52 / 0.3);
+  background: color-mix(in srgb, var(--clay) 30%, transparent);
   color: var(--plum);
 }
 
@@ -255,7 +255,7 @@ section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
   background: linear-gradient(
     90deg,
     transparent,
-    oklch(66% 0.088 86 / 0.26),
+    color-mix(in srgb, var(--clay) 26%, transparent),
     transparent
   );
   content: "";
@@ -320,7 +320,7 @@ section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
 
 .juujo-cart-wipe:hover .juujo-cart-pulse-ring,
 .juujo-cart-wipe:focus-visible .juujo-cart-pulse-ring {
-  background: oklch(17% 0.03 318 / 0.42);
+  background: color-mix(in srgb, var(--night) 42%, transparent);
 }
 
 .juujo-sticky-cart-icon {

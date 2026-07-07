@@ -45,7 +45,7 @@ export function GroundingTimelineSection() {
       <div className="juujo-wrap max-w-5xl">
         <div className="text-center mb-12">
           <h2 className="juujo-display text-3xl md:text-4xl text-gray-400 mb-4 font-light">
-            Your First 30 Nights <span className="text-[#3a666e] font-normal">Sleeping on Grounding Sheets</span>
+            Your First 30 Nights <span className="text-[var(--clay-deep)] font-normal">Sleeping on Grounding Sheets</span>
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
             Grounding sheets work cumulatively. Night after night, many people report deeper sleep, better recovery, and waking up feeling more refreshed - supported by emerging grounding research.
@@ -55,7 +55,7 @@ export function GroundingTimelineSection() {
         <div className="mt-20">
           {/* Timeline navigation */}
           <div className="relative mb-12 flex justify-between max-w-4xl mx-auto px-4">
-            <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-[#3a666e]"></div>
+            <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-[var(--clay-deep)]"></div>
             {timeline.map((item, idx) => (
               <button
                 key={idx}
@@ -67,18 +67,18 @@ export function GroundingTimelineSection() {
                   <div
                     className={`flex h-[18px] w-[18px] items-center justify-center rounded-full transition-all duration-300 ${
                       activeStep === idx
-                        ? "border-[2px] border-[#3a666e] scale-150"
+                        ? "border-[2px] border-[var(--clay-deep)] scale-150"
                         : "border-[2px] border-gray-300 group-hover:border-gray-400"
                     }`}
                   >
                     {activeStep === idx && (
-                      <div className="h-2 w-2 rounded-full bg-[#3a666e]" />
+                      <div className="h-2 w-2 rounded-full bg-[var(--clay-deep)]" />
                     )}
                   </div>
                 </div>
                 <span
                   className={`absolute top-12 whitespace-nowrap text-[13px] transition-colors duration-300 ${
-                    activeStep === idx ? "font-medium text-[#3a666e]" : "text-gray-500 group-hover:text-gray-700"
+                    activeStep === idx ? "font-medium text-[var(--clay-deep)]" : "text-gray-500 group-hover:text-gray-700"
                   }`}
                 >
                   {item.label}
@@ -98,8 +98,8 @@ export function GroundingTimelineSection() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="mb-3 text-sm text-[#3a666e]">{timeline[activeStep].label}</span>
-              <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[#1a2f33]">
+              <span className="mb-3 text-sm text-[var(--clay-deep)]">{timeline[activeStep].label}</span>
+              <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[var(--night)]">
                 {timeline[activeStep].title}
               </h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
