@@ -1,76 +1,88 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Truck } from "lucide-react";
+import Lottie from "lottie-react";
 import { market } from "@/lib/market";
 
-function useOrderWithinCountdown() {
-  const [remaining, setRemaining] = useState("");
+function useCountdown(seconds: number) {
+  const [remaining, setRemaining] = useState(seconds);
 
   useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      // Calculate time remaining until midnight
-      const endOfDay = new Date();
-      endOfDay.setHours(23, 59, 59, 999);
-      const diff = endOfDay.getTime() - now.getTime();
-      
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const mins = Math.floor((diff / (1000 * 60)) % 60);
-      setRemaining(`${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`);
-    };
-    
-    update();
-    const interval = window.setInterval(update, 60000); // update every minute
-    return () => window.clearInterval(interval);
-  }, []);
+    const interval = window.setInterval(() => {
+      setRemaining((current) => (current <= 0 ? seconds : current - 1));
+    }, 1000);
 
-  return remaining;
+    return () => window.clearInterval(interval);
+  }, [seconds]);
+
+  const minutes = Math.floor(remaining / 60);
+  const secs = remaining % 60;
+
+  return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
 function useDeliveryDate(daysFromToday: number) {
   const [dateLabel, setDateLabel] = useState("");
 
   useEffect(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + daysFromToday);
+    const timeout = window.setTimeout(() => {
+      const date = new Date();
+      date.setDate(date.getDate() + daysFromToday);
 
-    const weekday = date.toLocaleString(market.locale, { weekday: "long" });
-    const day = date.getDate();
-    const month = date.toLocaleString(market.locale, { month: "long" });
+      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
+      const day = date.getDate();
+      const month = date.toLocaleString(market.locale, { month: "long" });
 
-    setDateLabel(`${weekday} ${day} ${month}`);
+      setDateLabel(`${weekday} ${day} ${month}`);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, [daysFromToday]);
 
   return dateLabel;
 }
 
 export function DeliveryTimerBox() {
-  const timer = useOrderWithinCountdown();
+  const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(3);
+  const [deliveryIconData, setDeliveryIconData] = useState<Record<string, unknown> | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
+      .then((res) => res.json())
+      .then((data) => setDeliveryIconData(data))
+      .catch((err) => console.error("Error loading delivery lottie", err));
+  }, []);
 
   return (
-    <div 
-      className="w-full rounded-2xl p-4 sm:p-5 flex flex-col gap-1 sm:gap-2 mb-2" 
-      style={{ backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))", borderColor: "color-mix(in oklch, var(--gold) 15%, var(--border))", borderWidth: "1px" }}
-    >
-      <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <Truck size={14} className="sm:w-[16px] sm:h-[16px]" />
-          <span>Free Delivery</span>
+    <div className="mb-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
+      <div className="flex items-center justify-between gap-2 sm:gap-5">
+        <div>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {deliveryIconData ? (
+              <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0 flex items-center justify-center">
+                <Lottie animationData={deliveryIconData} loop={true} />
+              </div>
+            ) : (
+              <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0" />
+            )}
+            <p className="juujo-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs tracking-widest">
+              FREE DELIVERY
+            </p>
+          </div>
+          <p className="font-serif mt-1.5 text-base sm:text-2xl text-[var(--ink)] font-normal leading-none whitespace-nowrap">
+            {mounted ? (deliveryDate || "soon") : "Loading..."}
+          </p>
         </div>
-        <div>Order Within</div>
-      </div>
-      
-      <div className="flex justify-between items-end mt-1">
-        <div className="font-serif text-lg sm:text-2xl text-[var(--ink)] tracking-tight">
-          {mounted ? deliveryDate : "Loading..."}
-        </div>
-        <div className="font-serif text-2xl sm:text-4xl text-[var(--ink)] leading-none tracking-tight">
-          {mounted ? timer : "00:00"}
+        <div className="text-right">
+          <p className="juujo-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-widest m-0 leading-none h-5 sm:h-7 flex items-center justify-end font-bold uppercase">
+            ORDER WITHIN
+          </p>
+          <p className="font-serif mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--ink)] leading-none">
+            {mounted ? timer : "00:00"}
+          </p>
         </div>
       </div>
     </div>
