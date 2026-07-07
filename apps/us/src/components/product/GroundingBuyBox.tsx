@@ -15,6 +15,7 @@ import {
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
+import { Info, X } from "lucide-react";
 
 /**
  * Grounding-sheet buy-box with a bundle offer modelled on thegrounding.co:
@@ -66,6 +67,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
   const [tierId, setTierId] = useState<Tier["id"]>("bundle");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
+  const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
     const init: Record<string, SheetChoice[]> = {};
     for (const t of TIERS) {
@@ -171,6 +173,15 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </li>
         </ul>
       </div>
+
+      <button 
+        type="button" 
+        onClick={() => setShowSizeGuide(true)}
+        className="flex items-center gap-1.5 text-sm text-[var(--plum)] font-medium hover:opacity-80 transition-opacity mb-2"
+      >
+        <Info size={16} />
+        Size Guide
+      </button>
 
       {/* Bundle heading */}
       <div className="flex items-center gap-3">
@@ -356,6 +367,31 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         </div>
       )}      {/* Accordions */}
       <GroundingAccordions />
+
+      {/* Size Guide Modal */}
+      {showSizeGuide && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={() => setShowSizeGuide(false)}
+        >
+          <div 
+            className="relative inline-flex max-w-[95vw] max-h-[95vh] md:max-w-5xl animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setShowSizeGuide(false)}
+              className="absolute top-0 right-0 z-10 p-2 bg-white text-black hover:bg-gray-100 transition-colors"
+            >
+              <X size={24} />
+            </button>
+            <img 
+              src="/media/products/grounding-sheets/images/juujo-size-guide.png" 
+              alt="Size Guide" 
+              className="max-w-[95vw] md:max-w-5xl max-h-[95vh] object-contain shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
