@@ -12,6 +12,7 @@ import {
   getVariant,
   type Product,
 } from "@/data/products";
+import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
 
 /**
@@ -323,6 +324,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           ))}
         </ul>
       )}
+
+      {/* Accordions */}
+      <GroundingAccordions />
     </div>
   );
 }
