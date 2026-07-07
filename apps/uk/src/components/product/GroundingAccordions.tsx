@@ -7,7 +7,7 @@ const accordionData = [
   {
     title: "Product Details",
     content: (
-      <div className="space-y-4 text-sm text-[var(--muted)]">
+      <div className="space-y-4 text-sm text-[var(--plum)]">
         <p>Our grounding fitted sheet is designed to replace your regular bedsheet while providing a comfortable and secure fit for everyday use.</p>
         
         <div>
@@ -48,7 +48,7 @@ const accordionData = [
   {
     title: "What's Included",
     content: (
-      <div className="space-y-4 text-sm text-[var(--muted)]">
+      <div className="space-y-4 text-sm text-[var(--plum)]">
         <ul className="list-disc pl-5 space-y-1">
           <li>1x Grounding fitted sheet</li>
           <li>1x 5-meter grounding cord</li>
@@ -62,7 +62,7 @@ const accordionData = [
   {
     title: "How Does it Work?",
     content: (
-      <div className="space-y-4 text-sm text-[var(--muted)]">
+      <div className="space-y-4 text-sm text-[var(--plum)]">
         <p>The grounding sheet connects only to the grounded part of your outlet using the included cord and grounding plug.</p>
         <p>It does not connect to electricity and no electricity flows through the sheet or your body.</p>
         <p>Once connected, the conductive silver threads allow your body to make direct contact with the Earth while you rest or sleep.</p>

@@ -65,6 +65,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   );
 
   const [tierId, setTierId] = useState<Tier["id"]>("bundle");
+  const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
   const [choices, setChoices] = useState<SheetChoice[]>([
     defaultChoice,
     defaultChoice,
@@ -91,7 +92,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     (sum, v) => sum + v.compareAtCents,
     0,
   );
-  const bundleSavings = Math.max(bundleCompare - bundleTotal, 0);
 
   // Fallback per-sheet prices from product base (used for tier cards when tier not selected)
   const perSheet = product.priceCents;
@@ -145,19 +145,30 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="juujo-eyebrow">{product.categoryLabel}</p>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4.5vw,2.5rem)] leading-[1.02] tracking-tight">
-          {product.name}
-        </h1>
-        <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">
-          <span aria-hidden className="text-[var(--gold)]">
-            {"★★★★★"}
+        <a href="#reviews" className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer">
+          <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden="true">★★★★★</div>
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
+            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "16,000+"} CUSTOMERS
           </span>
-          <span>{product.rating.toFixed(1)} from 4274 reviews</span>
-        </p>
-        <p className="mt-3 text-sm text-[var(--muted)]">
-          Available in White, Grey and Green
-        </p>
+        </a>
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
+          Premium Grounding Bed sheets
+        </h1>
+        
+        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-sans text-sm lg:text-base text-[var(--plum)]">
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Pure Silver Threads</strong> for maximum conductivity</span>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Deep Sleep Support</strong> for a calmer, settled night</span>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Machine Washable</strong> and easy to care for</span>
+          </li>
+        </ul>
       </div>
 
       {/* Bundle heading */}
@@ -202,7 +213,10 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               {/* Card header (radio + label + price) */}
               <button
                 type="button"
-                onClick={() => setTierId(t.id)}
+                onClick={() => {
+                  setTierId(t.id);
+                  setExpandedTier(t.id);
+                }}
                 aria-pressed={selected}
                 className="flex w-full items-center gap-3 p-4 text-left transition-transform duration-150 ease-out active:scale-[0.995]"
               >
@@ -250,7 +264,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               </button>
 
               {/* Per-sheet selectors, only for the selected tier */}
-              {selected && (
+              {expandedTier === t.id && (
                 <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
                   <div className="text-xs text-[var(--muted)] -mb-1">Color, Size</div>
                   {Array.from({ length: t.sheets }).map((_, index) => (
@@ -269,6 +283,35 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           );
         })}
       </div>
+
+
+
+      <DeliveryTimerBox />
+
+      {/* Add to cart */}
+      <Button
+        id="hero-cta"
+        disabled={isNavigating || outOfStock}
+        onClick={handleAddToCart}
+        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
+      >
+        {isNavigating ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+              ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <span className="relative z-20 whitespace-nowrap">
+            {outOfStock
+              ? "SELECTED SIZE OUT OF STOCK"
+              : `ADD TO CART · ${formatMoney(bundleTotal, product.currency)}`}
+          </span>
+        )}
+      </Button>
 
       {/* Free grounding mat */}
       {giftProduct && (
@@ -310,50 +353,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </span>
           </span>
         </div>
-      )}
-
-      <DeliveryTimerBox />
-
-      {/* Add to cart */}
-      <Button
-        id="hero-cta"
-        disabled={isNavigating || outOfStock}
-        onClick={handleAddToCart}
-        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
-      >
-        {isNavigating ? (
-          <>
-            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
-              ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
-            </span>
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
-            </span>
-          </>
-        ) : (
-          <span className="relative z-20 whitespace-nowrap">
-            {outOfStock
-              ? "SELECTED SIZE OUT OF STOCK"
-              : `ADD TO CART · ${formatMoney(bundleTotal, product.currency)}`}
-          </span>
-        )}
-      </Button>
-
-      {/* Trust row */}
-      {product.badges.length > 0 && (
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)]">
-          {product.badges.map((badge) => (
-            <li key={badge} className="flex items-center gap-2">
-              <span aria-hidden className="text-[var(--gold)]">
-                {"✓"}
-              </span>
-              {badge}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Accordions */}
+      )}      {/* Accordions */}
       <GroundingAccordions />
     </div>
   );
@@ -375,7 +375,6 @@ function SheetRow({
 }) {
   const variant = getVariant(product, choice.colorId, choice.sizeId);
   const soldOut = !variant.inStock || !variant.variantId;
-  const selectedColor = product.colors.find((c) => c.id === choice.colorId);
 
   return (
     <div className="flex items-center gap-3">

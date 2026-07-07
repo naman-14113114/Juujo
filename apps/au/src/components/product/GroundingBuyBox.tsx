@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
@@ -18,179 +17,306 @@ import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
 
 /**
- * Grounding-sheet buy-box. Layout modelled on the grounding.co product page
- * (image colour swatches -> size rows with dimensions + size guide -> quantity
- * stepper -> price with SAVE -> a "Most Popular" bundle add-on -> add to cart),
- * built in Juujo's own theme, copy, and colour tokens. Scoped to the grounding
- * sheet only; other products keep the standard buy-box.
+ * Grounding-sheet buy-box with a bundle offer modelled on thegrounding.co:
+ *   - Buy 1              -> one sheet (colour + size)
+ *   - Buy 2, Get 1 Free  -> three sheets, each an independent colour + size,
+ *                           the third priced free ("Most Popular", preselected)
+ * A free Grounding Mat is added with either tier. Every sheet the customer
+ * picks becomes its own cart line, so mixed colours/sizes show separately.
+ * Built in Juujo's own theme + tokens. Scoped to grounding sheets only.
  */
+
+type SheetChoice = { colorId: string; sizeId: string };
+
+type Tier = {
+  id: "single" | "bundle";
+  label: string;
+  sheets: number;
+  freeCount: number;
+  badge?: string;
+  recommended?: boolean;
+};
+
+const TIERS: Tier[] = [
+  { id: "single", label: "Buy 1", sheets: 1, freeCount: 0 },
+  {
+    id: "bundle",
+    label: "Buy 2, Get 1 Free!",
+    sheets: 3,
+    freeCount: 1,
+    badge: "Most Popular",
+    recommended: true,
+  },
+];
+
 export function GroundingBuyBox({ product }: { product: Product }) {
-  const { addToCartVariant } = useCart();
+  const { setSheetBundle } = useCart();
   const router = useRouter();
 
-  const [colorId, setColorId] = useState(product.colors[0]?.id);
-  const [sizeId, setSizeId] = useState(product.sizes[0]?.id);
-  const [quantity, setQuantity] = useState(1);
-  const [isNavigating, setIsNavigating] = useState(false);
-
-  const variant = useMemo(
-    () => getVariant(product, colorId, sizeId),
-    [product, colorId, sizeId],
+  const defaultChoice = useMemo<SheetChoice>(
+    () => ({
+      colorId: product.colors[0]?.id ?? "",
+      sizeId:
+        product.sizes.find((s) => s.id === "queen")?.id ??
+        product.sizes[0]?.id ??
+        "",
+    }),
+    [product.colors, product.sizes],
   );
 
-  const lineTotal = variant.priceCents * quantity;
-  const compareTotal = variant.compareAtCents * quantity;
-  const savings = Math.max(compareTotal - lineTotal, 0);
+  const [tierId, setTierId] = useState<Tier["id"]>("bundle");
+  const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
+  const [choices, setChoices] = useState<SheetChoice[]>([
+    defaultChoice,
+    defaultChoice,
+    defaultChoice,
+  ]);
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const tier = TIERS.find((t) => t.id === tierId) ?? TIERS[0];
+  const activeChoices = choices.slice(0, tier.sheets);
+
+  // Compute prices from actual selected variants, not flat base price
+  const activeVariantPrices = activeChoices.map((choice) => {
+    const v = getVariant(product, choice.colorId, choice.sizeId);
+    return { priceCents: v.priceCents, compareAtCents: v.compareAtCents };
+  });
+
+  // For bundle: only the paid sheets count toward total (freeCount sheets are free)
+  // Paid items = first (sheets - freeCount) choices
+  const paidCount = tier.sheets - tier.freeCount;
+  const bundleTotal = activeVariantPrices
+    .slice(0, paidCount)
+    .reduce((sum, v) => sum + v.priceCents, 0);
+  const bundleCompare = activeVariantPrices.reduce(
+    (sum, v) => sum + v.compareAtCents,
+    0,
+  );
+
+  // Fallback per-sheet prices from product base (used for tier cards when tier not selected)
+  const perSheet = product.priceCents;
+  const perSheetCompare = product.compareAtCents;
 
   const giftProduct = getProductBySlug("grounding-mat");
 
-  function handleAddToCart() {
-    setIsNavigating(true);
-    addToCartVariant(product, quantity, variant.variantId);
-    router.push("/cart");
+  function priceForTier(t: Tier) {
+    if (t.id === tierId) {
+      // Use actual selected variant prices for the active tier
+      const paidN = t.sheets - t.freeCount;
+      return activeVariantPrices
+        .slice(0, paidN)
+        .reduce((sum, v) => sum + v.priceCents, 0);
+    }
+    return perSheet * (t.sheets - t.freeCount);
+  }
+  function compareForTier(t: Tier) {
+    if (t.id === tierId) {
+      return activeVariantPrices.reduce((sum, v) => sum + v.compareAtCents, 0);
+    }
+    return perSheetCompare * t.sheets;
   }
 
-  const selectedColor = product.colors.find((c) => c.id === colorId);
+  function updateChoice(index: number, patch: Partial<SheetChoice>) {
+    setChoices((current) => {
+      const next = [...current];
+      next[index] = { ...next[index], ...patch };
+      return next;
+    });
+  }
+
+  // Any selected colour+size that is out of stock (no real variant id) blocks
+  // checkout so we never send an unpurchasable line to PlusBase.
+  const outOfStock = activeChoices.some((choice) => {
+    const variant = getVariant(product, choice.colorId, choice.sizeId);
+    return !variant.inStock || !variant.variantId;
+  });
+
+  function handleAddToCart() {
+    if (outOfStock) return;
+    setIsNavigating(true);
+    const selections = activeChoices.map((choice) => ({
+      product,
+      variantId: getVariant(product, choice.colorId, choice.sizeId).variantId,
+    }));
+    setSheetBundle(selections, tier.freeCount);
+    router.push("/cart");
+  }
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="juujo-eyebrow">{product.categoryLabel}</p>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4.5vw,2.5rem)] whitespace-nowrap leading-[1.02] tracking-tight">{product.name}</h1>
-        <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">
-          <span aria-hidden className="text-[var(--gold)]">
-            {"★★★★★"}
+        <a href="#reviews" className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer">
+          <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden="true">★★★★★</div>
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
+            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "16,000+"} CUSTOMERS
           </span>
-          <span>
-            {product.rating.toFixed(1)} from 4274 reviews
-          </span>
-        </p>
-        <p className="mt-4 max-w-prose text-[var(--muted)]">{product.shortDescription}</p>
+        </a>
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
+          Premium Grounding Bed sheets
+        </h1>
+        
+        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-sans text-sm lg:text-base text-[var(--plum)]">
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Pure Silver Threads</strong> for maximum conductivity</span>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Deep Sleep Support</strong> for a calmer, settled night</span>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span className="leading-snug"><strong>Machine Washable</strong> and easy to care for</span>
+          </li>
+        </ul>
       </div>
 
-      {/* Price with SAVE */}
-      <div className="flex items-baseline gap-3">
-        <span className="text-3xl font-semibold text-[var(--ink)]">
-          {formatMoney(lineTotal, product.currency)}
+      {/* Bundle heading */}
+      <div className="flex items-center gap-3">
+        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
+          Bundle &amp; Save + Free Shipping &amp; Gifts
         </span>
-        {compareTotal > lineTotal && (
-          <span className="text-lg text-[var(--muted)] line-through">
-            {formatMoney(compareTotal, product.currency)}
-          </span>
-        )}
-        {savings > 0 && (
-          <span
-            className="rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-white"
-            style={{ backgroundColor: "var(--gold)" }}
-          >
-            Save {formatMoney(savings, product.currency)}
-          </span>
-        )}
+        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
       </div>
 
-      {/* Colour swatches */}
-      {product.colors.length > 0 && (
-        <fieldset className="flex flex-col gap-3">
-          <legend className="text-sm font-medium text-[var(--ink)]">
-            Colour: <span className="text-[var(--muted)]">{selectedColor?.name}</span>
-          </legend>
-          <div className="flex flex-wrap gap-3">
-            {product.colors.map((color) => {
-              const selected = color.id === colorId;
-              return (
-                <button
-                  key={color.id}
-                  type="button"
-                  onClick={() => setColorId(color.id)}
-                  aria-pressed={selected}
-                  aria-label={color.name}
-                  title={color.name}
-                  className="relative h-12 w-12 overflow-hidden rounded-xl border transition-transform duration-150 ease-out active:scale-[0.94]"
-                  style={{
-                    borderColor: selected ? "var(--gold)" : "var(--border)",
-                    boxShadow: selected ? "0 0 0 2px var(--paper), 0 0 0 4px var(--gold)" : "none",
-                  }}
-                >
-                  {color.image ? (
-                    <Image src={color.image} alt={color.name} fill sizes="48px" className="object-cover" />
-                  ) : (
-                    <span className="absolute inset-0" style={{ backgroundColor: color.hex }} />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
-      )}
+      {/* Tier cards */}
+      <div className="flex flex-col gap-4">
+        {TIERS.map((t) => {
+          const selected = t.id === tierId;
+          const total = priceForTier(t);
+          const compare = compareForTier(t);
+          const savings = Math.max(compare - total, 0);
+          const perUnit = Math.round(total / t.sheets);
 
-      {/* Size rows */}
-      {product.sizes.length > 0 && (
-        <fieldset className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <legend className="text-sm font-medium text-[var(--ink)]">Size</legend>
-            <Link href="/pages/faqs" className="text-sm text-[var(--gold)] underline underline-offset-2">
-              Have a question? Try our FAQs here
-            </Link>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {product.sizes.map((size) => {
-              const selected = size.id === sizeId;
-              return (
-                <button
-                  key={size.id}
-                  type="button"
-                  onClick={() => setSizeId(size.id)}
-                  aria-pressed={selected}
-                  className="flex flex-col items-center justify-center rounded-xl border p-2 text-center transition-transform duration-150 ease-out active:scale-[0.99]"
-                  style={{
-                    borderColor: selected ? "var(--gold)" : "var(--border)",
-                    backgroundColor: selected
-                      ? "color-mix(in oklch, var(--gold) 10%, var(--paper))"
-                      : "var(--card)",
-                  }}
+          return (
+            <div
+              key={t.id}
+              className="relative rounded-2xl border transition-colors"
+              style={{
+                borderColor: selected ? "var(--gold)" : "var(--border)",
+                backgroundColor: selected
+                  ? "color-mix(in oklch, var(--gold) 6%, var(--paper))"
+                  : "var(--card)",
+                boxShadow: selected ? "0 0 0 1px var(--gold)" : "none",
+              }}
+            >
+              {t.badge && (
+                <span
+                  className="absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
+                  style={{ backgroundColor: "var(--gold)" }}
                 >
-                  <span className="font-medium text-[var(--ink)]">{size.name}</span>
-                  {size.dimensions && (
-                    <span className="text-sm text-[var(--muted)]">{size.dimensions}</span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
-      )}
+                  {t.badge}
+                </span>
+              )}
 
-      {/* Quantity stepper */}
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-[var(--ink)]">Quantity</span>
-        <div
-          className="flex items-center gap-4 rounded-full border px-2 py-1"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <button
-            type="button"
-            aria-label="Decrease quantity"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="h-8 w-8 rounded-full text-lg text-[var(--ink)] transition-transform duration-150 ease-out active:scale-[0.9]"
-          >
-            −
-          </button>
-          <span className="min-w-6 text-center font-medium text-[var(--ink)]">{quantity}</span>
-          <button
-            type="button"
-            aria-label="Increase quantity"
-            onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-            className="h-8 w-8 rounded-full text-lg text-[var(--ink)] transition-transform duration-150 ease-out active:scale-[0.9]"
-          >
-            +
-          </button>
-        </div>
+              {/* Card header (radio + label + price) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setTierId(t.id);
+                  setExpandedTier(t.id);
+                }}
+                aria-pressed={selected}
+                className="flex w-full items-center gap-3 p-4 text-left transition-transform duration-150 ease-out active:scale-[0.995]"
+              >
+                <span
+                  className="grid h-5 w-5 flex-none place-items-center rounded-full border-2"
+                  style={{ borderColor: selected ? "var(--gold)" : "var(--border)" }}
+                >
+                  {selected && (
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: "var(--gold)" }}
+                    />
+                  )}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-2">
+                    <span className="text-lg font-semibold text-[var(--ink)]">
+                      {t.label}
+                    </span>
+                    {savings > 0 && (
+                      <span
+                        className="rounded-full px-2 py-0.5 text-[11px] font-semibold text-white"
+                        style={{ backgroundColor: "var(--success)" }}
+                      >
+                        You save {formatMoney(savings, product.currency)}
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-0.5 block text-sm text-[var(--muted)]">
+                    {t.freeCount > 0
+                      ? `Only ${formatMoney(perUnit, product.currency)} per sheet!`
+                      : `${formatMoney(perSheet, product.currency)} per sheet`}
+                  </span>
+                </span>
+                <span className="flex-none text-right">
+                  <span className="block text-lg font-semibold text-[var(--ink)]">
+                    {formatMoney(total, product.currency)}
+                  </span>
+                  {compare > total && (
+                    <span className="block text-sm text-[var(--muted)] line-through">
+                      {formatMoney(compare, product.currency)}
+                    </span>
+                  )}
+                </span>
+              </button>
+
+              {/* Per-sheet selectors, only for the selected tier */}
+              {expandedTier === t.id && (
+                <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
+                  <div className="text-xs text-[var(--muted)] -mb-1">Color, Size</div>
+                  {Array.from({ length: t.sheets }).map((_, index) => (
+                    <SheetRow
+                      key={index}
+                      product={product}
+                      index={index}
+                      showIndex={t.sheets > 1}
+                      choice={choices[index]}
+                      onChange={(patch) => updateChoice(index, patch)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      {/* Free Gift */}
+
+
+      <DeliveryTimerBox />
+
+      {/* Add to cart */}
+      <Button
+        id="hero-cta"
+        disabled={isNavigating || outOfStock}
+        onClick={handleAddToCart}
+        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
+      >
+        {isNavigating ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+              ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <span className="relative z-20 whitespace-nowrap">
+            {outOfStock
+              ? "SELECTED SIZE OUT OF STOCK"
+              : `ADD TO CART · ${formatMoney(bundleTotal, product.currency)}`}
+          </span>
+        )}
+      </Button>
+
+      {/* Free grounding mat */}
       {giftProduct && (
         <div
-          className="relative flex items-center gap-4 rounded-2xl border p-3 text-left transition-transform duration-150 ease-out"
+          className="relative flex items-center gap-4 rounded-2xl border p-3 text-left"
           style={{
             borderColor: "var(--gold)",
             backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
@@ -202,69 +328,155 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           >
             Free gift
           </span>
-          <span className="relative h-14 w-14 flex-none overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
-            <Image src={giftProduct.cartImage} alt={giftProduct.name} fill sizes="56px" className="object-cover" />
+          <span
+            className="relative h-16 w-16 flex-none overflow-hidden rounded-lg border"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <Image
+              src={giftProduct.cartImage}
+              alt={giftProduct.name}
+              fill
+              sizes="64px"
+              className="object-cover"
+            />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block font-medium text-[var(--ink)]">{giftProduct.name}</span>
-            <span className="block text-sm text-[var(--muted)]">Worth {formatMoney(giftProduct.priceCents, giftProduct.currency)}</span>
+            <span className="block text-sm text-[var(--muted)]">
+              Free with every order. Worth{" "}
+              {formatMoney(giftProduct.priceCents, giftProduct.currency)}.
+            </span>
           </span>
           <span className="text-right">
-            <span className="block font-semibold text-[var(--gold)] uppercase tracking-wider text-sm">
+            <span className="block text-sm font-semibold uppercase tracking-wider text-[var(--gold)]">
               Free
             </span>
           </span>
         </div>
+      )}      {/* Accordions */}
+      <GroundingAccordions />
+    </div>
+  );
+}
+
+/** One sheet's colour + size selectors (a row inside a bundle tier). */
+function SheetRow({
+  product,
+  index,
+  showIndex,
+  choice,
+  onChange,
+}: {
+  product: Product;
+  index: number;
+  showIndex: boolean;
+  choice: SheetChoice;
+  onChange: (patch: Partial<SheetChoice>) => void;
+}) {
+  const variant = getVariant(product, choice.colorId, choice.sizeId);
+  const soldOut = !variant.inStock || !variant.variantId;
+
+  return (
+    <div className="flex items-center gap-3">
+      {showIndex && (
+        <span className="juujo-mono w-6 flex-none text-sm text-[var(--muted)]">
+          #{index + 1}
+        </span>
       )}
-
-      <DeliveryTimerBox />
-
-      {/* Add to cart */}
-      <Button
-        id="hero-cta"
-        disabled={isNavigating}
-        onClick={handleAddToCart}
-        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
-      >
-        {isNavigating ? (
-          <>
-            <span
-              style={{ visibility: "hidden" }}
-              className="relative z-20 whitespace-nowrap"
-            >
-              ADD TO CART {"·"} {formatMoney(lineTotal, product.currency)}
-            </span>
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie
-                animationData={loadingLottie}
-                loop
-                className="h-16 w-24 scale-[1.35]"
-              />
-            </span>
-          </>
-        ) : (
-          <span className="relative z-20 whitespace-nowrap">
-            ADD TO CART {"·"} {formatMoney(lineTotal, product.currency)}
+      <label className="sr-only" htmlFor={`color-${index}`}>
+        Colour for sheet {index + 1}
+      </label>
+      <ColorSelect 
+        value={choice.colorId} 
+        onChange={(val) => onChange({ colorId: val })} 
+        colors={product.colors} 
+      />
+      <label className="sr-only" htmlFor={`size-${index}`}>
+        Size for sheet {index + 1}
+      </label>
+      <div className="relative flex-1">
+        <select
+          id={`size-${index}`}
+          value={choice.sizeId}
+          onChange={(event) => onChange({ sizeId: event.target.value })}
+          className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-3 pr-8 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+          style={{
+            borderColor: soldOut ? "var(--clay-deep)" : "var(--border)",
+          }}
+        >
+          {product.sizes.map((size) => (
+            <option key={size.id} value={size.id}>
+              {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
+            </option>
+          ))}
+        </select>
+        <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        {soldOut && (
+          <span className="mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
+            Out of stock, pick another size
           </span>
         )}
-      </Button>
+      </div>
+    </div>
+  );
+}
 
-      {/* Trust row */}
-      {product.badges.length > 0 && (
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)]">
-          {product.badges.map((badge) => (
-            <li key={badge} className="flex items-center gap-2">
-              <span aria-hidden className="text-[var(--gold)]">
-                {"✓"}
-              </span>
-              {badge}
+function ColorSelect({
+  value,
+  onChange,
+  colors,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  colors: Product["colors"];
+}) {
+  const [open, setOpen] = useState(false);
+  const selected = colors.find((c) => c.id === value);
+  
+  return (
+    <div className="relative flex-1">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        className="w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+        style={{ borderColor: "var(--border)" }}
+      >
+        {selected && (
+          <span
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-[3px] border"
+            style={{ backgroundColor: selected.hex, borderColor: "rgba(0,0,0,0.1)" }}
+          />
+        )}
+        {selected?.name}
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </button>
+      {open && (
+        <ul className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg" style={{ borderColor: "var(--border)" }}>
+          {colors.map((color) => (
+            <li key={color.id}>
+              <button
+                type="button"
+                onClick={() => {
+                  onChange(color.id);
+                  setOpen(false);
+                }}
+                className="flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
+              >
+                <span
+                  className="mr-2 h-4 w-4 flex-none rounded-[3px] border"
+                  style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
+                />
+                {color.name}
+              </button>
             </li>
           ))}
         </ul>
       )}
-
-      {/* Accordions */}
-      <GroundingAccordions />
     </div>
   );
 }

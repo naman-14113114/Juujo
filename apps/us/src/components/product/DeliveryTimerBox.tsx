@@ -51,7 +51,7 @@ export function DeliveryTimerBox() {
   useEffect(() => {
     // eslint-disable-next-line
     setMounted(true);
-    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
+    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json?v=2")
       .then((res) => res.json())
       .then((data) => setDeliveryIconData(data))
       .catch((err) => console.error("Error loading delivery lottie", err));
