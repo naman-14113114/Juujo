@@ -425,6 +425,7 @@ export const groundingMat: Product = {
   cartImage: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
   gallery: [
     { src: productMediaAsset("6206ed4066fb4719a6fe41321145df27.HD-1080p-7.2Mbps-36900726.mp4", "grounding-mat", "videos"), alt: "Grounding mat usage video", animated: true },
+    { src: productMediaAsset("mat-benefits-diagram.png", "grounding-mat", "images"), alt: "Grounding mat benefits diagram" },
     { src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
     { src: productMediaAsset("Frame1707480222_1.png", "grounding-mat", "images"), alt: "Grounding mat details" },
     { src: productMediaAsset("a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4", "grounding-mat", "videos"), alt: "Grounding mat connection", animated: true },

@@ -54,12 +54,13 @@ export function GroundingMatBenefitsSection() {
             ))}
           </div>
 
-          <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl order-1 md:order-2">
+          <div className="relative w-full order-1 md:order-2">
             <Image
-              src={productMediaAsset("TGC-mat1.png", "grounding-mat", "images")}
-              alt="Juujo Grounding Mat Benefits"
-              fill
-              className="object-cover"
+              src={productMediaAsset("mat-benefits-diagram.png", "grounding-mat", "images")}
+              alt="Juujo Grounding Mat Benefits Diagram"
+              width={1000}
+              height={1000}
+              className="w-full h-auto object-contain rounded-2xl shadow-xl"
               sizes="(min-width: 768px) 50vw, 100vw"
             />
           </div>
