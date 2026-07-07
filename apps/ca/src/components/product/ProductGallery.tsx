@@ -284,11 +284,9 @@ export function ProductGallery({
               viewBox="0 0 60 30"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect fill="#012169" height="30" width="60" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="3" />
-              <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
-              <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
+              <rect width="60" height="30" fill="#ff0000" />
+              <rect width="30" height="30" x="15" fill="#fff" />
+              <path d="M30,5 L33,12 L38,10 L35,16 L38,20 L33,19 L30,25 L27,19 L22,20 L25,16 L22,10 L27,12 Z" fill="#ff0000" />
             </svg>
             <span className="juujo-mono leading-none">
               {market.madeInLabel}
