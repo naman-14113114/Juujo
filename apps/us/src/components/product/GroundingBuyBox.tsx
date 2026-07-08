@@ -391,19 +391,31 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       </Button>
       {/* Free gifts bundle */}
       {giftProduct && (
-        <div className="mt-6 grid grid-cols-3 gap-2">
+        <section className="mt-8 mb-6" id="free-gifts">
+          <div className="text-center mb-8 flex flex-col items-center">
+            <h2 className="juujo-display text-3xl font-medium text-[var(--ink)]">
+              Summer Sleep Sale
+            </h2>
+            <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--ink)]" style={{ backgroundColor: "color-mix(in oklch, var(--gold) 15%, transparent)" }}>
+              <span className="juujo-display text-sm sm:text-base font-extrabold normal-case text-[var(--ink)]">
+                {formatMoney(giftProduct.priceCents + 2900 + 3900, giftProduct.currency)}
+              </span>
+              <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
           {[
-            {
-              id: "grounding-mat",
-              name: giftProduct.name,
-              valueCents: giftProduct.priceCents,
-              image: giftProduct.cartImage,
-            },
             {
               id: "premium-packaging",
               name: "Premium Packaging",
               valueCents: 2900,
-              image: "/images/premium_packaging.png",
+              image: "/images/juujo_premium_packaging.png",
+            },
+            {
+              id: "grounding-mat",
+              name: giftProduct.name,
+              valueCents: giftProduct.priceCents,
+              image: "/images/grounding_mat_gift.png",
             },
             {
               id: "sleep-app",
@@ -414,7 +426,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           ].map((gift) => (
             <div
               key={gift.id}
-              className="group relative flex min-h-[140px] flex-col rounded-xl border p-2 pt-5 text-center transition hover:-translate-y-1"
+              className={`group relative flex min-h-[140px] flex-col rounded-xl border p-2 pt-5 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md' : 'hover:-translate-y-1'}`}
               style={{
                 borderColor: "var(--gold)",
                 backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
@@ -443,7 +455,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               </span>
             </div>
           ))}
-        </div>
+          </div>
+        </section>
       )}{" "}
       {/* Accordions */}
       <GroundingAccordions />
