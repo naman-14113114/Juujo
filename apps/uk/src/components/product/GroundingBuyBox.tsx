@@ -11,7 +11,7 @@ import { getProductBySlug, getVariant, type Product } from "@/data/products";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
-import { Info, X } from "lucide-react";
+import { Info, X, Moon, HeartPulse, Sun } from "lucide-react";
 
 /**
  * Grounding-sheet buy-box with a bundle offer modelled on thegrounding.co:
@@ -174,65 +174,55 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           Premium Grounding Bed Sheets
         </h1>
 
-        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
-          <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            <span className="leading-snug">
-              <strong>Pure Silver Threads</strong> for maximum conductivity
-            </span>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            <span className="leading-snug">
-              <strong>Deep Sleep Support</strong> for a calmer, settled night
-            </span>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            <span className="leading-snug">
-              <strong>Machine Washable</strong> and easy to care for
-            </span>
-          </li>
-        </ul>
+        {product.id === "grounding-flat-sheet" ? (
+          <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
+            <li className="flex items-start gap-2.5">
+              <Moon className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+              <span className="leading-snug">
+                Settle nervous tension to fall asleep faster and deeper
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <HeartPulse
+                className="text-[var(--gold)] shrink-0 mt-0.5"
+                size={20}
+              />
+              <span className="leading-snug">
+                Ease inflammation and wake up with less morning stiffness
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Sun className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+              <span className="leading-snug">
+                Experience restorative sleep cycles and wake up refreshed
+              </span>
+            </li>
+          </ul>
+        ) : (
+          <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
+            <li className="flex items-start gap-2.5">
+              <Moon className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+              <span className="leading-snug">
+                Fall asleep faster by calming your mind and nervous tension
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <HeartPulse
+                className="text-[var(--gold)] shrink-0 mt-0.5"
+                size={20}
+              />
+              <span className="leading-snug">
+                Soothe aches and pains to wake up with less joint stiffness
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Sun className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+              <span className="leading-snug">
+                Experience deeper, restorative sleep for all-day energy
+              </span>
+            </li>
+          </ul>
+        )}
       </div>
       <DeliveryTimerBox />
       {/* Bundle heading */}
