@@ -2,10 +2,15 @@ import type { Product } from "@/data/products";
 import { ProductGallery } from "./ProductGallery";
 import { ProductBuyBox } from "./ProductBuyBox";
 import { GroundingBuyBox } from "./GroundingBuyBox";
+import { GroundingMatBuyBox } from "./GroundingMatBuyBox";
 
 export function ProductHero({ product }: { product: Product }) {
   const BuyBox =
-    product.category === "grounding-sheets" ? GroundingBuyBox : ProductBuyBox;
+    product.category === "grounding-sheets" 
+      ? GroundingBuyBox 
+      : product.category === "grounding-mat"
+      ? GroundingMatBuyBox
+      : ProductBuyBox;
   return (
     <section
       className="juujo-section bg-[var(--cream)] pt-8 pb-14 [overflow-anchor:none] md:pt-12 md:pb-24"

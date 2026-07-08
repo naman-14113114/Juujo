@@ -8,70 +8,53 @@ import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import {
-  getProductBySlug,
   getVariant,
   type Product,
 } from "@/data/products";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
-import { GroundingAccordions } from "./GroundingAccordions";
+import { GroundingMatAccordions } from "./GroundingMatAccordions";
 import { formatMoney } from "@/lib/money";
-import { Info, X } from "lucide-react";
 
-/**
- * Grounding-sheet buy-box with a bundle offer modelled on thegrounding.co:
- *   - Buy 1              -> one sheet (colour + size)
- *   - Buy 2, Get 1 Free  -> three sheets, each an independent colour + size,
- *                           the third priced free ("Most Popular", preselected)
- * A free Grounding Mat is added with either tier. Every sheet the customer
- * picks becomes its own cart line, so mixed colours/sizes show separately.
- * Built in Juujo's own theme + tokens. Scoped to grounding sheets only.
- */
-
-type SheetChoice = { colorId: string; sizeId: string };
+type MatChoice = { sizeId: string };
 
 type Tier = {
   id: "single" | "bundle";
   label: string;
-  sheets: number;
+  mats: number;
   freeCount: number;
   badge?: string;
   recommended?: boolean;
 };
 
 const TIERS: Tier[] = [
-  { id: "single", label: "Buy 1", sheets: 1, freeCount: 0 },
+  { id: "single", label: "Buy 1", mats: 1, freeCount: 0 },
   {
     id: "bundle",
     label: "Buy 2, Get 1 Free!",
-    sheets: 3,
+    mats: 3,
     freeCount: 1,
     badge: "Most Popular",
     recommended: true,
   },
 ];
 
-export function GroundingBuyBox({ product }: { product: Product }) {
+export function GroundingMatBuyBox({ product }: { product: Product }) {
   const { setSheetBundle } = useCart();
   const router = useRouter();
 
-  const defaultChoice = useMemo<SheetChoice>(
+  const defaultChoice = useMemo<MatChoice>(
     () => ({
-      colorId: product.colors[0]?.id ?? "",
-      sizeId:
-        product.sizes.find((s) => s.id === "queen")?.id ??
-        product.sizes[0]?.id ??
-        "",
+      sizeId: product.sizes[0]?.id ?? "",
     }),
-    [product.colors, product.sizes],
+    [product.sizes],
   );
 
   const [tierId, setTierId] = useState<Tier["id"]>("bundle");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
-  const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
-    const init: Record<string, SheetChoice[]> = {};
+  const [choices, setChoices] = useState<Record<string, MatChoice[]>>(() => {
+    const init: Record<string, MatChoice[]> = {};
     for (const t of TIERS) {
-      init[t.id] = Array(t.sheets).fill(defaultChoice);
+      init[t.id] = Array(t.mats).fill(defaultChoice);
     }
     return init;
   });
@@ -80,44 +63,35 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const tier = TIERS.find((t) => t.id === tierId) ?? TIERS[0];
   const activeChoices = choices[tierId];
 
-  // Compute prices from actual selected variants, not flat base price
+  const colorId = product.colors[0]?.id ?? "black";
+
   const activeVariantPrices = activeChoices.map((choice) => {
-    const v = getVariant(product, choice.colorId, choice.sizeId);
+    const v = getVariant(product, colorId, choice.sizeId);
     return { priceCents: v.priceCents, compareAtCents: v.compareAtCents };
   });
 
-  // For bundle: only the paid sheets count toward total (freeCount sheets are free)
-  // Paid items = first (sheets - freeCount) choices
-  const paidCount = tier.sheets - tier.freeCount;
+  const paidCount = tier.mats - tier.freeCount;
   const bundleTotal = activeVariantPrices
     .slice(0, paidCount)
     .reduce((sum, v) => sum + v.priceCents, 0);
-  const bundleCompare = activeVariantPrices.reduce(
-    (sum, v) => sum + v.compareAtCents,
-    0,
-  );
 
-  // Fallback per-sheet prices from product base (used for tier cards when tier not selected)
   const perSheet = product.priceCents;
-  const perSheetCompare = product.compareAtCents;
-
-  const giftProduct = getProductBySlug("grounding-mat");
 
   function priceForTier(t: Tier) {
     const tierChoices = choices[t.id];
-    const paidN = t.sheets - t.freeCount;
+    const paidN = t.mats - t.freeCount;
     return tierChoices
       .slice(0, paidN)
-      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).priceCents, 0);
+      .reduce((sum, choice) => sum + getVariant(product, colorId, choice.sizeId).priceCents, 0);
   }
   
   function compareForTier(t: Tier) {
     const tierChoices = choices[t.id];
     return tierChoices
-      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).compareAtCents, 0);
+      .reduce((sum, choice) => sum + getVariant(product, colorId, choice.sizeId).compareAtCents, 0);
   }
 
-  function updateChoice(tierIdToUpdate: string, index: number, patch: Partial<SheetChoice>) {
+  function updateChoice(tierIdToUpdate: string, index: number, patch: Partial<MatChoice>) {
     setChoices((current) => {
       const next = { ...current };
       const nextChoices = [...next[tierIdToUpdate]];
@@ -127,10 +101,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     });
   }
 
-  // Any selected colour+size that is out of stock (no real variant id) blocks
-  // checkout so we never send an unpurchasable line to PlusBase.
   const outOfStock = activeChoices.some((choice) => {
-    const variant = getVariant(product, choice.colorId, choice.sizeId);
+    const variant = getVariant(product, colorId, choice.sizeId);
     return !variant.inStock || !variant.variantId;
   });
 
@@ -139,7 +111,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     setIsNavigating(true);
     const selections = activeChoices.map((choice) => ({
       product,
-      variantId: getVariant(product, choice.colorId, choice.sizeId).variantId,
+      variantId: getVariant(product, colorId, choice.sizeId).variantId,
     }));
     setSheetBundle(selections, tier.freeCount);
     router.push("/cart");
@@ -151,55 +123,44 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         <a href="#reviews" className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer">
           <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden="true">★★★★★</div>
           <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
-            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "16,000+"} CUSTOMERS
+            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "40,000+"} CUSTOMERS
           </span>
         </a>
         <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
-          Premium Grounding Sheets
+          Juujo Grounding Mat
         </h1>
         
         <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
           <li className="flex items-start gap-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Pure Silver Threads</strong> for maximum conductivity</span>
+            <span className="leading-snug"><strong>Conductive Carbon Surface</strong> for maximum conductivity</span>
           </li>
           <li className="flex items-start gap-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Deep Sleep Support</strong> for a calmer, settled night</span>
+            <span className="leading-snug"><strong>Versatile Design</strong> perfect for desk, couch, or floor</span>
           </li>
           <li className="flex items-start gap-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Machine Washable</strong> and easy to care for</span>
+            <span className="leading-snug"><strong>Easy to clean</strong> and built to last</span>
           </li>
         </ul>
       </div>
 
-      <button 
-        type="button" 
-        onClick={() => setShowSizeGuide(true)}
-        className="flex items-center gap-1.5 text-sm text-[var(--plum)] font-medium hover:opacity-80 transition-opacity mb-2"
-      >
-        <Info size={16} />
-        Size Guide
-      </button>
-
-      {/* Bundle heading */}
       <div className="flex items-center gap-3">
         <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
         <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
-          Bundle &amp; Save + Free Shipping &amp; Gifts
+          Bundle &amp; Save
         </span>
         <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
       </div>
 
-      {/* Tier cards */}
       <div className="flex flex-col gap-4">
         {TIERS.map((t) => {
           const selected = t.id === tierId;
           const total = priceForTier(t);
           const compare = compareForTier(t);
           const savings = Math.max(compare - total, 0);
-          const perUnit = Math.round(total / t.sheets);
+          const perUnit = Math.round(total / t.mats);
 
           return (
             <div
@@ -222,7 +183,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 </span>
               )}
 
-              {/* Card header (radio + label + price) */}
               <button
                 type="button"
                 onClick={() => {
@@ -259,8 +219,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                   </span>
                   <span className="font-serif mt-0.5 block text-sm text-[var(--muted)]">
                     {t.freeCount > 0
-                      ? `Only ${formatMoney(perUnit, product.currency)} per sheet!`
-                      : `${formatMoney(perSheet, product.currency)} per sheet`}
+                      ? `Only ${formatMoney(perUnit, product.currency)} per mat!`
+                      : `${formatMoney(perSheet, product.currency)}`}
                   </span>
                 </span>
                 <span className="flex-none text-right">
@@ -275,16 +235,15 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 </span>
               </button>
 
-              {/* Per-sheet selectors, only for the selected tier */}
               {expandedTier === t.id && (
                 <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
-                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">Color, Size</div>
-                  {Array.from({ length: t.sheets }).map((_, index) => (
-                    <SheetRow
+                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">Size</div>
+                  {Array.from({ length: t.mats }).map((_, index) => (
+                    <MatRow
                       key={index}
                       product={product}
                       index={index}
-                      showIndex={t.sheets > 1}
+                      showIndex={t.mats > 1}
                       choice={choices[t.id][index]}
                       onChange={(patch) => updateChoice(t.id, index, patch)}
                     />
@@ -296,11 +255,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         })}
       </div>
 
-
-
       <DeliveryTimerBox />
 
-      {/* Add to cart */}
       <Button
         id="hero-cta"
         disabled={isNavigating || outOfStock}
@@ -325,79 +281,12 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         )}
       </Button>
 
-      {/* Free grounding mat */}
-      {giftProduct && (
-        <div
-          className="relative flex items-center gap-4 rounded-2xl border p-3 text-left"
-          style={{
-            borderColor: "var(--gold)",
-            backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
-          }}
-        >
-          <span
-            className="absolute -top-2 left-4 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
-            style={{ backgroundColor: "var(--gold)" }}
-          >
-            Free gift
-          </span>
-          <span
-            className="relative h-16 w-16 flex-none overflow-hidden rounded-lg border"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <Image
-              src={giftProduct.cartImage}
-              alt={giftProduct.name}
-              fill
-              sizes="64px"
-              className="object-cover"
-            />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block font-medium text-[var(--ink)]">{giftProduct.name}</span>
-            <span className="block text-sm text-[var(--muted)]">
-              Free with every order. Worth{" "}
-              {formatMoney(giftProduct.priceCents, giftProduct.currency)}.
-            </span>
-          </span>
-          <span className="text-right">
-            <span className="block text-sm font-semibold uppercase tracking-wider text-[var(--gold)]">
-              Free
-            </span>
-          </span>
-        </div>
-      )}      {/* Accordions */}
-      <GroundingAccordions />
-
-      {/* Size Guide Modal */}
-      {showSizeGuide && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-          onClick={() => setShowSizeGuide(false)}
-        >
-          <div 
-            className="relative inline-flex max-w-[95vw] max-h-[95vh] md:max-w-5xl animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button 
-              onClick={() => setShowSizeGuide(false)}
-              className="absolute top-0 right-0 z-10 p-2 bg-white text-black hover:bg-gray-100 transition-colors"
-            >
-              <X size={24} />
-            </button>
-            <img 
-              src="/media/products/grounding-sheets/images/juujo-size-guide.png" 
-              alt="Size Guide" 
-              className="max-w-[95vw] md:max-w-5xl max-h-[95vh] object-contain shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
+      <GroundingMatAccordions />
     </div>
   );
 }
 
-/** One sheet's colour + size selectors (a row inside a bundle tier). */
-function SheetRow({
+function MatRow({
   product,
   index,
   showIndex,
@@ -407,10 +296,11 @@ function SheetRow({
   product: Product;
   index: number;
   showIndex: boolean;
-  choice: SheetChoice;
-  onChange: (patch: Partial<SheetChoice>) => void;
+  choice: MatChoice;
+  onChange: (patch: Partial<MatChoice>) => void;
 }) {
-  const variant = getVariant(product, choice.colorId, choice.sizeId);
+  const colorId = product.colors[0]?.id ?? "black";
+  const variant = getVariant(product, colorId, choice.sizeId);
   const soldOut = !variant.inStock || !variant.variantId;
 
   return (
@@ -420,16 +310,8 @@ function SheetRow({
           #{index + 1}
         </span>
       )}
-      <label className="sr-only" htmlFor={`color-${index}`}>
-        Colour for sheet {index + 1}
-      </label>
-      <ColorSelect 
-        value={choice.colorId} 
-        onChange={(val) => onChange({ colorId: val })} 
-        colors={product.colors} 
-      />
       <label className="sr-only" htmlFor={`size-${index}`}>
-        Size for sheet {index + 1}
+        Size for mat {index + 1}
       </label>
       <div className="relative flex-1">
         <select
@@ -456,64 +338,6 @@ function SheetRow({
           </span>
         )}
       </div>
-    </div>
-  );
-}
-
-function ColorSelect({
-  value,
-  onChange,
-  colors,
-}: {
-  value: string;
-  onChange: (val: string) => void;
-  colors: Product["colors"];
-}) {
-  const [open, setOpen] = useState(false);
-  const selected = colors.find((c) => c.id === value);
-  
-  return (
-    <div className="relative flex-1">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className="font-serif w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
-        style={{ borderColor: "var(--border)" }}
-      >
-        {selected && (
-          <span
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-[3px] border"
-            style={{ backgroundColor: selected.hex, borderColor: "rgba(0,0,0,0.1)" }}
-          />
-        )}
-        {selected?.name}
-        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        </span>
-      </button>
-      {open && (
-        <ul className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg" style={{ borderColor: "var(--border)" }}>
-          {colors.map((color) => (
-            <li key={color.id}>
-              <button
-                type="button"
-                onClick={() => {
-                  onChange(color.id);
-                  setOpen(false);
-                }}
-                className="font-serif flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
-              >
-                <span
-                  className="mr-2 h-4 w-4 flex-none rounded-[3px] border"
-                  style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
-                />
-                {color.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }

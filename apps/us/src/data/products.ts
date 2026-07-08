@@ -400,7 +400,9 @@ const matColors: ProductColor[] = [
 ];
 
 const matSizes: SizePricing[] = [
-  { id: "standard", name: "Desk / Couch / Floor", dimensions: "68 x 25 cm", priceCents: 6995, compareAtCents: 13995 },
+  { id: "desk", name: "Desk Mat", dimensions: "10in x 27in", priceCents: 6900, compareAtCents: 14900 },
+  { id: "couch", name: "Couch Mat", dimensions: "16in x 24in", priceCents: 8900, compareAtCents: 17900 },
+  { id: "floor", name: "Floor Mat", dimensions: "24in x 36in", priceCents: 10900, compareAtCents: 21900 },
 ];
 
 export const groundingMat: Product = {
@@ -444,12 +446,32 @@ export const groundingMat: Product = {
   variants: [
     {
       colorId: "black",
-      sizeId: "standard",
+      sizeId: "desk",
       productId: "1000000669152669",
       variantId: "1000020491331605",
-      sku: "JUUJO-GROUNDING-MAT",
-      priceCents: 6995,
-      compareAtCents: 13995,
+      sku: "JUUJO-GROUNDING-MAT-DESK",
+      priceCents: 6900,
+      compareAtCents: 14900,
+      inStock: true,
+    },
+    {
+      colorId: "black",
+      sizeId: "couch",
+      productId: "1000000669250727",
+      variantId: "1000020494356823",
+      sku: "JUUJO-GROUNDING-MAT-COUCH",
+      priceCents: 8900,
+      compareAtCents: 17900,
+      inStock: true,
+    },
+    {
+      colorId: "black",
+      sizeId: "floor",
+      productId: "1000000669250727",
+      variantId: "1000020494356820",
+      sku: "JUUJO-GROUNDING-MAT-FLOOR",
+      priceCents: 10900,
+      compareAtCents: 21900,
       inStock: true,
     },
   ],

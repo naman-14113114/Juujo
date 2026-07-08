@@ -322,7 +322,9 @@ const matColors: ProductColor[] = [
 ];
 
 const matSizes: SizePricing[] = [
-  { id: "standard", name: "Desk / Couch / Floor", dimensions: "68 x 25 cm", priceCents: 6995, compareAtCents: 13995 },
+  { id: "desk", name: "Desk Mat", dimensions: "10in x 27in", priceCents: 6995, compareAtCents: 13995 },
+  { id: "couch", name: "Couch Mat", dimensions: "16in x 24in", priceCents: 6995, compareAtCents: 13995 },
+  { id: "floor", name: "Floor Mat", dimensions: "24in x 36in", priceCents: 6995, compareAtCents: 13995 },
 ];
 
 export const groundingMat: Product = {
@@ -367,7 +369,38 @@ export const groundingMat: Product = {
   ],
   colors: matColors,
   sizes: matSizes,
-  variants: buildVariants("MAT", matColors, matSizes),
+  variants: [
+    {
+      colorId: "black",
+      sizeId: "desk",
+      productId: "1000000669152669",
+      variantId: "1000020491331605",
+      sku: "JUUJO-GROUNDING-MAT-DESK",
+      priceCents: 6995,
+      compareAtCents: 13995,
+      inStock: true,
+    },
+    {
+      colorId: "black",
+      sizeId: "couch",
+      productId: "1000000669250727",
+      variantId: "1000020494356823",
+      sku: "JUUJO-GROUNDING-MAT-COUCH",
+      priceCents: 6995,
+      compareAtCents: 13995,
+      inStock: true,
+    },
+    {
+      colorId: "black",
+      sizeId: "floor",
+      productId: "1000000669250727",
+      variantId: "1000020494356820",
+      sku: "JUUJO-GROUNDING-MAT-FLOOR",
+      priceCents: 6995,
+      compareAtCents: 13995,
+      inStock: true,
+    },
+  ],
   quantityTiers: defaultQuantityTiers,
   material: "Conductive carbon infused leatherette",
   care: "Wipe clean with a damp cloth.",
