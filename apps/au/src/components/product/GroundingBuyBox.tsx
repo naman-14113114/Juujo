@@ -360,6 +360,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       showIndex={t.sheets > 1}
                       choice={choices[t.id][index]}
                       onChange={(patch) => updateChoice(t.id, index, patch)}
+                      onSizeGuideClick={() => setShowSizeGuide(true)}
                     />
                   ))}
                 </div>
