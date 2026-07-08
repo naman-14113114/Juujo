@@ -413,6 +413,28 @@ function SheetRow({
   const variant = getVariant(product, choice.colorId, choice.sizeId);
   const soldOut = !variant.inStock || !variant.variantId;
 
+  /** Check if a specific color has ANY in-stock size */
+  const isColorInStock = (colorId: string) =>
+    product.sizes.some((size) => {
+      const v = getVariant(product, colorId, size.id);
+      return v.inStock && !!v.variantId;
+    });
+
+  /** Check if a specific color+size combo is in stock */
+  const isSizeInStock = (colorId: string, sizeId: string) => {
+    const v = getVariant(product, colorId, sizeId);
+    return v.inStock && !!v.variantId;
+  };
+
+  /** When color changes, auto-select first in-stock size for that color */
+  const handleColorChange = (colorId: string) => {
+    const firstInStockSize = product.sizes.find((s) => isSizeInStock(colorId, s.id));
+    onChange({
+      colorId,
+      sizeId: firstInStockSize?.id ?? choice.sizeId,
+    });
+  };
+
   return (
     <div className="flex items-center gap-3">
       {showIndex && (
@@ -425,8 +447,9 @@ function SheetRow({
       </label>
       <ColorSelect 
         value={choice.colorId} 
-        onChange={(val) => onChange({ colorId: val })} 
-        colors={product.colors} 
+        onChange={handleColorChange} 
+        colors={product.colors}
+        isColorInStock={isColorInStock}
       />
       <label className="sr-only" htmlFor={`size-${index}`}>
         Size for sheet {index + 1}
@@ -441,11 +464,15 @@ function SheetRow({
             borderColor: soldOut ? "var(--clay-deep)" : "var(--border)",
           }}
         >
-          {product.sizes.map((size) => (
-            <option key={size.id} value={size.id}>
-              {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
-            </option>
-          ))}
+          {product.sizes.map((size) => {
+            const sizeAvailable = isSizeInStock(choice.colorId, size.id);
+            return (
+              <option key={size.id} value={size.id} disabled={!sizeAvailable}>
+                {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
+                {!sizeAvailable ? " — Out of Stock" : ""}
+              </option>
+            );
+          })}
         </select>
         <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -464,10 +491,12 @@ function ColorSelect({
   value,
   onChange,
   colors,
+  isColorInStock,
 }: {
   value: string;
   onChange: (val: string) => void;
   colors: Product["colors"];
+  isColorInStock: (colorId: string) => boolean;
 }) {
   const [open, setOpen] = useState(false);
   const selected = colors.find((c) => c.id === value);
@@ -494,26 +523,41 @@ function ColorSelect({
       </button>
       {open && (
         <ul className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg" style={{ borderColor: "var(--border)" }}>
-          {colors.map((color) => (
-            <li key={color.id}>
-              <button
-                type="button"
-                onClick={() => {
-                  onChange(color.id);
-                  setOpen(false);
-                }}
-                className="font-serif flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
-              >
-                <span
-                  className="mr-2 h-4 w-4 flex-none rounded-[3px] border"
-                  style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
-                />
-                {color.name}
-              </button>
-            </li>
-          ))}
+          {colors.map((color) => {
+            const inStock = isColorInStock(color.id);
+            return (
+              <li key={color.id}>
+                <button
+                  type="button"
+                  disabled={!inStock}
+                  onClick={() => {
+                    if (!inStock) return;
+                    onChange(color.id);
+                    setOpen(false);
+                  }}
+                  className={`font-serif flex w-full items-center px-3 py-2 text-sm text-left text-[var(--ink)] ${
+                    inStock
+                      ? "hover:bg-gray-50 focus:bg-gray-50 cursor-pointer"
+                      : "opacity-40 cursor-not-allowed"
+                  }`}
+                >
+                  <span
+                    className={`mr-2 h-4 w-4 flex-none rounded-[3px] border ${!inStock ? "grayscale" : ""}`}
+                    style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
+                  />
+                  {color.name}
+                  {!inStock && (
+                    <span className="ml-auto text-[11px] font-medium text-[var(--clay-deep)]">
+                      Out of Stock
+                    </span>
+                  )}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
   );
 }
+

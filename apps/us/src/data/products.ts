@@ -224,6 +224,57 @@ function buildGroundingVariants(
   return variants;
 }
 
+// Real ShopBase/PlusBase ids for the FLAT grounding sheet, keyed by
+// `${colorId}-${sizeId}`. Source: user's "Flat Grounding Sheets.docx".
+// Green is entirely out of stock. White/Grey Cali King are out of stock.
+const groundingFlatSheetIds: Record<string, { productId: string; variantId: string | null }> = {
+  "white-single":    { productId: "1000000669115427", variantId: "1000020490757976" },
+  "white-twin":      { productId: "1000000668486093", variantId: "1000020478581936" },
+  "white-twin-xl":   { productId: "1000000669280338", variantId: "1000020494966604" },
+  "white-full":      { productId: "1000000668486093", variantId: "1000020478581946" },
+  "white-queen":     { productId: "1000000669280338", variantId: "1000020494966605" },
+  "white-king":      { productId: "1000000668486093", variantId: "1000020478581940" },
+  "white-cali-king": { productId: "1000000668486093", variantId: null },
+  "grey-single":     { productId: "1000000669115427", variantId: "1000020490798339" },
+  "grey-twin":       { productId: "1000000668486093", variantId: "1000020478581967" },
+  "grey-twin-xl":    { productId: "1000000669280338", variantId: "1000020494966606" },
+  "grey-full":       { productId: "1000000668486093", variantId: "1000020478581954" },
+  "grey-queen":      { productId: "1000000669280338", variantId: "1000020494966607" },
+  "grey-king":       { productId: "1000000668486093", variantId: "1000020478582025" },
+  "grey-cali-king":  { productId: "1000000668486093", variantId: null },
+  "green-single":    { productId: "", variantId: null },
+  "green-twin":      { productId: "", variantId: null },
+  "green-twin-xl":   { productId: "", variantId: null },
+  "green-full":      { productId: "", variantId: null },
+  "green-queen":     { productId: "", variantId: null },
+  "green-king":      { productId: "", variantId: null },
+  "green-cali-king": { productId: "", variantId: null },
+};
+
+/** Build the flat-sheet variant matrix using the real store ids above. */
+function buildGroundingFlatVariants(
+  colors: ProductColor[],
+  sizes: SizePricing[],
+): ProductVariant[] {
+  const variants: ProductVariant[] = [];
+  colors.forEach((color) => {
+    sizes.forEach((size) => {
+      const ids = groundingFlatSheetIds[`${color.id}-${size.id}`];
+      variants.push({
+        colorId: color.id,
+        sizeId: size.id,
+        productId: ids?.productId ?? "",
+        variantId: ids?.variantId ?? "",
+        sku: `JUUJO-GROUNDING-FLAT-${color.id}-${size.id}`.toUpperCase(),
+        priceCents: size.priceCents,
+        compareAtCents: size.compareAtCents,
+        inStock: Boolean(ids?.variantId),
+      });
+    });
+  });
+  return variants;
+}
+
 export const groundingSheets: Product = {
   id: "grounding-sheets",
   sku: "JUUJO-GROUNDING-QUEEN-GRAPHITE",
@@ -374,7 +425,18 @@ export const groundingFlatSheet: Product = {
   seoTitle: "Grounding Flat Sheet | Juujo Premium Bedding",
   seoDescription:
     "Juujo Grounding Flat Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
-  variants: buildVariants("GROUNDING-FLAT", groundingColors, groundingSizes),
+  gallery: [
+    ...groundingSheets.gallery,
+    { src: productMediaAsset("juujo-flat-sheet-1.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet lifestyle" },
+    { src: productMediaAsset("juujo-flat-sheet-2.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet on bed" },
+    { src: productMediaAsset("juujo-flat-sheet-3.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet detail" },
+    { src: productMediaAsset("juujo-flat-sheet-4.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet setup" },
+    { src: productMediaAsset("juujo-flat-sheet-5.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet comfort" },
+    { src: productMediaAsset("juujo-flat-sheet-6.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet features" },
+    { src: productMediaAsset("juujo-flat-sheet-7.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet silver threads" },
+    { src: productMediaAsset("juujo-flat-sheet-8.png", "grounding-sheets", "images"), alt: "Juujo grounding flat sheet presentation" },
+  ],
+  variants: buildGroundingFlatVariants(groundingColors, groundingSizes),
   specs: [
     { label: "Material", value: "Organic cotton with silver fibre" },
     { label: "Conductive thread", value: "Pure silver, evenly woven" },
