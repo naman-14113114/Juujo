@@ -48,19 +48,19 @@ export function DeliveryTimerBox() {
     <div className="mb-3 flex items-center justify-center rounded-xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-2.5 sm:p-3">
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
         {deliveryIconData ? (
-          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center sm:h-7 sm:w-7">
+          <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center sm:h-8 sm:w-8">
             <Lottie animationData={deliveryIconData} loop={true} />
           </div>
         ) : (
-          <div className="h-6 w-6 flex-shrink-0 sm:h-7 sm:w-7" />
+          <div className="h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
         )}
-        <p className="juujo-eyebrow m-0 pt-0.5 text-[14px] font-bold leading-none tracking-widest text-[var(--gold)] sm:text-[15px]">
+        <p className="juujo-eyebrow m-0 pt-0.5 text-[16px] font-bold leading-none tracking-widest text-[var(--gold)] sm:text-[18px]">
           FREE DELIVERY
         </p>
         <span className="hidden text-[13px] text-[var(--gold)] opacity-40 sm:block">
           -
         </span>
-        <p className="font-serif pt-0.5 text-[14px] font-medium leading-none text-[var(--ink)] sm:text-[15px]">
+        <p className="font-serif pt-0.5 text-[16px] font-medium leading-none text-[var(--ink)] sm:text-[18px]">
           {mounted ? deliveryDate || "soon" : "Loading..."}
         </p>
       </div>
