@@ -60,16 +60,15 @@ export function GroundingBenefitsSection() {
           </div>
 
           <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl order-1 md:order-2">
-            <Image
+            <video
               src={productMediaAsset(
-                "US_cam_1_lightgray.jpg",
+                "doctor-earthing-video-720p.mp4",
                 "grounding-sheets",
-                "images",
+                "videos",
               )}
-              alt="Juujo Grounding Sheet Benefits"
-              fill
-              className="object-cover"
-              sizes="(min-width: 768px) 50vw, 100vw"
+              controls
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </div>
