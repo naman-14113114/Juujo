@@ -220,7 +220,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   function setQuantity(productId: string, quantity: number) {
-
     setState((current) => {
       const product = getProductById(productId);
 
@@ -228,9 +227,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return current;
       }
 
+      let nextLines = upsertProductCartLines(current.lines, product, quantity);
+
+      const hasPaidProduct = nextLines.some((l) => l.type === "product" && !l.free);
+      if (!hasPaidProduct) {
+        nextLines = [];
+      }
+
       const nextState = {
         ...current,
-        lines: upsertProductCartLines(current.lines, product, quantity),
+        lines: nextLines,
       };
 
       if (!hasProductLines(nextState)) {
@@ -243,9 +249,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function removeProduct(productId: string) {
     setState((current) => {
+      let nextLines = current.lines.filter((line) => line.productId !== productId);
+
+      const hasPaidProduct = nextLines.some((l) => l.type === "product" && !l.free);
+      if (!hasPaidProduct) {
+        nextLines = [];
+      }
+
       const nextState = {
         ...current,
-        lines: current.lines.filter((line) => line.productId !== productId),
+        lines: nextLines,
       };
 
       if (!hasProductLines(nextState)) {

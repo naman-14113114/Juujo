@@ -24,7 +24,7 @@ const accordionData = [
         <div>
           <strong className="block text-[var(--ink)] mb-1">Dimensions:</strong>
           <ul className="list-disc pl-5 space-y-1">
-            <li>40 × 60 cm (16" × 24")</li>
+            <li>40 × 60 cm (16&quot; × 24&quot;)</li>
             <li>Compact and easy to place under feet or on a desk</li>
             <li>Lightweight and portable</li>
             <li>Ideal for home, office, or travel</li>
@@ -62,7 +62,7 @@ const accordionData = [
         <ul className="list-disc pl-5 space-y-1">
           <li>The Grounding Mat connects only to the grounded part of your outlet using the included grounding cord and grounding plug.</li>
           <li>It does not connect to electricity, and no electricity flows through the mat or your body.</li>
-          <li>Once connected, the copper-infused conductive surface allows your body to make direct contact with the Earth's natural energy while you work, relax, read, meditate, or watch TV.</li>
+          <li>Once connected, the copper-infused conductive surface allows your body to make direct contact with the Earth&apos;s natural energy while you work, relax, read, meditate, or watch TV.</li>
           <li>Simply place your bare feet or skin on the mat and enjoy the benefits of grounding throughout the day.</li>
         </ul>
       </div>

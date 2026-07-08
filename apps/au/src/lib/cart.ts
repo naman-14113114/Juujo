@@ -24,6 +24,8 @@ export type CartLine = {
   compareAtCents?: number;
   quantity: number;
   locked?: boolean;
+  bundle?: boolean;
+  free?: boolean;
 };
 
 export type CartState = {
