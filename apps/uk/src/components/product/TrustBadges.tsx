@@ -3,8 +3,8 @@ import Image from "next/image";
 export function TrustBadges() {
   const badges = [
     {
-      title: "Free Shipping all over UK",
-      icon: "/media/products/buudy-led-mask/images/i3.png", // Truck
+      title: "Free Shipping",
+      icon: "/media/products/buudy-led-mask/images/i3_clean.png", // Truck
     },
     {
       title: "Skin-Friendly Fabric",
