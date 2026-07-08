@@ -1,4 +1,4 @@
-﻿import {
+import {
   productAsset,
   productMediaAsset,
   type ProductImage,
@@ -923,7 +923,7 @@ const matSizes: SizePricing[] = [
     name: "Desk Mat",
     dimensions: "10in x 27in",
     priceCents: 6900,
-    compareAtCents: 14900,
+    compareAtCents: 14000,
   },
   {
     id: "couch",
@@ -957,8 +957,8 @@ export const groundingMat: Product = {
   seoDescription:
     "Juujo Grounding Mat for desk, couch, or floor. Connect to the earth's natural energy indoors.",
   currency: market.currency,
-  priceCents: 6995,
-  compareAtCents: 13995,
+  priceCents: 6900,
+  compareAtCents: 14000,
   rating: 4.9,
   reviewCount: 1542,
   customerCount: "40,000+",
@@ -1082,7 +1082,7 @@ export const groundingMat: Product = {
       variantId: "1000020491331605",
       sku: "JUUJO-GROUNDING-MAT-DESK",
       priceCents: 6900,
-      compareAtCents: 14900,
+      compareAtCents: 14000,
       inStock: true,
     },
     {

@@ -402,14 +402,14 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       </Button>
       {/* Free gifts bundle */}
       {giftProduct && (
-        <section className="mt-8 mb-6" id="free-gifts">
+        <section className="mt-4 mb-6" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h2 className="juujo-display text-3xl font-medium text-[var(--ink)]">
               Summer Sleep Sale
             </h2>
             <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--ink)]" style={{ backgroundColor: "color-mix(in oklch, var(--gold) 15%, transparent)" }}>
               <span className="juujo-display text-sm sm:text-base font-extrabold normal-case text-[var(--ink)]">
-                {formatMoney(giftProduct.priceCents + 2900 + 3900, giftProduct.currency)}
+                {formatMoney((giftProduct.compareAtCents || giftProduct.priceCents) + 2900 + 3900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
@@ -425,7 +425,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             {
               id: "grounding-mat",
               name: giftProduct.name,
-              valueCents: giftProduct.priceCents,
+              valueCents: giftProduct.compareAtCents || giftProduct.priceCents,
               image: "/images/grounding_mat_gift.png",
             },
             {
