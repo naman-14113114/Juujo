@@ -411,7 +411,7 @@ export const groundingMat: Product = {
   slug: "grounding-mat",
   category: "grounding-mat",
   categoryLabel: "Grounding Mat",
-  name: "Juujo Grounding Mat",
+  name: "Grounding Mat",
   heroTitle: "Grounding",
   heroEmphasis: "Mat",
   shortDescription: "A versatile grounding mat for your desk, couch, or floor.",
