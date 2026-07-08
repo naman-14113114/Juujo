@@ -8,7 +8,16 @@ import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
 
 export function CartLineItem({ line }: { line: CartLine }) {
-  const { setQuantity, removeProduct } = useCart();
+  const { setQuantity, removeProduct, removeLine } = useCart();
+
+  // Bundle sheets and the free mat are fixed single units: no quantity stepper.
+  // Bundle sheets can still be removed (by their unique line id); the free gift
+  // and free bundle sheet are locked.
+  const isGift = line.type === "gift";
+  const isBundle = Boolean(line.bundle);
+  const isFree = Boolean(line.free) || line.unitPriceCents === 0;
+  const showStepper = !isGift && !isBundle && !line.locked;
+  const canRemove = isBundle ? !line.free : !isGift && !line.locked;
 
   return (
     <div className="flex gap-4 border-b border-[var(--border)] py-5">
@@ -62,11 +71,11 @@ export function CartLineItem({ line }: { line: CartLine }) {
         </div>
 
         <div className="mt-4 flex items-center justify-between gap-3">
-          {line.locked ? (
+          {isGift || isFree ? (
             <span className="juujo-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-[var(--gold)]">
-              Unlocked x {line.quantity}
+              {isGift ? "Free gift" : "Free sheet"}
             </span>
-          ) : (
+          ) : showStepper ? (
             <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
               <button
                 aria-label="Decrease quantity"
@@ -90,13 +99,17 @@ export function CartLineItem({ line }: { line: CartLine }) {
                 <Plus size={14} />
               </button>
             </div>
+          ) : (
+            <span className="juujo-mono text-xs text-[var(--muted)]">
+              Qty {line.quantity}
+            </span>
           )}
-          {!line.locked ? (
+          {canRemove ? (
             <button
               aria-label={`Remove ${line.title}`}
               className="inline-flex items-center gap-2 text-xs text-[var(--muted)] transition hover:text-[var(--plum)]"
-              data-testid={`remove-${line.productId}`}
-              onClick={() => removeProduct(line.productId)}
+              data-testid={`remove-${line.id}`}
+              onClick={() => (isBundle ? removeLine(line.id) : removeProduct(line.productId))}
               type="button"
             >
               <Trash2 size={14} />

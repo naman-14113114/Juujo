@@ -14,6 +14,8 @@ export type CartLine = {
   productId: string;
   slug?: string;
   variantId?: string;
+  /** Real ShopBase/PlusBase product id for this variant (used at checkout). */
+  checkoutProductId?: string;
   colorId?: string;
   sizeId?: string;
   type: CartLineType;
@@ -24,7 +26,9 @@ export type CartLine = {
   compareAtCents?: number;
   quantity: number;
   locked?: boolean;
+  /** Part of a multi-sheet bundle (Buy 1 / Buy 2 Get 1 Free) — one line each. */
   bundle?: boolean;
+  /** A free sheet inside a bundle (the "get 1 free" unit). */
   free?: boolean;
 };
 
@@ -71,6 +75,7 @@ export function buildProductCartLines(
     productId: product.id,
     slug: product.slug,
     variantId: variant.variantId,
+    checkoutProductId: variant.productId,
     colorId: variant.colorId,
     sizeId: variant.sizeId,
     type: "product",
@@ -83,6 +88,55 @@ export function buildProductCartLines(
   };
 
   return [productLine];
+}
+
+/**
+ * Build the individual cart lines for a grounding-sheet bundle. The customer
+ * picks one variant per sheet (they can all differ), so each sheet becomes its
+ * own line shown separately in the cart. `freeCount` sheets (the "get 1 free"
+ * units) are priced at 0 but keep their compare-at for the strike-through.
+ */
+export type BundleSelection = {
+  product: Product;
+  variantId?: string;
+};
+
+export function buildSheetBundleLines(
+  selections: BundleSelection[],
+  freeCount = 0,
+): CartLine[] {
+  const paidCutoff = selections.length - Math.max(0, freeCount);
+
+  return selections.map((selection, index) => {
+    const { product } = selection;
+    const variant =
+      product.variants.find((entry) => entry.variantId === selection.variantId) ??
+      getDefaultVariant(product);
+
+    const color = product.colors.find((entry) => entry.id === variant.colorId);
+    const size = product.sizes.find((entry) => entry.id === variant.sizeId);
+    const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
+    const isFree = index >= paidCutoff;
+
+    return {
+      id: `bundle-${index + 1}-${variant.variantId || "default"}`,
+      productId: product.id,
+      slug: product.slug,
+      variantId: variant.variantId,
+      checkoutProductId: variant.productId,
+      colorId: variant.colorId,
+      sizeId: variant.sizeId,
+      type: "product",
+      title: product.name,
+      subtitle: variantLabel || product.shortDescription,
+      image: color?.image ?? product.cartImage,
+      unitPriceCents: isFree ? 0 : variant.priceCents,
+      compareAtCents: variant.compareAtCents,
+      quantity: 1,
+      bundle: true,
+      free: isFree,
+    } satisfies CartLine;
+  });
 }
 
 function findProductForLine(line: CartLine) {
@@ -101,6 +155,33 @@ export function normalizeCartLines(lines: CartLine[]) {
 
     if (!product) {
       return [];
+    }
+
+    // Bundle lines are per-sheet (one variant each, possibly free) and must be
+    // preserved as-is instead of collapsed into a single product line.
+    if (line.bundle) {
+      const variant =
+        product.variants.find((entry) => entry.variantId === line.variantId) ??
+        getDefaultVariant(product);
+      const color = product.colors.find((entry) => entry.id === variant.colorId);
+      const size = product.sizes.find((entry) => entry.id === variant.sizeId);
+      const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
+
+      return [
+        {
+          ...line,
+          slug: product.slug,
+          checkoutProductId: variant.productId,
+          colorId: variant.colorId,
+          sizeId: variant.sizeId,
+          title: product.name,
+          subtitle: variantLabel || product.shortDescription,
+          image: color?.image ?? product.cartImage,
+          unitPriceCents: line.free ? 0 : variant.priceCents,
+          compareAtCents: variant.compareAtCents,
+          quantity: 1,
+        } satisfies CartLine,
+      ];
     }
 
     return buildProductCartLines(product, line.quantity, line.variantId);
@@ -136,6 +217,7 @@ function deriveGiftLines(lines: CartLine[]): CartLine[] {
     productId: matProduct.id,
     slug: matProduct.slug,
     variantId: matVariant.variantId,
+    checkoutProductId: matVariant.productId,
     type: "gift",
     title: matProduct.name,
     subtitle: "Free gift",
@@ -144,6 +226,7 @@ function deriveGiftLines(lines: CartLine[]): CartLine[] {
     compareAtCents: matVariant.priceCents,
     quantity: 1,
     locked: true,
+    free: true,
   };
 
   return [matLine];

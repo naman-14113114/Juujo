@@ -530,6 +530,7 @@ function ColorSelect({
                 <button
                   type="button"
                   disabled={!inStock}
+                  onPointerDown={(e) => e.preventDefault()}
                   onClick={() => {
                     if (!inStock) return;
                     onChange(color.id);

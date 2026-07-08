@@ -11,10 +11,12 @@ import {
 } from "react";
 import { getProductById, type Product } from "@/data/products";
 import {
+  buildSheetBundleLines,
   calculateCartTotals,
   emptyCart,
   normalizeCartLines,
   upsertProductCartLines,
+  type BundleSelection,
   type CartState,
 } from "@/lib/cart";
 
@@ -29,9 +31,13 @@ type CartContextValue = CartState & {
     quantity: number,
     variantId?: string,
   ) => void;
+  /** Replace the grounding-sheet bundle with one line per selected sheet. */
+  setSheetBundle: (selections: BundleSelection[], freeCount?: number) => void;
   setQuantity: (productId: string, quantity: number) => void;
 
   removeProduct: (productId: string) => void;
+  /** Remove a single line by its id (bundle sheets share a productId). */
+  removeLine: (lineId: string) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
@@ -219,6 +225,59 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }));
   }
 
+  // Replace the whole grounding-sheet bundle. Bundle sheets share a productId
+  // but are separate lines (one variant each), so we clear that product's
+  // lines first, then append the freshly built per-sheet lines.
+  function setSheetBundle(selections: BundleSelection[], freeCount = 0) {
+    if (selections.length === 0) {
+      return;
+    }
+
+    dispatchAddToCartEvent(selections[0].product);
+    const bundleProductId = selections[0].product.id;
+    const bundleLines = buildSheetBundleLines(selections, freeCount);
+
+    setState((current) => ({
+      ...current,
+      lines: [
+        ...current.lines.filter((line) => line.productId !== bundleProductId),
+        ...bundleLines,
+      ],
+    }));
+  }
+
+  function removeLine(lineId: string) {
+    setState((current) => {
+      const removedLine = current.lines.find((line) => line.id === lineId);
+      let nextLines = current.lines.filter((line) => line.id !== lineId);
+
+      if (removedLine?.bundle && !removedLine.free) {
+        const freeLineIndex = nextLines.findIndex(
+          (l) => l.productId === removedLine.productId && l.bundle && l.free
+        );
+        if (freeLineIndex !== -1) {
+          nextLines.splice(freeLineIndex, 1);
+        }
+      }
+
+      const hasPaidProduct = nextLines.some((l) => l.type === "product" && !l.free);
+      if (!hasPaidProduct) {
+        nextLines = [];
+      }
+
+      const nextState = {
+        ...current,
+        lines: nextLines,
+      };
+
+      if (!hasProductLines(nextState)) {
+        clearCheckoutRecovery(nextState);
+      }
+
+      return nextState;
+    });
+  }
+
   function setQuantity(productId: string, quantity: number) {
     setState((current) => {
       const product = getProductById(productId);
@@ -283,8 +342,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       activePromoCodes,
       addProduct,
       addToCartVariant,
+      setSheetBundle,
       setQuantity,
       removeProduct,
+      removeLine,
       clearCart,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),

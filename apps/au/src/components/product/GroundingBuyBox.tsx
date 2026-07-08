@@ -498,6 +498,7 @@ function ColorSelect({
             <li key={color.id}>
               <button
                 type="button"
+                onPointerDown={(e) => e.preventDefault()}
                 onClick={() => {
                   onChange(color.id);
                   setOpen(false);
