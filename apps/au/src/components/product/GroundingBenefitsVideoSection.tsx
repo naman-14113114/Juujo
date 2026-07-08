@@ -27,7 +27,7 @@ export function GroundingBenefitsVideoSection() {
 
           {/* Video Content */}
           <div className="order-1 w-full">
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-3xl shadow-xl">
+            <div className="relative aspect-square w-full max-w-md mx-auto overflow-hidden rounded-3xl shadow-xl">
               <video
                 src={productMediaAsset(
                   "grounding-indoors-720p.mp4?v=4",

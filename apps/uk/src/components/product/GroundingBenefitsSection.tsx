@@ -1,9 +1,20 @@
+"use client";
 import Image from "next/image";
+import { useState, useRef } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { productMediaAsset } from "@/lib/media";
-import { Moon, Leaf, HeartPulse } from "lucide-react";
+import { Moon, Leaf, HeartPulse, Play } from "lucide-react";
 
 export function GroundingBenefitsSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
   const benefits = [
     {
       title: "Achieve Deeper, Restorative Sleep",
@@ -59,17 +70,34 @@ export function GroundingBenefitsSection() {
             ))}
           </div>
 
-          <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl order-1 md:order-2">
+          <div className="relative rounded-[2rem] overflow-hidden aspect-video shadow-2xl order-1 md:order-2">
             <video
+              ref={videoRef}
               src={productMediaAsset(
                 "doctor-earthing-video-720p.mp4",
                 "grounding-sheets",
                 "videos",
               )}
-              controls
+              controls={isPlaying}
               playsInline
               className="absolute inset-0 h-full w-full object-cover"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
             />
+            {!isPlaying && (
+              <button
+                onClick={handlePlay}
+                className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors z-10"
+                aria-label="Play video"
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white/90 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
+                  <Play
+                    className="w-8 h-8 md:w-10 md:h-10 text-[var(--plum)] ml-2"
+                    fill="currentColor"
+                  />
+                </div>
+              </button>
+            )}
           </div>
         </div>
       </div>
