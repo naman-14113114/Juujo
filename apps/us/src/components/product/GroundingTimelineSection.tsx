@@ -69,9 +69,11 @@ export function GroundingTimelineSection() {
           {/* Timeline navigation */}
           <div className="relative mb-12 flex justify-between max-w-4xl mx-auto px-4">
             <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-gray-200">
-              <div 
+              <div
                 className="absolute left-0 top-0 h-full bg-[var(--clay-deep)] transition-all duration-500 ease-in-out"
-                style={{ width: `${(activeStep / (timeline.length - 1)) * 100}%` }}
+                style={{
+                  width: `${(activeStep / (timeline.length - 1)) * 100}%`,
+                }}
               ></div>
             </div>
             {timeline.map((item, idx) => (
@@ -87,8 +89,8 @@ export function GroundingTimelineSection() {
                       idx === activeStep
                         ? "border-[2px] border-[var(--clay-deep)] scale-150 bg-white"
                         : idx < activeStep
-                        ? "border-[2px] border-[var(--clay-deep)] bg-[var(--clay-deep)]"
-                        : "border-[2px] border-gray-300 bg-white group-hover:border-gray-400"
+                          ? "border-[2px] border-[var(--clay-deep)] bg-[var(--clay-deep)]"
+                          : "border-[2px] border-gray-300 bg-white group-hover:border-gray-400"
                     }`}
                   >
                     {idx === activeStep && (
