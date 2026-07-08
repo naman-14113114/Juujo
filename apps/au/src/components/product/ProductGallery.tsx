@@ -277,7 +277,7 @@ export function ProductGallery({
               3 Free Gifts
             </span>
           )}
-          <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
+{/* <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
             <svg
               aria-hidden="true"
               className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
@@ -291,7 +291,7 @@ export function ProductGallery({
             <span className="juujo-mono leading-none">
               {market.madeInLabel}
             </span>
-          </span>
+          </span> */}
 
           <button
             aria-label="Magnify current product image"
