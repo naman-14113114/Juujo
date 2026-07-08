@@ -4,23 +4,6 @@ import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { market } from "@/lib/market";
 
-function useCountdown(seconds: number) {
-  const [remaining, setRemaining] = useState(seconds);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setRemaining((current) => (current <= 0 ? seconds : current - 1));
-    }, 1000);
-
-    return () => window.clearInterval(interval);
-  }, [seconds]);
-
-  const minutes = Math.floor(remaining / 60);
-  const secs = remaining % 60;
-
-  return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-}
-
 function useDeliveryDate(daysFromToday: number) {
   const [dateLabel, setDateLabel] = useState("");
 
@@ -43,48 +26,43 @@ function useDeliveryDate(daysFromToday: number) {
 }
 
 export function DeliveryTimerBox() {
-  const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(3);
-  const [deliveryIconData, setDeliveryIconData] = useState<Record<string, unknown> | null>(null);
+  const [deliveryIconData, setDeliveryIconData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line
     setMounted(true);
-    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json?v=2")
+    fetch(
+      "/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json?v=2",
+    )
       .then((res) => res.json())
       .then((data) => setDeliveryIconData(data))
       .catch((err) => console.error("Error loading delivery lottie", err));
   }, []);
 
   return (
-    <div className="mb-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
-      <div className="flex items-center justify-between gap-2 sm:gap-5">
-        <div>
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {deliveryIconData ? (
-              <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0 flex items-center justify-center">
-                <Lottie animationData={deliveryIconData} loop={true} />
-              </div>
-            ) : (
-              <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0" />
-            )}
-            <p className="juujo-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs tracking-widest">
-              FREE DELIVERY
-            </p>
+    <div className="mb-4 flex items-center justify-center rounded-xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-4">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        {deliveryIconData ? (
+          <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center sm:h-6 sm:w-6">
+            <Lottie animationData={deliveryIconData} loop={true} />
           </div>
-          <p className="font-serif mt-1.5 text-base sm:text-2xl text-[var(--ink)] font-normal leading-none whitespace-nowrap">
-            {mounted ? (deliveryDate || "soon") : "Loading..."}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="juujo-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-widest m-0 leading-none h-5 sm:h-7 flex items-center justify-end font-bold uppercase">
-            ORDER WITHIN
-          </p>
-          <p className="font-serif mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--ink)] leading-none">
-            {mounted ? timer : "00:00"}
-          </p>
-        </div>
+        ) : (
+          <div className="h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
+        )}
+        <p className="juujo-eyebrow m-0 pt-0.5 text-[10px] font-bold leading-none tracking-widest text-[var(--gold)] sm:text-xs">
+          FREE DELIVERY
+        </p>
+        <span className="hidden text-xs text-[var(--gold)] opacity-40 sm:block">
+          -
+        </span>
+        <p className="font-serif pt-0.5 text-[15px] font-normal leading-none text-[var(--ink)] sm:text-[17px]">
+          {mounted ? deliveryDate || "soon" : "Loading..."}
+        </p>
       </div>
     </div>
   );
