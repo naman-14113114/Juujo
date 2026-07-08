@@ -80,7 +80,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
     <div className="flex flex-col gap-6">
       <div>
         <p className="juujo-eyebrow">{product.categoryLabel}</p>
-        <h1 className="font-bold text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4.5vw,2.5rem)] whitespace-nowrap tracking-tight leading-[1.02]">
+        <h1 className="font-bold text-[var(--plum)] mt-2 !text-[clamp(1.3rem,4.5vw,2.6rem)] whitespace-nowrap tracking-tight leading-[1.02]">
           {product.name}
         </h1>
         <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">
@@ -88,7 +88,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
             {"★★★★★"}
           </span>
           <span>
-            {product.rating.toFixed(1)} from {product.reviewCount.toLocaleString()} reviews
+            {product.rating.toFixed(1)} from{" "}
+            {product.reviewCount.toLocaleString()} reviews
           </span>
         </p>
         <p className="mt-4 max-w-prose text-[var(--muted)]">
@@ -141,7 +142,9 @@ export function ProductBuyBox({ product }: { product: Product }) {
       {/* Size */}
       {product.sizes.length > 0 && (
         <fieldset className="flex flex-col gap-3">
-          <legend className="text-sm font-medium text-[var(--ink)]">Size</legend>
+          <legend className="text-sm font-medium text-[var(--ink)]">
+            Size
+          </legend>
           <div className="flex flex-wrap gap-2">
             {product.sizes.map((size) => {
               const selected = size.id === sizeId;
@@ -164,7 +167,9 @@ export function ProductBuyBox({ product }: { product: Product }) {
                 >
                   <span className="font-medium">{size.name}</span>
                   {size.dimensions && (
-                    <span className="ml-2 text-[var(--muted)]">{size.dimensions}</span>
+                    <span className="ml-2 text-[var(--muted)]">
+                      {size.dimensions}
+                    </span>
                   )}
                 </button>
               );
@@ -251,7 +256,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
       {/* Live price + actions */}
       <div className="flex flex-col gap-3">
-
         <DeliveryTimerBox />
 
         <Button

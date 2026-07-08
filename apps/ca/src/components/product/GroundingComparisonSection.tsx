@@ -37,7 +37,8 @@ export function GroundingComparisonSection() {
           eyebrow="Comparison"
           title={
             <>
-              Why <em className="juujo-italic text-[var(--gold)]">Juujo</em> Stands Out
+              Why <em className="juujo-italic text-[var(--gold)]">Juujo</em>{" "}
+              Stands Out
             </>
           }
           copy="See how our Grounding Sheet compares to ordinary bed sheets."
@@ -48,16 +49,25 @@ export function GroundingComparisonSection() {
           <table className="w-full text-left border-collapse min-w-[600px]">
             <thead>
               <tr>
-                <th className="py-6 px-6 font-medium text-[var(--muted)] text-lg w-1/2 border-b border-[var(--border)]">Feature</th>
-                <th className="py-6 px-6 bg-[var(--cream)] rounded-t-2xl border-b border-[var(--border)] text-center w-1/4">
-                  <span className="juujo-display text-2xl text-[var(--plum)]">Juujo</span>
+                <th className="py-6 px-6 font-medium text-[var(--muted)] text-lg w-1/2 border-b border-[var(--border)]">
+                  Feature
                 </th>
-                <th className="py-6 px-6 font-medium text-[var(--muted)] text-lg text-center w-1/4 border-b border-[var(--border)]">Regular Sheets</th>
+                <th className="py-6 px-6 bg-[var(--cream)] rounded-t-2xl border-b border-[var(--border)] text-center w-1/4">
+                  <span className="juujo-display text-2xl text-[var(--plum)]">
+                    Juujo
+                  </span>
+                </th>
+                <th className="py-6 px-6 font-medium text-[var(--muted)] text-lg text-center w-1/4 border-b border-[var(--border)]">
+                  Regular Sheets
+                </th>
               </tr>
             </thead>
             <tbody>
               {comparisons.map((item, idx) => (
-                <tr key={idx} className="group hover:bg-gray-50 transition-colors border-b border-[var(--border)]">
+                <tr
+                  key={idx}
+                  className="group hover:bg-gray-50 transition-colors border-b border-[var(--border)]"
+                >
                   <td className="py-6 px-6 text-[var(--plum)] font-medium text-lg">
                     {item.feature}
                   </td>

@@ -5,7 +5,8 @@ export function GroundingFlatSheetHowItWorksSection() {
   const steps = [
     {
       num: "01",
-      description: "Place the Grounding Flat Sheet over your mattress and regular sheets",
+      description:
+        "Place the Grounding Flat Sheet over your mattress and regular sheets",
       video: "F1.mp4",
     },
     {
@@ -21,7 +22,10 @@ export function GroundingFlatSheetHowItWorksSection() {
   ];
 
   return (
-    <section className="juujo-section bg-white py-14 md:py-24" id="how-it-works">
+    <section
+      className="juujo-section bg-white py-14 md:py-24"
+      id="how-it-works"
+    >
       <div className="juujo-wrap">
         <SectionHeading
           eyebrow="Simple Setup"
@@ -39,7 +43,11 @@ export function GroundingFlatSheetHowItWorksSection() {
             <div key={idx} className="flex flex-col gap-6 group">
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[var(--cream)]">
                 <video
-                  src={productMediaAsset(step.video, "grounding-sheets", "videos")}
+                  src={productMediaAsset(
+                    step.video,
+                    "grounding-sheets",
+                    "videos",
+                  )}
                   autoPlay
                   loop
                   muted

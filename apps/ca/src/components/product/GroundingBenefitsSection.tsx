@@ -7,17 +7,20 @@ export function GroundingBenefitsSection() {
   const benefits = [
     {
       title: "Achieve Deeper, Restorative Sleep",
-      description: "Connect to the earth's natural energy to fall asleep faster and wake up feeling completely refreshed.",
+      description:
+        "Connect to the earth's natural energy to fall asleep faster and wake up feeling completely refreshed.",
       icon: Moon,
     },
     {
       title: "Relieve Stress & Find Calm",
-      description: "Neutralize free radicals to help your body unwind, reducing daily tension and promoting a peaceful state of mind.",
+      description:
+        "Neutralize free radicals to help your body unwind, reducing daily tension and promoting a peaceful state of mind.",
       icon: Leaf,
     },
     {
       title: "Soothe Aches & Inflammation",
-      description: "Experience the soothing effect of natural grounding which can help ease joint discomfort and promote recovery.",
+      description:
+        "Experience the soothing effect of natural grounding which can help ease joint discomfort and promote recovery.",
       icon: HeartPulse,
     },
   ];
@@ -29,7 +32,9 @@ export function GroundingBenefitsSection() {
           eyebrow="Benefits"
           title={
             <>
-              Experience the <em className="juujo-italic text-[var(--gold)]">benefits</em> of natural grounding.
+              Experience the{" "}
+              <em className="juujo-italic text-[var(--gold)]">benefits</em> of
+              natural grounding.
             </>
           }
           copy="Transform your bed into a restorative sanctuary. Our premium grounding sheet brings the earth's healing energy straight to your bedroom."
@@ -46,7 +51,7 @@ export function GroundingBenefitsSection() {
                   <h3 className="juujo-display text-xl md:text-2xl text-[var(--plum)] mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base">
+                  <p className="text-[var(--muted)] leading-relaxed text-base">
                     {benefit.description}
                   </p>
                 </div>
@@ -56,7 +61,11 @@ export function GroundingBenefitsSection() {
 
           <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl order-1 md:order-2">
             <Image
-              src={productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images")}
+              src={productMediaAsset(
+                "US_cam_1_lightgray.jpg",
+                "grounding-sheets",
+                "images",
+              )}
               alt="Juujo Grounding Sheet Benefits"
               fill
               className="object-cover"

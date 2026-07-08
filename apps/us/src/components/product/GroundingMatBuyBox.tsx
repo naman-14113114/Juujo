@@ -7,10 +7,7 @@ import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
-import {
-  getVariant,
-  type Product,
-} from "@/data/products";
+import { getVariant, type Product } from "@/data/products";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingMatAccordions } from "./GroundingMatAccordions";
 import { formatMoney } from "@/lib/money";
@@ -82,16 +79,27 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
     const paidN = t.mats - t.freeCount;
     return tierChoices
       .slice(0, paidN)
-      .reduce((sum, choice) => sum + getVariant(product, colorId, choice.sizeId).priceCents, 0);
-  }
-  
-  function compareForTier(t: Tier) {
-    const tierChoices = choices[t.id];
-    return tierChoices
-      .reduce((sum, choice) => sum + getVariant(product, colorId, choice.sizeId).compareAtCents, 0);
+      .reduce(
+        (sum, choice) =>
+          sum + getVariant(product, colorId, choice.sizeId).priceCents,
+        0,
+      );
   }
 
-  function updateChoice(tierIdToUpdate: string, index: number, patch: Partial<MatChoice>) {
+  function compareForTier(t: Tier) {
+    const tierChoices = choices[t.id];
+    return tierChoices.reduce(
+      (sum, choice) =>
+        sum + getVariant(product, colorId, choice.sizeId).compareAtCents,
+      0,
+    );
+  }
+
+  function updateChoice(
+    tierIdToUpdate: string,
+    index: number,
+    patch: Partial<MatChoice>,
+  ) {
     setChoices((current) => {
       const next = { ...current };
       const nextChoices = [...next[tierIdToUpdate]];
@@ -120,38 +128,100 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <a href="#reviews" className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer">
-          <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden="true">★★★★★</div>
+        <a
+          href="#reviews"
+          className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer"
+        >
+          <div
+            className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
+            aria-hidden="true"
+          >
+            ★★★★★
+          </div>
           <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
-            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "40,000+"} CUSTOMERS
+            {product.rating.toFixed(1)} · TRUSTED BY{" "}
+            {product.customerCount || "40,000+"} CUSTOMERS
           </span>
         </a>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.2rem,4.3vw,2.4rem)] whitespace-nowrap leading-[1.02] tracking-tight">
           Grounding Mat
         </h1>
-        
+
         <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Conductive Carbon Surface</strong> for maximum conductivity</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Conductive Carbon Surface</strong> for maximum
+              conductivity
+            </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Versatile Design</strong> perfect for desk, couch, or floor</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Versatile Design</strong> perfect for desk, couch, or
+              floor
+            </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Easy to clean</strong> and built to last</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Easy to clean</strong> and built to last
+            </span>
           </li>
         </ul>
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span
+          className="h-px flex-1"
+          style={{ backgroundColor: "var(--border)" }}
+        />
         <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
           Bundle &amp; Save
         </span>
-        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span
+          className="h-px flex-1"
+          style={{ backgroundColor: "var(--border)" }}
+        />
       </div>
 
       <div className="flex flex-col gap-4">
@@ -194,7 +264,9 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
               >
                 <span
                   className="grid h-5 w-5 flex-none place-items-center rounded-full border-2"
-                  style={{ borderColor: selected ? "var(--gold)" : "var(--border)" }}
+                  style={{
+                    borderColor: selected ? "var(--gold)" : "var(--border)",
+                  }}
                 >
                   {selected && (
                     <span
@@ -236,8 +308,13 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
               </button>
 
               {expandedTier === t.id && (
-                <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
-                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">Size</div>
+                <div
+                  className="flex flex-col gap-3 border-t px-4 py-4"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">
+                    Size
+                  </div>
                   {Array.from({ length: t.mats }).map((_, index) => (
                     <MatRow
                       key={index}
@@ -265,11 +342,18 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
       >
         {isNavigating ? (
           <>
-            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+            <span
+              style={{ visibility: "hidden" }}
+              className="relative z-20 whitespace-nowrap"
+            >
               ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
+              <Lottie
+                animationData={loadingLottie}
+                loop
+                className="h-16 w-24 scale-[1.35]"
+              />
             </span>
           </>
         ) : (
@@ -330,7 +414,18 @@ function MatRow({
           ))}
         </select>
         <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </div>
         {soldOut && (
           <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">

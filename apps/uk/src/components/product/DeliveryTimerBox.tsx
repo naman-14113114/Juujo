@@ -45,22 +45,22 @@ export function DeliveryTimerBox() {
   }, []);
 
   return (
-    <div className="mb-4 flex items-center justify-center rounded-xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-4">
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+    <div className="mb-6 flex items-center justify-center rounded-xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-4 sm:p-5">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
         {deliveryIconData ? (
-          <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center sm:h-6 sm:w-6">
+          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center sm:h-7 sm:w-7">
             <Lottie animationData={deliveryIconData} loop={true} />
           </div>
         ) : (
-          <div className="h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
+          <div className="h-6 w-6 flex-shrink-0 sm:h-7 sm:w-7" />
         )}
-        <p className="juujo-eyebrow m-0 pt-0.5 text-[10px] font-bold leading-none tracking-widest text-[var(--gold)] sm:text-xs">
+        <p className="juujo-eyebrow m-0 pt-0.5 text-[11px] font-bold leading-none tracking-widest text-[var(--gold)] sm:text-[13px]">
           FREE DELIVERY
         </p>
-        <span className="hidden text-xs text-[var(--gold)] opacity-40 sm:block">
+        <span className="hidden text-[13px] text-[var(--gold)] opacity-40 sm:block">
           -
         </span>
-        <p className="font-serif pt-0.5 text-[15px] font-normal leading-none text-[var(--ink)] sm:text-[17px]">
+        <p className="font-serif pt-0.5 text-[16px] font-normal leading-none text-[var(--ink)] sm:text-[18px]">
           {mounted ? deliveryDate || "soon" : "Loading..."}
         </p>
       </div>

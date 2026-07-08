@@ -7,11 +7,7 @@ import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
-import {
-  getProductBySlug,
-  getVariant,
-  type Product,
-} from "@/data/products";
+import { getProductBySlug, getVariant, type Product } from "@/data/products";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
@@ -108,16 +104,27 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     const paidN = t.sheets - t.freeCount;
     return tierChoices
       .slice(0, paidN)
-      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).priceCents, 0);
-  }
-  
-  function compareForTier(t: Tier) {
-    const tierChoices = choices[t.id];
-    return tierChoices
-      .reduce((sum, choice) => sum + getVariant(product, choice.colorId, choice.sizeId).compareAtCents, 0);
+      .reduce(
+        (sum, choice) =>
+          sum + getVariant(product, choice.colorId, choice.sizeId).priceCents,
+        0,
+      );
   }
 
-  function updateChoice(tierIdToUpdate: string, index: number, patch: Partial<SheetChoice>) {
+  function compareForTier(t: Tier) {
+    const tierChoices = choices[t.id];
+    return tierChoices.reduce(
+      (sum, choice) =>
+        sum + getVariant(product, choice.colorId, choice.sizeId).compareAtCents,
+      0,
+    );
+  }
+
+  function updateChoice(
+    tierIdToUpdate: string,
+    index: number,
+    patch: Partial<SheetChoice>,
+  ) {
     setChoices((current) => {
       const next = { ...current };
       const nextChoices = [...next[tierIdToUpdate]];
@@ -148,41 +155,100 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <a href="#reviews" className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer">
-          <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden="true">★★★★★</div>
+        <a
+          href="#reviews"
+          className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer"
+        >
+          <div
+            className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
+            aria-hidden="true"
+          >
+            ★★★★★
+          </div>
           <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
-            {product.rating.toFixed(1)} · TRUSTED BY {product.customerCount || "16,000+"} CUSTOMERS
+            {product.rating.toFixed(1)} · TRUSTED BY{" "}
+            {product.customerCount || "16,000+"} CUSTOMERS
           </span>
         </a>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.2rem,4.3vw,2.4rem)] whitespace-nowrap leading-[1.02] tracking-tight">
           Premium Grounding Sheets
         </h1>
-        
+
         <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Pure Silver Threads</strong> for maximum conductivity</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Pure Silver Threads</strong> for maximum conductivity
+            </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Deep Sleep Support</strong> for a calmer, settled night</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Deep Sleep Support</strong> for a calmer, settled night
+            </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"></path></svg>
-            <span className="leading-snug"><strong>Machine Washable</strong> and easy to care for</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[var(--gold)] shrink-0 mt-0.5"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <span className="leading-snug">
+              <strong>Machine Washable</strong> and easy to care for
+            </span>
           </li>
         </ul>
       </div>
-
+      <DeliveryTimerBox />
       {/* Bundle heading */}
       <div className="flex items-center gap-3">
-        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span
+          className="h-px flex-1"
+          style={{ backgroundColor: "var(--border)" }}
+        />
         <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
           Bundle &amp; Save + Free Shipping &amp; Gifts
         </span>
-        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span
+          className="h-px flex-1"
+          style={{ backgroundColor: "var(--border)" }}
+        />
       </div>
-
       {/* Tier cards */}
       <div className="flex flex-col gap-4">
         {TIERS.map((t) => {
@@ -225,7 +291,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               >
                 <span
                   className="grid h-5 w-5 flex-none place-items-center rounded-full border-2"
-                  style={{ borderColor: selected ? "var(--gold)" : "var(--border)" }}
+                  style={{
+                    borderColor: selected ? "var(--gold)" : "var(--border)",
+                  }}
                 >
                   {selected && (
                     <span
@@ -268,11 +336,16 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
               {/* Per-sheet selectors, only for the selected tier */}
               {expandedTier === t.id && (
-                <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
+                <div
+                  className="flex flex-col gap-3 border-t px-4 py-4"
+                  style={{ borderColor: "var(--border)" }}
+                >
                   <div className="flex justify-between items-center -mb-1">
-                    <div className="font-serif text-xs text-[var(--muted)]">Color, Size</div>
-                    <button 
-                      type="button" 
+                    <div className="font-serif text-xs text-[var(--muted)]">
+                      Color, Size
+                    </div>
+                    <button
+                      type="button"
                       onClick={() => setShowSizeGuide(true)}
                       className="text-xs text-[var(--plum)] font-medium hover:opacity-80 transition-opacity underline"
                     >
@@ -295,11 +368,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           );
         })}
       </div>
-
-
-
-      <DeliveryTimerBox />
-
       {/* Add to cart */}
       <Button
         id="hero-cta"
@@ -309,11 +377,18 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       >
         {isNavigating ? (
           <>
-            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+            <span
+              style={{ visibility: "hidden" }}
+              className="relative z-20 whitespace-nowrap"
+            >
               ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
+              <Lottie
+                animationData={loadingLottie}
+                loop
+                className="h-16 w-24 scale-[1.35]"
+              />
             </span>
           </>
         ) : (
@@ -324,14 +399,14 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </span>
         )}
       </Button>
-
       {/* Free grounding mat */}
       {giftProduct && (
         <div
           className="relative flex items-center gap-4 rounded-2xl border p-3 text-left"
           style={{
             borderColor: "var(--gold)",
-            backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
+            backgroundColor:
+              "color-mix(in oklch, var(--gold) 8%, var(--paper))",
           }}
         >
           <span
@@ -353,7 +428,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block font-medium text-[var(--ink)]">{giftProduct.name}</span>
+            <span className="block font-medium text-[var(--ink)]">
+              {giftProduct.name}
+            </span>
             <span className="block text-sm text-[var(--muted)]">
               Free with every order. Worth{" "}
               {formatMoney(giftProduct.priceCents, giftProduct.currency)}.
@@ -365,28 +442,28 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </span>
           </span>
         </div>
-      )}      {/* Accordions */}
+      )}{" "}
+      {/* Accordions */}
       <GroundingAccordions />
-
       {/* Size Guide Modal */}
       {showSizeGuide && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onClick={() => setShowSizeGuide(false)}
         >
-          <div 
+          <div
             className="relative inline-flex max-w-[95vw] max-h-[95vh] md:max-w-5xl animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
+            <button
               onClick={() => setShowSizeGuide(false)}
               className="absolute top-0 right-0 z-10 p-2 bg-white text-black hover:bg-gray-100 transition-colors"
             >
               <X size={24} />
             </button>
-            <img 
-              src="/media/products/grounding-sheets/images/juujo-size-guide.png" 
-              alt="Size Guide" 
+            <img
+              src="/media/products/grounding-sheets/images/juujo-size-guide.png"
+              alt="Size Guide"
               className="max-w-[95vw] md:max-w-5xl max-h-[95vh] object-contain shadow-2xl"
             />
           </div>
@@ -428,7 +505,9 @@ function SheetRow({
 
   /** When color changes, auto-select first in-stock size for that color */
   const handleColorChange = (colorId: string) => {
-    const firstInStockSize = product.sizes.find((s) => isSizeInStock(colorId, s.id));
+    const firstInStockSize = product.sizes.find((s) =>
+      isSizeInStock(colorId, s.id),
+    );
     onChange({
       colorId,
       sizeId: firstInStockSize?.id ?? choice.sizeId,
@@ -445,9 +524,9 @@ function SheetRow({
       <label className="sr-only" htmlFor={`color-${index}`}>
         Colour for sheet {index + 1}
       </label>
-      <ColorSelect 
-        value={choice.colorId} 
-        onChange={handleColorChange} 
+      <ColorSelect
+        value={choice.colorId}
+        onChange={handleColorChange}
         colors={product.colors}
         isColorInStock={isColorInStock}
       />
@@ -475,7 +554,18 @@ function SheetRow({
           })}
         </select>
         <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </div>
         {soldOut && (
           <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
@@ -500,7 +590,7 @@ function ColorSelect({
 }) {
   const [open, setOpen] = useState(false);
   const selected = colors.find((c) => c.id === value);
-  
+
   return (
     <div className="relative flex-1">
       <button
@@ -513,16 +603,33 @@ function ColorSelect({
         {selected && (
           <span
             className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-[3px] border"
-            style={{ backgroundColor: selected.hex, borderColor: "rgba(0,0,0,0.1)" }}
+            style={{
+              backgroundColor: selected.hex,
+              borderColor: "rgba(0,0,0,0.1)",
+            }}
           />
         )}
         {selected?.name}
         <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </span>
       </button>
       {open && (
-        <ul className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg" style={{ borderColor: "var(--border)" }}>
+        <ul
+          className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg"
+          style={{ borderColor: "var(--border)" }}
+        >
           {colors.map((color) => {
             const inStock = isColorInStock(color.id);
             return (
@@ -544,7 +651,10 @@ function ColorSelect({
                 >
                   <span
                     className={`mr-2 h-4 w-4 flex-none rounded-[3px] border ${!inStock ? "grayscale" : ""}`}
-                    style={{ backgroundColor: color.hex, borderColor: "rgba(0,0,0,0.1)" }}
+                    style={{
+                      backgroundColor: color.hex,
+                      borderColor: "rgba(0,0,0,0.1)",
+                    }}
                   />
                   {color.name}
                   {!inStock && (
@@ -561,4 +671,3 @@ function ColorSelect({
     </div>
   );
 }
-

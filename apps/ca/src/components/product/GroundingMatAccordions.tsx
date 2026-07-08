@@ -7,11 +7,21 @@ const accordionData = [
   {
     title: "Product Details",
     content: (
-      <div className="space-y-4 text-sm text-[var(--plum)]">
-        <p>Our grounding mat is designed for simple, everyday use—whether at your desk, on the floor, or while relaxing. Made with a copper-infused surface for high conductivity, it ensures a reliable grounding connection whenever you need it. The anti-slip backing keeps it securely in place, while reinforced edges prevent wear over time. Finished in a sleek black design, it’s a custom product created exclusively for Juujo.</p>
-        
+      <div className="space-y-4 text-[var(--muted)]">
+        <p>
+          Our grounding mat is designed for simple, everyday use—whether at your
+          desk, on the floor, or while relaxing. Made with a copper-infused
+          surface for high conductivity, it ensures a reliable grounding
+          connection whenever you need it. The anti-slip backing keeps it
+          securely in place, while reinforced edges prevent wear over time.
+          Finished in a sleek black design, it’s a custom product created
+          exclusively for Juujo.
+        </p>
+
         <div>
-          <strong className="block text-[var(--ink)] mb-1">Materials</strong>
+          <strong className="block text-[var(--plum)] font-semibold mb-1">
+            Materials
+          </strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Copper-infused surface for effective grounding</li>
             <li>Durable, skin-safe material for daily use</li>
@@ -22,7 +32,9 @@ const accordionData = [
         </div>
 
         <div>
-          <strong className="block text-[var(--ink)] mb-1">Dimensions:</strong>
+          <strong className="block text-[var(--plum)] font-semibold mb-1">
+            Dimensions:
+          </strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>40 × 60 cm (16" × 24")</li>
             <li>Compact and easy to place under feet or on a desk</li>
@@ -32,18 +44,24 @@ const accordionData = [
         </div>
 
         <div>
-          <strong className="block text-[var(--ink)] mb-1">Design & Compatibility</strong>
+          <strong className="block text-[var(--plum)] font-semibold mb-1">
+            Design & Compatibility
+          </strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Designed for use while working, sitting, or relaxing</li>
             <li>Place under feet, on a desk, or on the floor</li>
             <li>Includes 5m coil cord and grounding plug</li>
-            <li>Compatible with grounded outlets (EU / UK / DK / CH & IT / USA)</li>
+            <li>
+              Compatible with grounded outlets (EU / UK / DK / CH & IT / USA)
+            </li>
             <li>Works best with direct skin contact</li>
           </ul>
         </div>
 
         <div>
-          <strong className="block text-[var(--ink)] mb-1">Key Features</strong>
+          <strong className="block text-[var(--plum)] font-semibold mb-1">
+            Key Features
+          </strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Reliable grounding at home or work</li>
             <li>Stable, non-slip design</li>
@@ -58,12 +76,25 @@ const accordionData = [
   {
     title: "How Does it Work?",
     content: (
-      <div className="space-y-4 text-sm text-[var(--plum)]">
+      <div className="space-y-4 text-[var(--muted)]">
         <ul className="list-disc pl-5 space-y-1">
-          <li>The Grounding Mat connects only to the grounded part of your outlet using the included grounding cord and grounding plug.</li>
-          <li>It does not connect to electricity, and no electricity flows through the mat or your body.</li>
-          <li>Once connected, the copper-infused conductive surface allows your body to make direct contact with the Earth&apos;s natural energy while you work, relax, read, meditate, or watch TV.</li>
-          <li>Simply place your bare feet or skin on the mat and enjoy the benefits of grounding throughout the day.</li>
+          <li>
+            The Grounding Mat connects only to the grounded part of your outlet
+            using the included grounding cord and grounding plug.
+          </li>
+          <li>
+            It does not connect to electricity, and no electricity flows through
+            the mat or your body.
+          </li>
+          <li>
+            Once connected, the copper-infused conductive surface allows your
+            body to make direct contact with the Earth&apos;s natural energy
+            while you work, relax, read, meditate, or watch TV.
+          </li>
+          <li>
+            Simply place your bare feet or skin on the mat and enjoy the
+            benefits of grounding throughout the day.
+          </li>
         </ul>
       </div>
     ),
@@ -71,20 +102,22 @@ const accordionData = [
   {
     title: "What's Included",
     content: (
-      <div className="space-y-4 text-sm text-[var(--plum)]">
+      <div className="space-y-4 text-[var(--muted)]">
         <ul className="list-disc pl-5 space-y-1">
           <li>1× Grounding Mat (Black)</li>
           <li>1× User Manual</li>
           <li>1× Grounding Cord & Grounding Plug (Choose Your Country Type)</li>
         </ul>
-        <p>Ready to use right out of the box. No additional equipment required.</p>
+        <p>
+          Ready to use right out of the box. No additional equipment required.
+        </p>
       </div>
     ),
   },
   {
     title: "When can I expect results?",
     content: (
-      <div className="space-y-4 text-sm text-[var(--plum)]">
+      <div className="space-y-4 text-[var(--muted)]">
         <ul className="list-none pl-0 space-y-3">
           <li>
             <strong className="block text-[var(--ink)]">Day 1</strong>
@@ -96,7 +129,8 @@ const accordionData = [
           </li>
           <li>
             <strong className="block text-[var(--ink)]">Day 4–7</strong>
-            Experience steadier energy, better recovery, and a greater sense of well-being.
+            Experience steadier energy, better recovery, and a greater sense of
+            well-being.
           </li>
           <li>
             <strong className="block text-[var(--ink)]">Day 7+</strong>
@@ -105,7 +139,7 @@ const accordionData = [
         </ul>
       </div>
     ),
-  }
+  },
 ];
 
 export function GroundingMatAccordions() {
@@ -116,14 +150,21 @@ export function GroundingMatAccordions() {
   };
 
   return (
-    <div className="flex flex-col border-t mt-4" style={{ borderColor: "var(--border)" }}>
+    <div
+      className="flex flex-col border-t mt-4"
+      style={{ borderColor: "var(--border)" }}
+    >
       {accordionData.map((item, index) => {
         const isOpen = openIndex === index;
         return (
-          <div key={item.title} className="border-b" style={{ borderColor: "var(--border)" }}>
+          <div
+            key={item.title}
+            className="border-b"
+            style={{ borderColor: "var(--border)" }}
+          >
             <button
               onClick={() => toggle(index)}
-              className="flex w-full items-center justify-between py-4 text-left font-medium text-[var(--ink)] transition-colors hover:text-[var(--gold)]"
+              className="flex w-full items-start justify-between gap-6 py-5 text-left juujo-display text-[1.25rem] text-[var(--plum)] transition-colors hover:text-[var(--gold)]"
               aria-expanded={isOpen}
             >
               <span>{item.title}</span>
@@ -135,9 +176,7 @@ export function GroundingMatAccordions() {
             <div
               className={`grid transition-all duration-200 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 mb-4" : "grid-rows-[0fr] opacity-0"}`}
             >
-              <div className="overflow-hidden">
-                {item.content}
-              </div>
+              <div className="overflow-hidden">{item.content}</div>
             </div>
           </div>
         );

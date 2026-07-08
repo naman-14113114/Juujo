@@ -21,7 +21,10 @@ export function GroundingMatHowToUseSection() {
   ];
 
   return (
-    <section className="juujo-section bg-white py-14 md:py-24" id="how-it-works">
+    <section
+      className="juujo-section bg-white py-14 md:py-24"
+      id="how-it-works"
+    >
       <div className="juujo-wrap">
         <SectionHeading
           eyebrow="Simple Setup"
