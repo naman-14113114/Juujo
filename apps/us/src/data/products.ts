@@ -454,15 +454,6 @@ export const groundingSheets: Product = {
   gallery: [
     {
       src: productMediaAsset(
-        "grounding-indoors-720p.mp4",
-        "grounding-sheets",
-        "videos",
-      ),
-      alt: "Grounding indoors with a Grounding Sheet",
-      animated: true,
-    },
-    {
-      src: productMediaAsset(
         "juujo-grounding-bed-sheets-texture-close-up.png",
         "grounding-sheets",
         "images",
@@ -497,11 +488,11 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "374974684d48448181a86f198f569415.HD-1080p-2.5Mbps-42863921.mp4",
+        "grounding-indoors-720p.mp4",
         "grounding-sheets",
         "videos",
       ),
-      alt: "Grounding sheet close-up video",
+      alt: "Grounding indoors with a Grounding Sheet",
       animated: true,
     },
     {

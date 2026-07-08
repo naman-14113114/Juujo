@@ -12,7 +12,7 @@ export function GroundingBenefitsVideoSection() {
           {/* Text Content */}
           <div className="order-2 flex flex-col justify-center">
             <h2 className="juujo-display text-[2.5rem] leading-[1.1] md:text-5xl text-[var(--plum)] mb-6">
-              How Grounding Sheets can benefit your health?
+              How our Premium Grounding Sheets can benefit your health?
             </h2>
             <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base max-w-lg">
               While grounding outdoors offers great health benefits, staying
@@ -30,7 +30,7 @@ export function GroundingBenefitsVideoSection() {
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-3xl shadow-xl">
               <video
                 src={productMediaAsset(
-                  "c902a57fbb1647a3bab2a743ff4e2e3e.HD-1080p-3.3Mbps-32908024.mp4",
+                  "grounding-indoors-720p.mp4?v=4",
                   "grounding-sheets",
                   "videos",
                 )}

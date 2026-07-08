@@ -15,10 +15,12 @@ The `Juujo-Vercel` folder is a **copy of the existing Buudy store** (pnpm/Turbor
 **Juujo product categories (build for scalability — more added later):** 1) Grounding Sheets, 2) Weighted Blankets, 3) Cooling Bed Sheets, 4) Pillows.
 
 **Design/content inspiration ONLY (do not copy their copyrighted media/text):**
+
 - https://shopmiraclebrand.co/cooling-comforter-skin-friendly/ksp
 - https://shopmiraclebrand.co/sheets/ksp
 
 **User's exact requirements:**
+
 - Remove every reference to Buudy, LED masks, skincare, light therapy, wavelengths, related content.
 - Replace branding, SEO, GEO, metadata, copy, images, videos, icons, product content with bedding content.
 - Keep legal pages (Privacy, Terms, Contact, etc.) mostly the same but replace "Buudy" with "Juujo" everywhere (buudy.com → juujo.com, support email, remove LED specifics).
@@ -76,7 +78,7 @@ Also many `seo-*` skills in that folder for Phase 6.
 
 **4.4 EDITED `apps/uk/src/lib/market.ts`:** added `brandName:"Juujo"`, `supportEmail:"support@juujo.com"`; `siteUrl`→`https://uk.juujo.com`; `madeInLabel`→"Designed in the UK"; `checkoutSource`→`uk_juujo`; `checkoutUtmSource`→`uk.juujo.com`; `checkoutUtmCampaign`→`uk_bedding`. Kept locale/currency/country/marketLabel/supportHours + StoreCurrency type.
 
-**4.5 EDITED `apps/uk/src/lib/site.ts`:** `plusbaseStoreUrl`→`https://juujo.com`. **Reworked `buildPlusbaseCheckoutUrl` + `CheckoutBridgeOptions`:** now REQUIRES `productId`+`variantId` (dynamic), optional `productHandle`. **Removed hardcoded mask IDs** (`1000019092784268`/`1000000611225890`) and **ALL gift params** (`gift_variant_id/gift_product_id/gift_quantity/gift` + `giftQuantity` option). Keeps quantity/qty/product_quantity/redirect/source/utm_*.
+**4.5 EDITED `apps/uk/src/lib/site.ts`:** `plusbaseStoreUrl`→`https://juujo.com`. **Reworked `buildPlusbaseCheckoutUrl` + `CheckoutBridgeOptions`:** now REQUIRES `productId`+`variantId` (dynamic), optional `productHandle`. **Removed hardcoded mask IDs** (`1000019092784268`/`1000000611225890`) and **ALL gift params** (`gift_variant_id/gift_product_id/gift_quantity/gift` + `giftQuantity` option). Keeps quantity/qty/product*quantity/redirect/source/utm*\*.
 
 **4.6 EDITED `apps/uk/src/lib/checkout.ts`:** fallback `https://buudy.com/cart`→`https://juujo.com/cart`.
 
@@ -113,6 +115,7 @@ fonts (loaded in layout.tsx): Fraunces (display), Inter (body), Playfair + JetBr
 ## 6. REMAINING BREAKAGE TO FIX (references removed fields/exports; UK won't compile until fixed)
 
 Removed: template, gifts, wavelengths, promoCode, promoLabel, exports buudyMask/buudyRedTorch. Consumers to update/retire:
+
 - `lib/seo.ts:23` `product.template==="mask"` + all Buudy/LED JSON-LD (instagram buudy_com, fb, youtube @buudy-com, logo `/media/products/buudy-led-mask/...`, "best LED face mask UK" abouts, support@buudy.com). Rewrite bedding + juujo.com.
 - `data/home.ts` imports `{buudyMask,buudyRedTorch}`; whole file LED. Rewrite bedding (hero, 4-category showcase, sleep story, reviews CTA). Remove wavelength/torch/skincare-quiz sections.
 - `app/products/[slug]/page.tsx:43,107` `product.template==="mask"`. Make category-agnostic.
@@ -152,6 +155,7 @@ pnpm --filter @buudy/uk lint        # scopes still @buudy/* until P8; then @juuj
 pnpm --filter @buudy/uk typecheck
 pnpm --filter @buudy/uk build        # authoritative
 ```
+
 Then string-grep checks (§6). Visual desktop+mobile, no mojibake, checkout path intact.
 
 ---
@@ -192,6 +196,7 @@ Since §9 was written, the UK app was driven to **zero TypeScript errors** (veri
 - `app/layout.tsx`: metadata/title/OG/twitter/keywords/applicationName → Juujo bedding, OG image `/images/home/01-home-bedding-hero.webp`.
 
 **STILL TO DO (unchanged priority):**
+
 - P5 finish: `HomePage.tsx` + home components visual bedding redesign; `AnnouncementBar`/`Header`/`Footer` component copy; clear analytics IDs (Clarity/Klaviyo/Tawk/UET) to env placeholders in their integration components + `.env`.
 - P6 SEO: finish `seo.ts` remaining Buudy strings, `sitemap.ts`, `robots.ts`, `llms.txt`, `seoFaqs.ts` (`ledMaskSeoFaqs` still LED, now unused — rewrite/rename), `faqs.ts`, JSON-LD org sameAs/logo/email.
 - P7 content/legal: `about.ts`, `contact.ts`, `faqs.ts`, policies (Buudy→Juujo, buudy.com→juujo.com, support email, drop LED specifics), reviews JSON → bedding placeholders. Also `data/freeGifts.ts` + `components/gifts/FreeGiftDetailPage.tsx` + `app/pages/[gift routes]` (free-gift pages) should be removed/repurposed. `components/cart/FreeGiftsPanel.tsx` still rendered in `CartPageContent.tsx:164` but renders nothing (no gift lines) — remove for cleanliness. `components/quiz/` + `lib/skincareQuiz.ts` + `data/skincareQuiz.ts` + `app/pages/skincare-quiz/` still exist (LED, compile fine) — delete. Retired-route string refs remain in `sitemap.ts`, `llms.txt`, `SEOGuideSection.tsx`, `api/reviews/[productHandle]/route.ts:337` (`revalidatePath("/products/buudy-led-mask-2")`).
@@ -214,6 +219,7 @@ Since §9 was written, the UK app was driven to **zero TypeScript errors** (veri
 - **Replicated UK → us/ca/au** (Phase 9): `rm -rf apps/{us,ca,au}/src && cp -r apps/uk/src apps/<cc>/src`, then per-country `apps/<cc>/src/lib/market.ts` set (siteUrl `<cc>.juujo.com`, locale/currency/country/marketLabel/madeInLabel/checkoutSource/utm/supportHours). **All four apps `tsc --noEmit` clean** (verified uk + us).
 
 **REMAINING (polish / lower priority — none block type-check):**
+
 1. **P8 workspace de-brand (mechanical):** rename `.buudy-*` CSS classes → `.juujo-*` in every app `globals.css` + all `className` usages (do together). Rename `@buudy/*`→`@juujo/*`, package `buudy`→`juujo` in every `apps/*/package.json` + root `package.json` scripts + `turbo.json`, then regenerate `pnpm-lock.yaml`. Rename storage keys `buudy-cart-*`→`juujo-*` + event `buudy:add-to-cart` in `CartProvider.tsx` (+ any KlaviyoAnalytics listener). Replace `buudy-led-mask` asset-path segments in `lib/media.ts` defaults are already `grounding-sheets`; product galleries use per-category slugs already.
 2. **Placeholder media:** create `public/images/home/*` + `public/images/products/<category>/*` bedding placeholders + `public/images/juujo-logo.png` + favicon (`.private/brand/favicon-1.png` is Buudy). Currently image `src`s point to non-existent files (fine for build/type-check; needed for visual).
 3. **LED-worded copy still in kept data/components** (brand is fixed, wording is not): `data/productSections.ts` (features/comparison/reviewVideos/wavelengths/transformations still LED), `data/reviews/*.json` (bodies mention "7 colors"/skin), `data/about.ts`, `data/faqs.ts`, `data/seoFaqs.ts` (`ledMaskSeoFaqs` now unused), `data/freeGifts.ts` + `components/gifts/FreeGiftDetailPage.tsx` + `components/product/{FeatureGrid,ResultsMarquee,SEOGuideSection,ComparisonTable,VideoReviews,TrustBadges,GuaranteeSection,ProductReviewsGrid}.tsx` — rewrite copy to bedding or delete the unused ones. `components/cart/FreeGiftsPanel.tsx` still imported in `CartPageContent.tsx` but renders nothing (no gift lines) — remove for cleanliness. `api/reviews/[productHandle]/route.ts:337` still `revalidatePath("/products/buudy-led-mask-2")`.
@@ -228,15 +234,16 @@ Since §9 was written, the UK app was driven to **zero TypeScript errors** (veri
 
 ## 13. PROGRESS UPDATE #3 — Phase 8 internal de-brand done (all 4 apps type-check clean)
 
-- **CSS classes renamed** `.buudy-*` → `.juujo-*` across all 4 apps (globals.css + every className usage): wrap, section, display, mono, italic, eyebrow, heading, copy, glow, marquee(+slow), ping, fade-in-up, cart-wipe/-pulse/-pulse-ring, sticky-cart-icon, mask-sticky-cta, policy(-content/-table-wrap), review-sort-menu/-stars-menu, tawk*, clarity, klaviyo, attribution, goddess-bg.
+- **CSS classes renamed** `.buudy-*` → `.juujo-*` across all 4 apps (globals.css + every className usage): wrap, section, display, mono, italic, eyebrow, heading, copy, glow, marquee(+slow), ping, fade-in-up, cart-wipe/-pulse/-pulse-ring, sticky-cart-icon, mask-sticky-cta, policy(-content/-table-wrap), review-sort-menu/-stars-menu, tawk\*, clarity, klaviyo, attribution, goddess-bg.
 - **Storage keys** `buudy-cart-*` → `juujo-cart-*` and **event** `buudy:add-to-cart` → `juujo:add-to-cart` in CartProvider.
 - **Package scopes** `@buudy/*` → `@juujo/*` and root package name `buudy` → `juujo` across every `package.json` + root scripts. (NOTE: `pnpm install` must be re-run so node_modules symlinks match the new scope before a real `pnpm build`; `tsc` still passes via the existing symlinks.)
 - **Klaviyo company id** `Tp323F` cleared from `.env*`.
 - Verified: `apps/uk` and `apps/us` `tsc --noEmit` = 0 errors after rename.
 
-**Only remaining buudy-* tokens are intentional and non-blocking:** asset/image path segments `buudy-led-mask` / `buudy-red-torch` (placeholder image src + review JSON filenames `data/reviews/buudy-*.json` and their import in `reviews.ts`) — these are dead/placeholder media refs; rename the JSON files + import + galleries when adding real bedding media/reviews. A few `buudy-com` strings may remain in social/host constants (grep and fix).
+**Only remaining buudy-\* tokens are intentional and non-blocking:** asset/image path segments `buudy-led-mask` / `buudy-red-torch` (placeholder image src + review JSON filenames `data/reviews/buudy-*.json` and their import in `reviews.ts`) — these are dead/placeholder media refs; rename the JSON files + import + galleries when adding real bedding media/reviews. A few `buudy-com` strings may remain in social/host constants (grep and fix).
 
 **TRUE REMAINING WORK (all non-blocking for type-check; for a finished store):**
+
 1. Placeholder bedding media under `public/images/{home,products/<category>}` + `public/images/juujo-logo.png` + favicon.
 2. Rewrite still-LED-worded COPY (brand is already Juujo) in: `data/productSections.ts`, `data/reviews/*.json` (+ rename files), `data/about.ts`, `data/faqs.ts`, `data/seoFaqs.ts`, `data/freeGifts.ts`, and components `FeatureGrid/ResultsMarquee/SEOGuideSection/ComparisonTable/VideoReviews/TrustBadges/GuaranteeSection/ProductReviewsGrid/FreeGiftDetailPage/FreeGiftsPanel`. Remove the free-gift pages/panel. `api/reviews/[productHandle]/route.ts:337` revalidatePath.
 3. Per-app `layout.tsx` locale (`lang`/OG `locale`) → en-US/en-CA/en-AU (currently all en-GB from the UK copy).
@@ -251,6 +258,7 @@ Since §9 was written, the UK app was driven to **zero TypeScript errors** (veri
 ## 14. PROGRESS UPDATE #4 — grounding-sheet page reworked (all 4 apps type-check clean)
 
 Per user follow-up (scope: grounding sheets only; do not touch other products):
+
 - **Cart flow fixed:** `ProductBuyBox` "Buy it now" button REMOVED; "Add to cart" now `router.push("/cart")` (Buudy flow, no drawer). `id="hero-cta"` added so the sticky bar tracks it.
 - **NEW `components/product/GroundingBuyBox.tsx`** — grounding-sheet buy-box modelled on thegrounding.co layout, in Juujo theme/copy: colour swatches (image slot or hex) → size rows (name + dimensions + "Size guide" link) → quantity stepper → price with SAVE badge → a "Most Popular" bundle add-on (adds the Pillow) → Add to cart → /cart. `ProductHero` renders it ONLY when `product.category === "grounding-sheets"`; every other product keeps `ProductBuyBox`.
 - **Images:** replicated the LAYOUT only; did NOT download/re-host thegrounding.co's copyrighted product photos. Colour swatches use `color.image` if set, else the hex chip; gallery/bundle use Juujo local image slots. Drop real grounding-sheet photos into `public/images/products/grounding-sheets/` (or set `color.image`/gallery URLs you own).
@@ -266,9 +274,10 @@ Per user follow-up (scope: grounding sheets only; do not touch other products):
 ---
 
 ## 15. PROGRESS UPDATE #5 — Grounding sections added based on competitor reference
+
 - Fixed lignment="center" type errors on SectionHeading in GroundingComparisonSection.tsx, GroundingScienceSection.tsx, and GroundingTimelineSection.tsx.
 - Updated GroundingHowItWorksSection.tsx with the 3 accurate steps for how to use Grounding Sheets and matched them with the 3 specific video files.
-- Added GroundingBenefitsVideoSection.tsx ("How Grounding Sheets can benefit your health?").
+- Added GroundingBenefitsVideoSection.tsx ("How our Premium Grounding Sheets can benefit your health?").
 - Added GroundingWhatIsItSection.tsx ("What is Grounding?") using the remaining video asset.
 - Updated ProductPage.tsx to include the new video sections.
 - Updated products.ts gallery: removed the 3 how-to-use videos and added the 3 other video assets.
@@ -283,18 +292,22 @@ Per user follow-up (scope: grounding sheets only; do not touch other products):
 > This section is a **complete, standalone execution spec** for the next agent. It was authored after full exploration of the repo, both reference pages, and the media folder. Read it top to bottom. Do the work UK-first, build-verify, then replicate to us/ca/au. Follow the standing rules in §10 (no bulk-edit scripts, targeted reviewable edits, no em dashes, OKLCH tokens, emil motion, preserve cart/checkout plumbing).
 
 ### 16.0 What the user asked for (verbatim intent)
+
 Inside the **Grounding Sheets** category there is currently ONE product: the **fitted** sheet (built in §14/§15, slug `/products/grounding-sheets`). The user wants:
+
 1. A **second sheet product — "Grounding Flat Sheet"** — a near-identical page to the fitted one (same theme/sections; only a flat-sheet vs fitted-sheet distinction). "There is not much difference in pages of sheets" — reuse the exact same page/sections, do not invent a new design.
 2. A **third product — "Grounding Mat"** — its own product page, **sold standalone** (own price + working Add to Cart), AND **given FREE as a gift with BOTH the fitted and flat sheet**.
 3. **Header restructure** in the grounding.co style: a **"Grounding Sheets" dropdown** with sub-menu items **Fitted Sheet** + **Flat Sheet**, plus a top-level **Grounding Mat** link. **Comment out / hide Weighted Blankets, Cooling Sheets, and Pillows** everywhere (site + header) — user does not want to see them right now (comment out, do not hard-delete, so they can return later).
 
 ### 16.1 User's LOCKED decisions (do not re-ask)
+
 - **Mat on the sheet pages** = a **FREE gift auto-added to cart at £0** (show worth ~£69.95 struck through to FREE). Not a paid add-on, not a size-picker.
 - **Mat is ALSO sold standalone** — its page has its own price and a real Add to Cart.
 - **Header** keeps only **Grounding (Fitted / Flat) + Grounding Mat**. Weighted/Cooling/Pillows hidden.
 - **Fitted page keeps its URL** `/products/grounding-sheets` — only relabel the visible name to **"Grounding Fitted Sheet"**. Flat sheet = new slug `/products/grounding-flat-sheet`. Mat = new slug `/products/grounding-mat`.
 
 ### 16.2 Reference pages (structure/data/imagery reference ONLY — do NOT hot-link or copy their photos; use the user's own media)
+
 - Flat sheet: `https://thegrounding.co/products/terra-grounding-flat-sheet`
 - Mat: `https://thegrounding.co/products/terra-earthlink-grounding-mat`
 - Header pattern (Grounding dropdown with sub-menu): `https://thegrounding.co`
@@ -304,9 +317,11 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 **Flat sheet page structure:** effectively identical to the fitted grounding page already built — Product Details (95% organic cotton + 5% conductive silver), Read-the-Science benefits, What's in the package, Care & Dimensions, timeline, 3-step setup, science stats, FAQ.
 
 ### 16.3 MEDIA — source folder + classification (verified by viewing the images)
+
 **Source (user's folder, outside the repo — request directory access):** `E:\1st YEAR DTU\New folder\Bedsheets\Grounding Sheets` (one flat folder, MIXED sheet + mat + review selfies — must NOT be mixed on the site). Copy targeted files only (no bulk scripts).
 
 **MAT-ONLY assets (verified):**
+
 - `TGC-mat1.png` — 3-layer cross-section infographic (Conductive Carbon Fiber / Polyurethane Cushion / High-Density Polymer Foam). Use for the mat "materials/layers" section.
 - `Frame1707480222_1.png` — "Grounding Mat Size Guide" (Small 10x27 desk / Medium 16x32 bed / Large 24x36 floor-yoga). Use for mat size guide.
 - `71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg` — mat on a desk under laptop + mouse + hands (desk use-case).
@@ -323,6 +338,7 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 **Target folders (create):** `apps/<cc>/public/media/products/grounding-mat/{images,videos}/` and (if the existing pattern needs it) `apps/<cc>/public/videos/grounding-mat/`. Flat sheet reuses the existing `grounding-sheets` media (same fabric) — no new folder needed unless the user supplies distinct flat-fold photos.
 
 ### 16.4 KEY CODE FACTS the agent needs (already verified in the repo)
+
 - **Product model:** `apps/uk/src/data/products.ts`. `ProductCategory` union currently `grounding-sheets|weighted-blankets|cooling-sheets|pillows`. `Product` has `category`, `colors[]`, `sizes[]`, `variants[]` (built by `buildVariants(base,colors,sizes)` -> placeholder `PLACEHOLDER-*` ids), `quantityTiers`, `specs`, `included?`, `faqs`, `badges`, `cartImage`, `gallery[]`. Registry: `export const products = [groundingSheets, weightedBlanket, coolingSheets, pillows]` + `getProductBySlug`/`getProductById`.
 - **Product route:** `apps/uk/src/app/products/[slug]/page.tsx` — `generateStaticParams()` maps `products` -> slugs, so **a product only gets a page if it is in the `products` array.** Adding flat sheet + mat = add them to `products`. Hiding weighted/cooling/pillows = remove them from `products` (comment out) — their pages then 404 automatically and drop from `generateStaticParams`.
 - **Page composition:** `apps/uk/src/components/product/ProductPage.tsx` renders `ProductHero` -> `TrustBadges` -> (grounding sections IF `category === "grounding-sheets"`) -> `ProductReviewsSection` -> `FAQSection` -> `GuaranteeSection` -> `StickyAddToCart`. The grounding sections block already keys off `category === "grounding-sheets"`, so **the flat sheet (same category) automatically gets all grounding sections for free.** For the mat, add a `category === "grounding-mat"` branch rendering mat-specific sections.
@@ -334,6 +350,7 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 - **Build-green consumers of the hidden products** (must be updated when weighted/cooling/pillows leave `products`): `data/home.ts` (imports + uses `coolingSheets`, `weightedBlanket`, `pillows` — see lines ~2, 22, 30, 38, 55, 69, 78, 80, 99), `data/footer.ts`, `app/sitemap.ts`, `app/llms.txt/route.ts`, `data/about.ts`. Keep the `export const weightedBlanket/coolingSheets/pillows` definitions (so stray imports still type-check) but remove them from the `products` array and from home/footer/sitemap/llms references, OR comment the references. Grep `pillows|weightedBlanket|coolingSheets` after editing and confirm nothing in a rendered path still imports a hidden product.
 
 ### 16.5 STEP-BY-STEP EXECUTION (UK first)
+
 1. **Media.** Request dir access to `E:\1st YEAR DTU\New folder\Bedsheets\Grounding Sheets`. View the video `*.thumbnail*.jpg` files to classify sheet-vs-mat. Create `apps/uk/public/media/products/grounding-mat/{images,videos}/` and copy ONLY mat assets (16.3) + any confirmed mat video(s). Leave sheet media as-is.
 2. **`data/products.ts`.** Add `"grounding-mat"` to `ProductCategory`. Add optional `freeGiftId?: string` to the `Product` type. Relabel the fitted product `name: "Grounding Fitted Sheet"` (keep `slug:"grounding-sheets"`, `category:"grounding-sheets"`) and set `freeGiftId:"grounding-mat"`. Add `export const groundingFlatSheet` (slug `grounding-flat-sheet`, category `grounding-sheets`, flat-sheet copy, `freeGiftId:"grounding-mat"`, reuse sheet gallery/colors/sizes). Add `export const groundingMat` (slug `grounding-mat`, `category:"grounding-mat"`, sizes Desk/Couch/Floor with dimensions, own price ~£69.95 / compare £139.95, `buildVariants("GROUNDINGMAT",...)`, mat gallery from `grounding-mat` media). Set `products = [groundingSheets, groundingFlatSheet, groundingMat]` (comment out weighted/cooling/pillows in the array only; keep their `const` exports).
 3. **`lib/cart.ts`.** Add `deriveGiftLines(lines)` + wire into `getDisplayLines` (append derived mat gift, locked £0) and `calculateCartTotals` (`giftValueCents` = mat compareAt; keep `totalCents` = product subtotal so the gift stays free). Look up the mat via `getProductById("grounding-mat")` for its image/title/compareAt.
@@ -347,6 +364,7 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 11. **Log it.** Append a Progress Update #6 to THIS file + `trustpilot-led-mask-replica\CONTEXT.md` §15 (what changed, any media/videos still unclassified, any deviations).
 
 ### 16.6 GOTCHAS / DO-NOT
+
 - Do NOT persist the mat gift line — it will be stripped on reload; derive it. Do NOT let the mat gift itself trigger another gift (guard on `category === "grounding-sheets"` only, never on the mat).
 - Do NOT mix mat imagery onto sheet pages or sheet imagery onto the mat page (that is the user's explicit worry). When unsure about a video, view its thumbnail first.
 - Do NOT hot-link thegrounding.co media — use the user's own files in `Bedsheets\Grounding Sheets`.
@@ -372,12 +390,14 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 > Scope this session: **US app only** (`apps/us`). Fitted grounding sheet page `/products/grounding-sheets`. Source of truth for IDs: `C:\Users\sahil\Downloads\Fitted Grounding Sheets.docx`. Reference design: `https://thegrounding.co/products/terra-grounding-bed-sheet`. All edits type-check clean (`cd apps/us && node ../../node_modules/typescript/lib/tsc.js --noEmit -p tsconfig.json` -> 0 errors).
 
 ### User's locked decisions (from Q&A this session)
+
 - **Bundle pricing = reference EXACT** (user chose this over the "$99" note): every fitted sheet **$159.95** (compareAt **$319.90**). Buy 1 = $159.95. **Buy 2 Get 1 Free = $319.90 total for 3 sheets** (2 paid + 1 free), per-sheet $106.63, compareAt $959.70, "You save $639.80".
 - **Checkout = add EVERYTHING at full price** to PlusBase (the free 3rd sheet AND the free mat are sent at their real variant ids). The "3rd free" + "free mat" discounts are NOT applied at checkout yet — **user will configure automatic discounts on PlusBase**. Until then the customer is charged full price for all lines. (This is the user's explicit choice.)
 - **Real catalog**: colours **White / Grey / Green**; sizes **Single, Twin, Twin XL, Full, Queen, King, Cali King**. **Green Twin XL = out of stock.**
 - **US app only** for now (docx ids are the US/ShopBase store). uk/ca/au still have the OLD buy box + placeholder ids.
 
 ### Real ShopBase ids wired (from the docx) — `apps/us/src/data/products.ts`
+
 - The ShopBase PRODUCT_ID **varies per size within a colour** (not one per product), so each variant carries its own `productId` + `variantId`. Stored in the `groundingSheetIds` map keyed `"{color}-{size}"`, built into variants by `buildGroundingVariants()`.
 - Green Twin XL has `variantId: null` -> `inStock:false` (buy box disables + blocks checkout for that combo).
 - **Free mat** real ids set explicitly on `groundingMat.variants[0]`: productId `1000000669152669`, variantId `1000020491331605`.
@@ -385,6 +405,7 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 - Price consts `GROUNDING_SHEET_PRICE_CENTS = 15995`, `GROUNDING_SHEET_COMPARE_CENTS = 31990`. Applied to fitted sheet base + every size. (Flat sheet inherits colours/sizes but keeps PLACEHOLDER ids via `buildVariants("GROUNDING-FLAT",...)` — user only gave FITTED ids; flat checkout is NOT wired.)
 
 ### Bundle UI — `apps/us/src/components/product/GroundingBuyBox.tsx` (fully rewritten)
+
 - Replaced the old (swatch + size grid + qty stepper + paid pillow add-on) with two selectable **tier cards**: `Buy 1` and `Buy 2, Get 1 Free!` ("Most Popular", recommended + **preselected**). Prices/compare/savings/per-sheet all computed from `product.priceCents`/`compareAtCents` so they match the reference exactly.
 - Selected tier expands **per-sheet rows** (`SheetRow`): each sheet is an independent **Colour `<select>` + Size `<select>`** (Buy 2 shows 3 rows #1/#2/#3, all default to Queen). User can mix colours/sizes per sheet.
 - A **Free Grounding Mat** card is shown below (image + "Free", worth $69.95).
@@ -392,7 +413,8 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 - CTA keeps `id="hero-cta"` (sticky bar tracks it). On click -> `setSheetBundle(selections, tier.freeCount)` then `router.push("/cart")`.
 
 ### Cart multi-line refactor — `apps/us/src/lib/cart.ts` + `CartProvider.tsx`
-- **Problem solved:** cart used to hold ONE line per product; a Buy-2-Get-1-Free with 3 different variants needs 3 separate lines (possibly same variant). 
+
+- **Problem solved:** cart used to hold ONE line per product; a Buy-2-Get-1-Free with 3 different variants needs 3 separate lines (possibly same variant).
 - `CartLine` gained `checkoutProductId` (real ShopBase product id for checkout), `bundle` (part of a sheet bundle), `free` (the free unit).
 - New `buildSheetBundleLines(selections, freeCount)` -> one line per selected sheet, unique id `bundle-{n}-{variantId}`, last `freeCount` are `unitPriceCents:0` + `free:true` (keep compareAt for the strike-through).
 - `normalizeCartLines` now **preserves bundle lines individually** (re-derives title/image/price from the variant, respects `free`) instead of collapsing them; non-bundle lines behave as before.
@@ -400,14 +422,17 @@ Inside the **Grounding Sheets** category there is currently ONE product: the **f
 - `CartProvider`: added `setSheetBundle(selections, freeCount)` (clears the sheet product's lines then appends the new per-sheet lines) and `removeLine(lineId)` (bundle sheets share a productId so must be removed by line id).
 
 ### Cart rendering — `apps/us/src/components/cart/CartLineItem.tsx` + `CartSummary.tsx`
+
 - `CartLineItem`: gift + free lines show a "Free gift" / "Free sheet" tag (no stepper, not removable); bundle paid sheets show "Qty 1" + a Remove that calls `removeLine(line.id)`; normal products keep the stepper. Fixed the legacy "Unlocked xN" wording.
 - `CartSummary`: total-discount dropdown now shows **FREE GROUNDING MAT** (`totals.giftValueCents`) + **BUNDLE DISCOUNT** (`totals.savingsCents - giftValueCents`) instead of the old "FREE TORCH". Subtotal = `totals.totalCents` (e.g. $319.90 for the bundle).
 
 ### ACTIVE checkout — `apps/us/src/app/api/checkout/prepare/route.ts` + `CheckoutForm.tsx`
+
 - `CheckoutForm` builds `checkoutItems` from `getDisplayLines(lines)` (all paid sheets + free sheet + free mat), each `{productId: line.checkoutProductId, variantId: line.variantId, quantity}`, and POSTs them as `items[]` to `/api/checkout/prepare`.
 - `prepare/route.ts` no longer hardcodes mask+torch. `createPlusbaseCheckout(items)` creates a real PlusBase cart (`POST /api/checkout/next/cart.json`) then loops `items` doing `addItem(productId, variantId, qty)` for each. Falls back to `buildPlusbaseCheckoutUrl` with the first item if the API path fails. **This is the "make checkout active" piece** — the button now sends the exact selected product/variant ids to the real juujo.com PlusBase cart.
 
 ### KNOWN LIMITATIONS / NEXT
+
 1. **Checkout overcharges until PlusBase discounts are set** (user's explicit choice): free 3rd sheet + free mat are sent at full price. Configure an automatic "buy 2 get 1" discount + a $0/free mat on PlusBase, OR change `CheckoutForm.checkoutItems` to drop `free` lines / send only paid units.
 2. **Flat sheet** (`/products/grounding-flat-sheet`) shows the same bundle UI but still has PLACEHOLDER variant ids -> its checkout is not real. Wire real flat-sheet ids when the user provides them.
 3. **uk/ca/au NOT updated** — replicate this session's changes + per-country ids/prices when ready. (Their PlusBase store/currency differ; ids here are US.)
@@ -461,7 +486,9 @@ DO IT UK-FIRST, get apps/uk type-checking clean (cd apps\uk && node ../../node_m
 
 Ask me if anything is unclear before large changes. Take your time; there is no time limit.
 ```
+
 ## [2026-07-07] Color Theme Update
+
 - Replaced the legacy Buudy dark blue/indigo (--night) with a luxury premium forest/teal green (oklch(28% 0.04 155)) to match the new Grounding brand identity.
 - Applied across all 4 apps by modifying the root CSS tokens in globals.css.
 - Shifted --ink (primary text) and --muted (secondary text) to a green-compatible hue (155) while keeping chroma extremely low (0.015 and 0.02) to maintain near-black and neutral grey readability.
