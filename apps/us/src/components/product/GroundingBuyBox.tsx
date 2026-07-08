@@ -389,48 +389,60 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </span>
         )}
       </Button>
-      {/* Free grounding mat */}
+      {/* Free gifts bundle */}
       {giftProduct && (
-        <div
-          className="relative flex items-center gap-4 rounded-2xl border p-3 text-left"
-          style={{
-            borderColor: "var(--gold)",
-            backgroundColor:
-              "color-mix(in oklch, var(--gold) 8%, var(--paper))",
-          }}
-        >
-          <span
-            className="absolute -top-2 left-4 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
-            style={{ backgroundColor: "var(--gold)" }}
-          >
-            Free gift
-          </span>
-          <span
-            className="relative h-16 w-16 flex-none overflow-hidden rounded-lg border"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <Image
-              src={giftProduct.cartImage}
-              alt={giftProduct.name}
-              fill
-              sizes="64px"
-              className="object-cover"
-            />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block font-medium text-[var(--ink)]">
-              {giftProduct.name}
-            </span>
-            <span className="block text-sm text-[var(--muted)]">
-              Free with every order. Worth{" "}
-              {formatMoney(giftProduct.priceCents, giftProduct.currency)}.
-            </span>
-          </span>
-          <span className="text-right">
-            <span className="block text-sm font-semibold uppercase tracking-wider text-[var(--gold)]">
-              Free
-            </span>
-          </span>
+        <div className="mt-6 grid grid-cols-3 gap-2">
+          {[
+            {
+              id: "grounding-mat",
+              name: giftProduct.name,
+              valueCents: giftProduct.priceCents,
+              image: giftProduct.cartImage,
+            },
+            {
+              id: "premium-packaging",
+              name: "Premium Packaging",
+              valueCents: 2900,
+              image: "/images/premium_packaging.png",
+            },
+            {
+              id: "sleep-app",
+              name: "Sleep Monitoring App",
+              valueCents: 3900,
+              image: "/images/sleep_monitoring_app.png",
+            }
+          ].map((gift) => (
+            <div
+              key={gift.id}
+              className="group relative flex min-h-[140px] flex-col rounded-xl border p-2 pt-5 text-center transition hover:-translate-y-1"
+              style={{
+                borderColor: "var(--gold)",
+                backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
+              }}
+            >
+              <span
+                className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white"
+                style={{ backgroundColor: "var(--gold)" }}
+              >
+                Free
+                <span className="font-medium normal-case line-through opacity-80">
+                  {formatMoney(gift.valueCents, giftProduct.currency)}
+                </span>
+              </span>
+              <span className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply">
+                <Image
+                  alt={gift.name}
+                  className="rounded-2xl object-cover transition-transform group-hover:scale-105"
+                  fill
+                  sizes="120px"
+                  src={gift.image}
+                />
+              </span>
+              <span className="mt-3 text-xs font-semibold leading-tight text-[var(--ink)] sm:text-sm">
+                {gift.name}
+              </span>
+            </div>
+          ))}
         </div>
       )}{" "}
       {/* Accordions */}
