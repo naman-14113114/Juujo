@@ -127,7 +127,7 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           </span>
         </a>
         <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.1rem,4vw,2.2rem)] whitespace-nowrap leading-[1.02] tracking-tight">
-          Juujo Grounding Mat
+          Grounding Mat
         </h1>
         
         <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
