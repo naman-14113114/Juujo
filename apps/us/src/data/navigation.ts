@@ -6,7 +6,10 @@ export const primaryNavigation: NavigationItem[] = [
   {
     label: "Grounding Sheets",
     items: [
-      { label: "Fitted Grounding Sheet", href: "/products/grounding-sheets" },
+      {
+        label: "Fitted Grounding Sheet",
+        href: "/products/grounding-fitted-sheets",
+      },
       { label: "Flat Grounding Sheet", href: "/products/grounding-flat-sheet" },
     ],
   },

@@ -3,7 +3,10 @@ export const footerMenus = [
     title: "Shop",
     links: [
       { label: "Home", href: "/" },
-      { label: "Fitted Grounding Sheet", href: "/products/grounding-sheets" },
+      {
+        label: "Fitted Grounding Sheet",
+        href: "/products/grounding-fitted-sheets",
+      },
       { label: "Flat Grounding Sheet", href: "/products/grounding-flat-sheet" },
       { label: "Grounding Mat", href: "/products/grounding-mat" },
       { label: "Privacy Policy", href: "/policies/privacy-policy" },

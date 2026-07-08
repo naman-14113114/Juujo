@@ -160,15 +160,33 @@ const groundingColors: ProductColor[] = [
 ];
 
 const groundingSizes: SizePricing[] = [
-  { id: "double", name: "Double", dimensions: "137 x 191 cm", priceCents: 12900, compareAtCents: 17900 },
-  { id: "queen", name: "Queen", dimensions: "153 x 203 cm", priceCents: 14900, compareAtCents: 19900 },
-  { id: "king", name: "King", dimensions: "183 x 203 cm", priceCents: 16900, compareAtCents: 22900 },
+  {
+    id: "double",
+    name: "Double",
+    dimensions: "137 x 191 cm",
+    priceCents: 12900,
+    compareAtCents: 17900,
+  },
+  {
+    id: "queen",
+    name: "Queen",
+    dimensions: "153 x 203 cm",
+    priceCents: 14900,
+    compareAtCents: 19900,
+  },
+  {
+    id: "king",
+    name: "King",
+    dimensions: "183 x 203 cm",
+    priceCents: 16900,
+    compareAtCents: 22900,
+  },
 ];
 
 export const groundingSheets: Product = {
   id: "grounding-sheets",
   sku: "JUUJO-GROUNDING-QUEEN-GRAPHITE",
-  slug: "grounding-sheets",
+  slug: "grounding-fitted-sheets",
   category: "grounding-sheets",
   categoryLabel: "Grounding Sheets",
   name: "Juujo Grounding Fitted Sheet",
@@ -189,36 +207,243 @@ export const groundingSheets: Product = {
   customerCount: "40,000+",
   cartImage: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"),
   gallery: [
-    { src: productMediaAsset("b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet lifestyle video", animated: true },
-    { src: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"), alt: "Juujo grounding sheet on a made bed" },
-    { src: productMediaAsset("3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4", "grounding-sheets", "videos"), alt: "Using the grounding sheet", animated: true },
-    { src: productMediaAsset("Video_Project_34.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet video", animated: true },
-    { src: productMediaAsset("Pillowcase1Revised.jpg", "grounding-sheets", "images"), alt: "Pillowcase matching grounding sheet" },
-    { src: productMediaAsset("374974684d48448181a86f198f569415.HD-1080p-2.5Mbps-42863921.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet close-up video", animated: true },
-    { src: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"), alt: "Grounding sheet light gray perspective 1" },
-    { src: productMediaAsset("US_cam_2_draft2_31a3d82e-01c8-4644-8178-99729119a0c6.jpg", "grounding-sheets", "images"), alt: "Grounding sheet light gray perspective 2" },
-    { src: productMediaAsset("4603e65ff0a64b56b03b8107d58c91f0.HD-1080p-3.3Mbps-35985735.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet usage", animated: true },
-    { src: productMediaAsset("render_scene_PhysCamera001_gray_final.jpg", "grounding-sheets", "images"), alt: "Grounding sheet gray render" },
-    { src: productMediaAsset("dfsfsasaa.jpg", "grounding-sheets", "images"), alt: "Conductive silver threads detail" },
-    { src: productMediaAsset("EN_Bed_Sheet_-_How_to_Wash.png", "grounding-sheets", "images"), alt: "How to wash" },
-    { src: productMediaAsset("EN_Grounding_Bed_Sheet_Benefits.png", "grounding-sheets", "images"), alt: "Benefits" },
-    { src: productMediaAsset("EN_Sleep_Risk_reversal.png", "grounding-sheets", "images"), alt: "Sleep Risk Reversal" },
-    { src: productMediaAsset("EN_Fitted_Bed_Sheets.png", "grounding-sheets", "images"), alt: "Fitted Bed Sheets" },
-    { src: productMediaAsset("EN_BEFORE_vs_AFTER.png", "grounding-sheets", "images"), alt: "Before vs After" },
-    { src: productMediaAsset("SV_Scientifically_Proven_to_Treat.jpg", "grounding-sheets", "images"), alt: "Scientifically Proven" },
-    { src: productMediaAsset("EN_MATERIALS_FBS.jpg", "grounding-sheets", "images"), alt: "Materials" },
-    { src: productMediaAsset("Bed_Sheet_-_New_Hero_18-04-26.jpg", "grounding-sheets", "images"), alt: "New Hero" },
-    { src: productMediaAsset("fca637c42e3148119829236a41c9d822.thumbnail.0000000000_1100x.jpg", "grounding-sheets", "images"), alt: "Thumbnail" },
-    { src: productMediaAsset("whitelinen3_jpg-min.jpg", "grounding-sheets", "images"), alt: "White linen" },
-    { src: productMediaAsset("greenlinen3_png-min.png", "grounding-sheets", "images"), alt: "Green linen" },
-    { src: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images"), alt: "Gray linen" },
-    { src: productMediaAsset("custom-image-v2-3.png", "grounding-sheets", "images"), alt: "Custom Image 3" },
-    { src: productMediaAsset("custom-image-v2-4.png", "grounding-sheets", "images"), alt: "Custom Image 4" },
-    { src: productMediaAsset("custom-image-v2-2.png", "grounding-sheets", "images"), alt: "Custom Image 2" },
-    { src: productMediaAsset("custom-image-v2-6.png", "grounding-sheets", "images"), alt: "Custom Image 6" },
-    { src: productMediaAsset("custom-image-v2-5.png", "grounding-sheets", "images"), alt: "Custom Image 5" },
-    { src: productMediaAsset("Gemini_Generated_Image_uic6bquic6bquic6.jpg", "grounding-sheets", "images"), alt: "Lifestyle Image" },
-    { src: productMediaAsset("custom-image-v2-1.png", "grounding-sheets", "images"), alt: "Custom Image 1" }
+    {
+      src: productMediaAsset(
+        "b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Grounding sheet lifestyle video",
+      animated: true,
+    },
+    {
+      src: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"),
+      alt: "Juujo grounding sheet on a made bed",
+    },
+    {
+      src: productMediaAsset(
+        "3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Using the grounding sheet",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "Video_Project_34.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Grounding sheet video",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "Pillowcase1Revised.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Pillowcase matching grounding sheet",
+    },
+    {
+      src: productMediaAsset(
+        "374974684d48448181a86f198f569415.HD-1080p-2.5Mbps-42863921.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Grounding sheet close-up video",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "US_cam_1_lightgray.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Grounding sheet light gray perspective 1",
+    },
+    {
+      src: productMediaAsset(
+        "US_cam_2_draft2_31a3d82e-01c8-4644-8178-99729119a0c6.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Grounding sheet light gray perspective 2",
+    },
+    {
+      src: productMediaAsset(
+        "4603e65ff0a64b56b03b8107d58c91f0.HD-1080p-3.3Mbps-35985735.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Grounding sheet usage",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "render_scene_PhysCamera001_gray_final.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Grounding sheet gray render",
+    },
+    {
+      src: productMediaAsset("dfsfsasaa.jpg", "grounding-sheets", "images"),
+      alt: "Conductive silver threads detail",
+    },
+    {
+      src: productMediaAsset(
+        "EN_Bed_Sheet_-_How_to_Wash.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "How to wash",
+    },
+    {
+      src: productMediaAsset(
+        "EN_Grounding_Bed_Sheet_Benefits.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Benefits",
+    },
+    {
+      src: productMediaAsset(
+        "EN_Sleep_Risk_reversal.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Sleep Risk Reversal",
+    },
+    {
+      src: productMediaAsset(
+        "EN_Fitted_Bed_Sheets.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Fitted Bed Sheets",
+    },
+    {
+      src: productMediaAsset(
+        "EN_BEFORE_vs_AFTER.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Before vs After",
+    },
+    {
+      src: productMediaAsset(
+        "SV_Scientifically_Proven_to_Treat.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Scientifically Proven",
+    },
+    {
+      src: productMediaAsset(
+        "EN_MATERIALS_FBS.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Materials",
+    },
+    {
+      src: productMediaAsset(
+        "Bed_Sheet_-_New_Hero_18-04-26.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "New Hero",
+    },
+    {
+      src: productMediaAsset(
+        "fca637c42e3148119829236a41c9d822.thumbnail.0000000000_1100x.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Thumbnail",
+    },
+    {
+      src: productMediaAsset(
+        "whitelinen3_jpg-min.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "White linen",
+    },
+    {
+      src: productMediaAsset(
+        "greenlinen3_png-min.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Green linen",
+    },
+    {
+      src: productMediaAsset(
+        "graylinen3_png-min.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Gray linen",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-3.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 3",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-4.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 4",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-2.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 2",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-6.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 6",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-5.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 5",
+    },
+    {
+      src: productMediaAsset(
+        "Gemini_Generated_Image_uic6bquic6bquic6.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Lifestyle Image",
+    },
+    {
+      src: productMediaAsset(
+        "custom-image-v2-1.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Custom Image 1",
+    },
   ],
   colors: groundingColors,
   sizes: groundingSizes,
@@ -322,9 +547,27 @@ const matColors: ProductColor[] = [
 ];
 
 const matSizes: SizePricing[] = [
-  { id: "desk", name: "Desk Mat", dimensions: "10in x 27in", priceCents: 6995, compareAtCents: 13995 },
-  { id: "couch", name: "Couch Mat", dimensions: "16in x 24in", priceCents: 6995, compareAtCents: 13995 },
-  { id: "floor", name: "Floor Mat", dimensions: "24in x 36in", priceCents: 6995, compareAtCents: 13995 },
+  {
+    id: "desk",
+    name: "Desk Mat",
+    dimensions: "10in x 27in",
+    priceCents: 6995,
+    compareAtCents: 13995,
+  },
+  {
+    id: "couch",
+    name: "Couch Mat",
+    dimensions: "16in x 24in",
+    priceCents: 6995,
+    compareAtCents: 13995,
+  },
+  {
+    id: "floor",
+    name: "Floor Mat",
+    dimensions: "24in x 36in",
+    priceCents: 6995,
+    compareAtCents: 13995,
+  },
 ];
 
 export const groundingMat: Product = {
@@ -337,9 +580,11 @@ export const groundingMat: Product = {
   heroTitle: "Grounding",
   heroEmphasis: "Mat",
   shortDescription: "A versatile grounding mat for your desk, couch, or floor.",
-  description: "Experience the benefits of grounding wherever you are. Perfect for under your desk while working, at the couch, or on the floor. Includes grounding cord.",
+  description:
+    "Experience the benefits of grounding wherever you are. Perfect for under your desk while working, at the couch, or on the floor. Includes grounding cord.",
   seoTitle: "Grounding Mat | Juujo Premium",
-  seoDescription: "Juujo Grounding Mat for desk, couch, or floor. Connect to the earth's natural energy indoors.",
+  seoDescription:
+    "Juujo Grounding Mat for desk, couch, or floor. Connect to the earth's natural energy indoors.",
   currency: market.currency,
   priceCents: 6995,
   compareAtCents: 13995,
@@ -348,23 +593,140 @@ export const groundingMat: Product = {
   customerCount: "40,000+",
   cartImage: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
   gallery: [
-    { src: productMediaAsset("6206ed4066fb4719a6fe41321145df27.HD-1080p-7.2Mbps-36900726.mp4", "grounding-mat", "videos"), alt: "Grounding mat usage video", animated: true },
-    { src: productMediaAsset("mat-benefits-diagram.png", "grounding-mat", "images"), alt: "Grounding mat benefits diagram" },
-    { src: productMediaAsset("science_grounding_font_green_fixed_clean.png", "grounding-mat", "images"), alt: "Science of grounding infographic" },
-    { src: productMediaAsset("juujo-grounding-mat-health-info.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Health Info" },
-    { src: productMediaAsset("juujo-grounding-mat-earth-connection.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Earth Connection" },
-    { src: productMediaAsset("juujo-grounding-mat-health-benefits.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Health Benefits" },
-    { src: productMediaAsset("juujo-earthing-mat-office-desk.png", "grounding-mat", "images"), alt: "Juujo Earthing Mat Office Desk" },
-    { src: productMediaAsset("juujo-grounding-mat-relaxing-home.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Relaxing Home" },
-    { src: productMediaAsset("juujo-grounding-mat-better-sleep.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Better Sleep" },
-    { src: productMediaAsset("juujo-earthing-mat-features-guide.png", "grounding-mat", "images"), alt: "Juujo Earthing Mat Features Guide" },
-    { src: productMediaAsset("juujo-grounding-mat-customer-testimonial.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Customer Testimonial" },
-    { src: productMediaAsset("juujo-grounding-mat-daily-use.png", "grounding-mat", "images"), alt: "Juujo Grounding Mat Daily Use" },
-    { src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
-    { src: productMediaAsset("Frame1707480222_1.png", "grounding-mat", "images"), alt: "Grounding mat details" },
-    { src: productMediaAsset("a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4", "grounding-mat", "videos"), alt: "Grounding mat connection", animated: true },
-    { src: productMediaAsset("71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg", "grounding-mat", "images"), alt: "Grounding mat texture" },
-    { src: productMediaAsset("Gemini_Generated_Image_2zycqj2zycqj2zyc.png", "grounding-mat", "images"), alt: "Grounding mat lifestyle" },
+    {
+      src: productMediaAsset(
+        "6206ed4066fb4719a6fe41321145df27.HD-1080p-7.2Mbps-36900726.mp4",
+        "grounding-mat",
+        "videos",
+      ),
+      alt: "Grounding mat usage video",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "mat-benefits-diagram.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat benefits diagram",
+    },
+    {
+      src: productMediaAsset(
+        "science_grounding_font_green_fixed_clean.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Science of grounding infographic",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-health-info.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Health Info",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-earth-connection.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Earth Connection",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-health-benefits.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Health Benefits",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-earthing-mat-office-desk.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Earthing Mat Office Desk",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-relaxing-home.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Relaxing Home",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-better-sleep.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Better Sleep",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-earthing-mat-features-guide.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Earthing Mat Features Guide",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-customer-testimonial.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Customer Testimonial",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-daily-use.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Daily Use",
+    },
+    {
+      src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
+      alt: "Juujo grounding mat",
+    },
+    {
+      src: productMediaAsset(
+        "Frame1707480222_1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat details",
+    },
+    {
+      src: productMediaAsset(
+        "a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4",
+        "grounding-mat",
+        "videos",
+      ),
+      alt: "Grounding mat connection",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat texture",
+    },
+    {
+      src: productMediaAsset(
+        "Gemini_Generated_Image_2zycqj2zycqj2zyc.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat lifestyle",
+    },
   ],
   colors: matColors,
   sizes: matSizes,
@@ -429,7 +791,8 @@ export const groundingMat: Product = {
   faqs: [
     {
       question: "Where can I use the mat?",
-      answer: "The mat is perfect for use under your desk while working, at the couch, or on the floor.",
+      answer:
+        "The mat is perfect for use under your desk while working, at the couch, or on the floor.",
     },
     {
       question: "How do I clean it?",
@@ -450,9 +813,27 @@ const weightedColors: ProductColor[] = [
 ];
 
 const weightedSizes: SizePricing[] = [
-  { id: "5kg", name: "5 kg", dimensions: "125 x 180 cm", priceCents: 14900, compareAtCents: 19900 },
-  { id: "7kg", name: "7 kg", dimensions: "150 x 200 cm", priceCents: 16900, compareAtCents: 22900 },
-  { id: "9kg", name: "9 kg", dimensions: "150 x 200 cm", priceCents: 18900, compareAtCents: 24900 },
+  {
+    id: "5kg",
+    name: "5 kg",
+    dimensions: "125 x 180 cm",
+    priceCents: 14900,
+    compareAtCents: 19900,
+  },
+  {
+    id: "7kg",
+    name: "7 kg",
+    dimensions: "150 x 200 cm",
+    priceCents: 16900,
+    compareAtCents: 22900,
+  },
+  {
+    id: "9kg",
+    name: "9 kg",
+    dimensions: "150 x 200 cm",
+    priceCents: 18900,
+    compareAtCents: 24900,
+  },
 ];
 
 export const weightedBlanket: Product = {
@@ -477,13 +858,37 @@ export const weightedBlanket: Product = {
   rating: 4.9,
   reviewCount: 5310,
   customerCount: "40,000+",
-  cartImage: productAsset("01-weighted-blanket-front.webp", "weighted-blankets"),
+  cartImage: productAsset(
+    "01-weighted-blanket-front.webp",
+    "weighted-blankets",
+  ),
   gallery: [
-    { src: productAsset("01-weighted-blanket-front.webp", "weighted-blankets"), alt: "Juujo weighted blanket folded on a bed" },
-    { src: productAsset("02-weighted-blanket-texture.webp", "weighted-blankets"), alt: "Soft breathable cover texture" },
-    { src: productAsset("03-weighted-blanket-draped.webp", "weighted-blankets"), alt: "Weighted blanket draped over a chair" },
-    { src: productAsset("04-weighted-blanket-stitch.webp", "weighted-blankets"), alt: "Even box stitching detail" },
-    { src: productAsset("05-weighted-blanket-lifestyle.webp", "weighted-blankets"), alt: "Person relaxing under the weighted blanket" },
+    {
+      src: productAsset("01-weighted-blanket-front.webp", "weighted-blankets"),
+      alt: "Juujo weighted blanket folded on a bed",
+    },
+    {
+      src: productAsset(
+        "02-weighted-blanket-texture.webp",
+        "weighted-blankets",
+      ),
+      alt: "Soft breathable cover texture",
+    },
+    {
+      src: productAsset("03-weighted-blanket-draped.webp", "weighted-blankets"),
+      alt: "Weighted blanket draped over a chair",
+    },
+    {
+      src: productAsset("04-weighted-blanket-stitch.webp", "weighted-blankets"),
+      alt: "Even box stitching detail",
+    },
+    {
+      src: productAsset(
+        "05-weighted-blanket-lifestyle.webp",
+        "weighted-blankets",
+      ),
+      alt: "Person relaxing under the weighted blanket",
+    },
   ],
   colors: weightedColors,
   sizes: weightedSizes,
@@ -552,9 +957,27 @@ const coolingColors: ProductColor[] = [
 ];
 
 const coolingSizes: SizePricing[] = [
-  { id: "double", name: "Double", dimensions: "137 x 191 cm", priceCents: 11900, compareAtCents: 16900 },
-  { id: "queen", name: "Queen", dimensions: "153 x 203 cm", priceCents: 12900, compareAtCents: 17900 },
-  { id: "king", name: "King", dimensions: "183 x 203 cm", priceCents: 14900, compareAtCents: 19900 },
+  {
+    id: "double",
+    name: "Double",
+    dimensions: "137 x 191 cm",
+    priceCents: 11900,
+    compareAtCents: 16900,
+  },
+  {
+    id: "queen",
+    name: "Queen",
+    dimensions: "153 x 203 cm",
+    priceCents: 12900,
+    compareAtCents: 17900,
+  },
+  {
+    id: "king",
+    name: "King",
+    dimensions: "183 x 203 cm",
+    priceCents: 14900,
+    compareAtCents: 19900,
+  },
 ];
 
 export const coolingSheets: Product = {
@@ -581,11 +1004,26 @@ export const coolingSheets: Product = {
   customerCount: "40,000+",
   cartImage: productAsset("01-cooling-sheets-front.webp", "cooling-sheets"),
   gallery: [
-    { src: productAsset("01-cooling-sheets-front.webp", "cooling-sheets"), alt: "Juujo cooling bed sheets on a made bed" },
-    { src: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"), alt: "Close up of the breathable cooling weave" },
-    { src: productAsset("03-cooling-sheets-set.webp", "cooling-sheets"), alt: "Full sheet set with pillowcases" },
-    { src: productAsset("04-cooling-sheets-drape.webp", "cooling-sheets"), alt: "Silky drape of the cooling sheet" },
-    { src: productAsset("05-cooling-sheets-lifestyle.webp", "cooling-sheets"), alt: "Cooling sheets in a bright bedroom" },
+    {
+      src: productAsset("01-cooling-sheets-front.webp", "cooling-sheets"),
+      alt: "Juujo cooling bed sheets on a made bed",
+    },
+    {
+      src: productAsset("02-cooling-sheets-weave.webp", "cooling-sheets"),
+      alt: "Close up of the breathable cooling weave",
+    },
+    {
+      src: productAsset("03-cooling-sheets-set.webp", "cooling-sheets"),
+      alt: "Full sheet set with pillowcases",
+    },
+    {
+      src: productAsset("04-cooling-sheets-drape.webp", "cooling-sheets"),
+      alt: "Silky drape of the cooling sheet",
+    },
+    {
+      src: productAsset("05-cooling-sheets-lifestyle.webp", "cooling-sheets"),
+      alt: "Cooling sheets in a bright bedroom",
+    },
   ],
   colors: coolingColors,
   sizes: coolingSizes,
@@ -658,9 +1096,27 @@ const pillowColors: ProductColor[] = [
 ];
 
 const pillowSizes: SizePricing[] = [
-  { id: "standard", name: "Standard", dimensions: "48 x 74 cm", priceCents: 6900, compareAtCents: 9900 },
-  { id: "king", name: "King", dimensions: "51 x 92 cm", priceCents: 7900, compareAtCents: 10900 },
-  { id: "pair", name: "Pair (2)", dimensions: "2 x Standard", priceCents: 11900, compareAtCents: 17900 },
+  {
+    id: "standard",
+    name: "Standard",
+    dimensions: "48 x 74 cm",
+    priceCents: 6900,
+    compareAtCents: 9900,
+  },
+  {
+    id: "king",
+    name: "King",
+    dimensions: "51 x 92 cm",
+    priceCents: 7900,
+    compareAtCents: 10900,
+  },
+  {
+    id: "pair",
+    name: "Pair (2)",
+    dimensions: "2 x Standard",
+    priceCents: 11900,
+    compareAtCents: 17900,
+  },
 ];
 
 export const pillows: Product = {
@@ -687,11 +1143,26 @@ export const pillows: Product = {
   customerCount: "40,000+",
   cartImage: productAsset("01-pillow-front.webp", "pillows"),
   gallery: [
-    { src: productAsset("01-pillow-front.webp", "pillows"), alt: "Juujo adaptive pillow on a bed" },
-    { src: productAsset("02-pillow-loft.webp", "pillows"), alt: "Adjustable loft fill detail" },
-    { src: productAsset("03-pillow-cover.webp", "pillows"), alt: "Breathable washable cover" },
-    { src: productAsset("04-pillow-support.webp", "pillows"), alt: "Pillow supporting a sleeper's neck" },
-    { src: productAsset("05-pillow-lifestyle.webp", "pillows"), alt: "Pair of pillows on a styled bed" },
+    {
+      src: productAsset("01-pillow-front.webp", "pillows"),
+      alt: "Juujo adaptive pillow on a bed",
+    },
+    {
+      src: productAsset("02-pillow-loft.webp", "pillows"),
+      alt: "Adjustable loft fill detail",
+    },
+    {
+      src: productAsset("03-pillow-cover.webp", "pillows"),
+      alt: "Breathable washable cover",
+    },
+    {
+      src: productAsset("04-pillow-support.webp", "pillows"),
+      alt: "Pillow supporting a sleeper's neck",
+    },
+    {
+      src: productAsset("05-pillow-lifestyle.webp", "pillows"),
+      alt: "Pair of pillows on a styled bed",
+    },
   ],
   colors: pillowColors,
   sizes: pillowSizes,

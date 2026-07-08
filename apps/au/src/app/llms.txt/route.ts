@@ -6,7 +6,7 @@ Juujo UK sells premium bedding for better sleep: fitted grounding sheets, flat g
 
 ## Primary Pages
 - Home: ${market.siteUrl}
-- Fitted Grounding Sheet: ${market.siteUrl}/products/grounding-sheets
+- Fitted Grounding Sheet: ${market.siteUrl}/products/grounding-fitted-sheets
 - Flat Grounding Sheet: ${market.siteUrl}/products/grounding-flat-sheet
 - Grounding Mat: ${market.siteUrl}/products/grounding-mat
 - FAQs: ${market.siteUrl}/pages/faqs

@@ -3,7 +3,8 @@ import type { FAQItem } from "@/data/productSections";
 import { absoluteUrl } from "@/lib/site";
 import { market } from "@/lib/market";
 
-const schemaCountry = (market.marketLabel as string) === "UK" ? "GB" : market.marketLabel;
+const schemaCountry =
+  (market.marketLabel as string) === "UK" ? "GB" : market.marketLabel;
 
 export function productJsonLd(product: Product) {
   const productUrl = absoluteUrl(`/products/${product.slug}`);
@@ -71,7 +72,8 @@ export function productJsonLd(product: Product) {
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: schemaCountry,
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        returnPolicyCategory:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: 90,
         returnMethod: "https://schema.org/ReturnByMail",
         returnFees: "https://schema.org/FreeReturn",
@@ -146,7 +148,7 @@ export function websiteJsonLd() {
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: `${absoluteUrl("/products/grounding-sheets")}?q={search_term_string}`,
+      target: `${absoluteUrl("/products/grounding-fitted-sheets")}?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -182,7 +184,7 @@ export function guidePageJsonLd({
         { "@type": "Thing", name: "cooling bed sheets" },
       ],
       mainEntity: {
-        "@id": `${absoluteUrl("/products/grounding-sheets")}#product`,
+        "@id": `${absoluteUrl("/products/grounding-fitted-sheets")}#product`,
       },
     },
     faqJsonLd(faqs),
