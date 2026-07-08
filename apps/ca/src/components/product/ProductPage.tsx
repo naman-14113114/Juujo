@@ -7,6 +7,7 @@ import { StickyAddToCart } from "./StickyAddToCart";
 import { TrustBadges } from "./TrustBadges";
 import { GroundingBenefitsSection } from "./GroundingBenefitsSection";
 import { GroundingHowItWorksSection } from "./GroundingHowItWorksSection";
+import { GroundingFlatSheetHowItWorksSection } from "./GroundingFlatSheetHowItWorksSection";
 import { GroundingScienceSection } from "./GroundingScienceSection";
 import { GroundingComparisonSection } from "./GroundingComparisonSection";
 import { GroundingTimelineSection } from "./GroundingTimelineSection";
@@ -33,7 +34,11 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingWhatIsItSection />
           <GroundingBenefitsSection />
           <GroundingBenefitsVideoSection />
-          <GroundingHowItWorksSection />
+          {product.id === "grounding-flat-sheet" ? (
+            <GroundingFlatSheetHowItWorksSection />
+          ) : (
+            <GroundingHowItWorksSection />
+          )}
           <GroundingTimelineSection />
           <GroundingScienceSection />
           <GroundingComparisonSection />
