@@ -68,7 +68,12 @@ export function GroundingTimelineSection() {
         <div className="mt-20">
           {/* Timeline navigation */}
           <div className="relative mb-12 flex justify-between max-w-4xl mx-auto px-4">
-            <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-[var(--clay-deep)]"></div>
+            <div className="absolute left-[5%] right-[5%] top-1/2 h-[2px] -translate-y-1/2 bg-gray-200">
+              <div 
+                className="absolute left-0 top-0 h-full bg-[var(--clay-deep)] transition-all duration-500 ease-in-out"
+                style={{ width: `${(activeStep / (timeline.length - 1)) * 100}%` }}
+              ></div>
+            </div>
             {timeline.map((item, idx) => (
               <button
                 key={idx}
@@ -79,19 +84,21 @@ export function GroundingTimelineSection() {
                 <div className="bg-[var(--cream)] p-2">
                   <div
                     className={`flex h-[18px] w-[18px] items-center justify-center rounded-full transition-all duration-300 ${
-                      activeStep === idx
-                        ? "border-[2px] border-[var(--clay-deep)] scale-150"
-                        : "border-[2px] border-gray-300 group-hover:border-gray-400"
+                      idx === activeStep
+                        ? "border-[2px] border-[var(--clay-deep)] scale-150 bg-white"
+                        : idx < activeStep
+                        ? "border-[2px] border-[var(--clay-deep)] bg-[var(--clay-deep)]"
+                        : "border-[2px] border-gray-300 bg-white group-hover:border-gray-400"
                     }`}
                   >
-                    {activeStep === idx && (
+                    {idx === activeStep && (
                       <div className="h-2 w-2 rounded-full bg-[var(--clay-deep)]" />
                     )}
                   </div>
                 </div>
                 <span
                   className={`absolute top-12 whitespace-nowrap text-[13px] transition-colors duration-300 ${
-                    activeStep === idx
+                    idx <= activeStep
                       ? "font-medium text-[var(--clay-deep)]"
                       : "text-[var(--muted)] group-hover:text-[var(--night)]"
                   }`}
