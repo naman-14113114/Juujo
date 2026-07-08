@@ -174,15 +174,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         </ul>
       </div>
 
-      <button 
-        type="button" 
-        onClick={() => setShowSizeGuide(true)}
-        className="flex items-center gap-1.5 text-sm text-[var(--plum)] font-medium hover:opacity-80 transition-opacity mb-2"
-      >
-        <Info size={16} />
-        Size Guide
-      </button>
-
       {/* Bundle heading */}
       <div className="flex items-center gap-3">
         <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
@@ -278,7 +269,16 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               {/* Per-sheet selectors, only for the selected tier */}
               {expandedTier === t.id && (
                 <div className="flex flex-col gap-3 border-t px-4 py-4" style={{ borderColor: "var(--border)" }}>
-                  <div className="font-serif text-xs text-[var(--muted)] -mb-1">Color, Size</div>
+                  <div className="flex justify-between items-center -mb-1">
+                    <div className="font-serif text-xs text-[var(--muted)]">Color, Size</div>
+                    <button 
+                      type="button" 
+                      onClick={() => setShowSizeGuide(true)}
+                      className="text-xs text-[var(--plum)] font-medium hover:opacity-80 transition-opacity underline"
+                    >
+                      Size Guide
+                    </button>
+                  </div>
                   {Array.from({ length: t.sheets }).map((_, index) => (
                     <SheetRow
                       key={index}
