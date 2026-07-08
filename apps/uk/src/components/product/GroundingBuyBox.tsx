@@ -407,16 +407,16 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <div className="grid grid-cols-3 gap-2">
           {[
             {
-              id: "premium-packaging",
-              name: "Premium Packaging",
-              valueCents: 2900,
-              image: "/images/juujo_premium_packaging_v3.png",
-            },
-            {
               id: "grounding-mat",
               name: giftProduct.name,
               valueCents: giftProduct.compareAtCents || giftProduct.priceCents,
               image: "/images/grounding_mat_gift.png",
+            },
+            {
+              id: "premium-packaging",
+              name: "Premium Packaging",
+              valueCents: 2900,
+              image: "/images/juujo_premium_packaging_v3.png",
             },
             {
               id: "sleep-app",
