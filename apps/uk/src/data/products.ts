@@ -209,6 +209,15 @@ export const groundingSheets: Product = {
   gallery: [
     {
       src: productMediaAsset(
+        "grounding-indoors-720p.mp4",
+        "grounding-sheets",
+        "videos",
+      ),
+      alt: "Grounding indoors with a Grounding Sheet",
+      animated: true,
+    },
+    {
+      src: productMediaAsset(
         "b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4",
         "grounding-sheets",
         "videos",
