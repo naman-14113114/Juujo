@@ -13,7 +13,7 @@ export function GroundingWhatIsItSection() {
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl shadow-lg">
               <video
                 src={productMediaAsset(
-                  "juujo-what-is-grounding-video.mp4",
+                  "juujo-what-is-grounding-video.mp4?v=3",
                   "grounding-sheets",
                   "videos",
                 )}

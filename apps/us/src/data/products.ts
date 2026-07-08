@@ -506,7 +506,7 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "juujo-grounding-bed-sheets-lifestyle-sleeping.png",
+        "juujo-grounding-bed-sheets-lifestyle-sleeping.png?v=3",
         "grounding-sheets",
         "images",
       ),
@@ -618,7 +618,7 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "juujo-premium-earthing-sheets-display.png",
+        "juujo-premium-earthing-sheets-display.png?v=3",
         "grounding-sheets",
         "images",
       ),
@@ -758,7 +758,7 @@ export const groundingFlatSheet: Product = {
     // { src: productMediaAsset("3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4", "grounding-sheets", "videos"), alt: "Using the grounding sheet", animated: true },
     {
       src: productMediaAsset(
-        "juujo-grounding-bed-sheets-lifestyle-sleeping.png",
+        "juujo-grounding-bed-sheets-lifestyle-sleeping.png?v=3",
         "grounding-sheets",
         "images",
       ),
@@ -840,7 +840,7 @@ export const groundingFlatSheet: Product = {
       ),
       alt: "Grounding sheet detail view",
     },
-    // { src: productMediaAsset("juujo-premium-earthing-sheets-display.png", "grounding-sheets", "images"), alt: "Grounding sheet display" },
+    // { src: productMediaAsset("juujo-premium-earthing-sheets-display.png?v=3", "grounding-sheets", "images"), alt: "Grounding sheet display" },
     // --- New flat sheet images (reorder as needed) ---
     {
       src: productMediaAsset(
