@@ -31,7 +31,6 @@ export function ProductPage({ product }: { product: Product }) {
       <TrustBadges />
       {product.category === "grounding-sheets" && (
         <>
-          <GroundingWhatIsItSection />
           <GroundingBenefitsSection />
           <GroundingBenefitsVideoSection />
           {product.id === "grounding-flat-sheet" ? (
@@ -41,21 +40,25 @@ export function ProductPage({ product }: { product: Product }) {
           )}
           <GroundingTimelineSection />
           <GroundingScienceSection />
+          <GroundingWhatIsItSection />
           <GroundingComparisonSection />
         </>
       )}
       {product.category === "grounding-mat" && (
         <>
-          <GroundingMatWhatIsItSection />
           <GroundingMatBenefitsSection />
           <GroundingMatHowToUseSection />
           <GroundingMatTimelineSection />
           <GroundingScienceSection />
+          <GroundingMatWhatIsItSection />
         </>
       )}
       <ProductReviewsSection
         productHandle={
-          product.category === "grounding-sheets" || product.category === "grounding-mat" ? product.slug : "buudy-led-mask"
+          product.category === "grounding-sheets" ||
+          product.category === "grounding-mat"
+            ? product.slug
+            : "buudy-led-mask"
         }
       />
       <FAQSection faqs={product.faqs} />
