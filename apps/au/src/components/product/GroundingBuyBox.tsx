@@ -420,7 +420,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               id: "premium-packaging",
               name: "Premium Packaging",
               valueCents: 2900,
-              image: "/images/juujo_premium_packaging.png",
+              image: "/images/juujo_premium_packaging_v3.png",
             },
             {
               id: "grounding-mat",
