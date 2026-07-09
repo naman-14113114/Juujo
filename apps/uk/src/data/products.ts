@@ -722,6 +722,22 @@ export const groundingMat: Product = {
     },
     {
       src: productMediaAsset(
+        "juujo-mat-gallery-1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat detail 1",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-mat-gallery-2.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat detail 2",
+    },
+    {
+      src: productMediaAsset(
         "71QzTmxycZL._AC_SL1407_43b95b99-3157-4e9e-b125-0fa3dbaa3228.jpg",
         "grounding-mat",
         "images",

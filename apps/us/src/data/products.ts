@@ -1,4 +1,4 @@
-import {
+﻿import {
   productAsset,
   productMediaAsset,
   type ProductImage,
@@ -981,9 +981,9 @@ export const groundingMat: Product = {
       alt: "Grounding mat usage video",
       animated: true,
     },
-    {
+        {
       src: productMediaAsset(
-        "juujo-grounding-mat-earth-connection.png",
+        "juujo-mat-gallery-2.png",
         "grounding-mat",
         "images",
       ),
@@ -1055,20 +1055,20 @@ export const groundingMat: Product = {
     },
     {
       src: productMediaAsset(
-        "juujo-grounding-mat-health-info.png",
-        "grounding-mat",
-        "images",
-      ),
-      alt: "Juujo Grounding Mat Health Info",
-    },
-    {
-      src: productMediaAsset(
         "a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4",
         "grounding-mat",
         "videos",
       ),
       alt: "Grounding mat connection",
       animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "juujo-mat-gallery-1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Grounding mat detail 1",
     },
   ],
   colors: matColors,

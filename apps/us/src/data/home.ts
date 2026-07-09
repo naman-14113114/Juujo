@@ -34,26 +34,26 @@ export const homeTechnologySpotlight = {
   eyebrow: "Materials that matter",
   title: "Breathable, honest, built to last.",
   copy: "From premium silver-threaded weaves to conductive carbon mats, each product is made with materials chosen for comfort and durability, not shortcuts.",
-  ctaLabel: "Shop flat sheets",
-  ctaHref: `/products/${groundingFlatSheet.slug}`,
-  image: { src: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images"), alt: "Breathable cooling weave detail" },
+  ctaLabel: "Shop fitted sheets",
+  ctaHref: `/products/${groundingSheets.slug}`,
+  image: { src: productMediaAsset("juujo-better-sleep-sheets.png", "grounding-sheets", "images"), alt: "Better sleep grounding sheets" },
 };
 
 export const homeFeatureCards = [
   {
-    title: "Breathable by design",
-    copy: "Weaves chosen to stay temperature-friendly, so you spend less of the night too warm.",
-    image: productMediaAsset("graylinen3_png-min.png", "grounding-sheets", "images"),
+    title: "Woven with silver",
+    copy: "Pure conductive silver threads woven evenly throughout to safely transfer the Earth's healing electrons.",
+    image: productMediaAsset("juujo-silver-thread-feature.png", "grounding-sheets", "images"),
   },
   {
     title: "Comfort you can feel",
     copy: "Soft, premium materials that stay comfortable and keep their shape wash after wash.",
-    image: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"),
+    image: productMediaAsset("juujo-comfort-feature.png", "grounding-sheets", "images"),
   },
   {
     title: "Made for every bed",
     copy: "Multiple colours and sizes across fitted and flat sheets to match your space.",
-    image: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
+    image: productMediaAsset("juujo-fitted-flat-sheets-feature.png", "grounding-sheets", "images"),
   },
 ];
 
@@ -76,7 +76,7 @@ export const homeTorchSpotlight = {
   copy: "Connect to the earth's natural energy field from your desk, couch, or floor. Versatile, portable, and easy to use.",
   ctaLabel: "Shop grounding mat",
   ctaHref: `/products/${groundingMat.slug}`,
-  image: { src: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
+  image: { src: productMediaAsset("juujo-grounding-sheet-reconnect.png", "grounding-mat", "images"), alt: "Juujo grounding mat" },
   product: groundingMat,
 };
 
