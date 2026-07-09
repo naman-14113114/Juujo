@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Hexagon, Home, ShieldCheck } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
@@ -147,64 +148,23 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           Grounding Mat
         </h1>
 
-        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
+        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)] tracking-wide">
           <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
+            <Hexagon className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
             <span className="leading-snug">
-              <strong>Conductive Carbon Surface</strong> for maximum
-              conductivity
+              Conductive Carbon Surface for maximum conductivity
             </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
+            <Home className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
             <span className="leading-snug">
-              <strong>Versatile Design</strong> perfect for desk, couch, or
-              floor
+              Versatile Design perfect for desk, couch, or floor
             </span>
           </li>
           <li className="flex items-start gap-2.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[var(--gold)] shrink-0 mt-0.5"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
+            <ShieldCheck className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
             <span className="leading-snug">
-              <strong>Easy to clean</strong> and built to last
+              Easy to clean and built to last
             </span>
           </li>
         </ul>
