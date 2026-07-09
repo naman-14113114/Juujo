@@ -10,10 +10,10 @@ export function GroundingMatWhatIsItSection() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Left Video */}
           <div className="w-full">
-            <div className="relative aspect-video w-full overflow-hidden rounded-3xl shadow-lg">
+            <div className="relative aspect-square w-full overflow-hidden rounded-3xl shadow-lg">
               <video
                 src={productMediaAsset(
-                  "a0c706eb701446b5b7b6daf744da9e7a.HD-1080p-7.2Mbps-36900662.mp4",
+                  "mat-what-is-grounding.mp4",
                   "grounding-mat",
                   "videos",
                 )}
