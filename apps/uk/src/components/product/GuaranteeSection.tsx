@@ -1,13 +1,17 @@
 import Image from "next/image";
 
-export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) {
+export function GuaranteeSection({ showVideo = true, productCategory }: { showVideo?: boolean, productCategory?: string }) {
+  const bgImage = productCategory === "grounding-mat"
+    ? "/media/products/grounding-mat/images/juujo-grounding-mat-banner.png"
+    : "/media/products/grounding-sheets/images/juujo-guarantee-bg.png";
+
   return (
     <section className={`juujo-section relative overflow-hidden bg-[var(--ink)] py-14 pb-24 text-center md:py-24 md:pb-36 ${!showVideo ? 'bg-[var(--plum)]' : ''}`}>
       {showVideo && (
         <Image
           alt="Juujo guarantee lifestyle background"
           className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
-          src="/media/products/grounding-sheets/images/juujo-guarantee-bg.png"
+          src={bgImage}
           fill
           unoptimized
         />
