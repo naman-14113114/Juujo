@@ -1,14 +1,15 @@
-import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
+import Image from "next/image";
 
 export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) {
   return (
     <section className={`juujo-section relative overflow-hidden bg-[var(--ink)] py-14 pb-24 text-center md:py-24 md:pb-36 ${!showVideo ? 'bg-[var(--plum)]' : ''}`}>
       {showVideo && (
-        <LazyAutoplayVideo
-          ariaLabel="Juujo guarantee lifestyle background"
+        <Image
+          alt="Juujo guarantee lifestyle background"
           className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
-          rootMargin="1400px 0px"
-          src="/media/products/buudy-led-mask/videos/juujo-goddess-bg.mp4"
+          src="/media/products/grounding-sheets/images/juujo-guarantee-bg.png"
+          fill
+          unoptimized
         />
       )}
 
@@ -18,14 +19,14 @@ export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) 
       />
 
       <div className="juujo-wrap relative z-20 max-w-5xl">
-        <p className="juujo-eyebrow">Promise</p>
+        {/* <p className="juujo-eyebrow text-[var(--gold)]">Promise</p> */}
         <h2 className="juujo-display mx-auto mt-3 max-w-4xl text-[2rem] leading-[1.05] text-[var(--cream)] sm:text-[2.35rem] md:mt-4 md:text-6xl">
           Our <em className="juujo-italic text-[var(--gold)]">Juujo Goddess</em>
           <br />
           money back guarantee.
         </h2>
         <p className="mx-auto mt-6 hidden max-w-xl text-sm font-medium leading-7 text-white md:block md:text-base">
-          Bring clinical-inspired skincare into your daily routine with Juujo. Designed for visible glow, smoother-looking skin, and effortless at-home use, Juujo gives you a premium treatment experience you can trust every time.
+          Bring the natural benefits of grounding into your daily routine with Juujo. Designed for deeper sleep, better recovery, and effortless at-home use, Juujo gives you a premium rest experience you can trust every single night.
         </p>
         {/* <div className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-[rgba(247,241,232,0.25)] bg-[rgba(18,9,20,0.52)] px-7 py-4 backdrop-blur-md">
           {["90 days", "Free returns", "Full refund"].map((item, index) => (
