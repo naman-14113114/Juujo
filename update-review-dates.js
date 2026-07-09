@@ -17,14 +17,14 @@ const targetProduct = args[1]; // Optional second argument
 
 const appsDir = path.join(__dirname, 'apps');
 const countries = ['us', 'uk', 'ca', 'au'];
-let filesToProcess = ['buudy-led-mask-reviews.json', 'buudy-red-torch-reviews.json'];
+let filesToProcess = ['buudy-led-mask-reviews.json', 'buudy-red-torch-reviews.json', 'grounding-sheets-reviews.json', 'grounding-fitted-sheets-reviews.json'];
 
 // If a specific product was provided, filter the files to process
 if (targetProduct) {
   const targetFileName = `${targetProduct}-reviews.json`;
   if (!filesToProcess.includes(targetFileName)) {
     console.error(`\nError: Unknown product "${targetProduct}".`);
-    console.error(`Available products are: buudy-led-mask, buudy-red-torch\n`);
+    console.error(`Available products are: buudy-led-mask, buudy-red-torch, grounding-sheets, grounding-fitted-sheets\n`);
     process.exit(1);
   }
   filesToProcess = [targetFileName];
