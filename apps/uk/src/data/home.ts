@@ -60,7 +60,7 @@ export const homeFeatureCards = [
 export const homeLightTherapy = {
   eyebrow: "The Juujo promise",
   title: "Better sleep, made simple.",
-  copy: "We keep bedding honest: clear materials, fair pricing, and a 100-night trial so you can feel the difference at home before you commit. No hype, just rest.",
+  copy: "We keep bedding honest: clear materials, fair pricing, and a 120-night trial so you can feel the difference at home before you commit. No hype, just rest.",
   image: { src: productMediaAsset("custom-image-v2-3.png", "grounding-sheets", "images"), alt: "Calm bedroom editorial image" },
 };
 
@@ -92,7 +92,7 @@ export const homeCustomerReviewsGrid = {
   copy: "Thousands of calmer nights, in their words.",
   ctaLabel: "About Us",
   ctaHref: "/pages/about-us",
-  image: productMediaAsset("custom-image-v2-5.png", "grounding-sheets", "images"),
+  image: productMediaAsset("hero-1.png", "grounding-sheets", "images"),
 };
 
 // Kept for compatibility with the home page, now referencing grounding products.

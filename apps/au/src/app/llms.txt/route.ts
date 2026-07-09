@@ -17,7 +17,7 @@ Juujo UK sells premium bedding for better sleep: fitted grounding sheets, flat g
 - Grounding Mat: versatile conductive mat for grounding at your desk, on the couch, or on the floor.
 
 ## Buyer Support
-- Every product ships free, comes with a 100-night sleep trial and easy returns.
+- Every product ships free, comes with a 120-night sleep trial and easy returns.
 - Each product offers a quantity discount: Buy 1, Buy 2 (save 10%), or Buy 3 (best value, save 20%).
 - Colours and sizes are selectable per product, with pricing that updates to the chosen size.
 

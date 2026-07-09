@@ -33,7 +33,7 @@ export const aboutSections = [
     id: "trust-transparency",
     eyebrow: "Values",
     title: "Trust and Transparency",
-    copy: "When it comes to your sleep, trust matters. Transparency is part of how we work, with no exaggerated claims and no hidden fine print.\n\n- Made to last: every Juujo product is checked for quality, comfort, and durability wash after wash.\n- Privacy first: we use strong encryption so your personal and payment details stay secure.\n- 100-night trial: sleep on it. If it is not right for you, our easy returns and money-back trial have you covered.",
+    copy: "When it comes to your sleep, trust matters. Transparency is part of how we work, with no exaggerated claims and no hidden fine print.\n\n- Made to last: every Juujo product is checked for quality, comfort, and durability wash after wash.\n- Privacy first: we use strong encryption so your personal and payment details stay secure.\n- 120-night trial: sleep on it. If it is not right for you, our easy returns and money-back trial have you covered.",
     image: {
       src: "/images/about/about-trust.png",
       alt: "Quality, easy returns, and secure checkout badges",

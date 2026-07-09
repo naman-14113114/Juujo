@@ -711,7 +711,7 @@ export const groundingSheets: Product = {
     },
   ],
   badges: [
-    "100-night trial",
+    "120-night trial",
     "Free shipping",
     "Easy returns",
     "OEKO-TEX certified fabric",
@@ -1283,7 +1283,7 @@ export const weightedBlanket: Product = {
     },
   ],
   badges: [
-    "100-night trial",
+    "120-night trial",
     "Free shipping",
     "Easy returns",
     "Hypoallergenic fill",
@@ -1423,7 +1423,7 @@ export const coolingSheets: Product = {
     },
   ],
   badges: [
-    "100-night trial",
+    "120-night trial",
     "Free shipping",
     "Easy returns",
     "OEKO-TEX certified fabric",
@@ -1557,7 +1557,7 @@ export const pillows: Product = {
     },
   ],
   badges: [
-    "100-night trial",
+    "120-night trial",
     "Free shipping",
     "Easy returns",
     "Hypoallergenic fill",

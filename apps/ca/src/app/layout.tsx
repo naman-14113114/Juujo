@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     template: "%s | Juujo",
   },
   description:
-    "Juujo premium bedding for better sleep: grounding sheets, weighted blankets, cooling bed sheets, and adaptive pillows. Breathable materials, honest craft, 100-night trial.",
+    "Juujo premium bedding for better sleep: grounding sheets, weighted blankets, cooling bed sheets, and adaptive pillows. Breathable materials, honest craft, 120-night trial.",
   applicationName: "Juujo",
   keywords: [
     "premium bedding UK",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     title: "Juujo | Premium Bedding for Better Sleep",
     description:
-      "Considered bedding made for real rest: grounding sheets, weighted blankets, cooling sheets, and adaptive pillows. Breathable, premium, 100-night trial.",
+      "Considered bedding made for real rest: grounding sheets, weighted blankets, cooling sheets, and adaptive pillows. Breathable, premium, 120-night trial.",
     images: [
       {
         url: "/images/home/01-home-bedding-hero.webp",
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Juujo | Premium Bedding for Better Sleep",
     description:
-      "Grounding sheets, weighted blankets, cooling sheets, and adaptive pillows. Breathable materials, honest craft, 100-night trial.",
+      "Grounding sheets, weighted blankets, cooling sheets, and adaptive pillows. Breathable materials, honest craft, 120-night trial.",
     images: ["/images/home/01-home-bedding-hero.webp"],
   },
 };
