@@ -604,12 +604,44 @@ export const groundingMat: Product = {
   gallery: [
     {
       src: productMediaAsset(
+        "juujo-grounding-mat-gallery-1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Guide",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-gallery-2.jpg",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Lifestyle",
+    },
+    {
+      src: productMediaAsset(
         "6206ed4066fb4719a6fe41321145df27.HD-1080p-7.2Mbps-36900726.mp4",
         "grounding-mat",
         "videos",
       ),
       alt: "Grounding mat usage video",
       animated: true,
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-gallery-1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Guide",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-gallery-2.jpg",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Lifestyle",
     },
     {
       src: productMediaAsset(

@@ -1,4 +1,4 @@
-﻿import {
+import {
   productAsset,
   productMediaAsset,
   type ProductImage,
@@ -964,6 +964,22 @@ export const groundingMat: Product = {
   customerCount: "40,000+",
   cartImage: productMediaAsset("TGC-mat1.png", "grounding-mat", "images"),
   gallery: [
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-gallery-1.png",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Guide",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-mat-gallery-2.jpg",
+        "grounding-mat",
+        "images",
+      ),
+      alt: "Juujo Grounding Mat Setup Lifestyle",
+    },
     {
       src: productMediaAsset(
         "mat-benefits-diagram.png",
