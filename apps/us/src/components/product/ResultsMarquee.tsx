@@ -5,7 +5,7 @@ export function ResultsMarquee() {
   const images = [...realLifeImages, ...realLifeImages];
 
   return (
-    <section className="juujo-section border-y border-[var(--border)] bg-[var(--plum)] text-[var(--cream)] md: py-14 md:py-24">
+    <section className="juujo-section border-y border-[var(--border)] bg-[var(--plum)] text-[var(--cream)] py-7 md:py-12">
       <div className="juujo-wrap flex items-end justify-between gap-6">
         <div>
           <p className="juujo-mono text-[var(--gold)]">Reviews & Real Results</p>

@@ -26,7 +26,7 @@ export function GroundingMatBenefitsSection() {
   ];
 
   return (
-    <section className="juujo-section bg-[var(--cream)] py-14 md:py-24">
+    <section className="juujo-section bg-[var(--cream)] py-7 md:py-12">
       <div className="juujo-wrap">
         <SectionHeading
           eyebrow="Benefits"

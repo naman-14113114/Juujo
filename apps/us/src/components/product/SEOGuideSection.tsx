@@ -43,7 +43,7 @@ const queryAnswers = [
 
 export function SEOGuideSection({ product }: { product: Product }) {
   return (
-    <section className="juujo-section bg-[var(--cream)] md: md: py-14 md:py-24">
+    <section className="juujo-section bg-[var(--cream)] py-7 md:py-12">
       <div className="juujo-wrap">
         <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div className="rounded-[30px] bg-[var(--plum)] p-7 text-[var(--cream)] md:p-9 lg:sticky lg:top-28">

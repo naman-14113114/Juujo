@@ -9,7 +9,7 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
   const [open, setOpen] = useState(-1);
 
   return (
-    <section className="juujo-section bg-[var(--cream)] md: md: py-14 md:py-24" id="faq">
+    <section className="juujo-section bg-[var(--cream)] py-7 md:py-12" id="faq">
       <div className="juujo-wrap grid gap-8 md:gap-12 lg:grid-cols-[1fr_1.5fr]">
         <SectionHeading
           eyebrow="FAQ"

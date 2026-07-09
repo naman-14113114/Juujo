@@ -23,7 +23,7 @@ export function GroundingHowItWorksSection() {
 
   return (
     <section
-      className="juujo-section bg-white py-14 md:py-24"
+      className="juujo-section bg-white py-7 md:py-12"
       id="how-it-works"
     >
       <div className="juujo-wrap">

@@ -22,7 +22,7 @@ export function GroundingScienceSection() {
 
   return (
     <section
-      className="juujo-section bg-[var(--cream)] py-14 md:py-24"
+      className="juujo-section bg-[var(--cream)] py-7 md:py-12"
       id="science"
     >
       <div className="juujo-wrap max-w-[1200px] mx-auto">
@@ -71,14 +71,14 @@ export function GroundingScienceSection() {
                       </span>
                     </div>
                   </div>
-                  <p className="text-[var(--muted)] text-base leading-relaxed font-medium">
+                  <p className="juujo-copy text-base font-medium">
                     {stat.description}
                   </p>
                 </div>
               ))}
             </div>
 
-            <p className="text-[11px] md:text-xs text-[var(--muted)] font-bold mt-6 tracking-wide">
+            <p className="juujo-eyebrow mt-6">
               Based on Peer Reviewed Scientific Studies. Updated to 2024.
             </p>
           </div>

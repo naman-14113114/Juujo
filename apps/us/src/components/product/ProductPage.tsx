@@ -40,6 +40,7 @@ export function ProductPage({ product }: { product: Product }) {
           )}
           <GroundingTimelineSection />
           <GroundingScienceSection />
+          <ProductReviewsSection productHandle={product.slug} />
           <GroundingWhatIsItSection />
           <GroundingComparisonSection />
         </>
@@ -50,17 +51,13 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingMatHowToUseSection />
           <GroundingMatTimelineSection />
           <GroundingScienceSection />
+          <ProductReviewsSection productHandle={product.slug} />
           <GroundingMatWhatIsItSection />
         </>
       )}
-      <ProductReviewsSection
-        productHandle={
-          product.category === "grounding-sheets" ||
-          product.category === "grounding-mat"
-            ? product.slug
-            : "buudy-led-mask"
-        }
-      />
+      {product.category !== "grounding-sheets" && product.category !== "grounding-mat" && (
+        <ProductReviewsSection productHandle="buudy-led-mask" />
+      )}
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />

@@ -31,7 +31,7 @@ export function GroundingComparisonSection() {
   ];
 
   return (
-    <section className="juujo-section bg-white py-14 md:py-24" id="comparison">
+    <section className="juujo-section bg-white py-7 md:py-12" id="comparison">
       <div className="juujo-wrap max-w-4xl">
         <SectionHeading
           eyebrow="Comparison"

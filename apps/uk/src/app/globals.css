@@ -118,12 +118,6 @@ video {
   overflow: clip;
 }
 
-section.bg-\[var\(--cream\)\] + section.bg-\[var\(--cream\)\],
-section.bg-\[var\(--cream\)\] + section.bg-\[\#f6ede2\],
-section.bg-\[\#f6ede2\] + section.bg-\[var\(--cream\)\],
-section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
-  padding-top: 0 !important;
-}
 
 .juujo-display {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

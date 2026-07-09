@@ -3,7 +3,7 @@ import { productMediaAsset } from "@/lib/media";
 export function GroundingMatWhatIsItSection() {
   return (
     <section
-      className="juujo-section bg-[var(--cream)] py-14 md:py-24"
+      className="juujo-section bg-[var(--cream)] py-7 md:py-12"
       id="what-is-grounding"
     >
       <div className="juujo-wrap max-w-[1200px] mx-auto">

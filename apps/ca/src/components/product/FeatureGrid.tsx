@@ -26,7 +26,7 @@ export function FeatureGrid() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="juujo-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] md: md: py-14 md:py-24">
+    <section className="juujo-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] py-7 md:py-12">
       <div className="juujo-wrap">
         <SectionHeading
           eyebrow="Why Juujo"

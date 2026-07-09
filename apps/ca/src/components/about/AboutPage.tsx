@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <div className="bg-[var(--cream)] min-h-screen">
       {/* Hero Banner Section */}
-      <section className="relative overflow-hidden py-14 md:py-24 text-center bg-black">
+      <section className="relative overflow-hidden py-7 md:py-12 text-center bg-black">
         {/* Desktop Hero Image */}
         <div className="absolute inset-0 hidden md:block select-none pointer-events-none">
           <Image
@@ -144,7 +144,7 @@ export function AboutPage() {
         {aboutSections.filter(s => s.id === "customer-support").map((section) => (
           <section
             key={section.id}
-            className="juujo-section py-14 md:py-24 transition-all duration-300"
+            className="juujo-section py-7 md:py-12 transition-all duration-300"
           >
             <div className="juujo-wrap max-w-3xl mx-auto text-center">
               <SectionHeading

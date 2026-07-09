@@ -95,7 +95,7 @@ function ReviewVideoCard({
 
 export function VideoReviews() {
   return (
-    <section className="juujo-section bg-[#f6ede2] pt-14 md:pt-24 pb-4 md:pb-6 overflow-hidden">
+    <section className="juujo-section bg-[#f6ede2] pt-7 md:pt-12 pb-4 md:pb-6 overflow-hidden">
       <style>{`
         @keyframes vr-css-auto-scroll {
           0% { transform: translateX(0); }

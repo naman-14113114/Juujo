@@ -14,7 +14,7 @@ export async function ProductReviewsSection({ productHandle = "buudy-led-mask" }
   const initialReviews = dataset.reviews.slice(0, reviewPageSize);
 
   return (
-    <section className="juujo-section bg-[var(--cream)] md: md: py-14 md:py-24" id="reviews">
+    <section className="juujo-section bg-[var(--cream)] py-7 md:py-12" id="reviews">
       <div className="juujo-wrap">
         <ProductReviewsGrid
           averageRating={dataset.summary.averageRating}

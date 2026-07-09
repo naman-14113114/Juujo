@@ -4,7 +4,7 @@ import { productMediaAsset } from "@/lib/media";
 export function GroundingBenefitsVideoSection() {
   return (
     <section
-      className="juujo-section bg-[var(--cream)] py-14 md:py-24"
+      className="juujo-section bg-[var(--cream)] py-7 md:py-12"
       id="grounding-benefits-video"
     >
       <div className="juujo-wrap max-w-[1200px] mx-auto">
