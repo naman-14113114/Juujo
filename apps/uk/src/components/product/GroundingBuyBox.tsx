@@ -186,7 +186,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       <div>
         <a
           href="#reviews"
-          className="mb-3 flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer"
+          className="flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer"
         >
           <div
             className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
@@ -194,7 +194,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           >
             ★★★★★
           </div>
-          <span className="font-sans text-xs sm:text-[13px] font-bold tracking-wide text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-full">
+          <span className="font-sans pt-[2px] sm:pt-[3px] text-xs sm:text-[13px] font-bold tracking-wide text-[var(--plum)]">
             {product.rating.toFixed(1)} · TRUSTED BY{" "}
             {product.customerCount || "40,000+"} CUSTOMERS
           </span>
@@ -251,7 +251,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       <DeliveryTimerBox />
 
       {/* Bundle heading */}
-      <div className="flex items-center gap-3 mt-1 lg:mt-2">
+      <div className="flex items-center gap-3">
         <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
         <span className="juujo-mono text-center text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--plum)]">
           Bundle & Save + Free Shipping & Gifts
@@ -284,11 +284,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             >
               {/* MOST POPULAR diagonal ribbon for bundle */}
               {t.badge && (
-                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none z-20">
-                  <div className="absolute top-0 right-0 w-28 h-28">
-                    <div className="absolute top-[1.35rem] -right-8 w-40 origin-center rotate-45 bg-[var(--clay-deep)] py-1.5 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
-                      {t.badge}
-                    </div>
+                <div className="absolute top-0 right-0 w-[80px] h-[80px] overflow-hidden pointer-events-none z-20 rounded-tr-2xl">
+                  <div className="absolute top-[20px] -right-[17px] w-[100px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
+                    {t.badge}
                   </div>
                 </div>
               )}
