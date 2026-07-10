@@ -205,7 +205,7 @@ export const groundingSheets: Product = {
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
-  cartImage: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"),
+  cartImage: productMediaAsset("juujo-fitted-sheet-main-new.jpg", "grounding-sheets", "images"),
   gallery: [
     {
       src: productMediaAsset(
@@ -226,8 +226,24 @@ export const groundingSheets: Product = {
       animated: true,
     },
     {
-      src: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"),
-      alt: "Juujo grounding sheet on a made bed",
+      src: productMediaAsset("juujo-fitted-sheet-main-new.jpg", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Fitted Sheet Main",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-fitted-sheet-gallery-new.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Gallery",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-lifestyle.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Lifestyle",
     },
     {
       src: productMediaAsset(
@@ -528,8 +544,24 @@ export const groundingFlatSheet: Product = {
   description:
     "A soft, breathable flat sheet woven with conductive silver threads and a grounding cord for your bed. Designed for people who want a calmer, more settled wind-down and a simple upgrade to their sleep setup.",
   seoTitle: "Grounding Flat Sheet | Juujo Premium Bedding",
+  cartImage: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
   seoDescription:
     "Juujo Grounding Flat Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
+  gallery: [
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle On Bed",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-1.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-3.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle Details",
+    },
+    ...(groundingSheets.gallery || []),
+  ],
   variants: buildVariants("GROUNDING-FLAT", groundingColors, groundingSizes),
   specs: [
     { label: "Material", value: "Organic cotton with silver fibre" },

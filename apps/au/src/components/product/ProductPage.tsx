@@ -59,7 +59,7 @@ export function ProductPage({ product }: { product: Product }) {
         <ProductReviewsSection productHandle="buudy-led-mask" />
       )}
       <FAQSection faqs={product.faqs} />
-      <GuaranteeSection productCategory={product.category} />
+      <GuaranteeSection productCategory={product.category} productId={product.id} />
       <StickyAddToCart product={product} />
     </>
   );

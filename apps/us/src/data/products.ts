@@ -450,15 +450,31 @@ export const groundingSheets: Product = {
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
-  cartImage: productMediaAsset("main1-1.jpg", "grounding-sheets", "images"),
+  cartImage: productMediaAsset("juujo-fitted-sheet-main-new.jpg", "grounding-sheets", "images"),
   gallery: [
     {
       src: productMediaAsset(
-        "juujo-grounding-bed-sheets-texture-close-up.png",
+        "juujo-fitted-sheet-main-new.jpg",
         "grounding-sheets",
         "images",
       ),
-      alt: "Grounding sheet texture",
+      alt: "Juujo Grounding Fitted Sheet",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-fitted-sheet-gallery-new.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Details",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-lifestyle.jpg",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Lifestyle",
     },
     {
       src: productMediaAsset(
@@ -730,11 +746,23 @@ export const groundingFlatSheet: Product = {
   description:
     "A soft, breathable flat sheet woven with conductive silver threads and a grounding cord for your bed. Designed for people who want a calmer, more settled wind-down and a simple upgrade to their sleep setup.",
   seoTitle: "Grounding Flat Sheet | Juujo Premium Bedding",
+  cartImage: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
   seoDescription:
     "Juujo Grounding Flat Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   gallery: [
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle On Bed",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-1.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-3.png", "grounding-sheets", "images"),
+      alt: "Juujo Grounding Flat Sheet Lifestyle Details",
+    },
     // --- Inherited from fitted sheets (reorder or remove as needed) ---
-    // { src: productMediaAsset("juujo-grounding-bed-sheets-texture-close-up.png", "grounding-sheets", "images"), alt: "Grounding sheet texture" },
     {
       src: productMediaAsset(
         "juujo-flat-sheet-8.png",
@@ -841,7 +869,6 @@ export const groundingFlatSheet: Product = {
       alt: "Grounding sheet detail view",
     },
     // { src: productMediaAsset("juujo-premium-earthing-sheets-display.png?v=3", "grounding-sheets", "images"), alt: "Grounding sheet display" },
-    // --- New flat sheet images (reorder as needed) ---
     {
       src: productMediaAsset(
         "juujo-flat-sheet-1.png",
