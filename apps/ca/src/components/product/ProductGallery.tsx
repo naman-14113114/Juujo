@@ -217,6 +217,10 @@ export function ProductGallery({
             .buudyLED-23435t23-zoom_btn {
                 display: none !important;
             }
+            /* Hide Arrows on Mobile */
+            .buudyLED-23435t23-arrow {
+                display: none !important;
+            }
             .buudyLED-23435t23-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
                 min-width: 80px; 

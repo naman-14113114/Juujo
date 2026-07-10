@@ -118,7 +118,13 @@ export function GroundingComparisonSection() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <span className="juujo-display text-[var(--muted)] text-base md:text-lg font-bold leading-tight text-center">Terra</span>
+                    <img
+                      src="/media/competitors/groundingco_logo.png"
+                      alt="Terra"
+                      className="h-6 md:h-8 w-auto object-contain max-w-[90%]"
+                      decoding="async"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <span className="juujo-display text-[var(--muted)] text-base md:text-lg font-bold leading-tight text-center">GroundingWell</span>

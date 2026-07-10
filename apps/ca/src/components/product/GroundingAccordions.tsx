@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 const accordionData = [
@@ -102,6 +102,12 @@ const accordionData = [
 
 export function GroundingAccordions() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setOpenIndex(null);
+    }
+  }, []);
 
   const toggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
