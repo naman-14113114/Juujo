@@ -217,39 +217,38 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                 className="p-3 sm:p-4 flex flex-col w-full text-left relative z-10"
               >
                 <div className="flex items-start gap-3 w-full">
-                  <div className={`mt-[3px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] ${selected ? "border-[var(--night)] bg-[var(--night)]" : "border-[var(--muted)]"}`}>
+                  <div className={`mt-[2px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] ${selected ? "border-[var(--night)] bg-[var(--night)]" : "border-[var(--muted)]"}`}>
                     {selected && <div className="h-2 w-2 rounded-full bg-white" />}
                   </div>
                   
-                  <div className={`flex-1 ${t.badge ? 'pr-12 sm:pr-16' : 'pr-1 sm:pr-2'}`}>
-                    <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
-                      {t.label}
-                    </h3>
-                    <p className="mt-1.5 text-[14px] sm:text-[16px] text-[var(--muted)] leading-snug">
-                      {t.freeCount > 0
-                        ? `Only ${formatMoney(perUnit, product.currency)} per mat!`
-                        : `${formatMoney(perSheet, product.currency)}`}
-                    </p>
-                  </div>
-                </div>
+                  <div className="flex-1 flex flex-row justify-between items-start gap-2">
+                    <div className="flex flex-col flex-1 pr-1">
+                      <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
+                        {t.label}
+                      </h3>
+                      <p className="mt-1 text-[13.5px] sm:text-[15px] text-[var(--muted)] leading-snug">
+                        {t.freeCount > 0
+                          ? `Only ${formatMoney(perUnit, product.currency)} per mat!`
+                          : `${formatMoney(perSheet, product.currency)}`}
+                      </p>
+                    </div>
 
-                <div className="mt-3 flex items-end justify-between w-full">
-                  <div />
-                  <div className="flex flex-col items-end text-right">
-                    {savings > 0 && (
-                      <span className="inline-block px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)] mb-1">
-                        SAVE {formatMoney(savings, product.currency)}
-                      </span>
-                    )}
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
-                        {formatMoney(total, product.currency)}
-                      </span>
-                      {compare > total && (
-                        <span className="font-serif text-sm sm:text-[15px] text-[var(--muted)] line-through">
-                          {formatMoney(compare, product.currency)}
+                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-12 sm:pr-14' : ''}`}>
+                      {savings > 0 && (
+                        <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)] mb-1">
+                          SAVE {formatMoney(savings, product.currency)}
                         </span>
                       )}
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                          {formatMoney(total, product.currency)}
+                        </span>
+                        {compare > total && (
+                          <span className="font-serif text-[13px] sm:text-[15px] text-[var(--muted)] line-through">
+                            {formatMoney(compare, product.currency)}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
