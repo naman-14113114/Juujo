@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
@@ -8,10 +8,11 @@ import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import { getProductBySlug, getVariant, type Product } from "@/data/products";
-import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
-import { Info, X, Moon, HeartPulse, Sun } from "lucide-react";
+import { Info, X, Moon, HeartPulse, Sun, ShieldCheck, RefreshCw, Leaf, Truck } from "lucide-react";
+import { market } from "@/lib/market";
+import { DeliveryTimerBox } from "./DeliveryTimerBox";
 
 /**
  * Grounding-sheet buy-box with a bundle offer modelled on thegrounding.co:
@@ -45,6 +46,34 @@ const TIERS: Tier[] = [
     recommended: true,
   },
 ];
+
+function useDeliveryDate(daysFromToday: number) {
+  const [dateLabel, setDateLabel] = useState("");
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      const date = new Date();
+      date.setDate(date.getDate() + daysFromToday);
+
+      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
+      const day = date.getDate();
+      const month = date.toLocaleString(market.locale, { month: "long" });
+
+      setDateLabel(`${weekday} ${day} ${month}`);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [daysFromToday]);
+
+  return dateLabel;
+}
+
+function DeliveryDateDisplay({ days }: { days: number }) {
+  const date = useDeliveryDate(days);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return <>{mounted ? date || "soon" : "Loading..."}</>;
+}
 
 export function GroundingBuyBox({ product }: { product: Product }) {
   const { setSheetBundle } = useCart();
@@ -153,7 +182,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5 lg:gap-6">
       <div>
         <a
           href="#reviews"
@@ -165,206 +194,193 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           >
             ★★★★★
           </div>
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-md">
+          <span className="font-sans text-xs sm:text-[13px] font-bold tracking-wide text-[var(--plum)] bg-[color-mix(in_srgb,var(--gold)_18%,transparent)] px-2.5 py-0.5 rounded-full">
             {product.rating.toFixed(1)} · TRUSTED BY{" "}
-            {product.customerCount || "16,000+"} CUSTOMERS
+            {product.customerCount || "40,000+"} CUSTOMERS
           </span>
         </a>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.2rem,4.3vw,2.4rem)] whitespace-nowrap leading-[1.02] tracking-tight">
-          Premium Grounding Bed Sheets
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.6rem,4.5vw,2.6rem)] whitespace-nowrap leading-[1.05] tracking-tight">
+          Premium Grounding Sheets
         </h1>
 
         {product.id === "grounding-flat-sheet" ? (
-          <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
-            <li className="flex items-start gap-2.5">
-              <Moon className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+          <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[15px] lg:text-[16px] text-[var(--plum)]">
+            <li className="flex items-start gap-3">
+              <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Settle nervous tension to fall asleep faster and deeper
+                <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Settle nervous tension to fall asleep faster.
               </span>
             </li>
-            <li className="flex items-start gap-2.5">
-              <HeartPulse
-                className="text-[var(--gold)] shrink-0 mt-0.5"
-                size={20}
-              />
+            <li className="flex items-start gap-3">
+              <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Ease inflammation and wake up with less morning stiffness
+                <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Ease inflammation and wake up with less stiffness.
               </span>
             </li>
-            <li className="flex items-start gap-2.5">
-              <Sun className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+            <li className="flex items-start gap-3">
+              <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Experience restorative sleep cycles and wake up refreshed
+                <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience restorative sleep cycles for renewed vitality.
               </span>
             </li>
           </ul>
         ) : (
-          <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)]">
-            <li className="flex items-start gap-2.5">
-              <Moon className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+          <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[15px] lg:text-[16px] text-[var(--plum)]">
+            <li className="flex items-start gap-3">
+              <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Fall asleep faster by calming your mind and nervous tension
+                <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Fall asleep faster by calming nervous tension.
               </span>
             </li>
-            <li className="flex items-start gap-2.5">
-              <HeartPulse
-                className="text-[var(--gold)] shrink-0 mt-0.5"
-                size={20}
-              />
+            <li className="flex items-start gap-3">
+              <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Soothe aches and pains to wake up with less joint stiffness
+                <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Soothe aches to wake up with less joint stiffness.
               </span>
             </li>
-            <li className="flex items-start gap-2.5">
-              <Sun className="text-[var(--gold)] shrink-0 mt-0.5" size={20} />
+            <li className="flex items-start gap-3">
+              <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
-                Experience deeper, restorative sleep for all-day energy
+                <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience deeper sleep for all-day energy.
               </span>
             </li>
           </ul>
         )}
       </div>
+
       <DeliveryTimerBox />
+
       {/* Bundle heading */}
-      <div className="flex items-center gap-3">
-        <span
-          className="h-px flex-1"
-          style={{ backgroundColor: "var(--border)" }}
-        />
-        <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
-          Bundle &amp; Save + Free Shipping &amp; Gifts
+      <div className="flex items-center gap-3 mt-1 lg:mt-2">
+        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
+        <span className="juujo-mono text-center text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--plum)]">
+          Bundle & Save + Free Shipping & Gifts
         </span>
-        <span
-          className="h-px flex-1"
-          style={{ backgroundColor: "var(--border)" }}
-        />
+        <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
       </div>
-      {/* Tier cards */}
-      <div className="flex flex-col gap-4">
+
+      {/* Tier cards - vertical layout */}
+      <div className="flex flex-col gap-3 lg:gap-4">
         {TIERS.map((t) => {
           const selected = t.id === tierId;
           const total = priceForTier(t);
           const compare = compareForTier(t);
           const savings = Math.max(compare - total, 0);
-          const perUnit = Math.round(total / t.sheets);
-
+          
+          const isBundle = t.id === "bundle";
+          
           return (
             <div
               key={t.id}
-              className="relative rounded-2xl border transition-colors"
-              style={{
-                borderColor: selected ? "var(--gold)" : "var(--border)",
-                backgroundColor: selected
-                  ? "color-mix(in oklch, var(--gold) 6%, var(--paper))"
-                  : "var(--card)",
-                boxShadow: selected ? "0 0 0 1px var(--gold)" : "none",
+              className={`relative flex flex-col rounded-2xl transition-all duration-200 cursor-pointer ${
+                selected 
+                  ? "border-[2px] border-[var(--night)] bg-[color-mix(in_oklch,var(--clay)_6%,var(--paper))] shadow-sm z-10" 
+                  : "border border-[var(--border)] bg-[var(--card)] hover:border-[color-mix(in_oklch,var(--clay)_40%,var(--border))] opacity-95"
+              }`}
+              onClick={() => {
+                setTierId(t.id);
+                setExpandedTier(t.id);
               }}
             >
+              {/* MOST POPULAR diagonal ribbon for bundle */}
               {t.badge && (
-                <span
-                  className="absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
-                  style={{ backgroundColor: "var(--gold)" }}
-                >
-                  {t.badge}
-                </span>
+                <div className="absolute top-0 right-0 overflow-hidden w-28 h-28 pointer-events-none z-20">
+                  <div className="absolute top-[1.35rem] -right-8 w-40 origin-center rotate-45 bg-[var(--clay-deep)] py-1.5 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
+                    {t.badge}
+                  </div>
+                </div>
               )}
 
-              {/* Card header (radio + label + price) */}
-              <button
-                type="button"
-                onClick={() => {
-                  setTierId(t.id);
-                  setExpandedTier(t.id);
-                }}
-                aria-pressed={selected}
-                className="flex w-full items-center gap-3 p-4 text-left transition-transform duration-150 ease-out active:scale-[0.995]"
-              >
-                <span
-                  className="grid h-5 w-5 flex-none place-items-center rounded-full border-2"
-                  style={{
-                    borderColor: selected ? "var(--gold)" : "var(--border)",
-                  }}
-                >
-                  {selected && (
-                    <span
-                      className="h-2.5 w-2.5 rounded-full"
-                      style={{ backgroundColor: "var(--gold)" }}
-                    />
-                  )}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="flex items-center gap-2">
-                    <span className="font-serif text-lg font-semibold text-[var(--ink)]">
-                      {t.label}
-                    </span>
+              {/* Card content header */}
+              <div className="p-3 sm:p-4 flex-1 flex flex-col relative z-10">
+                <div className="flex items-start gap-3">
+                  {/* Radio circle */}
+                  <div className={`mt-[3px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] ${selected ? "border-[var(--night)] bg-[var(--night)]" : "border-[var(--muted)]"}`}>
+                    {selected && <div className="h-2 w-2 rounded-full bg-white" />}
+                  </div>
+                  
+                  <div className={`flex-1 ${t.badge ? 'pr-12 sm:pr-16' : 'pr-1 sm:pr-2'}`}>
+                    <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
+                      {isBundle ? "BEST VALUE BUNDLE" : "SINGLE SHEET SLEEP SET"}
+                    </h3>
+                    <p className="mt-1.5 text-[14px] sm:text-[16px] text-[var(--muted)] leading-snug">
+                      {isBundle ? (
+                        <>Includes 2 Sheet Sets, 2 Cables, & <strong className="text-[var(--night)] font-semibold">FREE Grounding Mat</strong> ($140 Value)</>
+                      ) : (
+                        <>Includes 1 Fitted Sheet, 1 Cable</>
+                      )}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Price block */}
+                <div className="mt-3 flex items-end justify-between">
+                  <div />
+                  <div className="flex flex-col items-end text-right">
                     {savings > 0 && (
-                      <span
-                        className="rounded-full px-2 py-0.5 text-[11px] font-semibold text-white"
-                        style={{ backgroundColor: "var(--success)" }}
-                      >
-                        You save {formatMoney(savings, product.currency)}
+                      <span className="inline-block px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)] mb-1">
+                        SAVE {formatMoney(savings, product.currency)}
                       </span>
                     )}
-                  </span>
-                  <span className="font-serif mt-0.5 block text-sm text-[var(--muted)]">
-                    {t.freeCount > 0
-                      ? `Only ${formatMoney(perUnit, product.currency)} per sheet!`
-                      : `${formatMoney(perSheet, product.currency)} per sheet`}
-                  </span>
-                </span>
-                <span className="flex-none text-right">
-                  <span className="font-serif block text-lg font-semibold text-[var(--ink)]">
-                    {formatMoney(total, product.currency)}
-                  </span>
-                  {compare > total && (
-                    <span className="font-serif block text-sm text-[var(--muted)] line-through">
-                      {formatMoney(compare, product.currency)}
-                    </span>
-                  )}
-                </span>
-              </button>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="font-serif text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                        {formatMoney(total, product.currency)}
+                      </span>
+                      {compare > total && (
+                        <span className="font-serif text-sm sm:text-[15px] text-[var(--muted)] line-through">
+                          {formatMoney(compare, product.currency)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              {/* Per-sheet selectors, only for the selected tier */}
+              {/* The expanded selection area for the CHOSEN tier */}
               {expandedTier === t.id && (
-                <div
-                  className="flex flex-col gap-3 border-t px-4 py-4"
-                  style={{ borderColor: "var(--border)" }}
-                >
-                  <div className="flex justify-between items-center -mb-1">
-                    <div className="font-serif text-xs text-[var(--muted)]">
-                      Color, Size
+                <div className="bg-[rgba(247,241,232,0.85)] border-t border-[var(--border)] rounded-b-[15px]">
+                  <div className="flex justify-between items-center px-4 sm:px-5 py-3 border-b border-[var(--border)] bg-[rgba(0,0,0,0.02)]">
+                    <div className="font-sans text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
+                      Customize Your Selection
                     </div>
                     <button
                       type="button"
-                      onClick={() => setShowSizeGuide(true)}
-                      className="text-xs text-[var(--plum)] font-medium hover:opacity-80 transition-opacity underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowSizeGuide(true);
+                      }}
+                      className="text-[11px] font-bold uppercase tracking-wider text-[var(--night)] hover:opacity-70 transition-opacity underline underline-offset-2"
                     >
                       Size Guide
                     </button>
                   </div>
-                  {Array.from({ length: t.sheets }).map((_, index) => (
-                    <SheetRow
-                      key={index}
-                      product={product}
-                      index={index}
-                      showIndex={t.sheets > 1}
-                      choice={choices[t.id][index]}
-                      onChange={(patch) => updateChoice(t.id, index, patch)}
-                      onSizeGuideClick={() => setShowSizeGuide(true)}
-                    />
-                  ))}
+                  <div className="p-3 sm:p-4 flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
+                    {Array.from({ length: t.sheets }).map((_, index) => (
+                      <SheetRow
+                        key={`${t.id}-${index}`}
+                        product={product}
+                        index={index}
+                        showIndex={t.sheets > 1}
+                        choice={choices[t.id][index]}
+                        onChange={(patch) => updateChoice(t.id, index, patch)}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
           );
         })}
       </div>
+
+
+
       {/* Add to cart */}
       <Button
         id="hero-cta"
         disabled={isNavigating || outOfStock}
         onClick={handleAddToCart}
-        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
+        className={`proxy-bundle-btn w-full rounded-[30px] border border-[var(--night)] bg-[var(--night)] py-4 text-[1.15rem] font-bold uppercase tracking-wide text-white shadow-lg transition-all duration-300 hover:scale-[1.01] hover:bg-[var(--night)] hover:border-[var(--night)] active:scale-[0.99] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
       >
         {isNavigating ? (
           <>
@@ -390,21 +406,38 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           </span>
         )}
       </Button>
+
+      {/* Trust Badges directly below CTA */}
+      <div className="grid grid-cols-3 gap-2 mt-3 px-1">
+        <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+          <ShieldCheck className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">FDA<br/>Cleared</span>
+        </div>
+        <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+          <RefreshCw className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">120-Night<br/>Guarantee</span>
+        </div>
+        <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+          <Leaf className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">Eco-Friendly<br/>Materials</span>
+        </div>
+      </div>
+
       {/* Free gifts bundle */}
       {giftProduct && (
-        <section className="mt-4 mb-6" id="free-gifts">
-          <div className="text-center mb-8 flex flex-col items-center">
-            <h2 className="juujo-display text-3xl font-medium text-[var(--ink)]">
+        <section className="mt-8 mb-6 bg-[color-mix(in_oklch,var(--gold)_4%,var(--paper))] p-5 rounded-2xl border border-[color-mix(in_oklch,var(--gold)_20%,transparent)]" id="free-gifts">
+          <div className="text-center mb-6 flex flex-col items-center">
+            <h2 className="juujo-display text-2xl sm:text-3xl font-medium text-[var(--ink)]">
               Summer Sleep Sale
             </h2>
-            <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--ink)]" style={{ backgroundColor: "color-mix(in oklch, var(--gold) 15%, transparent)" }}>
-              <span className="juujo-display text-sm sm:text-base font-extrabold normal-case text-[var(--ink)]">
+            <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-[11px] sm:text-[13px] font-bold tracking-widest text-[var(--ink)] bg-[color-mix(in_oklch,var(--gold)_15%,transparent)]">
+              <span className="juujo-display text-[13px] sm:text-base font-extrabold normal-case text-[var(--ink)]">
                 {formatMoney((giftProduct.compareAtCents || giftProduct.priceCents) + 2900 + 3900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {[
             {
               id: "premium-packaging",
@@ -427,15 +460,10 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           ].map((gift) => (
             <div
               key={gift.id}
-              className={`group relative flex min-h-[140px] flex-col rounded-xl border p-2 pt-5 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md' : 'hover:-translate-y-1'}`}
-              style={{
-                borderColor: "var(--gold)",
-                backgroundColor: "color-mix(in oklch, var(--gold) 8%, var(--paper))",
-              }}
+              className={`group relative flex flex-col rounded-xl border bg-white p-2 pt-4 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md border-[var(--clay)]' : 'hover:-translate-y-1 border-[var(--border)]'}`}
             >
               <span
-                className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white"
-                style={{ backgroundColor: "var(--gold)" }}
+                className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white bg-[var(--night)]"
               >
                 Free
                 <span className="font-medium normal-case line-through opacity-80">
@@ -445,22 +473,24 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               <span className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply">
                 <Image
                   alt={gift.name}
-                  className="rounded-2xl object-cover transition-transform group-hover:scale-105"
+                  className="rounded-xl object-cover transition-transform group-hover:scale-105"
                   fill
                   sizes="120px"
                   src={gift.image}
                 />
               </span>
-              <span className="mt-3 text-xs font-semibold leading-tight text-[var(--ink)] sm:text-sm">
+              <span className="mt-2 text-[11px] font-semibold leading-tight text-[var(--ink)] sm:text-xs">
                 {gift.name}
               </span>
             </div>
           ))}
           </div>
         </section>
-      )}{" "}
+      )}
+      
       {/* Accordions */}
       <GroundingAccordions />
+      
       {/* Size Guide Modal */}
       {showSizeGuide && (
         <div
@@ -496,20 +526,42 @@ function SheetRow({
   showIndex,
   choice,
   onChange,
-  onSizeGuideClick,
 }: {
   product: Product;
   index: number;
   showIndex: boolean;
   choice: SheetChoice;
   onChange: (patch: Partial<SheetChoice>) => void;
-  onSizeGuideClick: () => void;
 }) {
   const variant = getVariant(product, choice.colorId, choice.sizeId);
   const soldOut = !variant.inStock || !variant.variantId;
 
+  /** Check if a specific color has ANY in-stock size */
+  const isColorInStock = (colorId: string) =>
+    product.sizes.some((size) => {
+      const v = getVariant(product, colorId, size.id);
+      return v.inStock && !!v.variantId;
+    });
+
+  /** Check if a specific color+size combo is in stock */
+  const isSizeInStock = (colorId: string, sizeId: string) => {
+    const v = getVariant(product, colorId, sizeId);
+    return v.inStock && !!v.variantId;
+  };
+
+  /** When color changes, auto-select first in-stock size for that color */
+  const handleColorChange = (colorId: string) => {
+    const firstInStockSize = product.sizes.find((s) =>
+      isSizeInStock(colorId, s.id),
+    );
+    onChange({
+      colorId,
+      sizeId: firstInStockSize?.id ?? choice.sizeId,
+    });
+  };
+
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3">
       {showIndex && (
         <span className="font-serif w-6 flex-none text-sm text-[var(--muted)]">
           #{index + 1}
@@ -520,55 +572,26 @@ function SheetRow({
       </label>
       <ColorSelect
         value={choice.colorId}
-        onChange={(val) => onChange({ colorId: val })}
+        onChange={handleColorChange}
         colors={product.colors}
+        isColorInStock={isColorInStock}
       />
       <label className="sr-only" htmlFor={`size-${index}`}>
         Size for sheet {index + 1}
       </label>
       <div className="relative flex-1">
-        <select
-          id={`size-${index}`}
+        <SizeSelect
           value={choice.sizeId}
-          onChange={(event) => onChange({ sizeId: event.target.value })}
-          className="font-serif w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-3 pr-8 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
-          style={{
-            borderColor: soldOut ? "var(--clay-deep)" : "var(--border)",
-          }}
-        >
-          {product.sizes.map((size) => (
-            <option key={size.id} value={size.id}>
-              {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
-            </option>
-          ))}
-        </select>
-        <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </div>
+          onChange={(sizeId) => onChange({ sizeId })}
+          sizes={product.sizes}
+          isSizeInStock={(sizeId) => isSizeInStock(choice.colorId, sizeId)}
+        />
         {soldOut && (
-          <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--clay-deep)]">
+          <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--night)]">
             Out of stock, pick another size
           </span>
         )}
       </div>
-      <button
-        type="button"
-        onClick={onSizeGuideClick}
-        className="text-[12px] text-[var(--plum)] font-medium hover:opacity-80 transition-opacity underline whitespace-nowrap"
-      >
-        Size Guide
-      </button>
     </div>
   );
 }
@@ -577,34 +600,36 @@ function ColorSelect({
   value,
   onChange,
   colors,
+  isColorInStock,
 }: {
   value: string;
   onChange: (val: string) => void;
   colors: Product["colors"];
+  isColorInStock: (colorId: string) => boolean;
 }) {
   const [open, setOpen] = useState(false);
   const selected = colors.find((c) => c.id === value);
 
   return (
-    <div className="relative flex-1">
+    <div className="relative flex-[0.8] sm:flex-1">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className="font-serif w-full appearance-none rounded-xl border bg-[var(--card)] py-2.5 pl-9 pr-8 text-left text-sm text-[var(--ink)] outline-none transition focus:border-[var(--gold)]"
+        className="font-serif w-full appearance-none rounded-xl border bg-white py-2.5 pl-8 sm:pl-9 pr-6 sm:pr-8 text-left text-xs sm:text-sm text-[var(--ink)] outline-none transition focus:border-[var(--night)]"
         style={{ borderColor: "var(--border)" }}
       >
         {selected && (
           <span
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-[3px] border"
+            className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 -translate-y-1/2 rounded-[3px] border"
             style={{
               backgroundColor: selected.hex,
               borderColor: "rgba(0,0,0,0.1)",
             }}
           />
         )}
-        {selected?.name}
-        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+        <span className="truncate block">{selected?.name}</span>
+        <span className="pointer-events-none absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
           <svg
             width="12"
             height="12"
@@ -621,31 +646,130 @@ function ColorSelect({
       </button>
       {open && (
         <ul
-          className="absolute left-0 top-full z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg"
+          className="absolute left-0 top-full z-50 mt-1 max-h-60 w-[150%] sm:w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg"
           style={{ borderColor: "var(--border)" }}
         >
-          {colors.map((color) => (
-            <li key={color.id}>
-              <button
-                type="button"
-                onPointerDown={(e) => e.preventDefault()}
-                onClick={() => {
-                  onChange(color.id);
-                  setOpen(false);
-                }}
-                className="font-serif flex w-full items-center px-3 py-2 text-sm text-left hover:bg-gray-50 focus:bg-gray-50 text-[var(--ink)]"
-              >
-                <span
-                  className="mr-2 h-4 w-4 flex-none rounded-[3px] border"
-                  style={{
-                    backgroundColor: color.hex,
-                    borderColor: "rgba(0,0,0,0.1)",
+          {colors.map((color) => {
+            const inStock = isColorInStock(color.id);
+            return (
+              <li key={color.id}>
+                <button
+                  type="button"
+                  disabled={!inStock}
+                  onPointerDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    if (!inStock) return;
+                    onChange(color.id);
+                    setOpen(false);
                   }}
-                />
-                {color.name}
-              </button>
-            </li>
-          ))}
+                  className={`font-serif flex w-full items-center px-3 py-2 text-xs sm:text-sm text-left text-[var(--ink)] ${
+                    inStock
+                      ? "hover:bg-gray-50 focus:bg-gray-50 cursor-pointer"
+                      : "opacity-40 cursor-not-allowed"
+                  }`}
+                >
+                  <span
+                    className={`mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-none rounded-[3px] border ${!inStock ? "grayscale" : ""}`}
+                    style={{
+                      backgroundColor: color.hex,
+                      borderColor: "rgba(0,0,0,0.1)",
+                    }}
+                  />
+                  {color.name}
+                  {!inStock && (
+                    <span className="ml-auto text-[10px] sm:text-[11px] font-medium text-[var(--night)]">
+                      Out of Stock
+                    </span>
+                  )}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function SizeSelect({
+  value,
+  onChange,
+  sizes,
+  isSizeInStock,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  sizes: Product["sizes"];
+  isSizeInStock: (sizeId: string) => boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const selected = sizes.find((s) => s.id === value);
+
+  return (
+    <div className="relative flex-1">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        className="font-serif w-full appearance-none rounded-xl border bg-white py-2.5 pl-3 pr-8 sm:pr-9 text-left text-xs sm:text-sm text-[var(--ink)] outline-none transition focus:border-[var(--night)]"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <span className="truncate block">
+          {selected?.name} {selected?.dimensions ? `(${selected.dimensions})` : ""}
+        </span>
+        <span className="pointer-events-none absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </span>
+      </button>
+      {open && (
+        <ul
+          className="absolute left-0 top-full z-50 mt-1 max-h-60 w-[150%] sm:w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg"
+          style={{ borderColor: "var(--border)" }}
+        >
+          {sizes.map((size) => {
+            const inStock = isSizeInStock(size.id);
+            return (
+              <li key={size.id}>
+                <button
+                  type="button"
+                  disabled={!inStock}
+                  onPointerDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    if (!inStock) return;
+                    onChange(size.id);
+                    setOpen(false);
+                  }}
+                  className={`font-serif flex w-full flex-col px-3 py-2 text-xs sm:text-sm text-left text-[var(--ink)] ${
+                    inStock
+                      ? "hover:bg-gray-50 focus:bg-gray-50 cursor-pointer"
+                      : "opacity-40 cursor-not-allowed"
+                  }`}
+                >
+                  <div className="flex w-full items-center justify-between">
+                    <span>
+                      {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
+                    </span>
+                    {!inStock && (
+                      <span className="ml-2 text-[10px] sm:text-[11px] font-medium text-[var(--night)] whitespace-nowrap">
+                        Out of Stock
+                      </span>
+                    )}
+                  </div>
+                </button>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
