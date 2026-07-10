@@ -148,44 +148,39 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           Grounding Mat
         </h1>
 
-        <ul className="mt-4 lg:mt-5 space-y-2 lg:space-y-3 font-serif text-sm lg:text-base text-[var(--plum)] tracking-wide">
-          <li className="flex items-start gap-2.5">
-            <Hexagon className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
+        <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[15px] lg:text-[16px] text-[var(--plum)]">
+          <li className="flex items-start gap-3">
+            <Hexagon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              Conductive Carbon Surface for maximum conductivity
+              <strong className="font-semibold text-[var(--ink)]">CONDUCTIVE CARBON SURFACE:</strong> Engineered for maximum grounding conductivity.
             </span>
           </li>
-          <li className="flex items-start gap-2.5">
-            <Home className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
+          <li className="flex items-start gap-3">
+            <Home className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              Versatile Design perfect for desk, couch, or floor
+              <strong className="font-semibold text-[var(--ink)]">VERSATILE DESIGN:</strong> Perfect for use on your desk, couch, or floor.
             </span>
           </li>
-          <li className="flex items-start gap-2.5">
-            <ShieldCheck className="text-[var(--gold)] shrink-0 mt-0.5" strokeWidth={1.5} size={20} />
+          <li className="flex items-start gap-3">
+            <ShieldCheck className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              Easy to clean and built to last
+              <strong className="font-semibold text-[var(--ink)]">DURABLE & LOW MAINTENANCE:</strong> Easy to clean and built to last.
             </span>
           </li>
         </ul>
+
+        {/* Delivery & Bundle Header */}
+        <DeliveryTimerBox />
+        <div className="flex items-center gap-3 mt-1 lg:mt-2">
+          <div className="flex-1 h-px bg-[var(--border)]" />
+          <span className="text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-[var(--night)]">
+            Bundle &amp; Save
+          </span>
+          <div className="flex-1 h-px bg-[var(--border)]" />
+        </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span
-          className="h-px flex-1"
-          style={{ backgroundColor: "var(--border)" }}
-        />
-        <span className="juujo-mono text-center text-xs font-semibold uppercase tracking-wider text-[var(--plum)]">
-          Bundle &amp; Save
-        </span>
-        <span
-          className="h-px flex-1"
-          style={{ backgroundColor: "var(--border)" }}
-        />
-      </div>
-
-      <DeliveryTimerBox />
-
+      {/* Tiers */}
       <div className="flex flex-col gap-4">
         {TIERS.map((t) => {
           const selected = t.id === tierId;
@@ -197,12 +192,14 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           return (
             <div
               key={t.id}
-              className={`relative rounded-2xl border transition-colors ${selected ? 'border-[var(--night)] bg-[rgba(247,241,232,0.85)] border-[2px]' : 'border-[var(--border)] bg-white'}`}
+              className={`relative rounded-2xl border transition-colors ${selected ? 'border-[var(--night)] bg-[rgba(247,241,232,0.85)] border-[2px]' : 'border-[var(--border)] bg-transparent'}`}
             >
               {t.badge && (
-                <div className="absolute top-0 right-0 overflow-hidden w-[100px] h-[100px] z-20 pointer-events-none rounded-tr-2xl">
-                  <div className="absolute top-[20px] -right-[28px] w-[140px] rotate-45 bg-[var(--clay-deep)] text-[var(--night)] py-1.5 text-center text-[10px] font-extrabold uppercase tracking-widest shadow-sm">
-                    {t.badge}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none z-20">
+                  <div className="absolute top-0 right-0 w-28 h-28">
+                    <div className="absolute top-[1.35rem] -right-8 w-40 origin-center rotate-45 bg-[var(--clay-deep)] py-1.5 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
+                      {t.badge}
+                    </div>
                   </div>
                 </div>
               )}
@@ -233,13 +230,8 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                       </p>
                     </div>
 
-                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-12 sm:pr-14' : ''}`}>
-                      {savings > 0 && (
-                        <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)] mb-1">
-                          SAVE {formatMoney(savings, product.currency)}
-                        </span>
-                      )}
-                      <div className="flex items-baseline gap-1.5">
+                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-20 sm:pr-24' : ''}`}>
+                      <div className="flex items-baseline gap-1.5 mb-1">
                         <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
                           {formatMoney(total, product.currency)}
                         </span>
@@ -249,6 +241,11 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                           </span>
                         )}
                       </div>
+                      {savings > 0 && (
+                        <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
+                          SAVE {formatMoney(savings, product.currency)}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

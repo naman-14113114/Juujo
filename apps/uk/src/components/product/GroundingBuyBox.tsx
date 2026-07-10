@@ -284,9 +284,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             >
               {/* MOST POPULAR diagonal ribbon for bundle */}
               {t.badge && (
-                <div className="absolute top-0 right-0 overflow-hidden w-28 h-28 pointer-events-none z-20">
-                  <div className="absolute top-[1.35rem] -right-8 w-40 origin-center rotate-45 bg-[var(--clay-deep)] py-1.5 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
-                    {t.badge}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none z-20">
+                  <div className="absolute top-0 right-0 w-28 h-28">
+                    <div className="absolute top-[1.35rem] -right-8 w-40 origin-center rotate-45 bg-[var(--clay-deep)] py-1.5 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
+                      {t.badge}
+                    </div>
                   </div>
                 </div>
               )}
@@ -324,13 +326,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       </p>
                     </div>
 
-                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-12 sm:pr-14' : ''}`}>
-                      {savings > 0 && (
-                        <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)] mb-1">
-                          SAVE {formatMoney(savings, product.currency)}
-                        </span>
-                      )}
-                      <div className="flex items-baseline gap-1.5">
+                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-20 sm:pr-24' : ''}`}>
+                      <div className="flex items-baseline gap-1.5 mb-1">
                         <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
                           {formatMoney(total, product.currency)}
                         </span>
@@ -340,6 +337,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                           </span>
                         )}
                       </div>
+                      {savings > 0 && (
+                        <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
+                          SAVE {formatMoney(savings, product.currency)}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
