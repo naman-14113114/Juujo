@@ -1,9 +1,9 @@
 export const aboutHero = {
-  eyebrow: "About Juujo",
+  eyebrow: "",
   title: "Welcome to Juujo",
   copy: "Juujo is a premium bedding brand built around one idea: better sleep should feel effortless. We design fitted grounding sheets, flat grounding sheets, and grounding mats with breathable materials and honest craftsmanship, so your bed becomes the calmest part of your day.",
-  imageDesktop: "/images/about/about-hero-desktop-v4.webp",
-  imageMobile: "/images/about/about-hero-desktop-v4.webp",
+  imageDesktop: "/media/about-us-juujo-store.png",
+  imageMobile: "/media/about-us-juujo-store.png",
 };
 
 export const aboutSections = [

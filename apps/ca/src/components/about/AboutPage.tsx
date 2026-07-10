@@ -10,7 +10,7 @@ export function AboutPage() {
         {/* Desktop Hero Image */}
         <div className="absolute inset-0 hidden md:block select-none pointer-events-none">
           <Image
-            alt="Juujo Storefront Desktop Banner"
+            alt="Juujo Grounding Bedding Store Grand Opening Ribbon Cutting"
             src={aboutHero.imageDesktop}
             fill
             priority
@@ -22,7 +22,7 @@ export function AboutPage() {
         {/* Mobile Hero Image */}
         <div className="absolute inset-0 block md:hidden select-none pointer-events-none">
           <Image
-            alt="Juujo Storefront Mobile Banner"
+            alt="Juujo Grounding Bedding Store Grand Opening"
             src={aboutHero.imageMobile}
             fill
             priority
