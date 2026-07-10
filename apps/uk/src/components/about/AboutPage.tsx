@@ -61,14 +61,14 @@ export function AboutPage() {
               <div className="juujo-wrap grid gap-12 lg:grid-cols-2 lg:items-center">
                 {/* Image Column */}
                 <div 
-                  className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
+                  className={`relative overflow-hidden rounded-[24px] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
                     isRight ? "lg:order-2" : ""
                   }`}
                 >
                   <img
                     alt={section.image.alt}
                     src={section.image.src}
-                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                    className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
                   />
                 </div>
 
@@ -98,7 +98,7 @@ export function AboutPage() {
                               
                               return (
                                 <li key={bIdx} className="flex items-start gap-2.5">
-                                  <span className="text-[var(--gold)] mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                                  <span className="text-[var(--plum)] mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--plum)] shrink-0" />
                                   <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
                                     {rest ? (
                                       <>
@@ -171,7 +171,7 @@ export function AboutPage() {
                             
                             return (
                               <li key={bIdx} className="flex items-center gap-3">
-                                <span className="text-[var(--gold)] h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                                <span className="text-[var(--plum)] h-1.5 w-1.5 rounded-full bg-[var(--plum)] shrink-0" />
                                 <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
                                   {rest ? (
                                     <>
