@@ -58,12 +58,12 @@ function ContactHero() {
         <div className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_30px_70px_-44px_rgba(58,31,61,.45)]">
             <Image
-              alt="Juujo LED light therapy support"
+              alt="Juujo Customer Support"
               className="object-cover"
               fill
               priority
               sizes="(min-width: 1024px) 44vw, 92vw"
-              src={homeAsset("01-home-led-mask-hero.png")}
+              src={homeAsset("juujo-contact-us-hero.png")}
             />
           </div>
           <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[rgba(58,31,61,.9)] p-5 text-[var(--cream)] shadow-[0_20px_55px_-30px_rgba(0,0,0,.6)]">
