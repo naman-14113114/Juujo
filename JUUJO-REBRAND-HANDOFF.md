@@ -493,3 +493,10 @@ Ask me if anything is unclear before large changes. Take your time; there is no 
 - Applied across all 4 apps by modifying the root CSS tokens in globals.css.
 - Shifted --ink (primary text) and --muted (secondary text) to a green-compatible hue (155) while keeping chroma extremely low (0.015 and 0.02) to maintain near-black and neutral grey readability.
 - No components were changed; the alias system (--plum -> --night) handled the reskin instantly.
+
+## [2026-07-11] Grounding Sheets & Mat Premium Layout Update
+
+- Modified `GroundingBuyBox.tsx` and `GroundingMatBuyBox.tsx` across all 4 apps (US, UK, CA, AU).
+- Replaced the inline spans with `<span className="block">` to ensure permanent line breaks on all screen sizes for the 'Premium Grounding Sheets' title.
+- Scaled up the product name font sizes from clamped values to fixed larger values (`!text-[2.6rem] md:!text-[3.2rem]`) for both products.
+- Renamed the 'Grounding Mat' title to 'Premium Grounding Mat' to keep product presentation synchronized and equally premium.
