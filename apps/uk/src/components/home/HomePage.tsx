@@ -275,7 +275,7 @@ function HomeVideoHero() {
             >
               ★★★★★
             </div>
-            <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[color-mix(in_srgb,var(--gold)_30%,transparent)] px-2.5 py-0.5 rounded-md backdrop-blur-sm">
+            <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)]">
               Excellent 4.9/5 | 10,000+ Customers
             </span>
           </div>

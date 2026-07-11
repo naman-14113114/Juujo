@@ -398,7 +398,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               style={{ visibility: "hidden" }}
               className="relative z-20 whitespace-nowrap"
             >
-              ADD TO CART {"·"} {formatMoney(bundleTotal, product.currency)}
+              Add To Cart + 3 Free gifts
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie
@@ -412,7 +412,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <span className="relative z-20 whitespace-nowrap">
             {outOfStock
               ? "SELECTED SIZE OUT OF STOCK"
-              : `ADD TO CART · ${formatMoney(bundleTotal, product.currency)}`}
+              : "Add To Cart + 3 Free gifts"}
           </span>
         )}
       </Button>

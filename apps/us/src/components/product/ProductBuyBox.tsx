@@ -270,7 +270,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
                 style={{ visibility: "hidden" }}
                 className="relative z-20 whitespace-nowrap"
               >
-                Add to cart {"·"} {formatMoney(totalPrice, product.currency)}
+                Add To Cart + 3 Free gifts
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie
@@ -282,7 +282,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             </>
           ) : (
             <span className="relative z-20 whitespace-nowrap">
-              Add to cart {"·"} {formatMoney(totalPrice, product.currency)}
+              Add To Cart + 3 Free gifts
             </span>
           )}
         </Button>

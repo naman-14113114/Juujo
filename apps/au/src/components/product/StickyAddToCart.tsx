@@ -116,7 +116,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
             <>
               <span style={{ visibility: "hidden" }} className="relative z-20 flex items-center gap-2">
                 <ShoppingBag size={17} />
-                <span>ADD TO CART</span>
+                <span>Add To Cart + 3 Free gifts</span>
               </span>
               <span className="absolute inset-0 z-20 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop className="h-10 w-16 scale-[1.35]" />
@@ -131,7 +131,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span>Add to cart{giftLabel}</span>
+              <span>Add To Cart + 3 Free gifts</span>
             </>
           )}
         </Button>
