@@ -144,8 +144,9 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
             {product.customerCount || "40,000+"} CUSTOMERS
           </span>
         </a>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.2rem,4.3vw,2.4rem)] whitespace-nowrap leading-[1.02] tracking-tight">
-          Grounding Mat
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[2.6rem] md:!text-[3.2rem] leading-[1.05] tracking-tight">
+          <span className="block">Premium</span>
+          <span className="block">Grounding Mat</span>
         </h1>
 
         <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[15px] lg:text-[16px] text-[var(--plum)]">

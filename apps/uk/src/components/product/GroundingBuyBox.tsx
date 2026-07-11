@@ -199,9 +199,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             {product.customerCount || "40,000+"} CUSTOMERS
           </span>
         </a>
-        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[2.3rem] md:!text-[clamp(1.6rem,4.5vw,2.6rem)] leading-[1.05] tracking-tight">
-          <span className="block md:inline">Premium</span>
-          <span className="block md:inline">Grounding Sheets</span>
+        <h1 className="font-serif text-[var(--plum)] mt-2 !text-[2.6rem] md:!text-[3.2rem] leading-[1.05] tracking-tight">
+          <span className="block">Premium</span>
+          <span className="block">Grounding Sheets</span>
         </h1>
 
         {product.id === "grounding-flat-sheet" ? (
