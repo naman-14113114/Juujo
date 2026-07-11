@@ -137,8 +137,8 @@ export function GroundingComparisonSection() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
-                      src="/media/competitors/getgrounding-logo.svg"
-                      alt="Get Grounding"
+                      src="/media/competitors/earthing-harmony-logo.webp"
+                      alt="Earthing Harmony"
                       className="h-6 md:h-8 w-auto object-contain max-w-[90%]"
                       decoding="async"
                       loading="lazy"
@@ -184,8 +184,8 @@ export function GroundingComparisonSection() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
-                      src="/media/competitors/getgrounding.webp"
-                      alt="Get Grounding"
+                      src="/media/competitors/earthing-harmony-image.webp"
+                      alt="Earthing Harmony"
                       className="h-16 sm:h-20 md:h-24 w-auto object-cover rounded-lg shadow-sm"
                       decoding="async"
                       loading="lazy"
