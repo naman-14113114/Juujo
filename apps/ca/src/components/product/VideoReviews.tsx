@@ -108,7 +108,7 @@ export function VideoReviews() {
           eyebrow="Real Customers"
           title={
             <>
-              Juujo Mask <span className="juujo-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
+              Juujo Grounding Sheets <span className="juujo-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
             </>
           }
         />

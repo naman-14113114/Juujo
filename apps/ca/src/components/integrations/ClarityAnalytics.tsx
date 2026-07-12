@@ -20,7 +20,7 @@ export function ClarityAnalytics() {
         }
 
         const script = document.createElement("script");
-        script.dataset.buudyClarity = "true";
+        script.dataset.juujoClarity = "true";
         script.textContent = clarityScript;
         document.head.appendChild(script);
       }),

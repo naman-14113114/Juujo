@@ -316,7 +316,7 @@ export async function POST(
       images: imageUrls,
       product_handle: productHandle,
       rating: parsed.data.rating,
-      source: "uk_buudy_review_form",
+      source: "uk_juujo_review_form",
       status: "published",
       title: parsed.data.title,
     })
@@ -332,11 +332,10 @@ export async function POST(
     );
   }
 
-  if (productHandle === "buudy-led-mask") {
-    revalidatePath("/products/buudy-led-mask");
-    revalidatePath("/products/buudy-led-mask-2");
-  } else {
-    revalidatePath("/products/red-light-torch");
+  if (productHandle === "grounding-sheets" || productHandle === "grounding-fitted-sheets" || productHandle === "grounding-flat-sheet" || productHandle === "grounding-mat") {
+    revalidatePath("/products/grounding-sheets");
+    revalidatePath("/products/grounding-flat-sheet");
+    revalidatePath("/products/grounding-mat");
   }
 
   return NextResponse.json({ review: toPublicProductReview(data) }, { status: 201 });

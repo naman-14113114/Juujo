@@ -19,7 +19,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
-              Salon-grade LED light therapy, beautifully wearable. Designed in
+              Premium grounding bedding, beautifully made. Designed in
               the United Kingdom.
             </p>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
@@ -73,7 +73,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/buudy_com"
+                href="https://www.instagram.com/juujo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(255,255,255,0.06)] text-[var(--cream)] transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--ink)] hover:-translate-y-1"
@@ -86,7 +86,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.youtube.com/@buudy-com"
+                href="https://www.youtube.com/@juujo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(255,255,255,0.06)] text-[var(--cream)] transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--ink)] hover:-translate-y-1"

@@ -77,7 +77,7 @@ export function CartDrawer() {
                 Your bag is waiting.
               </p>
               <p className="juujo-copy mt-3 max-w-xs text-sm">
-                Add the Juujo LED Mask or Red Torch to unlock current offers
+                Add Juujo grounding sheets or a grounding mat to unlock current offers
                 and free shipping.
               </p>
               <Button asChild className="mt-6" onClick={closeCart}>

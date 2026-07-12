@@ -90,7 +90,7 @@ export function CartPageContent({
           <ShoppingBag className="mx-auto text-[var(--gold)]" size={42} />
           <h1 className="juujo-heading mt-5">Your cart is empty.</h1>
           <p className="juujo-copy mx-auto mt-5 max-w-lg">
-            Add the Juujo LED Mask or Red Torch to unlock current offers and
+            Add Juujo grounding sheets or a grounding mat to unlock current offers and
             free shipping.
           </p>
           <Button asChild className="mt-8">
@@ -297,7 +297,7 @@ function PaymentTrustStrip() {
       <img
         alt="Payment Options"
         className="w-full max-w-[340px] h-auto object-contain"
-        src="/media/products/buudy-led-mask/images/payment_options.png"
+        src="/media/products/grounding-sheets/images/payment_options.png"
       />
     </div>
   );

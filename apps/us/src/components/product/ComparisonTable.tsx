@@ -221,7 +221,7 @@ export function ComparisonTable() {
                   <div className="-mt-px w-1/4 flex justify-center items-center h-full pb-4 md:mt-0 md:pb-5 px-2 overflow-visible">
                     <img
                       src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
-                      alt="Juujo Mask"
+                      alt="Juujo Grounding Sheet"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
                       decoding="async"
                       loading="lazy"
@@ -268,10 +268,10 @@ export function ComparisonTable() {
           />
 
           <ComparisonRow
-            title="Light Colours"
-            subtitle="Each with specific skin benefits"
+            title="Materials"
+            subtitle="Each with specific comfort benefits"
             values={[
-              <strong key="1" className="juujo-display font-bold text-sm md:text-base text-[var(--plum)]">7 LED Colours + NIR</strong>,
+              <strong key="1" className="juujo-display font-bold text-sm md:text-base text-[var(--plum)]">Organic cotton + silver thread</strong>,
               <strong key="2" className="juujo-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
               <strong key="3" className="juujo-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
               <strong key="4" className="juujo-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
@@ -296,7 +296,7 @@ export function ComparisonTable() {
           <ColorRow
             colorName="Blue"
             colorCode="#0231F0"
-            description="Anti-acne Fighter"
+            description="Sleep upgrade"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 

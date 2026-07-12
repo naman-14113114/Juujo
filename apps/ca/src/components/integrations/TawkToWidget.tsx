@@ -54,7 +54,7 @@ const tawkToPositionScript = `
   }
 
   document.documentElement.setAttribute('data-juujo-tawk-positioner', 'active');
-  window.__buudyPositionTawkTo = positionTawkFrames;
+  window.__juujoPositionTawkTo = positionTawkFrames;
 
   var observer = new MutationObserver(positionTawkFrames);
   observer.observe(document.documentElement, {
@@ -77,14 +77,14 @@ export function TawkToWidget() {
       runAfterEngagement(() => {
         if (!document.querySelector("script[data-juujo-tawk-position='true']")) {
           const positionScript = document.createElement("script");
-          positionScript.dataset.buudyTawkPosition = "true";
+          positionScript.dataset.juujoTawkPosition = "true";
           positionScript.textContent = tawkToPositionScript;
           document.head.appendChild(positionScript);
         }
 
         if (!document.querySelector("script[data-juujo-tawk='true']")) {
           const widgetScript = document.createElement("script");
-          widgetScript.dataset.buudyTawk = "true";
+          widgetScript.dataset.juujoTawk = "true";
           widgetScript.textContent = tawkToScript;
           document.head.appendChild(widgetScript);
         }

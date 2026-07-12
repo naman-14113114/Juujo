@@ -8,11 +8,11 @@ export default function NotFound() {
         <p className="juujo-eyebrow">Page not found</p>
         <h1 className="juujo-heading mt-4">This glow is still loading.</h1>
         <p className="juujo-copy mx-auto mt-5 max-w-xl">
-          The page you opened is not available yet. The Juujo LED Mask product
+          The page you opened is not available yet. The Juujo Grounding Sheets product
           page is ready for you.
         </p>
         <Button asChild className="mt-8">
-          <Link href="/products/buudy-led-mask">Shop Juujo LED Mask</Link>
+          <Link href="/products/grounding-sheets">Shop Juujo Grounding Sheets</Link>
         </Button>
       </div>
     </section>

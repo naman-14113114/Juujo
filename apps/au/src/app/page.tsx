@@ -4,30 +4,30 @@ import { market } from "@/lib/market";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Best LED Face Mask UK | Juujo Red Light Therapy",
+  title: "Juujo Grounding Sheets UK | Organic Cotton, Silver-Thread Sleep",
   description:
-    "Shop Juujo UK for salon-grade LED face masks, red light therapy, blue light acne routines, anti-ageing skincare, near-infrared support, neck coverage, and free tracked shipping.",
+    "Shop Juujo UK for grounding fitted sheets and flat sheets made with 95% organic cotton and conductive silver threads, plus a free grounding mat. Cooler, calmer, more restful sleep.",
   alternates: {
     canonical: "/",
   },
   keywords: [
-    "best LED face mask UK",
-    "red light therapy mask UK",
-    "LED face mask for acne UK",
-    "anti ageing LED mask UK",
-    "home LED light therapy",
+    "grounding sheets UK",
+    "earthing fitted sheet",
+    "organic cotton grounding sheet",
+    "silver thread sleep",
+    "better sleep naturally",
   ],
   openGraph: {
-    title: "Best LED Face Mask UK | Juujo",
+    title: "Juujo Grounding Sheets | Better Sleep, Naturally",
     description:
-      "Discover the Juujo LED Mask with 192 LEDs, red and blue light therapy, near-infrared support, and full face plus neck coverage.",
+      "Discover Juujo Grounding Sheets, made with 95% organic cotton and conductive silver threads for cooler, calmer, more restful sleep.",
     url: market.siteUrl,
     images: [
       {
-        url: "/images/products/buudy-led-mask/09-buudy-led-mask-home-spa.webp",
+        url: "/images/products/grounding-sheets/09-juujo-grounding-sheets-home-spa.webp",
         width: 1200,
         height: 900,
-        alt: "Juujo LED light therapy mask at home",
+        alt: "Juujo Grounding Sheets on a made bed",
       },
     ],
   },

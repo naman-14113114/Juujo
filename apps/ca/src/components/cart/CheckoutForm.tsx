@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { attributionStorageKey } from "@/components/integrations/AttributionCapture";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 import { promoCode } from "@/lib/cart";
+import { getProductById, getProductBySlug } from "@/data/products";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
 
 export type CheckoutCustomer = {
@@ -61,9 +62,12 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     };
   }, []);
   const maskQuantity =
-    lines.find(
-      (line) => line.type === "product" && line.productId === "buudy-led-mask",
-    )?.quantity ?? totals.itemCount;
+    lines.find((line) => {
+      const product =
+        getProductById(line.productId) ??
+        (line.slug ? getProductBySlug(line.slug) : undefined);
+      return product?.category === "grounding-sheets";
+    })?.quantity ?? totals.itemCount;
 
   function readAttribution() {
     const currentParams = new URLSearchParams(window.location.search);
@@ -110,7 +114,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
-      new CustomEvent("buudy:started-checkout", {
+      new CustomEvent("juujo:started-checkout", {
         detail: {
           lines,
           totals,

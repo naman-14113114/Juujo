@@ -3,16 +3,16 @@ import { AboutPage } from "@/components/about/AboutPage";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Us | UK LED Skincare Store - Juujo",
+  title: "About Us | Juujo Grounding Bedding - UK",
   description:
-    "Learn about Juujo, our team of skincare advocates, our story of wire-free LED mask innovation, and our mission to make high-quality light therapy routines simple and effective.",
+    "Learn about Juujo, our bedding specialists, our story of honest grounding comfort, and our mission to make restful sleep simple and accessible.",
   alternates: {
     canonical: "/pages/about-us",
   },
   openGraph: {
-    title: "About Juujo | High-Performance LED Skincare",
+    title: "About Juujo | Premium Grounding Bedding",
     description:
-      "Learn about our team of skincare advocates, our story of wire-free LED mask innovation, and our mission to deliver visible results.",
+      "Learn about our bedding specialists, our story of honest grounding comfort, and our mission to deliver better sleep.",
     url: absoluteUrl("/pages/about-us"),
   },
 };

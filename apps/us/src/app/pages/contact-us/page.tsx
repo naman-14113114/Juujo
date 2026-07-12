@@ -5,14 +5,14 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Juujo for product questions, order support, shipping help, and light therapy guidance.",
+    "Contact Juujo for product questions, order support, shipping help, and grounding guidance.",
   alternates: {
     canonical: "/pages/contact-us",
   },
   openGraph: {
     title: "Contact Juujo",
     description:
-      "Reach Juujo support for product questions, order support, shipping help, and light therapy guidance.",
+      "Reach Juujo support for product questions, order support, shipping help, and grounding guidance.",
     url: absoluteUrl("/pages/contact-us"),
   },
 };

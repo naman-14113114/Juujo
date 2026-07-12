@@ -73,7 +73,7 @@ function ContactHero() {
             </div>
             <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
               Product guidance, order updates, and routine support for your
-              Juujo light therapy devices.
+              Juujo grounding products.
             </p>
           </div>
         </div>

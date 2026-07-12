@@ -21,8 +21,8 @@ import { GroundingMatTimelineSection } from "./GroundingMatTimelineSection";
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
  * category. Colour, size, and the Buy 1 / 2 / 3 quantity offer live in the hero
- * BuyBox. All LED/skincare-only sections (wavelengths, dermatologist,
- * before/after, app promo, comparison, video reviews, torch variant) removed.
+ * BuyBox. LED/skincare-only sections are no longer rendered; this template is
+ * fully grounding/bedding focused.
  */
 export function ProductPage({ product }: { product: Product }) {
   return (
@@ -56,7 +56,7 @@ export function ProductPage({ product }: { product: Product }) {
         </>
       )}
       {product.category !== "grounding-sheets" && product.category !== "grounding-mat" && (
-        <ProductReviewsSection productHandle="buudy-led-mask" />
+        <ProductReviewsSection productHandle="grounding-sheets" />
       )}
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection productCategory={product.category} productId={product.id} />

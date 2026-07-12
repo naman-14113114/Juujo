@@ -36,7 +36,7 @@ const accordionData = [
             Dimensions:
           </strong>
           <ul className="list-disc pl-5 space-y-1">
-            <li>40 × 60 cm (16" × 24")</li>
+            <li>40 × 60 cm (16&quot; × 24&quot;)</li>
             <li>Compact and easy to place under feet or on a desk</li>
             <li>Lightweight and portable</li>
             <li>Ideal for home, office, or travel</li>

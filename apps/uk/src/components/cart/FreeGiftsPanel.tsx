@@ -10,7 +10,7 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
   const giftLines = lines
     .filter((line) => line.type === "gift")
     .sort((first, second) => {
-      const order = ["skincare-ebook", "buudy-led-torch", "premium-travel-box"];
+      const order = ["care-guide", "grounding-mat"];
       const firstIndex = order.findIndex((id) => first.id.includes(id));
       const secondIndex = order.findIndex((id) => second.id.includes(id));
 

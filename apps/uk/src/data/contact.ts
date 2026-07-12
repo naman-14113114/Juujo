@@ -3,7 +3,7 @@ import { market } from "@/lib/market";
 export const contactPage = {
   eyebrow: "Contact Juujo",
   title: "We are here to help.",
-  copy: "Welcome to Juujo, where professional-grade light therapy meets thoughtful support. We are delighted to assist you with product questions, order help, and anything you need for a smoother daily routine.",
+  copy: "Welcome to Juujo, where honest grounding comfort meets thoughtful support. We are delighted to assist you with product questions, order help, and anything you need for a calmer daily routine.",
   supportLabel: "support@juujo.com",
   supportHours: market.supportHours,
   supportIntro:
@@ -41,11 +41,11 @@ export const contactSocialLinks = [
   },
   {
     label: "YouTube",
-    href: "https://www.youtube.com/@buudy-com",
+    href: "https://www.youtube.com/@juujo",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/buudy_com",
+    href: "https://www.instagram.com/juujo",
   },
 ];
 

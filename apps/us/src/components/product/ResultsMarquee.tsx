@@ -10,7 +10,7 @@ export function ResultsMarquee() {
         <div>
           <p className="juujo-mono text-[var(--gold)]">Reviews & Real Results</p>
           <h2 className="juujo-display mt-3 text-[2.5rem] leading-tight text-[var(--cream)] md:text-5xl">
-            Juujo mask, in real life.
+            Juujo grounding, in real life.
           </h2>
         </div>
         <p className="juujo-mono hidden text-[rgba(247,241,232,.62)] md:block">

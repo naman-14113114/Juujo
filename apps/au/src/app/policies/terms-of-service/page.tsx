@@ -3,7 +3,7 @@ import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Juujo",
-  description: "Store operations, guidelines, terms, conditions, and service agreements of the Juujo LED store.",
+  description: "Store operations, guidelines, terms, conditions, and service agreements of Juujo.",
   alternates: {
     canonical: "/policies/terms-of-service",
   },

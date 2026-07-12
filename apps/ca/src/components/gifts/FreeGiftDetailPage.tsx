@@ -7,7 +7,7 @@ import {
   type FreeGiftDetail,
 } from "@/data/freeGifts";
 
-const offerHref = "/products/buudy-led-mask#free-gifts";
+const offerHref = "/products/grounding-sheets#free-gifts";
 
 export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
   return (

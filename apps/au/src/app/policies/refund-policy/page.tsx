@@ -3,7 +3,7 @@ import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Refund Policy | Juujo",
-  description: "Conditions regarding order cancellations, adjustments, and refunds for Juujo Light Therapy purchases.",
+  description: "Conditions regarding order cancellations, adjustments, and refunds for Juujo grounding purchases.",
   alternates: {
     canonical: "/policies/refund-policy",
   },

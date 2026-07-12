@@ -19,7 +19,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
   const [cartIconData, setCartIconData] = useState<Record<string, unknown> | null>(null);
 
   useEffect(() => {
-    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
+    fetch("/media/products/grounding-sheets/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
       .then((res) => res.json())
       .then((data) => setCartIconData(data))
       .catch((err) => console.error("Error loading sticky cart lottie", err));

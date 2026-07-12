@@ -71,6 +71,7 @@ function useDeliveryDate(daysFromToday: number) {
 function DeliveryDateDisplay({ days }: { days: number }) {
   const date = useDeliveryDate(days);
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR-safe mounted flag for hydration-safe date render
   useEffect(() => setMounted(true), []);
   return <>{mounted ? date || "soon" : "Loading..."}</>;
 }

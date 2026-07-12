@@ -318,7 +318,7 @@ export function KlaviyoAnalytics() {
 
       const script = document.createElement("script");
       script.async = true;
-      script.dataset.buudyKlaviyo = "true";
+      script.dataset.juujoKlaviyo = "true";
       script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${encodeURIComponent(
         KLAVIYO_COMPANY_ID,
       )}`;
@@ -469,7 +469,7 @@ export function KlaviyoAnalytics() {
         "track",
         "Started Checkout",
         {
-          $event_id: `uk-buudy-${Date.now()}`,
+          $event_id: `uk-juujo-${Date.now()}`,
           $value:
             typeof detail?.totals?.totalCents === "number"
               ? detail.totals.totalCents / 100
@@ -487,11 +487,11 @@ export function KlaviyoAnalytics() {
     }
 
     window.addEventListener("juujo:add-to-cart", handleAddToCart);
-    window.addEventListener("buudy:started-checkout", handleStartedCheckout);
+    window.addEventListener("juujo:started-checkout", handleStartedCheckout);
 
     return () => {
       window.removeEventListener("juujo:add-to-cart", handleAddToCart);
-      window.removeEventListener("buudy:started-checkout", handleStartedCheckout);
+      window.removeEventListener("juujo:started-checkout", handleStartedCheckout);
     };
   }, []);
 

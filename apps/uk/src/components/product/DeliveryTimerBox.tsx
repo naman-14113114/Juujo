@@ -37,7 +37,7 @@ export function DeliveryTimerBox() {
     // eslint-disable-next-line
     setMounted(true);
     fetch(
-      "/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-night-easey.json?v=2",
+      "/media/products/grounding-sheets/images/lottieflow-ecommerce-14-19-night-easey.json?v=2",
     )
       .then((res) => res.json())
       .then((data) => setDeliveryIconData(data))

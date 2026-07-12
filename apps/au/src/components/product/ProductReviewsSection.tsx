@@ -4,7 +4,7 @@ import {
   reviewPageSize,
 } from "@/data/reviews";
 
-export async function ProductReviewsSection({ productHandle = "buudy-led-mask" }: { productHandle?: string } = {}) {
+export async function ProductReviewsSection({ productHandle = "grounding-sheets" }: { productHandle?: string } = {}) {
   const dataset = await getMergedProductReviewDataset(productHandle);
 
   if (!dataset) {

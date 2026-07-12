@@ -182,7 +182,7 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-01",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486304350_448129a4-6d94-4e44-b8af-511f3e7999b2.webp",
-    src: productMediaAsset("review-01.mp4", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-01.mp4", "grounding-sheets", "videos"),
     fallbackSrc:
       "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
   },
@@ -190,7 +190,7 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-02",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138534_38dd960f-2287-4bfc-b1be-af40bc8ef5d6.webp",
-    src: productMediaAsset("review-02.mp4", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-02.mp4", "grounding-sheets", "videos"),
     fallbackSrc:
       "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
   },
@@ -198,7 +198,7 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-03",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485722607_ded18359-40b7-427c-b2a9-62e48436f87c.webp",
-    src: productMediaAsset("review-03.mp4", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-03.mp4", "grounding-sheets", "videos"),
     fallbackSrc:
       "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
   },
@@ -206,7 +206,7 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-04",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485860443_d12fd0ec-8701-4fe7-8e68-1c801ff59f85.webp",
-    src: productMediaAsset("review-04.mp4", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-04.mp4", "grounding-sheets", "videos"),
     fallbackSrc:
       "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
   },
@@ -214,7 +214,7 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-05",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485816239_f9dba8d1-d096-4067-aff8-eb4a72366122.webp",
-    src: productMediaAsset("review-05.mp4", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-05.mp4", "grounding-sheets", "videos"),
     fallbackSrc:
       "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
   },
@@ -387,7 +387,7 @@ export const wavelengths: Wavelength[] = [
     nm: "830nm",
     name: "INFRA-RED",
     color: "#a52c25",
-    description: "Near-infrared support for deeper skincare rituals",
+    description: "Grounding support for deeper rest",
   },
   {
     nm: "633nm",
@@ -399,7 +399,7 @@ export const wavelengths: Wavelength[] = [
     nm: "415nm",
     name: "BLUE",
     color: "#4a6acf",
-    description: "Anti-acne Fighter",
+    description: "Sleep upgrade",
   },
   {
     nm: "525nm",
@@ -440,21 +440,21 @@ export const torchWavelengths: Wavelength[] = [
     name: "RED",
     color: "#d4523a",
     description:
-      "Supports smoother-looking skin, fine-line care, and collagen rituals.",
+      "Supports a calmer, more settled bedtime routine.",
   },
   {
     nm: "660nm",
     name: "DEEP RED",
     color: "#b9332c",
     description:
-      "A deeper red wavelength for targeted body and skin wellness sessions.",
+      "A softer, more settled wind-down for restful evenings.",
   },
   {
     nm: "850nm",
     name: "NIR",
     color: "#7a2b2b",
     description:
-      "Near-infrared light for localized muscle stiffness and body relief routines.",
+      "Gentle, even support for a more relaxed body and mind.",
   },
   
 ];
@@ -467,49 +467,49 @@ export const torchFeatures: Feature[] = [
   },
   {
     title: "Clinical Strength",
-    kicker: "3 precision wavelengths",
-    body: "The torch combines red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
+    kicker: "3 comfort details",
+    body: "The mat combines a soft surface, secure cord, and silver threading for a focused grounding routine.",
   },
   {
-    title: "Precision Wavelengths",
+    title: "Precision Comfort",
     kicker: "630, 660, 850nm",
-    body: "Use the specific wavelength blend for localized application on the face, back, knees, shoulders, hands, feet, or other target areas.",
+    body: "Use the mat for localized grounding on the couch, floor, desk, or other target areas.",
   },
   {
     title: "Rapid Treatment",
     kicker: "Targeted 1 to 5 minute sessions",
-    body: "Hold the torch over the target area for quick sessions, building gradually as your body gets used to red light therapy.",
+    body: "Place the mat under the target area for quick sessions, building gradually as your routine settles in.",
   },
 ];
 
 export const torchDetailImages = [
   {
-    src: productAsset("09-buudy-red-torch-detail-wide.jpeg", "buudy-red-torch"),
-    alt: "Juujo Red Torch detail image",
+    src: productAsset("Bed_Sheet_-_New_Hero_18-04-26.jpg", "grounding-sheets"),
+    alt: "Juujo Grounding Sheet detail",
   },
   {
-    src: productAsset("10-buudy-red-torch-wellness.jpeg", "buudy-red-torch"),
-    alt: "Juujo Red Torch wellness use",
+    src: productAsset("Bed_Sheet_-_New_Hero_18-04-26.jpg", "grounding-sheets"),
+    alt: "Juujo Grounding Sheet flat lay",
   },
   {
-    src: productAsset("11-buudy-red-torch-treatment.jpeg", "buudy-red-torch"),
-    alt: "Juujo Red Torch treatment application",
+    src: productAsset("Bed_Sheet_-_New_Hero_18-04-26.jpg", "grounding-sheets"),
+    alt: "Juujo Grounding Sheet on bed",
   },
 ];
 
 export const torchHowToUse = [
-  "Set up the red light therapy device on a chair, table, wall, or door, then uncover the target area before use.",
+  "Set up the grounding mat on a chair, couch, floor, or desk, then place the target area on it before use.",
   "Position the device 4 to 6 inches away from the skin for best results.",
   "Treat each area that needs attention for 5 to 15 minutes, starting with 1 to 2 minutes per area.",
-  "Increase time slowly over the next few weeks as your body gets used to red light therapy.",
+  "Increase time slowly over the next few weeks as your routine settles in.",
   "Use four to ten times a week depending on your routine, allowing at least 6 hours between multiple daily sessions.",
 ];
 
 export const torchFaqs: FAQItem[] = [
   {
-    question: "How does this handheld light therapy device work?",
+    question: "How does this grounding mat work?",
     answer:
-      "The device uses LED technology with specific wavelengths: 630nm, 660nm, and 850nm. It emits red and near-infrared light for non-invasive application on body surfaces, where light energy may support local blood circulation and relieve muscle stiffness.",
+      "The mat uses conductive silver threading linked to a grounded outlet, providing a continuous path that supports a calm, settled feeling during rest.",
   },
   {
     question: "Can I use this device on any part of my body?",
@@ -519,26 +519,26 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Can I use it in my country?",
     answer:
-      "Yes. The Juujo Red Torch is dual voltage, which means it can be used worldwide without any issues.",
+      "Yes. The Juujo Grounding Mat is dual voltage, which means it can be used worldwide without any issues.",
   },
   {
     question:
       "What if I am pregnant, sensitive to light, have epilepsy, or take light sensitive medication?",
     answer:
-      "Consult your physician or another qualified healthcare professional before using LED products. People who may be sensitive to light, including women who are pregnant, people with epilepsy, or people taking medications such as tetracycline, steroids, or cortisone injections, should not use LED products without medical guidance.",
+      "Consult your physician or another qualified healthcare professional before starting any new wellness routine. People who are pregnant or have a medical condition should check before use.",
   },
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Juujo Red Torch is exclusively sold through juujo.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+      "The Juujo Grounding Mat is included free with the Juujo Grounding Sheet offer at juujo.com. There are no other authorized online sites.",
   },
 ];
 
 export const expertVideo = {
-  poster: productAsset("dermatologist-video-poster.png"),
+  poster: productAsset("Bed_Sheet_-_New_Hero_18-04-26.jpg", "grounding-sheets"),
   src: productMediaAsset(
-    "Juujo Dermatologists Video.webm",
-    "buudy-led-mask",
+    "Video_Project_34.mp4",
+    "grounding-sheets",
     "videos",
   ),
 };
@@ -553,7 +553,7 @@ export const comparison = {
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
-    ["Light Colours", "7 LED Colours + NIR", "3 total", "1 total", "3 total"],
+    ["Light Colours", "Organic cotton + silver thread", "3 total", "1 total", "3 total"],
     ["Neck Coverage", "Yes", "-", "-", "-"],
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],

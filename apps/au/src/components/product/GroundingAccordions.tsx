@@ -105,6 +105,7 @@ export function GroundingAccordions() {
 
   useEffect(() => {
     if (window.innerWidth < 768) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR-safe: collapse accordion on mobile after mount to avoid hydration mismatch
       setOpenIndex(null);
     }
   }, []);

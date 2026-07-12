@@ -1,5 +1,3 @@
-import maskReviews from "./reviews/buudy-led-mask-reviews.json";
-import torchReviews from "./reviews/buudy-red-torch-reviews.json";
 import groundingReviews from "./reviews/grounding-sheets-reviews.json";
 import fittedSheetsReviews from "./reviews/grounding-fitted-sheets-reviews.json";
 import { market } from "@/lib/market";
@@ -35,8 +33,6 @@ function normalizeStaticReview(r: ProductReview) {
 }
 
 const reviewCollections = {
-  "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
-  "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-sheets": groundingReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-fitted-sheets": fittedSheetsReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-flat-sheet": groundingReviews.map(normalizeStaticReview) as ProductReview[],

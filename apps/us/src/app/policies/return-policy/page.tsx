@@ -3,7 +3,7 @@ import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Return Policy | Juujo",
-  description: "Learn about the simple, stress-free replacement policy and goddess guarantees for the Juujo LED Skincare Mask.",
+  description: "Learn about the simple, stress-free replacement policy and guarantees for Juujo grounding bedding.",
   alternates: {
     canonical: "/policies/return-policy",
   },

@@ -6,38 +6,38 @@ import { Button } from "@/components/ui/Button";
 
 const criteria = [
   {
-    title: "Enough LEDs for even coverage",
-    copy: "Look for dense, evenly spaced LEDs so the face is not treated in patches. Juujo uses 192 high-density LEDs across the mask.",
+    title: "Real conductive silver threading",
+    copy: "Look for genuine silver threads woven through the cotton so the sheet actually connects to the grounding cord. Juujo uses 95% organic cotton with conductive silver threading across the sheet.",
   },
   {
-    title: "Red, blue, and near-infrared modes",
-    copy: "Red light supports anti-ageing routines, blue light is useful for breakout-prone skin routines, and near-infrared is used for deeper skincare support.",
+    title: "A reliable grounding connection",
+    copy: "A secure cord and a verified outlet link are what make grounding possible. Without a continuous conductive path the sheet is just a regular sheet, so connection quality matters most.",
   },
   {
-    title: "Face plus neck in one device",
-    copy: "Many LED masks stop at the chin. Juujo includes neck coverage because the neck is often one of the first areas to show visible ageing.",
+    title: "Soft, breathable, sleep-ready fabric",
+    copy: "A grounding sheet still has to feel good all night. Juujo keeps the weave soft and breathable so the routine is comfortable enough to repeat.",
   },
   {
-    title: "A routine people will actually repeat",
-    copy: "Cordless wearability, tap control, and simple sessions matter because consistent use is what makes at-home light therapy practical.",
+    title: "A routine people will actually keep",
+    copy: "The easiest grounding routine is the one you do in your sleep. A fitted sheet plus a free daytime mat makes consistency simple without extra effort.",
   },
 ];
 
 const queryAnswers = [
   {
-    question: "Best LED face mask UK",
+    question: "Best grounding sheet UK",
     answer:
-      "For UK shoppers comparing LED masks, Juujo is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and a 90-day return window.",
+      "For UK shoppers comparing grounding sheets, Juujo is strongest if you want 95% organic cotton with silver threading, a secure grounding cord, a free grounding mat for daytime use, free tracked shipping, and a 90-day return window.",
   },
   {
-    question: "LED face mask for acne and anti-ageing",
+    question: "Grounding sheet vs earthing mat",
     answer:
-      "Juujo combines blue 415nm light for breakout-prone routines with red 633nm light for fine-line and firmness routines, so you do not need separate acne and anti-ageing devices.",
+      "A grounding sheet works while you sleep; an earthing mat works while you sit. Juujo includes both so you can stay grounded in bed and at a desk, couch, or floor without a second purchase.",
   },
   {
-    question: "Red light therapy mask with neck coverage",
+    question: "Why does silver threading matter in a grounding sheet",
     answer:
-      "The mask includes face and neck coverage in one wearable device, which is useful for buyers who want their skincare routine to treat the jawline and neck together.",
+      "Silver threading is the conductive path that links the sheet to the cord and your grounded outlet. A continuous, well-made connection is what separates a grounding sheet from an ordinary one.",
   },
 ];
 
@@ -49,13 +49,12 @@ export function SEOGuideSection({ product }: { product: Product }) {
           <div className="rounded-[30px] bg-[var(--plum)] p-7 text-[var(--cream)] md:p-9 lg:sticky lg:top-28">
             <p className="juujo-mono text-[var(--gold)]">UK buying guide</p>
             <h2 className="juujo-display mt-4 text-4xl leading-none md:text-5xl">
-              What makes the best LED face mask for UK skincare?
+              What makes the best grounding sheet for UK sleep?
             </h2>
             <p className="mt-5 text-sm leading-7 text-[rgba(247,241,232,.74)] md:text-base">
-              The best LED face mask is not just the one with the prettiest
-              shell. It should give you even light coverage, useful wavelengths,
-              a comfortable fit, transparent pricing, and a routine simple
-              enough to repeat.
+              The best grounding sheet is not just the softest cotton. It should
+              give you a genuine conductive path, a secure connection, a
+              comfortable sleep-ready weave, and a routine simple enough to keep.
             </p>
             <div className="mt-6 rounded-2xl border border-[rgba(247,241,232,.18)] bg-[rgba(247,241,232,.08)] p-5">
               <p className="juujo-mono text-[var(--gold)]">Juujo today</p>
@@ -63,15 +62,15 @@ export function SEOGuideSection({ product }: { product: Product }) {
                 {formatMoney(product.priceCents, product.currency)}
               </p>
               <p className="mt-2 text-sm leading-6 text-[rgba(247,241,232,.7)]">
-                Includes free glow kit, free tracked shipping, and 90-day money
-                back guarantee while the UK launch offer is live.
+                Includes free grounding mat, free tracked shipping, and 90-day
+                money back guarantee while the UK launch offer is live.
               </p>
             </div>
             <Button
               asChild
               className="mt-6 bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]"
             >
-              <Link href="/pages/best-led-face-mask-uk">Read the full UK guide</Link>
+              <Link href="/products/grounding-sheets">Shop grounding sheets</Link>
             </Button>
           </div>
 
@@ -123,9 +122,10 @@ export function SEOGuideSection({ product }: { product: Product }) {
             <div className="flex items-start gap-4 rounded-[24px] border border-[var(--border)] bg-[var(--card)] p-5">
               <ShieldCheck className="mt-1 shrink-0 text-[var(--gold)]" size={23} />
               <p className="text-sm leading-7 text-[var(--muted)]">
-                Safety note: do not use LED light therapy without medical advice
-                if you are pregnant, have epilepsy, are sensitive to light, or
-                take medication that may cause photosensitivity.
+                Safety note: grounding is a passive practice and is generally
+                suitable for everyday use, but if you have a medical condition or
+                use implanted devices, speak with a qualified healthcare
+                professional before starting.
               </p>
             </div>
           </div>

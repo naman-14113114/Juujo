@@ -86,7 +86,7 @@ function TechnologySpotlight() {
       <div className="juujo-wrap">
         <div className="grid gap-16 lg:grid-cols-2">
 
-          {/* LEFT — light therapy text + button + mask spotlight image */}
+          {/* LEFT — grounding text + button + sheet spotlight image */}
           <div className="flex flex-col h-full">
             <div className="flex flex-col items-center text-center gap-2 mb-8">
               <SectionHeading
@@ -152,10 +152,10 @@ function HomeFeatureGrid() {
           eyebrow="Why Juujo"
           title={
             <>
-              Light therapy that covers the <em className="juujo-italic">details</em>.
+              Grounding that covers the <em className="juujo-italic">details</em>.
             </>
           }
-          copy="Dense LED coverage, flexible treatments, and built-in neck care help the daily ritual feel simple while still feeling complete."
+          copy="Dense silver-thread coverage, soft materials, and thoughtful design help the daily ritual feel simple while still feeling complete."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {homeFeatureCards.map((feature) => (
@@ -204,7 +204,7 @@ function LightTherapyStory() {
           eyebrow={homeLightTherapy.eyebrow}
           title={
             <>
-              What is light therapy and{" "}
+              What is grounding and{" "}
               <em className="juujo-italic">where did it come from?</em>
             </>
           }
@@ -281,11 +281,11 @@ function HomeVideoHero() {
           </div>
           
           <h1 className="juujo-display text-5xl md:text-6xl mb-6 leading-[1.1]">
-            United States #1<br/>Grounding Brand
+            United States’ #1<br/>Grounding Brand
           </h1>
           
           <p className="text-lg md:text-xl mb-8 leading-relaxed opacity-90 font-light">
-            The longer you're grounded, the better your health. Stay grounded 24/7 with the world's best grounding products.
+            The longer you’re grounded, the better your health. Stay grounded 24/7 with the world’s best grounding products.
           </p>
           
           <Button asChild className="mb-8 w-full sm:w-auto !bg-[var(--gold)] !text-[var(--cream)] !border-none hover:!bg-[var(--clay-deep)] hover:!text-[var(--ink)] text-lg py-6 px-8 rounded-full font-bold uppercase tracking-wide transition-all duration-300 hover:scale-[1.02]">

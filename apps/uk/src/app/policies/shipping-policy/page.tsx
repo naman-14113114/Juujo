@@ -3,7 +3,7 @@ import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Shipping Policy | Juujo",
-  description: "Detailed processing times, tracking rules, and free transit information for Juujo LED Skincare orders.",
+  description: "Detailed processing times, tracking rules, and free transit information for Juujo grounding orders.",
   alternates: {
     canonical: "/policies/shipping-policy",
   },

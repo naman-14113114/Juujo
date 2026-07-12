@@ -119,7 +119,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
-      new CustomEvent("buudy:started-checkout", {
+      new CustomEvent("juujo:started-checkout", {
         detail: {
           lines,
           totals,
