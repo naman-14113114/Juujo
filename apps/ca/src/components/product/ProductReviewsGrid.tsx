@@ -510,7 +510,7 @@ function ReviewCard({
     >
       <ReviewImages images={review.images} name={review.customerName} />
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-        <RatingStars rating={review.rating} size={13} />
+        <RatingStars rating={review.rating} size={17} />
         <span className="juujo-mono whitespace-nowrap text-[0.55rem] sm:text-[0.65rem] text-[var(--plum-soft)]">
           {review.displayDate || review.date}
         </span>
