@@ -4,19 +4,19 @@ export function TrustBadges() {
   const badges = [
     {
       title: "Free Shipping",
-      icon: "/media/products/grounding-sheets/images/i3_clean.png", // Truck
+      icon: "/media/products/buudy-led-mask/images/i3_clean.png", // Truck
     },
     {
       title: "Lab Tested Quality",
-      icon: "/media/products/grounding-sheets/images/i4.png", // Shield
+      icon: "/media/products/buudy-led-mask/images/i4.png", // Shield
     },
     {
       title: "Buy Now, Pay Later Options Available",
-      icon: "/media/products/grounding-sheets/images/i2.png", // Drop with $
+      icon: "/media/products/buudy-led-mask/images/i2.png", // Drop with $
     },
     {
       title: "Proven Results, Backed By Science",
-      icon: "/media/products/grounding-sheets/images/i1.png", // Atom
+      icon: "/media/products/buudy-led-mask/images/i1.png", // Atom
     },
   ];
 
