@@ -11,13 +11,14 @@ import { GroundingFlatSheetHowItWorksSection } from "./GroundingFlatSheetHowItWo
 import { GroundingExpectationsSection } from "./GroundingExpectationsSection";
 import { GroundingScienceSection } from "./GroundingScienceSection";
 import { GroundingComparisonSection } from "./GroundingComparisonSection";
-import { GroundingTimelineSection } from "./GroundingTimelineSection";
+// import { GroundingTimelineSection } from "./GroundingTimelineSection";
 import { GroundingWhatIsItSection } from "./GroundingWhatIsItSection";
 import { GroundingBenefitsVideoSection } from "./GroundingBenefitsVideoSection";
 import { GroundingMatWhatIsItSection } from "./GroundingMatWhatIsItSection";
 import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
 import { GroundingMatHowToUseSection } from "./GroundingMatHowToUseSection";
 import { GroundingMatTimelineSection } from "./GroundingMatTimelineSection";
+import { FeatureGrid } from "./FeatureGrid";
 
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
@@ -42,6 +43,7 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingExpectationsSection />
           {/* <GroundingTimelineSection /> */}
           <GroundingScienceSection />
+          <FeatureGrid />
           <ProductReviewsSection productHandle={product.slug} />
           <GroundingWhatIsItSection />
           <GroundingComparisonSection />
@@ -53,6 +55,7 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingMatHowToUseSection />
           <GroundingMatTimelineSection />
           <GroundingScienceSection />
+          <FeatureGrid />
           <ProductReviewsSection productHandle={product.slug} />
           <GroundingMatWhatIsItSection />
         </>

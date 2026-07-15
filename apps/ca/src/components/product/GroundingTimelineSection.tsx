@@ -1,6 +1,5 @@
 "use client";
 
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useState } from "react";
 import Image from "next/image";
 
