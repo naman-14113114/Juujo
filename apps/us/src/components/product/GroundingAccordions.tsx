@@ -101,7 +101,7 @@ const accordionData = [
 ];
 
 export function GroundingAccordions() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (window.innerWidth < 768) {

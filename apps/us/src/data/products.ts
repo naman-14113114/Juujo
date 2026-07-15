@@ -450,7 +450,11 @@ export const groundingSheets: Product = {
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
-  cartImage: productMediaAsset("juujo-fitted-sheet-main-new.jpg", "grounding-sheets", "images"),
+  cartImage: productMediaAsset(
+    "juujo-fitted-sheet-main-new.jpg",
+    "grounding-sheets",
+    "images",
+  ),
   gallery: [
     {
       src: productMediaAsset(
@@ -478,21 +482,29 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4",
-        "grounding-sheets",
-        "videos",
-      ),
-      alt: "Grounding sheet lifestyle video",
-      animated: true,
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-fitted-sheet-mattress.png",
+        "juujo-grounding-bed-sheets-health-benefits.png",
         "grounding-sheets",
         "images",
       ),
-      alt: "Grounding sheet setting",
+      alt: "Grounding sheet health",
     },
+    // {
+    //   src: productMediaAsset(
+    //     "b9bf397deb504e42b5ac5be802662db8.HD-1080p-3.3Mbps-43631279.mp4",
+    //     "grounding-sheets",
+    //     "videos",
+    //   ),
+    //   alt: "Grounding sheet lifestyle video",
+    //   animated: true,
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-fitted-sheet-mattress.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet setting",
+    // },
     {
       src: productMediaAsset(
         "Video_Project_34.mp4",
@@ -520,30 +532,30 @@ export const groundingSheets: Product = {
       alt: "Using the grounding sheet",
       animated: true,
     },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-bed-sheets-lifestyle-sleeping.png?v=3",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet lifestyle",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-earthing-sheets-bedroom-view.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet view",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-conductive-silver-thread-sheets.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet close up",
-    },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-bed-sheets-lifestyle-sleeping.png?v=3",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet lifestyle",
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-earthing-sheets-bedroom-view.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet view",
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-conductive-silver-thread-sheets.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet close up",
+    // },
     {
       src: productMediaAsset(
         "juujo-science-of-grounding-benefits.png",
@@ -560,22 +572,22 @@ export const groundingSheets: Product = {
       ),
       alt: "Customer testimonial cozy bedroom",
     },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-bed-sheets-showcase.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet showcase",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-features-guide.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet features",
-    },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-bed-sheets-showcase.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet showcase",
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-sheets-features-guide.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet features",
+    // },
     {
       src: productMediaAsset(
         "juujo-earthing-bed-sheet-visual.png",
@@ -618,28 +630,20 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "juujo-grounding-bed-sheets-health-benefits.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet health",
-    },
-    {
-      src: productMediaAsset(
         "juujo-grounding-sheets-fabric-detail.png",
         "grounding-sheets",
         "images",
       ),
       alt: "Grounding sheet detail view",
     },
-    {
-      src: productMediaAsset(
-        "juujo-premium-earthing-sheets-display.png?v=3",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet display",
-    },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-premium-earthing-sheets-display.png?v=3",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet display",
+    // },
     // { src: productMediaAsset("US_cam_1_lightgray.jpg", "grounding-sheets", "images"), alt: "Grounding sheet light gray perspective 1" },
     // { src: productMediaAsset("US_cam_2_draft2_31a3d82e-01c8-4644-8178-99729119a0c6.jpg", "grounding-sheets", "images"), alt: "Grounding sheet light gray perspective 2" },
     // { src: productMediaAsset("4603e65ff0a64b56b03b8107d58c91f0.HD-1080p-3.3Mbps-35985735.mp4", "grounding-sheets", "videos"), alt: "Grounding sheet usage", animated: true },
@@ -746,20 +750,36 @@ export const groundingFlatSheet: Product = {
   description:
     "A soft, breathable flat sheet woven with conductive silver threads and a grounding cord for your bed. Designed for people who want a calmer, more settled wind-down and a simple upgrade to their sleep setup.",
   seoTitle: "Grounding Flat Sheet | Juujo Premium Bedding",
-  cartImage: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
+  cartImage: productMediaAsset(
+    "juujo-grounding-flat-sheet-lifestyle-2.png",
+    "grounding-sheets",
+    "images",
+  ),
   seoDescription:
     "Juujo Grounding Flat Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   gallery: [
     {
-      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-2.png", "grounding-sheets", "images"),
+      src: productMediaAsset(
+        "juujo-grounding-flat-sheet-lifestyle-2.png",
+        "grounding-sheets",
+        "images",
+      ),
       alt: "Juujo Grounding Flat Sheet Lifestyle On Bed",
     },
     {
-      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-1.png", "grounding-sheets", "images"),
+      src: productMediaAsset(
+        "juujo-grounding-flat-sheet-lifestyle-1.png",
+        "grounding-sheets",
+        "images",
+      ),
       alt: "Juujo Grounding Flat Sheet Lifestyle",
     },
     {
-      src: productMediaAsset("juujo-grounding-flat-sheet-lifestyle-3.png", "grounding-sheets", "images"),
+      src: productMediaAsset(
+        "juujo-grounding-flat-sheet-lifestyle-3.png",
+        "grounding-sheets",
+        "images",
+      ),
       alt: "Juujo Grounding Flat Sheet Lifestyle Details",
     },
     // --- Inherited from fitted sheets (reorder or remove as needed) ---
@@ -1024,7 +1044,7 @@ export const groundingMat: Product = {
       alt: "Grounding mat usage video",
       animated: true,
     },
-        {
+    {
       src: productMediaAsset(
         "juujo-mat-gallery-2.png",
         "grounding-mat",
