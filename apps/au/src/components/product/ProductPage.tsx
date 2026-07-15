@@ -19,6 +19,7 @@ import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
 import { GroundingMatHowToUseSection } from "./GroundingMatHowToUseSection";
 import { GroundingMatTimelineSection } from "./GroundingMatTimelineSection";
 import { FeatureGrid } from "./FeatureGrid";
+import { VideoReviews } from "./VideoReviews";
 
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
@@ -30,6 +31,7 @@ export function ProductPage({ product }: { product: Product }) {
   return (
     <>
       <ProductHero product={product} />
+      {product.id === "grounding-sheets" && <VideoReviews />}
       <TrustBadges />
       {product.category === "grounding-sheets" && (
         <>

@@ -58,14 +58,11 @@ function ReviewVideoCard({
 
   return (
     <article
-      className="relative aspect-[9/16] w-40 flex-none overflow-hidden rounded-[18px] bg-[var(--ink)] transition hover:-translate-y-1 md:w-52 cursor-pointer"
+      className="relative aspect-[9/16] w-40 flex-none overflow-hidden rounded-[18px] bg-[var(--ink)] transition hover:-translate-y-1 md:w-52"
       ref={cardRef}
-      onClick={() => {
-        window.location.href = "#reviews";
-      }}
     >
       <video
-        aria-label={`Juujo customer video review ${index + 1}`}
+        aria-label={`Buudy customer video review ${index + 1}`}
         className="h-full w-full object-cover"
         disablePictureInPicture
         loop
@@ -95,7 +92,7 @@ function ReviewVideoCard({
 
 export function VideoReviews() {
   return (
-    <section className="juujo-section bg-[#f6ede2] pt-7 md:pt-12 pb-4 md:pb-6 overflow-hidden">
+    <section className="juujo-section bg-[var(--cream)] py-7 md:py-12 overflow-hidden">
       <style>{`
         @keyframes vr-css-auto-scroll {
           0% { transform: translateX(0); }
@@ -108,7 +105,7 @@ export function VideoReviews() {
           eyebrow="Real Customers"
           title={
             <>
-              Juujo Grounding Sheets <span className="juujo-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
+              Grounding Sheet <span className="juujo-italic text-[var(--gold)]">reviews</span> <span className="italic text-[var(--plum)]">&</span> real results
             </>
           }
         />
