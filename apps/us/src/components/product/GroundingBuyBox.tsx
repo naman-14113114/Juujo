@@ -27,23 +27,30 @@ import { DeliveryTimerBox } from "./DeliveryTimerBox";
 type SheetChoice = { colorId: string; sizeId: string };
 
 type Tier = {
-  id: "single" | "bundle";
+  id: "single" | "bundle-2" | "bundle-3";
   label: string;
   sheets: number;
-  freeCount: number;
+  discountTotalCents: number;
   badge?: string;
   recommended?: boolean;
 };
 
 const TIERS: Tier[] = [
-  { id: "single", label: "Buy 1", sheets: 1, freeCount: 0 },
+  { id: "single", label: "Buy 1", sheets: 1, discountTotalCents: 0 },
   {
-    id: "bundle",
-    label: "Buy 2, Get 1 Free!",
-    sheets: 3,
-    freeCount: 1,
-    badge: "Most Popular",
+    id: "bundle-2",
+    label: "Buy 2",
+    sheets: 2,
+    discountTotalCents: 2000,
+    badge: "Recommended",
     recommended: true,
+  },
+  {
+    id: "bundle-3",
+    label: "Buy 3",
+    sheets: 3,
+    discountTotalCents: 6000,
+    badge: "Most Popular",
   },
 ];
 
@@ -91,7 +98,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     [product.colors, product.sizes],
   );
 
-  const [tierId, setTierId] = useState<Tier["id"]>("bundle");
+  const [tierId, setTierId] = useState<Tier["id"]>("bundle-3");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
@@ -112,12 +119,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     return { priceCents: v.priceCents, compareAtCents: v.compareAtCents };
   });
 
-  // For bundle: only the paid sheets count toward total (freeCount sheets are free)
-  // Paid items = first (sheets - freeCount) choices
-  const paidCount = tier.sheets - tier.freeCount;
+  // For bundle: apply the flat discountTotalCents to the sum
   const bundleTotal = activeVariantPrices
-    .slice(0, paidCount)
-    .reduce((sum, v) => sum + v.priceCents, 0);
+    .reduce((sum, v) => sum + v.priceCents, 0) - tier.discountTotalCents;
   const bundleCompare = activeVariantPrices.reduce(
     (sum, v) => sum + v.compareAtCents,
     0,
@@ -131,14 +135,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
   function priceForTier(t: Tier) {
     const tierChoices = choices[t.id];
-    const paidN = t.sheets - t.freeCount;
-    return tierChoices
-      .slice(0, paidN)
-      .reduce(
-        (sum, choice) =>
-          sum + getVariant(product, choice.colorId, choice.sizeId).priceCents,
-        0,
-      );
+    return tierChoices.reduce(
+      (sum, choice) =>
+        sum + getVariant(product, choice.colorId, choice.sizeId).priceCents,
+      0,
+    ) - t.discountTotalCents;
   }
 
   function compareForTier(t: Tier) {
@@ -177,8 +178,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     const selections = activeChoices.map((choice) => ({
       product,
       variantId: getVariant(product, choice.colorId, choice.sizeId).variantId,
+      discountPerSheetCents: tier.sheets > 1 ? Math.round(tier.discountTotalCents / tier.sheets) : 0,
     }));
-    setSheetBundle(selections, tier.freeCount);
+    setSheetBundle(selections, 0); // No free sheets in this bundle model
     router.push("/cart");
   }
 
@@ -268,9 +270,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           const total = priceForTier(t);
           const compare = compareForTier(t);
           const savings = Math.max(compare - total, 0);
-          
-          const isBundle = t.id === "bundle";
-          
+
           return (
             <div
               key={t.id}
@@ -309,16 +309,30 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                   
                   <div className="flex-1 flex flex-row justify-between items-start gap-2">
                     <div className="flex flex-col flex-1 pr-1">
-                      <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
-                        {t.label}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
+                          {t.label}
+                        </h3>
+                        {t.discountTotalCents > 0 && (
+                          <span className="inline-block px-2 py-0.5 rounded text-[12px] sm:text-[13px] font-bold tracking-wide text-white bg-[var(--night)] shadow-sm">
+                            {formatMoney(t.discountTotalCents, product.currency)} OFF
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 text-[13.5px] sm:text-[15px] text-[var(--muted)] leading-snug">
-                        {t.id === "bundle" ? (
+                        {t.id === "bundle-3" ? (
+                          <>
+                            Includes 3 Sheet Sets, 3 Cables
+                            <br className="hidden sm:block" />
+                            <span className="sm:hidden">, </span>
+                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.compareAtCents || giftProduct.priceCents, giftProduct.currency) : "$140"} Value)
+                          </>
+                        ) : t.id === "bundle-2" ? (
                           <>
                             Includes 2 Sheet Sets, 2 Cables
                             <br className="hidden sm:block" />
                             <span className="sm:hidden">, </span>
-                            &amp; <strong>FREE Grounding Mat</strong> ($140 Value)
+                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.compareAtCents || giftProduct.priceCents, giftProduct.currency) : "$140"} Value)
                           </>
                         ) : (
                           <>Includes 1 Fitted Sheet, 1 Cable</>
@@ -337,9 +351,14 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                           </span>
                         )}
                       </div>
-                      {savings > 0 && (
+                      {t.discountTotalCents === 0 && savings > 0 && (
                         <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
                           SAVE {formatMoney(savings, product.currency)}
+                        </span>
+                      )}
+                      {t.sheets > 1 && (
+                        <span className="mt-1 font-sans text-[11.5px] sm:text-[12.5px] font-medium text-[var(--muted)]">
+                          ({formatMoney(Math.round(total / t.sheets), product.currency)} each)
                         </span>
                       )}
                     </div>

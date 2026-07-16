@@ -99,6 +99,7 @@ export function buildProductCartLines(
 export type BundleSelection = {
   product: Product;
   variantId?: string;
+  discountPerSheetCents?: number;
 };
 
 export function buildSheetBundleLines(
@@ -117,6 +118,7 @@ export function buildSheetBundleLines(
     const size = product.sizes.find((entry) => entry.id === variant.sizeId);
     const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
     const isFree = index >= paidCutoff;
+    const discount = selection.discountPerSheetCents || 0;
 
     return {
       id: `bundle-${index + 1}-${variant.variantId || "default"}`,
@@ -130,7 +132,7 @@ export function buildSheetBundleLines(
       title: product.name,
       subtitle: variantLabel || product.shortDescription,
       image: color?.image ?? product.cartImage,
-      unitPriceCents: isFree ? 0 : variant.priceCents,
+      unitPriceCents: isFree ? 0 : Math.max(0, variant.priceCents - discount),
       compareAtCents: variant.compareAtCents,
       quantity: 1,
       bundle: true,
@@ -177,7 +179,7 @@ export function normalizeCartLines(lines: CartLine[]) {
           title: product.name,
           subtitle: variantLabel || product.shortDescription,
           image: color?.image ?? product.cartImage,
-          unitPriceCents: line.free ? 0 : variant.priceCents,
+          unitPriceCents: line.free ? 0 : line.unitPriceCents,
           compareAtCents: variant.compareAtCents,
           quantity: 1,
         } satisfies CartLine,
