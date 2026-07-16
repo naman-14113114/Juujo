@@ -500,3 +500,11 @@ Ask me if anything is unclear before large changes. Take your time; there is no 
 - Replaced the inline spans with `<span className="block">` to ensure permanent line breaks on all screen sizes for the 'Premium Grounding Sheets' title.
 - Scaled up the product name font sizes from clamped values to fixed larger values (`!text-[2.6rem] md:!text-[3.2rem]`) for both products.
 - Renamed the 'Grounding Mat' title to 'Premium Grounding Mat' to keep product presentation synchronized and equally premium.
+
+## [2026-07-16] Grounding Sheets Video Reviews & Accordion Fixes
+
+- Added the 12 provided grounding sheet video reviews to the product page (using the infinite marquee design from Buudy).
+- Closed the "Product Details" accordion by default in `GroundingAccordions.tsx`.
+- Ported `VideoReviews.tsx` and modified the CSS animation (`vr-css-auto-scroll`) duration from 95s to 35.6s to perfectly match the original visual speed for a track of 12 videos (duplicated twice).
+- Cleaned up the `videos` folder and correctly placed the 12 new `.mp4` files into `public/media/products/grounding-sheets/videos/` across all 4 apps (US, UK, CA, AU) to fix 404 black screen errors.
+- Linked the videos in `productSections.ts` and restored the `onClick` scroll-to-reviews functionality exactly as it functioned on Buudy, ensuring no fullscreen popups occur.
