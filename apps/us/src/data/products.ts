@@ -162,7 +162,7 @@ const groundingColors: ProductColor[] = [
     name: "White",
     hex: "#f2efe8",
     image: productMediaAsset(
-      "juujo-grounding-bed-sheets-lifestyle-sleeping.png",
+      "juujo-grounding-sheet-white-cart.png",
       "grounding-sheets",
       "images",
     ),
@@ -172,7 +172,7 @@ const groundingColors: ProductColor[] = [
     name: "Grey",
     hex: "#9b9a95",
     image: productMediaAsset(
-      "juujo-earthing-sheets-bedroom-view.png",
+      "juujo-grounding-sheet-grey-cart.png",
       "grounding-sheets",
       "images",
     ),
@@ -182,7 +182,7 @@ const groundingColors: ProductColor[] = [
     name: "Green",
     hex: "#5c6b52",
     image: productMediaAsset(
-      "greenlinen3_png-min.png",
+      "juujo-grounding-sheet-green-cart.png",
       "grounding-sheets",
       "images",
     ),
@@ -194,50 +194,50 @@ const groundingSizes: SizePricing[] = [
     id: "single",
     name: "Single",
     dimensions: "27 x 78 in",
-    priceCents: 10995,
-    compareAtCents: 21990,
+    priceCents: 10900,
+    compareAtCents: 21900,
   },
   {
     id: "twin",
     name: "Twin",
     dimensions: "39 x 75 in",
-    priceCents: 14995,
-    compareAtCents: 29990,
+    priceCents: 14900,
+    compareAtCents: 29900,
   },
   {
     id: "twin-xl",
     name: "Twin XL",
     dimensions: "39 x 80 in",
-    priceCents: 15995,
-    compareAtCents: 31990,
+    priceCents: 15900,
+    compareAtCents: 31900,
   },
   {
     id: "full",
     name: "Full",
     dimensions: "54 x 75 in",
-    priceCents: 16995,
-    compareAtCents: 33990,
+    priceCents: 16900,
+    compareAtCents: 33900,
   },
   {
     id: "queen",
     name: "Queen",
     dimensions: "60 x 80 in",
-    priceCents: 16995,
-    compareAtCents: 33990,
+    priceCents: 16900,
+    compareAtCents: 33900,
   },
   {
     id: "king",
     name: "King",
     dimensions: "76 x 80 in",
-    priceCents: 18995,
-    compareAtCents: 37990,
+    priceCents: 18900,
+    compareAtCents: 37900,
   },
   {
     id: "cali-king",
     name: "Cali King",
     dimensions: "72 x 84 in",
-    priceCents: 18995,
-    compareAtCents: 37990,
+    priceCents: 18900,
+    compareAtCents: 37900,
   },
 ];
 
@@ -445,8 +445,8 @@ export const groundingSheets: Product = {
   seoDescription:
     "Juujo Grounding Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   currency: market.currency,
-  priceCents: 16995, // Queen price â€” the default selected size
-  compareAtCents: 33990,
+  priceCents: 16900, // Queen price â€” the default selected size
+  compareAtCents: 33900,
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
@@ -905,7 +905,7 @@ export const groundingMat: Product = {
   rating: 4.9,
   reviewCount: 1542,
   customerCount: "40,000+",
-  cartImage: productMediaAsset("juujo-grounding-mat-gallery-2.jpg", "grounding-mat", "images"),
+  cartImage: productMediaAsset("juujo-grounding-mat-cart.png"),
   gallery: [
     {
       src: productMediaAsset(
