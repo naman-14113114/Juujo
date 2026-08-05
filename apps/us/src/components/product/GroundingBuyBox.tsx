@@ -213,21 +213,18 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Settle nervous tension to fall asleep faster.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Improves sleep quality — fall asleep faster, stay asleep longer</span>
               </span>
             </li>
             <li className="flex items-start gap-3">
               <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Ease inflammation and wake up with less stiffness.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Reduces pain & inflammation — no more morning stiffness</span>
               </span>
             </li>
             <li className="flex items-start gap-3">
               <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience restorative sleep cycles for renewed vitality.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Restores natural energy — no more afternoon crashes</span>
               </span>
             </li>
           </ul>
@@ -237,21 +234,18 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Fall asleep faster by calming nervous tension.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Improves sleep quality — fall asleep faster, stay asleep longer</span>
               </span>
             </li>
             <li className="flex items-start gap-3">
               <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Soothe aches to wake up with less joint stiffness.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Reduces pain & inflammation — no more morning stiffness</span>
               </span>
             </li>
             <li className="flex items-start gap-3">
               <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
               <span className="leading-snug">
                 <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience deeper sleep for all-day energy.
-                <br/><span className="text-[var(--muted)] text-[14px] lg:text-[15px] font-normal">Restores natural energy — no more afternoon crashes</span>
               </span>
             </li>
           </ul>

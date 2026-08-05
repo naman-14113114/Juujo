@@ -458,6 +458,14 @@ export const groundingSheets: Product = {
   gallery: [
     {
       src: productMediaAsset(
+        "juujo-earthing-fitted-sheet-sleep-benefits.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Earthing Fitted Sheet Sleep Benefits",
+    },
+    {
+      src: productMediaAsset(
         "juujo-fitted-sheet-main-new.jpg",
         "grounding-sheets",
         "images",
@@ -531,30 +539,30 @@ export const groundingSheets: Product = {
       ),
       alt: "Customer testimonial cozy bedroom",
     },
-    {
-      src: productMediaAsset(
-        "juujo-earthing-bed-sheet-visual.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet visual",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-bed-sheets-corner-fit.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet angle 1",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-deep-pocket.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet angle 2",
-    },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-earthing-bed-sheet-visual.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet visual",
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-bed-sheets-corner-fit.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet angle 1",
+    // },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-sheets-deep-pocket.png",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Grounding sheet angle 2",
+    // },
     {
       src: productMediaAsset(
         "juujo-grounding-bedding-presentation.png",
@@ -586,14 +594,6 @@ export const groundingSheets: Product = {
         "images",
       ),
       alt: "Juujo Grounding Fitted Sheet Premium Quality",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-earthing-fitted-sheet-sleep-benefits.webp",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Juujo Earthing Fitted Sheet Sleep Benefits",
     },
     {
       src: productMediaAsset(

@@ -18,7 +18,7 @@ import { GroundingMatWhatIsItSection } from "./GroundingMatWhatIsItSection";
 import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
 import { GroundingMatHowToUseSection } from "./GroundingMatHowToUseSection";
 import { GroundingMatTimelineSection } from "./GroundingMatTimelineSection";
-import { FeatureGrid } from "./FeatureGrid";
+import { CompanionAppPromo } from "./CompanionAppPromo";
 import { VideoReviews } from "./VideoReviews";
 
 /**
@@ -45,7 +45,7 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingExpectationsSection />
           {/* <GroundingTimelineSection /> */}
           <GroundingScienceSection />
-          <FeatureGrid />
+          {/* <CompanionAppPromo /> */}
           <ProductReviewsSection productHandle={product.slug} />
           <GroundingWhatIsItSection />
           <GroundingComparisonSection />
@@ -57,7 +57,7 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingMatHowToUseSection />
           <GroundingMatTimelineSection />
           <GroundingScienceSection />
-          <FeatureGrid />
+          {/* <CompanionAppPromo /> */}
           <ProductReviewsSection productHandle={product.slug} />
           <GroundingMatWhatIsItSection />
         </>
