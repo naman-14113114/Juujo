@@ -579,6 +579,46 @@ export const groundingSheets: Product = {
       ),
       alt: "Grounding sheet detail view",
     },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-premium-quality.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Premium Quality",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-earthing-fitted-sheet-sleep-benefits.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Earthing Fitted Sheet Sleep Benefits",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-sheet-fitted-design.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Sheet Fitted Design",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-conductive-fitted-sheet-earthing.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Conductive Fitted Sheet Earthing",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounded-sleep-fitted-sheet.png",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounded Sleep Fitted Sheet",
+    },
   ],
   colors: groundingColors,
   sizes: groundingSizes,
