@@ -127,7 +127,7 @@ video {
 
 .juujo-mono {
   font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.69rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -139,7 +139,7 @@ video {
 
 .juujo-eyebrow {
   font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--plum);

@@ -93,10 +93,10 @@ export function StickyAddToCart({ product }: { product: Product }) {
             />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-base font-semibold text-[var(--plum)]">
+            <p className="truncate text-[16px] sm:text-[18px] font-semibold text-[var(--plum)]">
               {product.name}
             </p>
-            <p className="truncate text-sm text-[var(--muted)]">
+            <p className="truncate text-[15px] sm:text-[16px] text-[var(--muted)]">
               {formatMoney(product.priceCents, product.currency)}
               {subtitle}
             </p>

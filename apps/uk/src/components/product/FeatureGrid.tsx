@@ -90,7 +90,7 @@ export function FeatureGrid() {
                 <p className="juujo-display mt-2.5 italic text-[var(--plum-soft)]">
                   {feature.kicker}
                 </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+                <p className="mt-4 text-[17px] md:text-[18px] leading-7 text-[var(--muted)]">
                   {feature.body}
                 </p>
               </article>

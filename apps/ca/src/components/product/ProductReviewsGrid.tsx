@@ -522,7 +522,7 @@ function ReviewCard({
         </h3>
       ) : null}
 
-      <p className="mt-2 sm:mt-3 text-[0.7rem] sm:text-sm leading-5 sm:leading-7 text-[var(--muted)] line-clamp-3 sm:line-clamp-4">{review.body}</p>
+      <p className="mt-2 sm:mt-3 text-[15px] sm:text-[18px] leading-5 sm:leading-7 text-[var(--muted)] line-clamp-3 sm:line-clamp-4">{review.body}</p>
 
       <div className="mt-3 sm:mt-6 flex items-center justify-between gap-1 sm:gap-2 border-t border-[rgba(58,31,61,.12)] pt-3 sm:pt-4">
         <span className="juujo-display min-w-0 text-[0.7rem] sm:text-sm text-[var(--plum)] whitespace-nowrap overflow-hidden text-ellipsis">

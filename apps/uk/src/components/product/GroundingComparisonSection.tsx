@@ -50,7 +50,7 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
             {title}
           </p>
           {subtitle && (
-            <p className="juujo-display text-[var(--plum-soft)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
+            <p className="juujo-display text-[var(--plum-soft)] text-sm md:text-[18px] font-medium italic mt-0.5 leading-tight">
               {subtitle}
             </p>
           )}
