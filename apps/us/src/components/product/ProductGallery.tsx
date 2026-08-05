@@ -165,9 +165,13 @@ export function ProductGallery({
         .juujoGallery-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .juujoGallery-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
-        .juujoGallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-        .juujoGallery-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
-        .juujoGallery-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
+        .juujoGallery-thumbs_container { position: relative; width: 100%; display: flex; align-items: center; gap: 12px; }
+        .juujoGallery-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 15px; width: 100%; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; padding: 4px 0; scroll-snap-type: x mandatory; }
+        .juujoGallery-grid::-webkit-scrollbar { display: none; }
+        .juujoGallery-thumb_item { flex: 0 0 calc(25% - 11.25px); position: relative; appearance: none; width: 100%; padding: 0; aspect-ratio: 1 / 1; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; scroll-snap-align: start; }
+        .juujoGallery-thumb_nav { flex: 0 0 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(58, 31, 61, .16); background: rgba(247, 241, 232, .92); color: var(--plum); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s, background 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .juujoGallery-thumb_nav:hover { transform: scale(1.05); background: #fff; }
+        .juujoGallery-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
         .juujoGallery-thumb_zoom { position: absolute; bottom: 9px; left: 9px; z-index: 2; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid rgba(58, 31, 61, .16); border-radius: 50%; background: rgba(247, 241, 232, .92); color: var(--plum); opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s ease; }
         .juujoGallery-thumb_item:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(0, 0, 0, 0.05); z-index: 1; }
         .juujoGallery-thumb_item:hover .juujoGallery-thumb_img { transform: scale(1.08); }
@@ -198,43 +202,27 @@ export function ProductGallery({
         
         /* 7. STACKED RESPONSIVENESS */
         @media (max-width: 1023px) { 
-            .juujoGallery-grid { 
-                display: flex; 
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                gap: 12px; 
-                padding-bottom: 4px;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none; /* IE/Edge */
-            } 
-            /* Hide scrollbar for Chrome/Safari/Opera */
-            .juujoGallery-grid::-webkit-scrollbar {
-                display: none;
+            .juujoGallery-thumb_nav {
+                display: none !important;
             }
-            /* Hide Zoom Button on Mobile */
+            .juujoGallery-grid { 
+                gap: 12px; 
+            } 
             .juujoGallery-zoom_btn {
                 display: none !important;
             }
-            /* Hide Arrows on Mobile */
             .juujoGallery-arrow {
                 display: none !important;
             }
             .juujoGallery-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
                 min-width: 80px; 
-                padding: 0; /* Override desktop padding hack */
-                aspect-ratio: 1 / 1; /* Maintain perfect square */
-                scroll-snap-align: start;
-            }
-            .juujoGallery-thumb_img {
-                height: 100%; /* Reset the 100.5% height to exact fit */
             }
             .juujoGallery-thumb_zoom {
                 display: none !important;
             }
         }
+
       `,
         }}
       />
@@ -332,52 +320,70 @@ export function ProductGallery({
           </button>
         </div>
 
-        <div
-          className="juujoGallery-grid"
-          id="juujoGallery-Thumbs"
-          ref={thumbsRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => setIsPaused(false)}
-        >
-          {images.map((image, index) => (
-            <button
-              aria-label={`Magnify ${image.alt}`}
-              key={image.src}
-              className={`juujoGallery-thumb_item ${
-                index === currentIndex ? "juujoGallery-active" : ""
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                openLightbox(index);
-              }}
-              type="button"
-            >
-              {image.src.endsWith(".mp4") || image.src.endsWith(".webm") ? (
-                <video
-                  src={image.src}
-                  className="juujoGallery-thumb_img"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-              ) : (
-                <img
-                  src={image.src}
-                  className="juujoGallery-thumb_img"
-                  alt={image.alt}
-                  decoding="async"
-                  fetchPriority="low"
-                  loading="lazy"
-                />
-              )}
-              <span aria-hidden="true" className="juujoGallery-thumb_zoom">
-                <Search size={14} strokeWidth={2.2} />
-              </span>
-            </button>
-          ))}
+        <div className="juujoGallery-thumbs_container">
+          <button 
+            className="juujoGallery-thumb_nav" 
+            aria-label="Scroll Thumbnails Left"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); thumbsRef.current?.scrollBy({ left: -200, behavior: "smooth" }); }}
+          >
+            <i className="juujoGallery-icon juujoGallery-icon_left" style={{ margin: 0, padding: '3px', borderWidth: '0 2px 2px 0' }} />
+          </button>
+
+          <div
+            className="juujoGallery-grid"
+            id="juujoGallery-Thumbs"
+            ref={thumbsRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            {images.map((image, index) => (
+              <button
+                aria-label={`Magnify ${image.alt}`}
+                key={image.src}
+                className={`juujoGallery-thumb_item ${
+                  index === currentIndex ? "juujoGallery-active" : ""
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openLightbox(index);
+                }}
+                type="button"
+              >
+                {image.src.endsWith(".mp4") || image.src.endsWith(".webm") ? (
+                  <video
+                    src={image.src}
+                    className="juujoGallery-thumb_img"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={image.src}
+                    className="juujoGallery-thumb_img"
+                    alt={image.alt}
+                    decoding="async"
+                    fetchPriority="low"
+                    loading="lazy"
+                  />
+                )}
+                <span aria-hidden="true" className="juujoGallery-thumb_zoom">
+                  <Search size={14} strokeWidth={2.2} />
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <button 
+            className="juujoGallery-thumb_nav" 
+            aria-label="Scroll Thumbnails Right"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); thumbsRef.current?.scrollBy({ left: 200, behavior: "smooth" }); }}
+          >
+            <i className="juujoGallery-icon juujoGallery-icon_right" style={{ margin: 0, padding: '3px', borderWidth: '0 2px 2px 0' }} />
+          </button>
         </div>
       </div>
 
