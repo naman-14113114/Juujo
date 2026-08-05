@@ -152,9 +152,22 @@ video {
   letter-spacing: 0;
 }
 
+.juujo-body-copy,
+.juujo-copy {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
 .juujo-copy {
   color: var(--muted);
-  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .juujo-body-copy,
+  .juujo-copy {
+    font-size: 1.125rem;
+    line-height: 1.78;
+  }
 }
 
 .juujo-glow {

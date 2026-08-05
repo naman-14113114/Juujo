@@ -281,7 +281,7 @@ function DigitalGiftNotice({ line }: { line: CartLine }) {
             </p>
           </div>
         </div>
-        <p className="text-sm leading-6 text-[var(--muted)]">
+        <p className="juujo-body-copy text-[var(--muted)]">
           It will not appear as a shipped cart item, but it stays unlocked with
           your mask order so your routine starts the moment your confirmation
           email arrives.

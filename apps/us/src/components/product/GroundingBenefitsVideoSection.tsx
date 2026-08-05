@@ -14,7 +14,7 @@ export function GroundingBenefitsVideoSection() {
             <h2 className="juujo-display text-[2.5rem] leading-[1.1] md:text-5xl text-[var(--plum)] mb-6">
               How our Premium Grounding Sheets can benefit your health?
             </h2>
-            <p className="text-[var(--muted)] leading-relaxed text-sm md:text-base max-w-lg">
+            <p className="juujo-body-copy max-w-lg text-[var(--muted)]">
               While grounding outdoors offers great health benefits, staying
               grounded indoors can be challenging. That’s where our Grounding
               Sheets come in. Simply cover your mattress with the sheets,

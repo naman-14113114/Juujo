@@ -172,7 +172,7 @@ function HomeFeatureGrid() {
                 <h2 className="juujo-display text-2xl text-[var(--plum)]">
                   {feature.title}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                <p className="juujo-body-copy mt-3 text-[var(--muted)]">
                   {feature.copy}
                 </p>
               </div>

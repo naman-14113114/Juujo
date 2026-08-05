@@ -62,7 +62,7 @@ export function GroundingBenefitsSection() {
                   <h3 className="juujo-display text-xl md:text-2xl text-[var(--plum)] mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-[var(--muted)] leading-relaxed text-base">
+                  <p className="juujo-body-copy text-[var(--muted)]">
                     {benefit.description}
                   </p>
                 </div>

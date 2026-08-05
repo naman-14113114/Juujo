@@ -39,7 +39,7 @@ export function AboutPage() {
           <h1 className="juujo-display mt-4 text-[2.8rem] leading-[1.05] text-[var(--cream)] sm:text-[3.5rem] md:text-7xl font-light">
             Welcome to <em className="juujo-italic">Juujo.com</em>
           </h1>
-          <p className="mt-8 text-base sm:text-lg leading-8 text-[rgba(247,241,232,0.85)] max-w-2xl mx-auto font-light">
+          <p className="juujo-body-copy mt-8 max-w-2xl mx-auto font-light text-[rgba(247,241,232,0.85)]">
             {aboutHero.copy}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function AboutPage() {
                     }
                     align="left"
                   />
-                  <div className="mt-6 space-y-4 text-sm sm:text-base leading-7 text-[var(--muted)] whitespace-pre-line font-light">
+                  <div className="juujo-body-copy mt-6 space-y-4 whitespace-pre-line font-light text-[var(--muted)]">
                     {section.copy.split("\n\n").map((paragraph, pIdx) => {
                       // Format bullet lists beautifully
                       if (paragraph.startsWith("- ")) {
@@ -99,7 +99,7 @@ export function AboutPage() {
                               return (
                                 <li key={bIdx} className="flex items-start gap-2.5">
                                   <span className="text-[var(--plum)] mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--plum)] shrink-0" />
-                                  <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
+                                  <span className="juujo-body-copy text-[var(--muted)]">
                                     {rest ? (
                                       <>
                                         <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
@@ -160,7 +160,7 @@ export function AboutPage() {
                 align="center"
               />
               <div className="mt-8 rounded-3xl border border-[var(--border)] bg-[rgba(255,252,245,.6)] p-8 sm:p-12 shadow-[0_20px_50px_-20px_rgba(58,31,61,0.06)]">
-                <div className="space-y-6 text-sm sm:text-base leading-7 text-[var(--muted)] font-light mx-auto max-w-2xl text-left">
+                <div className="juujo-body-copy mx-auto max-w-2xl space-y-6 text-left font-light text-[var(--muted)]">
                   {section.copy.split("\n\n").map((paragraph, pIdx) => {
                     if (paragraph.startsWith("- ")) {
                       return (
@@ -172,7 +172,7 @@ export function AboutPage() {
                             return (
                               <li key={bIdx} className="flex items-center gap-3">
                                 <span className="text-[var(--plum)] h-1.5 w-1.5 rounded-full bg-[var(--plum)] shrink-0" />
-                                <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
+                                <span className="juujo-body-copy text-[var(--muted)]">
                                   {rest ? (
                                     <>
                                       <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>

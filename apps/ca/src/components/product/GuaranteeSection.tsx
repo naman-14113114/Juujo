@@ -31,7 +31,7 @@ export function GuaranteeSection({ showVideo = true, productCategory, productId 
           <br />
           money back guarantee.
         </h2>
-        <p className="mx-auto mt-6 hidden max-w-xl text-sm font-medium leading-7 text-white md:block md:text-base">
+        <p className="juujo-body-copy mx-auto mt-6 hidden max-w-xl font-medium text-white md:block">
           Bring the natural benefits of grounding into your daily routine with Juujo. Designed for deeper sleep, better recovery, and effortless at-home use, Juujo gives you a premium rest experience you can trust every single night.
         </p>
         {/* <div className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-[rgba(247,241,232,0.25)] bg-[rgba(18,9,20,0.52)] px-7 py-4 backdrop-blur-md">

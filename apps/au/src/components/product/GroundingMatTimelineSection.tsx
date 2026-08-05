@@ -57,7 +57,7 @@ export function GroundingMatTimelineSection() {
               Using a Grounding Mat
             </span>
           </h2>
-          <p className="text-[var(--muted)] leading-relaxed max-w-3xl mx-auto text-base">
+          <p className="juujo-body-copy mx-auto max-w-3xl text-[var(--muted)]">
             Grounding mats work cumulatively. With daily use, many people report
             feeling calmer, more comfortable, and more refreshed.
           </p>
@@ -126,7 +126,7 @@ export function GroundingMatTimelineSection() {
               <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[var(--night)]">
                 {timeline[activeStep].title}
               </h3>
-              <p className="text-[var(--muted)] leading-relaxed text-base">
+              <p className="juujo-body-copy text-[var(--muted)]">
                 {timeline[activeStep].description}
               </p>
             </div>

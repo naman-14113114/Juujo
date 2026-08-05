@@ -51,7 +51,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
             <h2 className="juujo-display mt-4 text-4xl leading-none md:text-5xl">
               What makes the best grounding sheet for UK sleep?
             </h2>
-            <p className="mt-5 text-sm leading-7 text-[rgba(247,241,232,.74)] md:text-base">
+            <p className="juujo-body-copy mt-5 text-[rgba(247,241,232,.74)]">
               The best grounding sheet is not just the softest cotton. It should
               give you a genuine conductive path, a secure connection, a
               comfortable sleep-ready weave, and a routine simple enough to keep.
@@ -61,7 +61,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
               <p className="juujo-display mt-2 text-3xl">
                 {formatMoney(product.priceCents, product.currency)}
               </p>
-              <p className="mt-2 text-sm leading-6 text-[rgba(247,241,232,.7)]">
+              <p className="juujo-body-copy mt-2 text-[rgba(247,241,232,.7)]">
                 Includes free grounding mat, free tracked shipping, and 90-day
                 money back guarantee while the UK launch offer is live.
               </p>
@@ -85,7 +85,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
                   <h3 className="juujo-display mt-5 text-2xl leading-tight text-[var(--plum)]">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                  <p className="juujo-body-copy mt-3 text-[var(--muted)]">
                     {item.copy}
                   </p>
                 </article>
@@ -111,7 +111,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
                     <h4 className="juujo-display text-xl text-[var(--plum)]">
                       {item.question}
                     </h4>
-                    <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                    <p className="juujo-body-copy mt-2 text-[var(--muted)]">
                       {item.answer}
                     </p>
                   </article>
@@ -121,7 +121,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
 
             <div className="flex items-start gap-4 rounded-[24px] border border-[var(--border)] bg-[var(--card)] p-5">
               <ShieldCheck className="mt-1 shrink-0 text-[var(--gold)]" size={23} />
-              <p className="text-sm leading-7 text-[var(--muted)]">
+              <p className="juujo-body-copy text-[var(--muted)]">
                 Safety note: grounding is a passive practice and is generally
                 suitable for everyday use, but if you have a medical condition or
                 use implanted devices, speak with a qualified healthcare

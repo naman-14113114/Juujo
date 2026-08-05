@@ -86,7 +86,7 @@ export function GroundingExpectationsSection() {
                         <span className="text-[var(--muted)]/50 hidden sm:inline">|</span>
                         <span className="font-semibold text-lg text-[var(--night)]">{step.title}</span>
                       </div>
-                      <p className="text-[var(--muted)] text-base leading-relaxed">
+                      <p className="juujo-body-copy text-[var(--muted)]">
                         {step.description}
                       </p>
                     </div>

@@ -50,7 +50,7 @@ function ContactHero() {
             </span>
           </div>
 
-          <p className="mt-8 max-w-xl leading-8 text-[var(--muted)]">
+          <p className="juujo-body-copy mt-8 max-w-xl text-[var(--muted)]">
             {contactPage.supportIntro}
           </p>
         </div>
@@ -71,7 +71,7 @@ function ContactHero() {
               <Sparkles className="text-[var(--gold)]" size={18} />
               <p className="juujo-mono text-[var(--gold)]">Support desk</p>
             </div>
-            <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
+            <p className="juujo-body-copy mt-3 text-[rgba(247,241,232,.78)]">
               Product guidance, order updates, and routine support for your
               Juujo grounding products.
             </p>
@@ -106,7 +106,7 @@ function HelpAndSocial() {
             >
               <HelpCircle className="text-[var(--gold)]" size={20} />
               <h2 className="juujo-display mt-4 text-2xl">{link.label}</h2>
-              <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.74)]">
+              <p className="juujo-body-copy mt-3 text-[rgba(247,241,232,.74)]">
                 {link.copy}
               </p>
             </Link>
@@ -154,14 +154,14 @@ function FormSection() {
           <div className="mt-8 grid gap-4">
             <div className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-[rgba(247,241,232,.72)] p-5">
               <MessageCircle className="mt-1 flex-none text-[var(--gold)]" size={20} />
-              <p className="text-sm leading-6 text-[var(--muted)]">
+              <p className="juujo-body-copy text-[var(--muted)]">
                 Include your order number if your message is about shipping,
                 returns, or an existing purchase.
               </p>
             </div>
             <div className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-[rgba(247,241,232,.72)] p-5">
               <Clock3 className="mt-1 flex-none text-[var(--gold)]" size={20} />
-              <p className="text-sm leading-6 text-[var(--muted)]">
+              <p className="juujo-body-copy text-[var(--muted)]">
                 Messages are reviewed Monday through Friday during support
                 hours.
               </p>

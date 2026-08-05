@@ -48,7 +48,7 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="max-w-3xl leading-7 text-[var(--muted)]">
+                    <p className="juujo-body-copy max-w-3xl text-[var(--muted)]">
                       {faq.answer}
                     </p>
                   </div>

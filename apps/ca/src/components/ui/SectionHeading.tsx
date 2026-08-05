@@ -29,7 +29,7 @@ export function SectionHeading({
       </h2>
       {copy ? (
         <p
-          className={`mt-4 leading-7 ${
+          className={`juujo-body-copy mt-4 ${
             invert ? "text-[rgba(247,241,232,.7)]" : "text-[var(--muted)]"
           }`}
         >

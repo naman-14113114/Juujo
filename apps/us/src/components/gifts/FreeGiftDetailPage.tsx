@@ -31,7 +31,7 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
                 </Link>
               </Button>
             </div>
-            <p className="mt-5 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+            <p className="juujo-body-copy mt-5 max-w-2xl text-[var(--muted)]">
               {gift.note}
             </p>
           </div>
@@ -53,7 +53,7 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
             <ul className="mt-4 grid gap-3">
               {gift.cardBullets.map((bullet) => (
                 <li
-                  className="flex gap-3 text-sm leading-6 text-[var(--muted)]"
+                  className="juujo-body-copy flex gap-3 text-[var(--muted)]"
                   key={bullet}
                 >
                   <Check
@@ -86,7 +86,7 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
                 <ul className="mt-5 grid gap-3">
                   {section.bullets.map((bullet) => (
                     <li
-                      className="flex gap-3 text-sm leading-6 text-[var(--muted)]"
+                      className="juujo-body-copy flex gap-3 text-[var(--muted)]"
                       key={bullet}
                     >
                       <Sparkles
@@ -110,7 +110,7 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
           <h2 className="juujo-display mt-3 text-4xl leading-tight md:text-5xl">
             Buy the mask, unlock the full bonus bundle.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-[rgba(247,241,232,.72)]">
+          <p className="juujo-body-copy mx-auto mt-5 max-w-2xl text-[rgba(247,241,232,.72)]">
             {freeGiftBundleFooter}
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">

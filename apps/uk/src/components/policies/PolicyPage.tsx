@@ -81,7 +81,7 @@ export function PolicyPage({ policyType }: PolicyPageProps) {
           <h1 className="juujo-display mt-3 text-[2.5rem] leading-[1.08] text-[var(--plum)] sm:text-5xl md:text-6xl font-light">
             {policy.title}
           </h1>
-          <p className="mt-4 text-sm sm:text-base text-[var(--muted)] font-light max-w-2xl mx-auto">
+          <p className="juujo-body-copy mt-4 max-w-2xl mx-auto font-light text-[var(--muted)]">
             {policy.subtitle}
           </p>
         </div>
@@ -89,7 +89,7 @@ export function PolicyPage({ policyType }: PolicyPageProps) {
         {/* Content Container */}
         <article className="rounded-[24px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 md:p-12 shadow-[0_16px_40px_-24px_rgba(58,31,61,0.08)]">
           <div
-            className="juujo-policy-content prose max-w-none text-sm sm:text-base leading-8 text-[var(--muted)] font-light space-y-6"
+            className="juujo-policy-content juujo-body-copy prose max-w-none space-y-6 font-light text-[var(--muted)]"
             dangerouslySetInnerHTML={{ __html: policy.html }}
           />
         </article>

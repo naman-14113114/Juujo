@@ -31,7 +31,7 @@ export function GroundingWhatIsItSection() {
             <h2 className="juujo-display text-[2.5rem] leading-[1.1] md:text-5xl text-[var(--plum)] mb-6">
               What is Grounding?
             </h2>
-            <p className="text-[var(--muted)] leading-relaxed text-base max-w-lg">
+            <p className="juujo-body-copy max-w-lg text-[var(--muted)]">
               Beneath your feet lies a most marvelous gift from Nature − the
               very Earth itself, naturally equipped with extraordinary healing
               power that may just be the single most effective medicine

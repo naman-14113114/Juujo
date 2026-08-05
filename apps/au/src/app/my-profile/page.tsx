@@ -127,7 +127,7 @@ export default async function MyProfilePage() {
                     </Link>
                   ))
                 ) : (
-                  <p className="text-sm leading-6 text-[var(--muted)]">
+                  <p className="juujo-body-copy text-[var(--muted)]">
                     Recorded orders will appear here after checkout.
                   </p>
                 )}

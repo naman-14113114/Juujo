@@ -57,7 +57,7 @@ export function GroundingTimelineSection() {
               Sleeping on Grounding Sheets
             </span>
           </h2>
-          <p className="text-[var(--muted)] leading-relaxed max-w-3xl mx-auto text-base">
+          <p className="juujo-body-copy mx-auto max-w-3xl text-[var(--muted)]">
             Grounding sheets work cumulatively. Night after night, many people
             report deeper sleep, better recovery, and waking up feeling more
             refreshed - supported by emerging grounding research.
@@ -127,7 +127,7 @@ export function GroundingTimelineSection() {
               <h3 className="juujo-display mb-4 text-2xl md:text-3xl text-[var(--night)]">
                 {timeline[activeStep].title}
               </h3>
-              <p className="text-[var(--muted)] leading-relaxed text-base">
+              <p className="juujo-body-copy text-[var(--muted)]">
                 {timeline[activeStep].description}
               </p>
             </div>

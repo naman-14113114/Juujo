@@ -71,7 +71,7 @@ export function GroundingScienceSection() {
                       </span>
                     </div>
                   </div>
-                  <p className="juujo-copy text-base font-medium">
+                  <p className="juujo-copy font-medium">
                     {stat.description}
                   </p>
                 </div>

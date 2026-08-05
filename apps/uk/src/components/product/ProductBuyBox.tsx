@@ -92,7 +92,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             {product.reviewCount.toLocaleString()} reviews
           </span>
         </p>
-        <p className="mt-4 max-w-prose text-[var(--muted)]">
+        <p className="juujo-body-copy mt-4 max-w-prose text-[var(--muted)]">
           {product.shortDescription}
         </p>
       </div>
