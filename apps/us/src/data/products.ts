@@ -489,14 +489,13 @@ export const groundingSheets: Product = {
       ),
       alt: "Juujo Grounding Fitted Sheet Sleep Benefits",
     },
-    {
+        {
       src: productMediaAsset(
-        "juujo-grounding-sheet-benefits-video.mp4",
+        "juujo-earthing-sheet-benefits.gif",
         "grounding-sheets",
-        "videos",
+        "images",
       ),
-      alt: "Juujo Grounding Sheet Benefits Video",
-      animated: true,
+      alt: "Juujo Earthing Sheet Benefits",
     },
     {
       src: productMediaAsset(
@@ -1606,3 +1605,4 @@ export function totalPriceForTier(
 ): number {
   return unitPriceForTier(variant, tier) * tier.quantity;
 }
+

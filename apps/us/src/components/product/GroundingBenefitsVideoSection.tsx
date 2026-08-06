@@ -1,4 +1,4 @@
-import { SectionHeading } from "@/components/ui/SectionHeading";
+﻿import { SectionHeading } from "@/components/ui/SectionHeading";
 import { productMediaAsset } from "@/lib/media";
 
 export function GroundingBenefitsVideoSection() {
@@ -16,7 +16,7 @@ export function GroundingBenefitsVideoSection() {
             </h2>
             <p className="juujo-body-copy max-w-lg text-[var(--muted)]">
               While grounding outdoors offers great health benefits, staying
-              grounded indoors can be challenging. That’s where our Grounding
+              grounded indoors can be challenging. Thatâ€™s where our Grounding
               Sheets come in. Simply cover your mattress with the sheets,
               connect the grounding cable to an outlet, and enjoy grounding
               benefits every night. Consistent grounding will improve your sleep
@@ -28,16 +28,13 @@ export function GroundingBenefitsVideoSection() {
           {/* Video Content */}
           <div className="order-1 w-full">
             <div className="relative aspect-square w-full max-w-md mx-auto overflow-hidden rounded-3xl shadow-xl">
-              <video
+                            <img
                 src={productMediaAsset(
-                  "grounding-indoors-720p.mp4?v=4",
+                  "juujo-earthing-sheet-benefits.gif",
                   "grounding-sheets",
-                  "videos",
+                  "images",
                 )}
-                autoPlay
-                loop
-                muted
-                playsInline
+                alt="Juujo Earthing Sheet Benefits"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -47,3 +44,4 @@ export function GroundingBenefitsVideoSection() {
     </section>
   );
 }
+
