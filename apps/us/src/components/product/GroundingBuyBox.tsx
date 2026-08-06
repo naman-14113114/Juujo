@@ -284,10 +284,10 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 setExpandedTier(t.id);
               }}
             >
-              {/* MOST POPULAR diagonal ribbon for bundle */}
+              {/* Diagonal ribbon clipped only by the card's top and right walls. */}
               {t.badge && (
-                <div className="absolute top-0 right-0 w-[80px] h-[80px] overflow-hidden pointer-events-none z-20 rounded-tr-2xl">
-                  <div className="absolute top-[20px] -right-[17px] w-[100px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
+                <div className="pointer-events-none absolute right-0 top-0 z-20 h-[92px] w-[92px] overflow-hidden">
+                  <div className="absolute right-[-35px] top-[21px] w-[132px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
                     {t.badge}
                   </div>
                 </div>
