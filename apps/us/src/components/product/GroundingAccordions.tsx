@@ -62,7 +62,7 @@ const accordionData = [
           return (
             <li
               key={index}
-              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4"
+              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4 text-[16px] md:text-[18px]"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">

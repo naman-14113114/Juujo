@@ -455,7 +455,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
       {/* Free gifts bundle */}
       {giftProduct && (
-        <section className="mt-8 mb-6 bg-[color-mix(in_oklch,var(--gold)_4%,var(--paper))] p-5 rounded-2xl border border-[color-mix(in_oklch,var(--gold)_20%,transparent)]" id="free-gifts">
+        <section className="mt-8 mb-6" id="free-gifts">
           <div className="text-center mb-6 flex flex-col items-center">
             <h2 className="juujo-display text-2xl sm:text-3xl font-medium text-[var(--ink)]">
               Summer Sleep Sale
@@ -493,7 +493,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               className={`group relative flex flex-col rounded-xl border bg-white p-2 pt-4 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md border-[var(--clay)]' : 'hover:-translate-y-1 border-[var(--border)]'}`}
             >
               <span
-                className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white bg-[var(--night)]"
+                className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white bg-[var(--night)]"
               >
                 Free
                 <span className="font-medium normal-case line-through opacity-80">
@@ -509,7 +509,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                   src={gift.image}
                 />
               </span>
-              <span className="mt-2 text-[11px] font-semibold leading-tight text-[var(--ink)] sm:text-xs">
+              <span className="mt-2 text-[18px] font-semibold leading-tight text-[var(--ink)]">
                 {gift.name}
               </span>
             </div>
