@@ -207,49 +207,26 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <span className="block">Grounding Sheets</span>
         </h1>
 
-        {product.id === "grounding-flat-sheet" ? (
-          <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
-            <li className="flex items-start gap-3">
-              <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Settle nervous tension to fall asleep faster.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Ease inflammation and wake up with less stiffness.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience restorative sleep cycles for renewed vitality.
-              </span>
-            </li>
-          </ul>
-        ) : (
-          <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
-            <li className="flex items-start gap-3">
-              <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">DEEP, RESTORATIVE SLEEP:</strong> Fall asleep faster by calming nervous tension.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">JOINT & MUSCLE SOOTHING:</strong> Soothe aches to wake up with less joint stiffness.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
-              <span className="leading-snug">
-                <strong className="font-semibold text-[var(--ink)]">ALL-DAY ENERGY BOOST:</strong> Experience deeper sleep for all-day energy.
-              </span>
-            </li>
-          </ul>
-        )}
+        <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
+          <li className="flex items-start gap-3">
+            <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <span className="leading-snug">
+              Fall asleep faster by easing tension and relaxing your body.
+            </span>
+          </li>
+          <li className="flex items-start gap-3">
+            <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <span className="leading-snug">
+              Wake up with less joint and muscle stiffness.
+            </span>
+          </li>
+          <li className="flex items-start gap-3">
+            <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <span className="leading-snug">
+              Sleep more deeply and feel energized throughout the day.
+            </span>
+          </li>
+        </ul>
       </div>
 
       <DeliveryTimerBox />

@@ -512,14 +512,14 @@ export const groundingSheets: Product = {
       ),
       alt: "Juujo Earthing Fitted Sheet Silver Thread",
     },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheet-deep-pocket.webp",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Juujo Grounding Sheet Deep Pocket",
-    },
+    // {
+    //   src: productMediaAsset(
+    //     "juujo-grounding-sheet-deep-pocket.webp",
+    //     "grounding-sheets",
+    //     "images",
+    //   ),
+    //   alt: "Juujo Grounding Sheet Deep Pocket",
+    // },
     {
       src: productMediaAsset(
         "juujo-grounding-therapy-fitted-sheet.webp",

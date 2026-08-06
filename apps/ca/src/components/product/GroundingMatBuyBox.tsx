@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Hexagon, Home, ShieldCheck, RefreshCw, Leaf } from "lucide-react";
+import { Moon, HeartPulse, Sun, ShieldCheck, RefreshCw, Leaf } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
@@ -151,21 +151,21 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
 
         <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[15px] lg:text-[16px] text-[var(--plum)]">
           <li className="flex items-start gap-3">
-            <Hexagon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              <strong className="font-semibold text-[var(--ink)]">CONDUCTIVE CARBON SURFACE:</strong> Engineered for maximum grounding conductivity.
+              Fall asleep faster by easing tension and relaxing your body.
             </span>
           </li>
           <li className="flex items-start gap-3">
-            <Home className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              <strong className="font-semibold text-[var(--ink)]">VERSATILE DESIGN:</strong> Perfect for use on your desk, couch, or floor.
+              Wake up with less joint and muscle stiffness.
             </span>
           </li>
           <li className="flex items-start gap-3">
-            <ShieldCheck className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
-              <strong className="font-semibold text-[var(--ink)]">DURABLE & LOW MAINTENANCE:</strong> Easy to clean and built to last.
+              Sleep more deeply and feel energized throughout the day.
             </span>
           </li>
         </ul>
