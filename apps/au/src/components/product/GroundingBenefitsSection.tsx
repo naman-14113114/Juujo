@@ -55,8 +55,8 @@ export function GroundingBenefitsSection() {
           <div className="flex flex-col gap-8 md:gap-12 order-2 md:order-1">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex gap-6 items-start">
-                <div className="flex-none w-14 h-14 rounded-full bg-[var(--blush)] text-[var(--plum)] flex items-center justify-center">
-                  <benefit.icon size={28} strokeWidth={1.5} />
+                <div className="flex-none text-[#219937] mt-1">
+                  <benefit.icon size={36} strokeWidth={1.5} />
                 </div>
                 <div>
                   <h3 className="juujo-display text-xl md:text-2xl text-[var(--plum)] mb-2">

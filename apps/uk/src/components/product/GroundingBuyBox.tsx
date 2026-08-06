@@ -208,19 +208,19 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
         <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
           <li className="flex items-start gap-3">
-            <Moon className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <Moon className="text-[#219937] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
               Fall asleep faster by easing tension and relaxing your body.
             </span>
           </li>
           <li className="flex items-start gap-3">
-            <HeartPulse className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <HeartPulse className="text-[#219937] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
               Wake up with less joint and muscle stiffness.
             </span>
           </li>
           <li className="flex items-start gap-3">
-            <Sun className="text-[var(--night)] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
+            <Sun className="text-[#219937] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
               Sleep more deeply and feel energized throughout the day.
             </span>
