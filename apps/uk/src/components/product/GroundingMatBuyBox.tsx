@@ -171,8 +171,6 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
         </ul>
       </div>
 
-      <DeliveryTimerBox />
-
       {/* Bundle heading */}
       <div className="flex items-center gap-3">
         <div className="flex-1 h-px bg-[var(--border)]" />
@@ -276,6 +274,8 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           );
         })}
       </div>
+
+      <DeliveryTimerBox />
 
       <Button
         id="hero-cta"

@@ -228,8 +228,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         </ul>
       </div>
 
-      <DeliveryTimerBox />
-
       {/* Bundle heading */}
       <div className="flex items-center gap-3">
         <span className="h-px flex-1" style={{ backgroundColor: "var(--border)" }} />
@@ -379,7 +377,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
         })}
       </div>
 
-
+      <DeliveryTimerBox />
 
       {/* Add to cart */}
       <Button
