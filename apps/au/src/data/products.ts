@@ -1,4 +1,4 @@
-import {
+﻿import {
   productAsset,
   productMediaAsset,
   type ProductImage,
@@ -445,36 +445,108 @@ export const groundingSheets: Product = {
   seoDescription:
     "Juujo Grounding Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   currency: market.currency,
-  priceCents: 16900, // Queen price â€” the default selected size
+  priceCents: 16900, // Queen price Ã¢â‚¬â€ the default selected size
   compareAtCents: 33900,
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
   cartImage: productMediaAsset(
-    "juujo-fitted-sheet-main-new.jpg",
+    "juujo-grounding-fitted-sheet-sleep-benefits.webp",
     "grounding-sheets",
     "images",
   ),
   gallery: [
     {
       src: productMediaAsset(
-        "juujo-fitted-sheet-main-new.jpg",
+        "juujo-grounding-fitted-sheet-sleep-benefits.webp",
         "grounding-sheets",
         "images",
       ),
-      alt: "Juujo Grounding Fitted Sheet",
+      alt: "Juujo Grounding Fitted Sheet Sleep Benefits",
     },
     {
       src: productMediaAsset(
-        "juujo-fitted-sheet-gallery-new.jpg",
+        "juujo-earthing-sheet-premium-quality.webp",
         "grounding-sheets",
         "images",
       ),
-      alt: "Juujo Grounding Fitted Sheet Details",
+      alt: "Juujo Earthing Sheet Premium Quality",
     },
     {
       src: productMediaAsset(
-        "juujo-grounding-fitted-sheet-lifestyle.jpg",
+        "juujo-conductive-fitted-sheet-earthing.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Conductive Fitted Sheet Earthing",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounded-sleep-fitted-sheet.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounded Sleep Fitted Sheet",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-organic-cotton-grounding-sheet.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Organic Cotton Grounding Sheet",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-bed-sheet-health.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Bed Sheet Health",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-earthing-fitted-sheet-silver-thread.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Earthing Fitted Sheet Silver Thread",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-sheet-deep-pocket.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Sheet Deep Pocket",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-therapy-fitted-sheet.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Therapy Fitted Sheet",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-conductive-bedding-fitted-sheet.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Conductive Bedding Fitted Sheet",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-earthing-bed-sheet-setup.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Earthing Bed Sheet Setup",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-lifestyle.webp",
         "grounding-sheets",
         "images",
       ),
@@ -482,102 +554,54 @@ export const groundingSheets: Product = {
     },
     {
       src: productMediaAsset(
-        "juujo-grounding-bed-sheets-health-benefits.png",
+        "juujo-natural-earthing-fitted-sheet.webp",
         "grounding-sheets",
         "images",
       ),
-      alt: "Grounding sheet health",
+      alt: "Juujo Natural Earthing Fitted Sheet",
     },
     {
       src: productMediaAsset(
-        "Video_Project_34.mp4",
+        "juujo-grounding-sheet-restful-sleep.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Sheet Restful Sleep",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-details.webp",
+        "grounding-sheets",
+        "images",
+      ),
+      alt: "Juujo Grounding Fitted Sheet Details",
+    },
+    {
+      src: productMediaAsset(
+        "juujo-grounding-fitted-sheet-demo.mp4",
         "grounding-sheets",
         "videos",
       ),
-      alt: "Grounding sheet video",
+      alt: "Juujo Grounding Fitted Sheet Demo",
       animated: true,
     },
     {
       src: productMediaAsset(
-        "grounding-indoors-720p.mp4",
+        "juujo-earthing-sheet-setup-guide.mp4",
         "grounding-sheets",
         "videos",
       ),
-      alt: "Grounding indoors with a Grounding Sheet",
+      alt: "Juujo Earthing Sheet Setup Guide",
       animated: true,
     },
     {
       src: productMediaAsset(
-        "3fe80a78c0a1471d947a133326381d98.HD-1080p-2.5Mbps-29703316.mp4",
+        "juujo-grounding-sheet-benefits-video.mp4",
         "grounding-sheets",
         "videos",
       ),
-      alt: "Using the grounding sheet",
+      alt: "Juujo Grounding Sheet Benefits Video",
       animated: true,
-    },
-    {
-      src: productMediaAsset(
-        "juujo-science-of-grounding-benefits.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Science of grounding infographic",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-customer-testimonial.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Customer testimonial cozy bedroom",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-earthing-bed-sheet-visual.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet visual",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-bed-sheets-corner-fit.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet angle 1",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-deep-pocket.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet angle 2",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-bedding-presentation.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet presentation",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-comfort-sleep.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet comfort",
-    },
-    {
-      src: productMediaAsset(
-        "juujo-grounding-sheets-fabric-detail.png",
-        "grounding-sheets",
-        "images",
-      ),
-      alt: "Grounding sheet detail view",
     },
   ],
   colors: groundingColors,
