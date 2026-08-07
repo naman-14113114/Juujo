@@ -3,7 +3,7 @@ import { PillowcaseHero } from "./pillowcase/PillowcaseHero";
 import { TrustBadges } from "@/components/product/TrustBadges";
 import { PillowcaseBenefitsSection } from "./pillowcase/PillowcaseBenefitsSection";
 import { PillowcaseHowItWorksSection } from "./pillowcase/PillowcaseHowItWorksSection";
-import { PillowcaseExpectationsSection } from "./pillowcase/PillowcaseExpectationsSection";
+
 import { PillowcaseScienceSection } from "./pillowcase/PillowcaseScienceSection";
 import { PillowcaseHowDoesItWorkSection } from "./pillowcase/PillowcaseHowDoesItWorkSection";
 import { PillowcaseWhyUseSection } from "./pillowcase/PillowcaseWhyUseSection";
@@ -23,7 +23,7 @@ export function PillowcasePage({ product }: { product: Product }) {
       <PillowcaseWhyUseSection />
       {/* <PillowcaseBenefitsSection /> */}
       <PillowcaseHowItWorksSection />
-      <PillowcaseExpectationsSection />
+
       <PillowcaseScienceSection />
       <ProductReviewsSection productHandle={product.slug} />
       <PillowcaseWhatIsItSection />
