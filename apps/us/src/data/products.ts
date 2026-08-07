@@ -1578,63 +1578,51 @@ export const groundingPillowcase: Product = {
   rating: 4.8,
   reviewCount: 342,
   customerCount: "10,000+",
-  cartImage: productMediaAsset("juujo-grounding-pillowcase-silver-threads.png", "grounding-pillowcases", "images"),
+  cartImage: productMediaAsset("juujo-grounding-pillowcase-organic-cotton.webp", "grounding-pillowcases", "images"),
   gallery: [
     {
-      src: productMediaAsset("juujo-grounding-pillowcase-silver-threads.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Grounding Pillowcase Silver Threads",
+      src: productMediaAsset("juujo-grounding-pillowcase-organic-cotton.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounding Pillowcase Organic Cotton",
     },
     {
-      src: productMediaAsset("juujo-earthing-pillow-cover-health-benefits.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Earthing Pillow Cover Health Benefits",
+      src: productMediaAsset("juujo-earthing-pillowcase-silver-threads.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Earthing Pillowcase Silver Threads",
     },
     {
-      src: productMediaAsset("juujo-conductive-pillowcase-deep-sleep.png", "grounding-pillowcases", "images"),
+      src: productMediaAsset("juujo-conductive-pillowcase-deep-sleep.webp", "grounding-pillowcases", "images"),
       alt: "Juujo Conductive Pillowcase Deep Sleep",
     },
     {
-      src: productMediaAsset("juujo-grounding-therapy-pillowcase-setup.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Grounding Therapy Pillowcase Setup",
+      src: productMediaAsset("juujo-grounding-pillowcase-how-to-use.mp4", "grounding-pillowcases", "videos"),
+      alt: "Juujo Grounding Pillowcase How To Use Video",
     },
     {
-      src: productMediaAsset("juujo-organic-cotton-earthing-pillowcase.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Organic Cotton Earthing Pillowcase",
+      src: productMediaAsset("juujo-grounding-pillowcase-health-benefits.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounding Pillowcase Health Benefits",
     },
     {
-      src: productMediaAsset("juujo-natural-healing-grounding-pillow-cover.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Natural Healing Grounding Pillow Cover",
+      src: productMediaAsset("juujo-earthing-pillow-cover-anti-inflammatory.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Earthing Pillow Cover Anti Inflammatory",
     },
     {
-      src: productMediaAsset("juujo-earthing-pillowcase-anti-inflammatory.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Earthing Pillowcase Anti Inflammatory",
+      src: productMediaAsset("juujo-natural-healing-grounding-pillowcase.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Natural Healing Grounding Pillowcase",
     },
     {
-      src: productMediaAsset("juujo-premium-grounding-pillowcase-close-up.png", "grounding-pillowcases", "images"),
+      src: productMediaAsset("juujo-premium-grounding-pillowcase-close-up.webp", "grounding-pillowcases", "images"),
       alt: "Juujo Premium Grounding Pillowcase Close Up",
     },
     {
-      src: productMediaAsset("juujo-silver-infused-earthing-pillowcase.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Silver Infused Earthing Pillowcase",
-    },
-    {
-      src: productMediaAsset("juujo-grounded-sleep-pillow-cover-lifestyle.png", "grounding-pillowcases", "images"),
+      src: productMediaAsset("juujo-grounded-sleep-pillow-cover-lifestyle.webp", "grounding-pillowcases", "images"),
       alt: "Juujo Grounded Sleep Pillow Cover Lifestyle",
     },
     {
-      src: productMediaAsset("juujo-earthing-pillowcase-stress-relief.png", "grounding-pillowcases", "images"),
+      src: productMediaAsset("juujo-earthing-pillowcase-stress-relief.webp", "grounding-pillowcases", "images"),
       alt: "Juujo Earthing Pillowcase Stress Relief",
     },
     {
-      src: productMediaAsset("juujo-grounding-pillowcase-restful-night.png", "grounding-pillowcases", "images"),
+      src: productMediaAsset("juujo-grounding-pillowcase-restful-night.webp", "grounding-pillowcases", "images"),
       alt: "Juujo Grounding Pillowcase Restful Night",
-    },
-    {
-      src: productMediaAsset("juujo-conductive-sleep-therapy-pillowcase.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Conductive Sleep Therapy Pillowcase",
-    },
-    {
-      src: productMediaAsset("juujo-earthing-grounding-pillowcase-benefits.png", "grounding-pillowcases", "images"),
-      alt: "Juujo Earthing Grounding Pillowcase Benefits",
     },
   ],
   colors: groundingPillowcaseColors,
