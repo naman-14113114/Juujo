@@ -308,24 +308,42 @@ export function PillowcaseBuyBox({ product }: { product: Product }) {
                     </div>
 
                     <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-20 sm:pr-24' : ''}`}>
-                      <div className="flex items-baseline gap-1.5 mb-1">
-                        <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
-                          {formatMoney(total, product.currency)}
-                        </span>
-                        {compare > total && (
-                          <span className="font-serif text-[13px] sm:text-[15px] text-[var(--muted)] line-through">
-                            {formatMoney(compare, product.currency)}
+                      {t.pillowcases > 1 ? (
+                        <>
+                          <div className="flex items-baseline gap-1 mb-0.5">
+                            <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                              {formatMoney(Math.round(total / t.pillowcases), product.currency)}
+                            </span>
+                            <span className="text-[12px] font-medium text-[var(--ink)]">
+                              each
+                            </span>
+                          </div>
+                          <div className="flex items-baseline gap-1.5 mb-1">
+                            <span className="font-serif text-[13px] sm:text-[14px] text-[var(--ink)] font-semibold">
+                              {formatMoney(total, product.currency)}
+                            </span>
+                            {compare > total && (
+                              <span className="font-serif text-[12px] sm:text-[13px] text-[var(--muted)] line-through">
+                                {formatMoney(compare, product.currency)}
+                              </span>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex items-baseline gap-1.5 mb-1">
+                          <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                            {formatMoney(total, product.currency)}
                           </span>
-                        )}
-                      </div>
+                          {compare > total && (
+                            <span className="font-serif text-[13px] sm:text-[15px] text-[var(--muted)] line-through">
+                              {formatMoney(compare, product.currency)}
+                            </span>
+                          )}
+                        </div>
+                      )}
                       {t.discountTotalCents === 0 && savings > 0 && (
                         <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
                           SAVE {formatMoney(savings, product.currency)}
-                        </span>
-                      )}
-                      {t.pillowcases > 1 && (
-                        <span className="mt-1 font-sans text-[11.5px] sm:text-[12.5px] font-medium text-[var(--muted)]">
-                          ({formatMoney(Math.round(total / t.pillowcases), product.currency)} each)
                         </span>
                       )}
                     </div>
@@ -469,22 +487,6 @@ function SheetRow({
         colors={product.colors}
         isColorInStock={isColorInStock}
       />
-      <label className="sr-only" htmlFor={`size-${index}`}>
-        Size for pillowcase {index + 1}
-      </label>
-      <div className="relative flex-1">
-        <SizeSelect
-          value={choice.sizeId}
-          onChange={(sizeId) => onChange({ sizeId })}
-          sizes={product.sizes}
-          isSizeInStock={(sizeId) => isSizeInStock(choice.colorId, sizeId)}
-        />
-        {soldOut && (
-          <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--night)]">
-            Out of stock, pick another size
-          </span>
-        )}
-      </div>
     </div>
   );
 }
@@ -521,7 +523,7 @@ function ColorSelect({
             }}
           />
         )}
-        <span className="truncate block">{selected?.name}</span>
+        <span className="truncate block">{selected?.name} (20 x 29 in)</span>
         <span className="pointer-events-none absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
           <svg
             width="12"
@@ -568,7 +570,7 @@ function ColorSelect({
                       borderColor: "rgba(0,0,0,0.1)",
                     }}
                   />
-                  {color.name}
+                  {color.name} (20 x 29 in)
                   {!inStock && (
                     <span className="ml-auto text-[10px] sm:text-[11px] font-medium text-[var(--night)]">
                       Out of Stock
@@ -584,87 +586,3 @@ function ColorSelect({
   );
 }
 
-function SizeSelect({
-  value,
-  onChange,
-  sizes,
-  isSizeInStock,
-}: {
-  value: string;
-  onChange: (val: string) => void;
-  sizes: Product["sizes"];
-  isSizeInStock: (sizeId: string) => boolean;
-}) {
-  const [open, setOpen] = useState(false);
-  const selected = sizes.find((s) => s.id === value);
-
-  return (
-    <div className="relative flex-1">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className="font-serif w-full appearance-none rounded-xl border bg-white py-2.5 pl-3 pr-8 sm:pr-9 text-left text-xs sm:text-sm text-[var(--ink)] outline-none transition focus:border-[var(--night)]"
-        style={{ borderColor: "var(--border)" }}
-      >
-        <span className="truncate block">
-          {selected?.name} {selected?.dimensions ? `(${selected.dimensions})` : ""}
-        </span>
-        <span className="pointer-events-none absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </span>
-      </button>
-      {open && (
-        <ul
-          className="absolute left-0 top-full z-50 mt-1 max-h-60 w-[150%] sm:w-full overflow-auto rounded-xl border bg-white py-1 shadow-lg"
-          style={{ borderColor: "var(--border)" }}
-        >
-          {sizes.map((size) => {
-            const inStock = isSizeInStock(size.id);
-            return (
-              <li key={size.id}>
-                <button
-                  type="button"
-                  disabled={!inStock}
-                  onPointerDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    if (!inStock) return;
-                    onChange(size.id);
-                    setOpen(false);
-                  }}
-                  className={`font-serif flex w-full flex-col px-3 py-2 text-xs sm:text-sm text-left text-[var(--ink)] ${
-                    inStock
-                      ? "hover:bg-gray-50 focus:bg-gray-50 cursor-pointer"
-                      : "opacity-40 cursor-not-allowed"
-                  }`}
-                >
-                  <div className="flex w-full items-center justify-between">
-                    <span>
-                      {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
-                    </span>
-                    {!inStock && (
-                      <span className="ml-2 text-[10px] sm:text-[11px] font-medium text-[var(--night)] whitespace-nowrap">
-                        Out of Stock
-                      </span>
-                    )}
-                  </div>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
-  );
-}
