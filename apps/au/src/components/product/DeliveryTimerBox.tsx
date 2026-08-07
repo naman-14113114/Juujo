@@ -53,13 +53,13 @@ export function DeliveryTimerBox() {
       ) : (
         <div className="h-10 w-10 flex-shrink-0 sm:h-12 sm:w-12" />
       )}
-      <p className="juujo-eyebrow m-0 pt-0.5 text-[16px] font-bold leading-none tracking-widest !text-[var(--night)] sm:text-[18px]">
+      <p className="font-sans m-0 pt-0.5 text-[18px] font-medium leading-none text-black">
         FREE DELIVERY
       </p>
-      <span className="hidden text-[16px] text-[var(--night)] opacity-40 sm:block">
+      <span className="hidden text-[18px] text-black opacity-40 sm:block">
         -
       </span>
-      <p className="font-serif pt-0.5 text-[16px] font-medium leading-none text-[var(--ink)] sm:text-[18px]">
+      <p className="font-sans pt-0.5 text-[18px] font-bold leading-none text-black">
         {mounted ? `Arrives by ${deliveryDate || "soon"}` : "Loading..."}
       </p>
     </div>
