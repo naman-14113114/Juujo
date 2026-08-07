@@ -38,9 +38,9 @@ const groundingPillowcaseFeatures = [
     icon: IconHeart,
   },
   {
-    title: "Premium 400 Thread Count",
+    title: "Premium High Thread Count",
     kicker: "Hotel-Quality",
-    body: "Made with 400 thread count for a smooth feel, lasting durability, and hotel-quality comfort.",
+    body: "Made with a high thread count for a smooth feel, lasting durability, and hotel-quality comfort.",
     icon: IconDiamond,
   },
   {
@@ -161,30 +161,8 @@ const accordionData = [
           <li>1x Grounding pillowcase</li>
           <li>1x 5-meter grounding cord</li>
           <li>1x Grounding plug (choose your country type)</li>
-          <li>1x User manual</li>
         </ul>
         <p>Ready to use out of the box. No additional equipment needed.</p>
-      </div>
-    ),
-  },
-  {
-    eyebrow: "Usage",
-    title: "How Does it Work?",
-    content: (
-      <div className="space-y-4 text-[var(--muted)] text-[16px] md:text-[18px]">
-        <p>
-          The grounding pillowcase connects only to the grounded part of your outlet
-          using the included cord and grounding plug.
-        </p>
-        <p>
-          It does not connect to electricity and no electricity flows through
-          the pillowcase or your body.
-        </p>
-        <p>
-          Once connected, the conductive silver threads allow your body to make
-          direct contact with the Earth while you rest or sleep.
-        </p>
-        <p>Simply plug it in and lie down — it works automatically.</p>
       </div>
     ),
   },

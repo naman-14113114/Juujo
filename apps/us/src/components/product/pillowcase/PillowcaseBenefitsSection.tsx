@@ -42,7 +42,7 @@ export function PillowcaseBenefitsSection() {
         />
 
         <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-8 md:gap-12 order-2 md:order-1">
+          <div className="flex flex-col gap-8 md:gap-12 order-2">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex gap-6 items-start">
                 <div className="flex-none text-[#219937] mt-1">
@@ -60,7 +60,7 @@ export function PillowcaseBenefitsSection() {
             ))}
           </div>
 
-          <div className="relative rounded-[2rem] overflow-hidden aspect-square shadow-2xl order-1 md:order-2">
+          <div className="relative rounded-[2rem] overflow-hidden aspect-square shadow-2xl order-1">
             <Image
               src={productMediaAsset(
                 "juujo-grounding-pillowcase-1.jpg",

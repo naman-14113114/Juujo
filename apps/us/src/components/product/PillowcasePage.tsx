@@ -5,6 +5,8 @@ import { PillowcaseBenefitsSection } from "./pillowcase/PillowcaseBenefitsSectio
 import { PillowcaseHowItWorksSection } from "./pillowcase/PillowcaseHowItWorksSection";
 import { PillowcaseExpectationsSection } from "./pillowcase/PillowcaseExpectationsSection";
 import { PillowcaseScienceSection } from "./pillowcase/PillowcaseScienceSection";
+import { PillowcaseHowDoesItWorkSection } from "./pillowcase/PillowcaseHowDoesItWorkSection";
+import { PillowcaseWhyUseSection } from "./pillowcase/PillowcaseWhyUseSection";
 import { ProductReviewsSection } from "@/components/product/ProductReviewsSection";
 import { PillowcaseWhatIsItSection } from "./pillowcase/PillowcaseWhatIsItSection";
 
@@ -17,7 +19,9 @@ export function PillowcasePage({ product }: { product: Product }) {
     <>
       <PillowcaseHero product={product} />
       <TrustBadges />
-      <PillowcaseBenefitsSection />
+      <PillowcaseHowDoesItWorkSection />
+      <PillowcaseWhyUseSection />
+      {/* <PillowcaseBenefitsSection /> */}
       <PillowcaseHowItWorksSection />
       <PillowcaseExpectationsSection />
       <PillowcaseScienceSection />
