@@ -26,7 +26,7 @@ import { DeliveryTimerBox } from "../DeliveryTimerBox";
 type PillowcaseChoice = { colorId: string; sizeId: string };
 
 type Tier = {
-  id: "single" | "bundle-2" | "bundle-3";
+  id: "single" | "bundle-2" | "bundle-4";
   label: string;
   pillowcases: number;
   discountTotalCents: number;
@@ -40,15 +40,15 @@ const TIERS: Tier[] = [
     id: "bundle-2",
     label: "Buy 2",
     pillowcases: 2,
-    discountTotalCents: 2000,
+    discountTotalCents: 1000,
     badge: "Recommended",
     recommended: true,
   },
   {
-    id: "bundle-3",
-    label: "Buy 3",
-    pillowcases: 3,
-    discountTotalCents: 6000,
+    id: "bundle-4",
+    label: "Buy 4",
+    pillowcases: 4,
+    discountTotalCents: 4000,
     badge: "Most Popular",
   },
 ];
@@ -97,7 +97,7 @@ export function PillowcaseBuyBox({ product }: { product: Product }) {
     [product.colors, product.sizes],
   );
 
-  const [tierId, setTierId] = useState<Tier["id"]>("bundle-3");
+  const [tierId, setTierId] = useState<Tier["id"]>("bundle-4");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [choices, setChoices] = useState<Record<string, PillowcaseChoice[]>>(() => {
@@ -293,9 +293,9 @@ export function PillowcaseBuyBox({ product }: { product: Product }) {
                         )}
                       </div>
                       <p className="mt-1 text-[13.5px] sm:text-[15px] text-[var(--muted)] leading-snug">
-                        {t.id === "bundle-3" ? (
+                        {t.id === "bundle-4" ? (
                           <>
-                            Includes 3 Pillowcases, 3 Cables
+                            Includes 4 Pillowcases, 4 Cables
                           </>
                         ) : t.id === "bundle-2" ? (
                           <>
@@ -336,21 +336,6 @@ export function PillowcaseBuyBox({ product }: { product: Product }) {
               {/* The expanded selection area for the CHOSEN tier */}
               {expandedTier === t.id && (
                 <div className="bg-[rgba(247,241,232,0.85)] border-t border-[var(--border)] rounded-b-[15px]">
-                  <div className="flex justify-between items-center px-4 sm:px-5 py-3 border-b border-[var(--border)] bg-[rgba(0,0,0,0.02)]">
-                    <div className="font-sans text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
-                      Customize Your Selection
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowSizeGuide(true);
-                      }}
-                      className="text-[11px] font-bold uppercase tracking-wider text-[var(--night)] hover:opacity-70 transition-opacity underline underline-offset-2"
-                    >
-                      Size Guide
-                    </button>
-                  </div>
                   <div className="p-3 sm:p-4 flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
                     {Array.from({ length: t.pillowcases }).map((_, index) => (
                       <SheetRow
@@ -423,31 +408,6 @@ export function PillowcaseBuyBox({ product }: { product: Product }) {
 
       {/* Accordions */}
       <PillowcaseAccordions />
-      
-      {/* Size Guide Modal */}
-      {showSizeGuide && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-          onClick={() => setShowSizeGuide(false)}
-        >
-          <div
-            className="relative inline-flex max-w-[95vw] max-h-[95vh] md:max-w-5xl animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowSizeGuide(false)}
-              className="absolute top-0 right-0 z-10 p-2 bg-white text-black hover:bg-gray-100 transition-colors"
-            >
-              <X size={24} />
-            </button>
-            <img
-              src="/media/products/grounding-pillowcases/images/juujo-size-guide.png"
-              alt="Size Guide"
-              className="max-w-[95vw] md:max-w-5xl max-h-[95vh] object-contain shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1556,7 +1556,7 @@ const groundingPillowcaseColors: ProductColor[] = [
 ];
 
 const groundingPillowcaseSizes: SizePricing[] = [
-  { id: "standard", name: "Standard", dimensions: "22 x 27.5 in", priceCents: 5700, compareAtCents: 11400 },
+  { id: "standard", name: "Standard", dimensions: "20 x 29 in", priceCents: 4900, compareAtCents: 9900 },
 ];
 
 export const groundingPillowcase: Product = {
@@ -1573,8 +1573,8 @@ export const groundingPillowcase: Product = {
   seoTitle: "Juujo Grounding Pillowcase - Sleep Better Naturally",
   seoDescription: "Silver-infused grounding pillowcase for better sleep and recovery.",
   currency: market.currency,
-  priceCents: 5700,
-  compareAtCents: 11400,
+  priceCents: 4900,
+  compareAtCents: 9900,
   rating: 4.8,
   reviewCount: 342,
   customerCount: "10,000+",
@@ -1644,7 +1644,7 @@ export const groundingPillowcase: Product = {
   specs: [
     { label: "Material", value: "95% Organic cotton, 5% conductive silver" },
     { label: "Conductive thread", value: "Pure silver fibers" },
-    { label: "Dimensions", value: "50 x 70 cm (approx 22 x 27.5 in)" },
+    { label: "Dimensions", value: "50 x 75 cm (approx 20 x 29 in)" },
     { label: "Care", value: "Machine washable" },
   ],
   included: [

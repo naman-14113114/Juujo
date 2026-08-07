@@ -11,12 +11,12 @@ export function PillowcaseHowItWorksSection() {
     {
       num: "02",
       description: "Plug the cord to the grounded outlet only (non-electrical)",
-      video: "pillowcase-how-to-use-2.mp4",
+      video: "pillowcase-how-to-use-3.mp4",
     },
     {
       num: "03",
       description: "Connect the Grounding Cord to the pillowcase port",
-      video: "pillowcase-how-to-use-3.mp4",
+      video: "pillowcase-how-to-use-2.mp4",
     },
   ];
 
