@@ -28,6 +28,6 @@ export const secondaryNavigation = [
 export const announcementItems = [
   "Free shipping on all orders",
   "120-night sleep trial",
-  "Sign up and enjoy £10 off",
+  "Sign up and enjoy $10 off",
   "Loved by 40,000+ sleepers",
 ];

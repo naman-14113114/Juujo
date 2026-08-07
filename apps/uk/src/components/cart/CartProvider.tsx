@@ -25,6 +25,8 @@ type CartContextValue = CartState & {
   isOpen: boolean;
   totals: ReturnType<typeof calculateCartTotals>;
   activePromoCodes: string[];
+  applyPromoCode: (code: string) => void;
+  removePromoCode: (code: string) => void;
   addProduct: (product: Product) => void;
   addToCartVariant: (
     product: Product,
@@ -79,6 +81,7 @@ function readStoredCart() {
         ...emptyCart,
         ...parsed,
         lines: normalizeCartLines(Array.isArray(parsed.lines) ? parsed.lines : []),
+        appliedPromoCodes: Array.isArray(parsed.appliedPromoCodes) ? parsed.appliedPromoCodes : [],
       };
 
       if (hasProductLines(storedState)) {
@@ -184,17 +187,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(() => calculateCartTotals(state.lines), [state.lines]);
-  const activePromoCodes = useMemo(() => {
-    const productIds = new Set(
-      state.lines
-        .filter((line) => line.type === "product")
-        .map((line) => line.productId),
-    );
+  const activePromoCodes = state.appliedPromoCodes || [];
 
-    return Array.from(productIds)
-      .map((productId) => getProductById(productId)?.promoCode)
-      .filter((code): code is string => Boolean(code));
-  }, [state.lines]);
+  function applyPromoCode(code: string) {
+    const uppercaseCode = code.toUpperCase();
+    setState((current) => ({
+      ...current,
+      appliedPromoCodes: current.appliedPromoCodes ? [...new Set([...current.appliedPromoCodes, uppercaseCode])] : [uppercaseCode],
+    }));
+  }
+
+  function removePromoCode(code: string) {
+    setState((current) => ({
+      ...current,
+      appliedPromoCodes: (current.appliedPromoCodes || []).filter((c) => c !== code),
+    }));
+  }
 
 
   function addProduct(product: Product) {
@@ -348,6 +356,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       totals,
       activePromoCodes,
+      applyPromoCode,
+      removePromoCode,
       addProduct,
       addToCartVariant,
       setSheetBundle,

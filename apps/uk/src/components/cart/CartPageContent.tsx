@@ -16,7 +16,6 @@ import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
-import { PromoCodeBox } from "./PromoCodeBox";
 import { getDisplayLines, type CartLine } from "@/lib/cart";
 import { market } from "@/lib/market";
 
@@ -162,7 +161,6 @@ export function CartPageContent({
               <span className="sr-only" id="checkout" />
               <CheckoutForm initialCustomer={initialCustomer} />
             </CartSummary>
-            <PromoCodeBox />
             <FreeGiftsPanel compact />
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               <button

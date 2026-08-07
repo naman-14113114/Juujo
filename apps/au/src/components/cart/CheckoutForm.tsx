@@ -110,7 +110,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode });
+    writeCheckoutSnapshot({ lines, giftMessage, promoCode, appliedPromoCodes: activePromoCodes });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(

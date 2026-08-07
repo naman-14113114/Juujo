@@ -374,11 +374,11 @@ export function ComparisonTable() {
             title="Price"
             values={[
               <span key="1" className="juujo-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <span className="line-through mr-1.5 opacity-60">£449</span>£179
+                <span className="line-through mr-1.5 opacity-60">$449</span>$179
               </span>,
-              <span key="2" className="juujo-display text-base md:text-lg text-[var(--muted)]">£395</span>,
-              <span key="3" className="juujo-display text-base md:text-lg text-[var(--muted)]">£380</span>,
-              <span key="4" className="juujo-display text-base md:text-lg text-[var(--muted)]">£382.49</span>,
+              <span key="2" className="juujo-display text-base md:text-lg text-[var(--muted)]">$395</span>,
+              <span key="3" className="juujo-display text-base md:text-lg text-[var(--muted)]">$380</span>,
+              <span key="4" className="juujo-display text-base md:text-lg text-[var(--muted)]">$382.49</span>,
             ]}
             isLast={true}
           />

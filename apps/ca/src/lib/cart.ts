@@ -35,6 +35,7 @@ export type CartLine = {
 export type CartState = {
   lines: CartLine[];
   promoCode: string;
+  appliedPromoCodes: string[];
   giftMessage: string;
 };
 
@@ -43,6 +44,7 @@ export const promoCode = "AUTO";
 export const emptyCart: CartState = {
   lines: [],
   promoCode,
+  appliedPromoCodes: [],
   giftMessage: "",
 };
 

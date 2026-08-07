@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
+import { PromoCodeBox } from "./PromoCodeBox";
 
 type CartSummaryProps = {
   action?: "cart" | "summary";
@@ -86,6 +87,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       </div>
 
       {/* 3. SUBTOTAL */}
+      <PromoCodeBox />
       <div className="flex items-center justify-between gap-4 mt-4 border-t border-[var(--border)] pt-5">
         <span>
           <span className="juujo-display block text-xl uppercase text-[var(--plum)]">
