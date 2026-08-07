@@ -315,24 +315,42 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     </div>
 
                     <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-20 sm:pr-24' : ''}`}>
-                      <div className="flex items-baseline gap-1.5 mb-1">
-                        <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
-                          {formatMoney(total, product.currency)}
-                        </span>
-                        {compare > total && (
-                          <span className="font-serif text-[13px] sm:text-[15px] text-[var(--muted)] line-through">
-                            {formatMoney(compare, product.currency)}
+                      {t.sheets > 1 ? (
+                        <>
+                          <div className="flex items-baseline gap-1 mb-0.5">
+                            <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                              {formatMoney(Math.round(total / t.sheets), product.currency)}
+                            </span>
+                            <span className="text-[12px] font-medium text-[var(--ink)]">
+                              each
+                            </span>
+                          </div>
+                          <div className="flex items-baseline gap-1.5 mb-1">
+                            <span className="font-serif text-[13px] sm:text-[14px] text-[var(--ink)] font-semibold">
+                              {formatMoney(total, product.currency)}
+                            </span>
+                            {compare > total && (
+                              <span className="font-serif text-[12px] sm:text-[13px] text-[var(--muted)] line-through">
+                                {formatMoney(compare, product.currency)}
+                              </span>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex items-baseline gap-1.5 mb-1">
+                          <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
+                            {formatMoney(total, product.currency)}
                           </span>
-                        )}
-                      </div>
+                          {compare > total && (
+                            <span className="font-serif text-[13px] sm:text-[15px] text-[var(--muted)] line-through">
+                              {formatMoney(compare, product.currency)}
+                            </span>
+                          )}
+                        </div>
+                      )}
                       {t.discountTotalCents === 0 && savings > 0 && (
                         <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
                           SAVE {formatMoney(savings, product.currency)}
-                        </span>
-                      )}
-                      {t.sheets > 1 && (
-                        <span className="mt-1 font-sans text-[11.5px] sm:text-[12.5px] font-medium text-[var(--muted)]">
-                          ({formatMoney(Math.round(total / t.sheets), product.currency)} each)
                         </span>
                       )}
                     </div>

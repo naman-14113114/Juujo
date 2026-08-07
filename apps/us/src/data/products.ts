@@ -107,6 +107,7 @@ export type Product = {
   differentiators?: string[];
   faqs: FAQItem[];
   badges: string[];
+  promoCode?: string;
 };
 
 /** Shared quantity offer: Buy 1, Buy 2 (save 10%), Buy 3 (best value, save 20%). */

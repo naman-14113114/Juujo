@@ -20,10 +20,10 @@ export function Footer() {
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
               Premium grounding bedding, beautifully made. Designed in
-              the United Kingdom.
+              United States.
             </p>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
-              13 Harefield Rd, Rickmansworth, England, WD3 1LY, UK
+              17760 NE 18th Ave, Citra, Florida 32113, United States
             </p>
           </div>
 

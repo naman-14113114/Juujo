@@ -157,7 +157,7 @@ export function GroundingComparisonSection() {
                 <div className="flex items-center h-full">
                   <div className="-mt-px w-1/4 flex justify-center items-center h-full pb-4 md:mt-0 md:pb-5 px-2 overflow-visible">
                     <img
-                      src="/media/products/grounding-sheets/images/juujo-earthing-bed-sheet-visual.png"
+                      src="/7.webp"
                       alt="Juujo Sheet"
                       className="h-16 sm:h-20 md:h-24 w-auto object-cover rounded-lg shadow-sm"
                       decoding="async"
@@ -211,11 +211,7 @@ export function GroundingComparisonSection() {
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
-          <ComparisonRow
-            title="Free Continuity Tester"
-            subtitle="Verify your sheet is working anytime"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
+
 
           <ComparisonRow
             title="Antimicrobial Properties"

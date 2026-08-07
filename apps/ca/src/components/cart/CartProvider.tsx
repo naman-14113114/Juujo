@@ -184,9 +184,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(() => calculateCartTotals(state.lines), [state.lines]);
-  // Juujo prices are driven by the variant and the quantity offer, so there
-  // are no product-level promo codes to surface anymore.
-  const activePromoCodes = useMemo<string[]>(() => [], []);
+  const activePromoCodes = useMemo(() => {
+    const productIds = new Set(
+      state.lines
+        .filter((line) => line.type === "product")
+        .map((line) => line.productId),
+    );
+
+    return Array.from(productIds)
+      .map((productId) => getProductById(productId)?.promoCode)
+      .filter((code): code is string => Boolean(code));
+  }, [state.lines]);
 
 
   function addProduct(product: Product) {

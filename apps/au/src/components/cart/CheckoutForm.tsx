@@ -147,14 +147,20 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
 
       const data = (await response.json()) as { checkoutUrl?: string };
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity }),
+        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ 
+          quantity: maskQuantity,
+          extraParams: activePromoCodes.length > 0 ? { discount: activePromoCodes.join(",") } : undefined, 
+        }),
       );
     } catch {
       setError("Opening secure checkout...");
       window.location.assign(
         buildPlusbaseCheckoutUrl({
           quantity: maskQuantity,
-          extraParams: attribution,
+          extraParams: {
+            ...attribution,
+            ...(activePromoCodes.length > 0 ? { discount: activePromoCodes.join(",") } : {})
+          },
         }),
       );
     }

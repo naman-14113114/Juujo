@@ -10,19 +10,19 @@ export function PromoCodeBox() {
     activePromoCodes.length > 0 ? activePromoCodes.join(" + ") : "AUTO";
 
   return (
-    <div className="rounded-xl border border-[var(--border)] bg-[rgba(241,223,210,.35)] p-4">
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--blush)] p-4">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="juujo-mono text-[var(--gold)]">Promo code</p>
+          <p className="juujo-mono text-[var(--ink)]">Promo code</p>
           <p className="mt-1 text-sm text-[var(--muted)]">
             {active
               ? "Applied automatically for product offers and free shipping."
               : "Add a Juujo product to unlock the current offer."}
           </p>
         </div>
-        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-3 py-2 text-xs font-semibold text-[var(--plum)]">
+        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-3 py-2 text-xs font-semibold text-[var(--ink)]">
           {active ? (
-            <CheckCircle2 size={15} className="text-[var(--gold)]" />
+            <CheckCircle2 size={15} className="text-[var(--clay)]" />
           ) : null}
           {codes}
         </span>

@@ -89,7 +89,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               fill
               loading="eager"
               sizes="56px"
-              src={product.cartImage}
+              src="/7.webp"
             />
           </div>
           <div className="min-w-0">

@@ -159,6 +159,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
             quantity: totalUnits,
             productId: firstItem?.productId,
             variantId: firstItem?.variantId,
+            extraParams: activePromoCodes.length > 0 ? { discount: activePromoCodes.join(",") } : undefined,
           }),
       );
     } catch {
@@ -169,7 +170,10 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
           quantity: totalUnits,
           productId: firstItem?.productId,
           variantId: firstItem?.variantId,
-          extraParams: attribution,
+          extraParams: {
+            ...attribution,
+            ...(activePromoCodes.length > 0 ? { discount: activePromoCodes.join(",") } : {})
+          },
         }),
       );
     }
