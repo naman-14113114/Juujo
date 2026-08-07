@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { getProductBySlug, getVariant, type Product } from "@/data/products";
 import { GroundingAccordions } from "./GroundingAccordions";
 import { formatMoney } from "@/lib/money";
-import { Info, X, Moon, HeartPulse, Sun, ShieldCheck, RefreshCw, Leaf, Truck } from "lucide-react";
+import { Info, X, Moon, HeartPulse, Sun, ShieldCheck, RefreshCw, Leaf, Truck, Lock } from "lucide-react";
 import { market } from "@/lib/market";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 
@@ -101,6 +101,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const [tierId, setTierId] = useState<Tier["id"]>("bundle-3");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
+  const [eyeMaskColor, setEyeMaskColor] = useState('Green');
+  const [pillowcaseColor, setPillowcaseColor] = useState('White');
   const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
     const init: Record<string, SheetChoice[]> = {};
     for (const t of TIERS) {
@@ -455,7 +457,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </h2>
             <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-[11px] sm:text-[13px] font-bold tracking-widest text-[var(--ink)] bg-[color-mix(in_oklch,var(--gold)_15%,transparent)]">
               <span className="juujo-display text-[13px] sm:text-base font-extrabold normal-case text-[var(--ink)]">
-                {formatMoney((giftProduct.compareAtCents || giftProduct.priceCents) + 2900 + 3900, giftProduct.currency)}
+                {formatMoney((giftProduct.compareAtCents || giftProduct.priceCents) + 6900 + 4900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
@@ -463,50 +465,104 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {[
             {
-              id: "premium-packaging",
-              name: "Premium Packaging",
-              valueCents: 2900,
-              image: "/images/juujo_premium_packaging_v2.png",
-            },
-            {
               id: "grounding-mat",
               name: giftProduct.name,
               valueCents: giftProduct.compareAtCents || giftProduct.priceCents,
               image: "/images/grounding_mat_gift.png",
             },
             {
-              id: "sleep-app",
-              name: "Sleep Monitoring App",
-              valueCents: 3900,
-              image: "/images/sleep_monitoring_app.png",
+              id: "premium-eye-mask",
+              name: "Premium Eye Mask",
+              valueCents: 6900,
+              image: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
+            },
+            {
+              id: "grounding-pillowcase",
+              name: "Grounding Pillowcase",
+              valueCents: 4900,
+              image: "/media/products/grounding-sheets/images/juujo-grounding-pillowcase-gift.webp",
             }
-          ].map((gift) => (
-            <div
-              key={gift.id}
-              className={`group relative flex flex-col rounded-xl border bg-white p-2 pt-4 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md border-[var(--clay)]' : 'hover:-translate-y-1 border-[var(--border)]'}`}
-            >
-              <span
-                className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white bg-[var(--night)]"
+          ].map((gift) => {
+            const isLocked =
+              gift.id === "premium-eye-mask"
+                ? tierId === "single"
+                : gift.id === "grounding-pillowcase"
+                  ? tierId !== "bundle-3"
+                  : false;
+
+            return (
+              <div
+                key={gift.id}
+                className={`group relative flex flex-col rounded-xl border bg-white p-2 pt-4 text-center transition ${gift.id === 'grounding-mat' ? 'scale-[1.03] z-10 shadow-md border-[var(--clay)]' : 'hover:-translate-y-1 border-[var(--border)]'} ${isLocked ? 'opacity-70 grayscale-[0.5]' : ''}`}
               >
-                Free
-                <span className="font-medium normal-case line-through opacity-80">
-                  {formatMoney(gift.valueCents, giftProduct.currency)}
+                <span
+                  className={`absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white ${isLocked ? 'bg-gray-400' : 'bg-[var(--night)]'}`}
+                >
+                  {isLocked ? "Locked" : "Free"}
+                  {!isLocked && (
+                    <span className="font-medium normal-case line-through opacity-80">
+                      {formatMoney(gift.valueCents, giftProduct.currency)}
+                    </span>
+                  )}
                 </span>
-              </span>
-              <span className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply">
-                <Image
-                  alt={gift.name}
-                  className="rounded-xl object-cover transition-transform group-hover:scale-105"
-                  fill
-                  sizes="120px"
-                  src={gift.image}
-                />
-              </span>
-              <span className="mt-2 text-[18px] font-semibold leading-tight text-[var(--ink)]">
-                {gift.name}
-              </span>
-            </div>
-          ))}
+                <span className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply">
+                  <Image
+                    alt={gift.name}
+                    className="rounded-xl object-cover transition-transform group-hover:scale-105"
+                    fill
+                    sizes="120px"
+                    src={gift.image}
+                  />
+                </span>
+                {isLocked ? (
+                  <div className="mt-2 flex items-center justify-center gap-1.5 rounded bg-gray-100 py-1.5 text-[13px] font-bold uppercase tracking-wide text-gray-500">
+                    <Lock size={14} /> Locked
+                  </div>
+                ) : (
+                  <div className="mt-2 flex flex-col items-center">
+                    <span className="text-[14px] sm:text-[18px] font-semibold leading-tight text-[var(--ink)]">
+                      {gift.name}
+                    </span>
+                    {gift.id === "premium-eye-mask" && (
+                      <div className="mt-2 flex items-center gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
+                        {[
+                          { name: 'Green', hex: '#597463' },
+                          { name: 'Black', hex: '#28282B' },
+                          { name: 'Pink', hex: '#E8D4D6' }
+                        ].map(color => (
+                          <button
+                            key={color.name}
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); setEyeMaskColor(color.name); }}
+                            aria-label={`Select ${color.name} Eye Mask`}
+                            className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all ${eyeMaskColor === color.name ? 'ring-2 ring-offset-1 ring-[var(--night)] border border-transparent' : 'border border-gray-300 hover:scale-110'}`}
+                            style={{ backgroundColor: color.hex }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    {gift.id === "grounding-pillowcase" && (
+                      <div className="mt-2 flex items-center gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
+                        {[
+                          { name: 'White', hex: '#FFFFFF' },
+                          { name: 'Grey', hex: '#95949B' }
+                        ].map(color => (
+                          <button
+                            key={color.name}
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); setPillowcaseColor(color.name); }}
+                            aria-label={`Select ${color.name} Pillowcase`}
+                            className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all ${pillowcaseColor === color.name ? 'ring-2 ring-offset-1 ring-[var(--night)] border border-transparent' : 'border border-gray-300 hover:scale-110'}`}
+                            style={{ backgroundColor: color.hex }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
           </div>
         </section>
       )}
