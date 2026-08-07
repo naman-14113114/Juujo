@@ -1565,7 +1565,7 @@ export const groundingPillowcase: Product = {
   slug: "grounding-pillowcase",
   category: "grounding-sheets", // For sharing category logic if needed, though we bypass it with dedicated route
   categoryLabel: "Grounding Pillowcase",
-  name: "Juujo™ Grounding Pillowcase",
+  name: "Premium Grounding Pillowcase",
   heroTitle: "Effortless Grounding While You Sleep",
   heroEmphasis: "Silver-Infused Earthing",
   shortDescription: "Fall asleep faster and stay asleep. Wake up energized every morning and improve sleep naturally.",
