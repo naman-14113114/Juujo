@@ -16,6 +16,8 @@ export function ProductGallery({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const thumbsRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef(0);
@@ -151,6 +153,20 @@ export function ProductGallery({
     }
   };
 
+  const checkScroll = useCallback(() => {
+    if (thumbsRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = thumbsRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [checkScroll, images]);
+
   const currentImage = images[currentIndex] ?? images[0];
 
   return (
@@ -168,7 +184,7 @@ export function ProductGallery({
         .juujoGallery-thumbs_container { position: relative; width: 100%; display: flex; align-items: center; gap: 12px; }
         .juujoGallery-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 15px; width: 100%; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; padding: 4px 0; scroll-snap-type: x mandatory; }
         .juujoGallery-grid::-webkit-scrollbar { display: none; }
-        .juujoGallery-thumb_item { flex: 0 0 calc(25% - 11.25px); position: relative; appearance: none; width: 100%; padding: 0; aspect-ratio: 1 / 1; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; scroll-snap-align: start; }
+        .juujoGallery-thumb_item { flex: 0 0 calc(20% - 12px); position: relative; appearance: none; width: 100%; padding: 0; aspect-ratio: 1 / 1; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; scroll-snap-align: start; }
         .juujoGallery-thumb_nav { flex: 0 0 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(58, 31, 61, .16); background: rgba(247, 241, 232, .92); color: var(--plum); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s, background 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .juujoGallery-thumb_nav:hover { transform: scale(1.05); background: #fff; }
         .juujoGallery-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
@@ -324,6 +340,7 @@ export function ProductGallery({
           <button 
             className="juujoGallery-thumb_nav" 
             aria-label="Scroll Thumbnails Left"
+            style={{ opacity: canScrollLeft ? 1 : 0.5, cursor: canScrollLeft ? "pointer" : "default" }}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); thumbsRef.current?.scrollBy({ left: -200, behavior: "smooth" }); }}
           >
             <i className="juujoGallery-icon juujoGallery-icon_left" style={{ margin: 0, padding: '3px', borderWidth: '0 2px 2px 0' }} />
@@ -333,6 +350,7 @@ export function ProductGallery({
             className="juujoGallery-grid"
             id="juujoGallery-Thumbs"
             ref={thumbsRef}
+            onScroll={checkScroll}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
@@ -380,6 +398,7 @@ export function ProductGallery({
           <button 
             className="juujoGallery-thumb_nav" 
             aria-label="Scroll Thumbnails Right"
+            style={{ opacity: canScrollRight ? 1 : 0.5, cursor: canScrollRight ? "pointer" : "default" }}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); thumbsRef.current?.scrollBy({ left: 200, behavior: "smooth" }); }}
           >
             <i className="juujoGallery-icon juujoGallery-icon_right" style={{ margin: 0, padding: '3px', borderWidth: '0 2px 2px 0' }} />
