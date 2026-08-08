@@ -483,7 +483,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               id: "grounding-pillowcase",
               name: "Grounding Pillowcase",
               valueCents: 4900,
-              image: "/media/products/grounding-sheets/images/juujo-grounding-pillowcase-gift.webp",
+              image: pillowcaseColor === 'Grey'
+                ? "/media/products/grounding-sheets/images/juujo-grounding-pillowcase-grey-gift.png"
+                : "/media/products/grounding-sheets/images/juujo-grounding-pillowcase-gift.webp",
             }
           ].map((gift) => {
             const isLocked =
