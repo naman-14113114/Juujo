@@ -1129,6 +1129,77 @@ export const groundingMat: Product = {
   badges: [],
 };
 
+
+/* ------------------------------------------------------------------ */
+/* Premium Eye Mask                                                    */
+/* ------------------------------------------------------------------ */
+
+export const premiumEyeMask: Product = {
+  id: "premium-eye-mask",
+  sku: "JUUJO-PREMIUM-EYE-MASK",
+  slug: "premium-eye-mask",
+  category: "grounding-sheets",
+  categoryLabel: "Eye Mask",
+  name: "Premium Eye Mask",
+  heroTitle: "Premium",
+  heroEmphasis: "Eye Mask",
+  shortDescription: "A comfortable eye mask for a restful sleep.",
+  description: "Experience deep, uninterrupted sleep with our premium eye mask.",
+  seoTitle: "Premium Eye Mask | Juujo",
+  seoDescription: "Juujo Premium Eye Mask for restful sleep.",
+  currency: market.currency,
+  priceCents: 4900,
+  compareAtCents: 4900,
+  rating: 4.9,
+  reviewCount: 100,
+  customerCount: "10,000+",
+  cartImage: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
+  gallery: [],
+  colors: [
+    { id: "black", name: "Black", hex: "#28282B" },
+    { id: "pink", name: "Pink", hex: "#E8D4D6" },
+    { id: "green", name: "Green", hex: "#597463" },
+  ],
+  sizes: [{ id: "default", name: "Default" }],
+  variants: [
+    {
+      colorId: "black",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469961",
+      sku: "JUUJO-EYE-MASK-BLACK",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+    {
+      colorId: "pink",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469960",
+      sku: "JUUJO-EYE-MASK-PINK",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+    {
+      colorId: "green",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469959",
+      sku: "JUUJO-EYE-MASK-GREEN",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+  ],
+  quantityTiers: defaultQuantityTiers,
+  specs: [],
+  highlights: [],
+  faqs: [],
+  badges: [],
+};
+
 /* ------------------------------------------------------------------ */
 /* Weighted Blankets                                                   */
 /* ------------------------------------------------------------------ */
@@ -1768,6 +1839,7 @@ export const products = [
   groundingFlatSheet,
   groundingMat,
   groundingPillowcase,
+  premiumEyeMask,
   // weightedBlanket,
   // coolingSheets,
   // pillows,

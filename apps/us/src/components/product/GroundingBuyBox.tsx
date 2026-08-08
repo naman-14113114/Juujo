@@ -84,7 +84,7 @@ function DeliveryDateDisplay({ days }: { days: number }) {
 }
 
 export function GroundingBuyBox({ product }: { product: Product }) {
-  const { setSheetBundle } = useCart();
+  const { setSheetBundle, setGiftColors } = useCart();
   const router = useRouter();
 
   const defaultChoice = useMemo<SheetChoice>(
@@ -182,6 +182,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       variantId: getVariant(product, choice.colorId, choice.sizeId).variantId,
       discountPerSheetCents: tier.sheets > 1 ? Math.round(tier.discountTotalCents / tier.sheets) : 0,
     }));
+    setGiftColors(pillowcaseColor, eyeMaskColor);
     setSheetBundle(selections, 0); // No free sheets in this bundle model
     router.push("/cart");
   }
@@ -457,7 +458,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </h2>
             <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-[11px] sm:text-[13px] font-bold tracking-widest text-[var(--ink)] bg-[color-mix(in_oklch,var(--gold)_15%,transparent)]">
               <span className="juujo-display text-[13px] sm:text-base font-extrabold normal-case text-[var(--ink)]">
-                {formatMoney(giftProduct.priceCents + 6900 + 4900, giftProduct.currency)}
+                {formatMoney(giftProduct.priceCents + 4900 + 4900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
@@ -514,12 +515,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     src={gift.image}
                   />
                 </span>
-                {isLocked ? (
-                  <div className="mt-2 flex items-center justify-center gap-1.5 rounded bg-gray-100 py-1.5 text-[13px] font-bold uppercase tracking-wide text-gray-500">
-                    <Lock size={14} /> Locked
-                  </div>
-                ) : (
-                  <div className="mt-2 flex flex-col items-center">
+                <div className="mt-2 flex flex-col items-center">
                     <span className="text-[14px] sm:text-[18px] font-semibold leading-tight text-[var(--ink)]">
                       {gift.name}
                     </span>
@@ -559,7 +555,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       </div>
                     )}
                   </div>
-                )}
               </div>
             );
           })}

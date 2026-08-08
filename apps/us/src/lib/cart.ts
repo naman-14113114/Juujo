@@ -1,4 +1,5 @@
 import {
+  getVariant,
   getDefaultVariant,
   getProductById,
   getProductBySlug,
@@ -37,6 +38,8 @@ export type CartState = {
   promoCode: string;
   appliedPromoCodes: string[];
   giftMessage: string;
+  pillowcaseColor?: string;
+  eyeMaskColor?: string;
 };
 
 export const promoCode = "AUTO";
@@ -202,7 +205,7 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity, variantId)];
 }
 
-function deriveGiftLines(lines: CartLine[]): CartLine[] {
+function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
   const productLines = lines.filter((line) => line.type === "product");
   const hasSheet = productLines.some((line) => {
     const product = findProductForLine(line);
@@ -211,34 +214,89 @@ function deriveGiftLines(lines: CartLine[]): CartLine[] {
 
   if (!hasSheet) return [];
 
+  const gifts: CartLine[] = [];
+
   const matProduct = getProductBySlug("grounding-mat");
-  if (!matProduct) return [];
+  if (matProduct) {
+    const matVariant = getDefaultVariant(matProduct);
+    gifts.push({
+      id: "gift-mat",
+      productId: matProduct.id,
+      slug: matProduct.slug,
+      variantId: matVariant.variantId,
+      checkoutProductId: matVariant.productId,
+      type: "gift",
+      title: matProduct.name,
+      subtitle: "Free gift",
+      image: matProduct.cartImage,
+      unitPriceCents: 0,
+      compareAtCents: matVariant.priceCents,
+      quantity: 1,
+      locked: true,
+      free: true,
+    });
+  }
 
-  const matVariant = getDefaultVariant(matProduct);
+  const sheetCount = productLines.reduce((acc, line) => {
+    const product = findProductForLine(line);
+    if (product?.category === "grounding-sheets") return acc + line.quantity;
+    return acc;
+  }, 0);
 
-  const matLine: CartLine = {
-    id: "gift-mat",
-    productId: matProduct.id,
-    slug: matProduct.slug,
-    variantId: matVariant.variantId,
-    checkoutProductId: matVariant.productId,
-    type: "gift",
-    title: matProduct.name,
-    subtitle: "Free gift",
-    image: matProduct.cartImage,
-    unitPriceCents: 0,
-    compareAtCents: matVariant.priceCents,
-    quantity: 1,
-    locked: true,
-    free: true,
-  };
+  if (sheetCount >= 2) {
+    const pillowcaseProduct = getProductBySlug("grounding-pillowcase");
+    if (pillowcaseProduct) {
+      const pillowColor = (state?.pillowcaseColor || "white").toLowerCase();
+      const pVariant = getVariant(pillowcaseProduct, pillowColor) || getDefaultVariant(pillowcaseProduct);
+      gifts.push({
+        id: "gift-pillowcase",
+        productId: pillowcaseProduct.id,
+        slug: pillowcaseProduct.slug,
+        variantId: pVariant.variantId,
+        checkoutProductId: pVariant.productId,
+        type: "gift",
+        title: pillowcaseProduct.name,
+        subtitle: pillowColor + " / Free gift",
+        image: pillowcaseProduct.cartImage,
+        unitPriceCents: 0,
+        compareAtCents: pVariant.priceCents,
+        quantity: 1,
+        locked: true,
+        free: true,
+      });
+    }
+  }
 
-  return [matLine];
+  if (sheetCount >= 3) {
+    const eyeMaskProduct = getProductBySlug("premium-eye-mask");
+    if (eyeMaskProduct) {
+      const eyeColor = (state?.eyeMaskColor || "black").toLowerCase();
+      const eVariant = getVariant(eyeMaskProduct, eyeColor) || getDefaultVariant(eyeMaskProduct);
+      gifts.push({
+        id: "gift-eyemask",
+        productId: eyeMaskProduct.id,
+        slug: eyeMaskProduct.slug,
+        variantId: eVariant.variantId,
+        checkoutProductId: eVariant.productId,
+        type: "gift",
+        title: eyeMaskProduct.name,
+        subtitle: eyeColor + " / Free gift",
+        image: eyeMaskProduct.cartImage,
+        unitPriceCents: 0,
+        compareAtCents: eVariant.priceCents,
+        quantity: 1,
+        locked: true,
+        free: true,
+      });
+    }
+  }
+
+  return gifts;
 }
 
-export function calculateCartTotals(lines: CartLine[]) {
+export function calculateCartTotals(lines: CartLine[], state?: CartState) {
   const productLines = lines.filter((line) => line.type === "product");
-  const giftLines = deriveGiftLines(lines);
+  const giftLines = deriveGiftLines(lines, state);
   const displayLines = [...productLines, ...giftLines];
 
   const subtotalCents = displayLines.reduce(

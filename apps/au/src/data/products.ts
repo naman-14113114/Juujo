@@ -1129,6 +1129,77 @@ export const groundingMat: Product = {
   badges: [],
 };
 
+
+/* ------------------------------------------------------------------ */
+/* Premium Eye Mask                                                    */
+/* ------------------------------------------------------------------ */
+
+export const premiumEyeMask: Product = {
+  id: "premium-eye-mask",
+  sku: "JUUJO-PREMIUM-EYE-MASK",
+  slug: "premium-eye-mask",
+  category: "grounding-sheets",
+  categoryLabel: "Eye Mask",
+  name: "Premium Eye Mask",
+  heroTitle: "Premium",
+  heroEmphasis: "Eye Mask",
+  shortDescription: "A comfortable eye mask for a restful sleep.",
+  description: "Experience deep, uninterrupted sleep with our premium eye mask.",
+  seoTitle: "Premium Eye Mask | Juujo",
+  seoDescription: "Juujo Premium Eye Mask for restful sleep.",
+  currency: market.currency,
+  priceCents: 4900,
+  compareAtCents: 4900,
+  rating: 4.9,
+  reviewCount: 100,
+  customerCount: "10,000+",
+  cartImage: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
+  gallery: [],
+  colors: [
+    { id: "black", name: "Black", hex: "#28282B" },
+    { id: "pink", name: "Pink", hex: "#E8D4D6" },
+    { id: "green", name: "Green", hex: "#597463" },
+  ],
+  sizes: [{ id: "default", name: "Default" }],
+  variants: [
+    {
+      colorId: "black",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469961",
+      sku: "JUUJO-EYE-MASK-BLACK",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+    {
+      colorId: "pink",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469960",
+      sku: "JUUJO-EYE-MASK-PINK",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+    {
+      colorId: "green",
+      sizeId: "default",
+      productId: "1000000673049614",
+      variantId: "1000020652469959",
+      sku: "JUUJO-EYE-MASK-GREEN",
+      priceCents: 4900,
+      compareAtCents: 4900,
+      inStock: true,
+    },
+  ],
+  quantityTiers: defaultQuantityTiers,
+  specs: [],
+  highlights: [],
+  faqs: [],
+  badges: [],
+};
+
 /* ------------------------------------------------------------------ */
 /* Weighted Blankets                                                   */
 /* ------------------------------------------------------------------ */
@@ -1547,6 +1618,217 @@ export const pillows: Product = {
   ],
 };
 
+
+/* Grounding Pillowcase                                               */
+/* ------------------------------------------------------------------ */
+
+const groundingPillowcaseColors: ProductColor[] = [
+  { id: "white", name: "White", hex: "#f2efe8" },
+  { id: "grey", name: "Grey", hex: "#9b9a95" },
+];
+
+const groundingPillowcaseSizes: SizePricing[] = [
+  { id: "standard", name: "Standard", dimensions: "20 x 29 in", priceCents: 4900, compareAtCents: 9900 },
+];
+
+export const groundingPillowcase: Product = {
+  id: "grounding-pillowcase",
+  sku: "JUUJO-GROUNDING-PILLOWCASE-WHITE-STANDARD",
+  slug: "grounding-pillowcase",
+  category: "grounding-sheets", // For sharing category logic if needed, though we bypass it with dedicated route
+  categoryLabel: "Grounding Pillowcase",
+  name: "Premium Grounding Pillowcase",
+  heroTitle: "Effortless Grounding While You Sleep",
+  heroEmphasis: "Silver-Infused Earthing",
+  shortDescription: "Fall asleep faster and stay asleep. Wake up energized every morning and improve sleep naturally.",
+  description: "An effortless addition to your nightly routine. Simply place the Earthing Pillowcase over your pillow, connect it to a grounded outlet, and sleep as usual.",
+  seoTitle: "Juujo Grounding Pillowcase - Sleep Better Naturally",
+  seoDescription: "Silver-infused grounding pillowcase for better sleep and recovery.",
+  currency: market.currency,
+  priceCents: 4900,
+  compareAtCents: 9900,
+  rating: 4.8,
+  reviewCount: 342,
+  customerCount: "10,000+",
+  cartImage: productMediaAsset("juujo-grounding-pillowcase-organic-cotton.webp", "grounding-pillowcases", "images"),
+  gallery: [
+    {
+      src: productMediaAsset("juujo-grounding-pillowcase-organic-cotton.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounding Pillowcase Organic Cotton",
+    },
+    {
+      src: productMediaAsset("juujo-earthing-pillowcase-silver-threads.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Earthing Pillowcase Silver Threads",
+    },
+    {
+      src: productMediaAsset("juujo-conductive-pillowcase-deep-sleep.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Conductive Pillowcase Deep Sleep",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-pillowcase-how-to-use.mp4", "grounding-pillowcases", "videos"),
+      alt: "Juujo Grounding Pillowcase How To Use Video",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-pillowcase-health-benefits.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounding Pillowcase Health Benefits",
+    },
+    {
+      src: productMediaAsset("juujo-earthing-pillow-cover-anti-inflammatory.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Earthing Pillow Cover Anti Inflammatory",
+    },
+    {
+      src: productMediaAsset("juujo-natural-healing-grounding-pillowcase.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Natural Healing Grounding Pillowcase",
+    },
+    {
+      src: productMediaAsset("juujo-premium-grounding-pillowcase-close-up.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Premium Grounding Pillowcase Close Up",
+    },
+    {
+      src: productMediaAsset("juujo-grounded-sleep-pillow-cover-lifestyle.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounded Sleep Pillow Cover Lifestyle",
+    },
+    {
+      src: productMediaAsset("juujo-earthing-pillowcase-stress-relief.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Earthing Pillowcase Stress Relief",
+    },
+    {
+      src: productMediaAsset("juujo-grounding-pillowcase-restful-night.webp", "grounding-pillowcases", "images"),
+      alt: "Juujo Grounding Pillowcase Restful Night",
+    },
+  ],
+  colors: groundingPillowcaseColors,
+  sizes: groundingPillowcaseSizes,
+  variants: [
+    {
+      colorId: "white",
+      sizeId: "standard",
+      productId: "1000000673049613",
+      variantId: "1000020652469956",
+      sku: "JUUJO-PILLOWCASE-WHITE-STANDARD",
+      priceCents: 4900,
+      compareAtCents: 9900,
+      inStock: true,
+    },
+    {
+      colorId: "grey",
+      sizeId: "standard",
+      productId: "1000000673049613",
+      variantId: "1000020652469958",
+      sku: "JUUJO-PILLOWCASE-GREY-STANDARD",
+      priceCents: 4900,
+      compareAtCents: 9900,
+      inStock: true,
+    },
+  ],
+  quantityTiers: defaultQuantityTiers,
+  specs: [
+    { label: "Material", value: "95% Organic cotton, 5% conductive silver" },
+    { label: "Conductive thread", value: "Pure silver fibers" },
+    { label: "Dimensions", value: "50 x 75 cm (approx 20 x 29 in)" },
+    { label: "Care", value: "Machine washable" },
+  ],
+  included: [
+    { quantity: "1x", label: "Grounding Pillowcase" },
+    { quantity: "1x", label: "Grounding cord" },
+    { quantity: "1x", label: "Wall adaptor" },
+  ],
+  highlights: [
+    "Organic cotton comfort",
+    "Conductive silver fibers",
+    "Perfect fit for most pillows",
+    "Easy to care for",
+  ],
+  keyBenefits: [
+    "Fall asleep faster and stay asleep",
+    "Wake up energized every morning",
+    "Reduce inflammation and daily pain",
+    "Improve sleep naturally — no medication",
+  ],
+  faqs: [
+    {
+      question: "What is a Grounding Pillowcase?",
+      answer: "A Grounding Pillowcase (sometimes called an Earthing Pillowcase) is a specialized pillow cover infused with highly conductive silver threads. These threads work to link your body directly to the Earth's natural electrical energy while you rest. By plugging the included grounding cord into the ground port of a standard wall outlet, you can experience the benefits of staying grounded without leaving your bedroom."
+    },
+    {
+      question: "How Does a Grounding Pillowcase Work?",
+      answer: "This pillowcase establishes a direct, conductive pathway between your body and the natural surface energy of the Earth. Once your skin touches the embedded silver threads, you become grounded via the connected cord and your home's grounded outlet.\n\nThe goal is to give electrons an easy route to transfer between you and the Earth, which helps restore your body to a stable, balanced electrical state as you sleep."
+    },
+    {
+      question: "Does a Grounding Pillowcase Use Electricity?",
+      answer: "Not at all.\n\nGrounding pillowcases operate completely free of electricity and draw zero power. The provided cord plugs exclusively into the grounding terminal of your wall outlet, meaning no electric current ever runs through the fabric or into your body. The product merely acts as an extension cord to the Earth outside."
+    },
+    // {
+    //   question: "Are Grounding & Earthing Pillowcases Safe?",
+    //   answer: "Yes. Grounding Pillowcases are designed for everyday use and connect only to the grounding port of a properly grounded outlet. Juujo pillowcases include a built-in 98k ohm safety resistor inside the grounding cord, which helps provide additional protection against electrical surges."
+    // },
+    // {
+    //   question: "What Is the Difference Between Grounding and Earthing?",
+    //   answer: "Grounding and Earthing mean the same thing.\n\n\"Grounding\" is the term most commonly used in North America, while \"Earthing\" is often used in Europe, Australia, and New Zealand. Both describe reconnecting your body with the Earth's natural electrical charge."
+    // },
+    {
+      question: "Do I Need Direct Skin Contact With the Conductive Pillowcase?",
+      answer: "For optimal grounding results, bare skin contact is highly recommended.\n\nMost individuals naturally rest their face, neck, shoulders, or arms against the pillow while they sleep. Even a small amount of direct skin exposure is typically sufficient to maintain a strong grounding connection throughout the night."
+    },
+    // {
+    //   question: "Can I Use Cotton, Bamboo, Linen, or Silk Sheets Over It?",
+    //   answer: "Natural fabrics such as cotton, bamboo, linen, and silk may still allow some conductivity.\n\nResults vary depending on the fabric thickness, moisture levels, and individual circumstances. Direct contact with the conductive surface provides the best grounding experience."
+    // },
+    // {
+    //   question: "How Long Does an Earthing Pillow Case Take to Work?",
+    //   answer: "Everyone is different.\n\nSome people report improvements in sleep quality, relaxation, and recovery within the first few nights. Others notice changes gradually over several weeks of consistent use."
+    // },
+    {
+      question: "What Should I Feel When Using a Grounding Pillowcase?",
+      answer: "Users frequently report experiencing:\n• Much deeper, uninterrupted sleep\n• Enhanced overall relaxation\n• Waking up feeling significantly more refreshed\n• Quicker recovery times following physical exertion\n\nWhile some individuals feel these benefits almost immediately, others may notice a more gradual shift in their well-being over a few weeks."
+    },
+    // {
+    //   question: "Why Do Some People Notice Results Faster Than Others?",
+    //   answer: "Every person's lifestyle, sleep habits, environment, and overall health are different.\n\nJust as with any wellness routine, individual experiences vary. Consistent use typically provides the best opportunity to notice changes over time."
+    // },
+    // {
+    //   question: "What If I Don't Notice Any Difference?",
+    //   answer: "We recommend using your Grounding Pillowcase consistently for several weeks.\n\nBecause everyone responds differently, some people notice benefits immediately while others require more time. That's one reason we offer a 100-night risk-free trial."
+    // },
+    // {
+    //   question: "What Is the Size of the Grounding Pillowcase?",
+    //   answer: "Juujo Grounding Pillowcase comes in a 50 × 70 cm size, which fits most standard pillows. It is easy to place over your existing pillow and can be used on its own or layered with another pillowcase."
+    // },
+    // {
+    //   question: "How Do I Care for My Earthing Bedding?",
+    //   answer: "To help preserve the conductive silver fibers:\n\nDo:\n• Wash regularly\n• Use mild detergent\n• Wash in warm or cool water\n• Air dry or tumble dry on low heat\n\nAvoid:\n• Bleach\n• Fabric softeners\n• Dryer sheets\n• Harsh detergents"
+    // },
+    // {
+    //   question: "How Long Does a Grounding Pillowcase Last?",
+    //   answer: "With proper care, a Grounding Pillowcase can last for years.\n\nIts lifespan depends on washing frequency, care methods, and overall use. Following the recommended care instructions helps maximize durability and maintain conductivity."
+    // },
+    // {
+    //   question: "Can the Silver Fibers Wear Out?",
+    //   answer: "Over time, all conductive materials experience natural wear.\n\nHowever, the silver fibers in the Juujo pillowcase is designed for long-term daily use. Proper washing and care help maintain conductivity and performance."
+    // },
+    // {
+    //   question: "How Do I Know My Grounding Pillowcase Is Working?",
+    //   answer: "The easiest way is to use a conductivity tester or outlet tester.\n\nYou can also verify that your outlet is properly grounded using a grounding outlet checker."
+    // },
+    // {
+    //   question: "Can I Test My Grounding Pillow?",
+    //   answer: "Yes.\n\nMany customers use conductivity testers or multimeters to verify conductivity between the sheet and the grounding connection.\n\nIf testing a dry sheet, a small amount of moisture can sometimes improve conductivity during the test."
+    // },
+    // {
+    //   question: "What If I Don't Have a Grounded Outlet?",
+    //   answer: "If your home does not have a grounded outlet, you can use a Grounding Rod placed directly in the soil outside.\n\nThe Grounding Rod provides an alternative connection to the Earth and can be used with Grounding Sheets, Grounding Pillowcase, and other grounding products."
+    // },
+    // {
+    //   question: "Which Grounding Plug Do I Need?",
+    //   answer: "Juujo includes the correct grounding plug based on your country.\n\nWe currently offer plug options for:\n• Europe (Type E & F)\n• United Kingdom & Ireland (Type G)\n• Switzerland (Type J)\n• Italy (Type L)\n• Denmark (Type K)\n• USA\n\nIf you're unsure which plug to choose, our support team is happy to help."
+    // }
+  ],
+  badges: [
+    "100-night guarantee",
+    "Free shipping",
+    "Easy returns",
+  ]
+};
 /* ------------------------------------------------------------------ */
 /* Registry + helpers                                                  */
 /* ------------------------------------------------------------------ */
@@ -1555,6 +1837,7 @@ export const products = [
   groundingSheets,
   groundingFlatSheet,
   groundingMat,
+  groundingPillowcase,
   // weightedBlanket,
   // coolingSheets,
   // pillows,

@@ -35,6 +35,7 @@ type CartContextValue = CartState & {
   ) => void;
   /** Replace the grounding-sheet bundle with one line per selected sheet. */
   setSheetBundle: (selections: BundleSelection[], freeCount?: number) => void;
+  setGiftColors: (pillowcaseColor: string, eyeMaskColor: string) => void;
   setQuantity: (productId: string, quantity: number) => void;
 
   removeProduct: (productId: string) => void;
@@ -262,6 +263,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }));
   }
 
+  function setGiftColors(pillowcaseColor: string, eyeMaskColor: string) {
+    setState((current) => ({
+      ...current,
+      pillowcaseColor,
+      eyeMaskColor,
+    }));
+  }
+
   function removeLine(lineId: string) {
     setState((current) => {
       const removedLine = current.lines.find((line) => line.id === lineId);
@@ -361,6 +370,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addProduct,
       addToCartVariant,
       setSheetBundle,
+      setGiftColors,
       setQuantity,
       removeProduct,
       removeLine,

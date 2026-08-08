@@ -49,6 +49,7 @@ function parseCart(cartJson: string): CartState | null {
 
     return {
       lines: Array.isArray(parsed.lines) ? (parsed.lines as CartLine[]) : [],
+      appliedPromoCodes: Array.isArray(parsed.appliedPromoCodes) ? parsed.appliedPromoCodes : [],
       promoCode: typeof parsed.promoCode === "string" ? parsed.promoCode : "AUTO",
       giftMessage:
         typeof parsed.giftMessage === "string" ? parsed.giftMessage.slice(0, 300) : "",
