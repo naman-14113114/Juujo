@@ -16,23 +16,30 @@ import { formatMoney } from "@/lib/money";
 type MatChoice = { sizeId: string };
 
 type Tier = {
-  id: "single" | "bundle";
+  id: "single" | "bundle-2" | "bundle-3";
   label: string;
   mats: number;
-  freeCount: number;
+  discountTotalCents: number;
   badge?: string;
   recommended?: boolean;
 };
 
 const TIERS: Tier[] = [
-  { id: "single", label: "Buy 1", mats: 1, freeCount: 0 },
+  { id: "single", label: "Buy 1", mats: 1, discountTotalCents: 0 },
   {
-    id: "bundle",
-    label: "Buy 2, Get 1 Free!",
-    mats: 3,
-    freeCount: 1,
-    badge: "Most Popular",
+    id: "bundle-2",
+    label: "Buy 2",
+    mats: 2,
+    discountTotalCents: 2000,
+    badge: "Recommended",
     recommended: true,
+  },
+  {
+    id: "bundle-3",
+    label: "Buy 3",
+    mats: 3,
+    discountTotalCents: 6000,
+    badge: "Most Popular",
   },
 ];
 
@@ -47,7 +54,7 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
     [product.sizes],
   );
 
-  const [tierId, setTierId] = useState<Tier["id"]>("bundle");
+  const [tierId, setTierId] = useState<Tier["id"]>("bundle-3");
   const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
   const [choices, setChoices] = useState<Record<string, MatChoice[]>>(() => {
     const init: Record<string, MatChoice[]> = {};
@@ -68,23 +75,17 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
     return { priceCents: v.priceCents, compareAtCents: v.compareAtCents };
   });
 
-  const paidCount = tier.mats - tier.freeCount;
-  const bundleTotal = activeVariantPrices
-    .slice(0, paidCount)
-    .reduce((sum, v) => sum + v.priceCents, 0);
+  const bundleTotal = activeVariantPrices.reduce((sum, v) => sum + v.priceCents, 0) - tier.discountTotalCents;
 
   const perSheet = product.priceCents;
 
   function priceForTier(t: Tier) {
     const tierChoices = choices[t.id];
-    const paidN = t.mats - t.freeCount;
-    return tierChoices
-      .slice(0, paidN)
-      .reduce(
-        (sum, choice) =>
-          sum + getVariant(product, colorId, choice.sizeId).priceCents,
-        0,
-      );
+    const baseTotal = tierChoices.reduce(
+      (sum, choice) => sum + getVariant(product, colorId, choice.sizeId).priceCents,
+      0
+    );
+    return baseTotal - t.discountTotalCents;
   }
 
   function compareForTier(t: Tier) {
@@ -122,7 +123,7 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
       product,
       variantId: getVariant(product, colorId, choice.sizeId).variantId,
     }));
-    setSheetBundle(selections, tier.freeCount);
+    setSheetBundle(selections, 0);
     router.push("/cart");
   }
 
@@ -187,16 +188,24 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
           const total = priceForTier(t);
           const compare = compareForTier(t);
           const savings = Math.max(compare - total, 0);
-          const perUnit = Math.round(total / t.mats);
 
           return (
             <div
               key={t.id}
-              className={`relative rounded-2xl border transition-colors ${selected ? 'border-[var(--night)] bg-[rgba(247,241,232,0.85)] border-[2px]' : 'border-[var(--border)] bg-transparent'}`}
+              className={`relative flex flex-col rounded-2xl transition-all duration-200 cursor-pointer ${
+                selected 
+                  ? "border-[2px] border-[var(--night)] bg-[color-mix(in_oklch,var(--clay)_6%,var(--paper))] shadow-sm z-10" 
+                  : "border border-[var(--border)] bg-[var(--card)] hover:border-[color-mix(in_oklch,var(--clay)_40%,var(--border))] opacity-95"
+              }`}
+              onClick={() => {
+                setTierId(t.id);
+                setExpandedTier(t.id);
+              }}
             >
+              {/* Diagonal ribbon clipped only by the card's top and right walls. */}
               {t.badge && (
-                <div className="absolute top-0 right-0 w-[80px] h-[80px] overflow-hidden pointer-events-none z-20 rounded-tr-2xl">
-                  <div className="absolute top-[20px] -right-[17px] w-[100px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
+                <div className="pointer-events-none absolute right-0 top-0 z-20 h-[92px] w-[92px] overflow-hidden">
+                  <div className="absolute right-[-35px] top-[21px] w-[132px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
                     {t.badge}
                   </div>
                 </div>
@@ -218,13 +227,28 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                   
                   <div className="flex-1 flex flex-row justify-between items-start gap-2">
                     <div className="flex flex-col flex-1 pr-1">
-                      <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
-                        {t.label}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-sans text-[14px] sm:text-[15px] font-extrabold text-[var(--ink)] leading-tight uppercase tracking-tight">
+                          {t.label}
+                        </h3>
+                        {t.discountTotalCents > 0 && (
+                          <span className="inline-block px-2 py-0.5 rounded text-[12px] sm:text-[13px] font-bold tracking-wide text-white bg-[var(--night)] shadow-sm">
+                            {formatMoney(t.discountTotalCents, product.currency)} OFF
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 text-[13.5px] sm:text-[15px] text-[var(--muted)] leading-snug">
-                        {t.freeCount > 0
-                          ? `Only ${formatMoney(perUnit, product.currency)} per mat!`
-                          : `${formatMoney(perSheet, product.currency)}`}
+                        {t.id === "bundle-3" ? (
+                          <>
+                            Includes 3 Mats, 3 Cables
+                          </>
+                        ) : t.id === "bundle-2" ? (
+                          <>
+                            Includes 2 Mats, 2 Cables
+                          </>
+                        ) : (
+                          <>Includes 1 Mat, 1 Cable</>
+                        )}
                       </p>
                     </div>
 
@@ -262,7 +286,7 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                           )}
                         </div>
                       )}
-                      {savings > 0 && (
+                      {t.discountTotalCents === 0 && savings > 0 && (
                         <span className="inline-block px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold tracking-wide text-white bg-[var(--night)]">
                           SAVE {formatMoney(savings, product.currency)}
                         </span>
@@ -272,6 +296,7 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                 </div>
               </button>
 
+              {/* The expanded selection area for the CHOSEN tier */}
               {expandedTier === t.id && (
                 <div className="bg-[rgba(247,241,232,0.85)] border-t border-[var(--border)] rounded-b-[15px]">
                   <div className="flex justify-between items-center px-4 sm:px-5 py-3 border-b border-[var(--border)] bg-[rgba(0,0,0,0.02)]">
@@ -279,10 +304,10 @@ export function GroundingMatBuyBox({ product }: { product: Product }) {
                        Customize Your Selection
                     </div>
                   </div>
-                  <div className="p-3 sm:p-4 flex flex-col gap-2">
+                  <div className="p-3 sm:p-4 flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
                     {Array.from({ length: t.mats }).map((_, index) => (
                       <MatRow
-                        key={index}
+                        key={`${t.id}-${index}`}
                         product={product}
                         index={index}
                         showIndex={t.mats > 1}
