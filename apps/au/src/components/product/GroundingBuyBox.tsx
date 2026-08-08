@@ -520,9 +520,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     {gift.id === "premium-eye-mask" && (
                       <div className="mt-2 flex items-center gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
                         {[
-                          { name: 'Green', hex: '#597463' },
+                          { name: 'Green', hex: '#066B73' },
                           { name: 'Black', hex: '#28282B' },
-                          { name: 'Pink', hex: '#E8D4D6' }
+                          { name: 'Pink', hex: '#C48B9F' }
                         ].map(color => (
                           <button
                             key={color.name}

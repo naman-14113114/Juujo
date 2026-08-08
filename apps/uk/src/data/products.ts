@@ -1157,8 +1157,8 @@ export const premiumEyeMask: Product = {
   gallery: [{ src: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png", alt: "Premium Eye Mask" }],
   colors: [
     { id: "black", name: "Black", hex: "#28282B" },
-    { id: "pink", name: "Pink", hex: "#E8D4D6" },
-    { id: "green", name: "Green", hex: "#597463" },
+    { id: "pink", name: "Pink", hex: "#C48B9F" },
+    { id: "green", name: "Green", hex: "#066B73" },
   ],
   sizes: [{ id: "default", name: "Default" }],
   variants: [
