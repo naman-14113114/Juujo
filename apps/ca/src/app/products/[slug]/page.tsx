@@ -71,10 +71,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       images: [
         {
-          url: product.gallery[0].src,
+          url: product.gallery?.[0]?.src || product.cartImage || "",
           width: 1200,
           height: 1500,
-          alt: product.gallery[0].alt,
+          alt: product.gallery?.[0]?.alt || product.name,
         },
       ],
     },
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: product.seoTitle,
       description: product.seoDescription,
-      images: [product.gallery[0].src],
+      images: [product.gallery?.[0]?.src || product.cartImage || ""],
     },
   };
 }

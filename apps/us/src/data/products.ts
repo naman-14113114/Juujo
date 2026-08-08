@@ -1154,7 +1154,7 @@ export const premiumEyeMask: Product = {
   reviewCount: 100,
   customerCount: "10,000+",
   cartImage: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
-  gallery: [],
+  gallery: [{ src: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png", alt: "Premium Eye Mask" }],
   colors: [
     { id: "black", name: "Black", hex: "#28282B" },
     { id: "pink", name: "Pink", hex: "#E8D4D6" },
