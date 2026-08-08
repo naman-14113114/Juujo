@@ -1,0 +1,130 @@
+<style>
+/* Muuhu Theme Custom CSS - Product Gallery */
+#grounding-gallery-block {
+  --plum: oklch(29% 0.071 322);
+  --plum-soft: oklch(46% 0.083 326);
+  --gold: oklch(66% 0.088 86);
+  --cream: transparent;
+  --blush: oklch(89% 0.032 52);
+  --ink: oklch(17% 0.03 318);
+  --card: transparent;
+  --border: oklch(83% 0.026 64);
+  --muted: oklch(48% 0.037 315);
+  --success: oklch(59% 0.14 151);
+  --background: transparent;
+  --foreground: var(--plum);
+  
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  background-color: transparent !important;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  width: 100%;
+}
+
+#grounding-gallery-block * {
+  box-sizing: border-box;
+}
+
+#grounding-gallery-block .gallery-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#grounding-gallery-block .main-image-container {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+#grounding-gallery-block .main-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s;
+}
+
+#grounding-gallery-block .thumbnails {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+#grounding-gallery-block .thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+#grounding-gallery-block .thumbnails::-webkit-scrollbar-thumb {
+  background-color: var(--muted);
+  border-radius: 3px;
+}
+
+#grounding-gallery-block .thumbnail-btn {
+  flex: 0 0 5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: var(--card);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+#grounding-gallery-block .thumbnail-btn:hover {
+  border-color: var(--muted);
+}
+
+#grounding-gallery-block .thumbnail-btn.active {
+  border-color: var(--gold);
+}
+
+#grounding-gallery-block .thumbnail-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+
+<div id="grounding-gallery-block">
+  <div class="gallery-col">
+    <div class="main-image-container">
+      <img id="grounding-main-image" src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-fitted-sheet-silver-thread.webp" alt="Grounding Fitted Sheet">
+    </div>
+    
+    <div class="thumbnails" id="grounding-thumbnails">
+      <button class="thumbnail-btn active" onclick="groundingSetImage(this, 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-fitted-sheet-silver-thread.webp')">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-fitted-sheet-silver-thread.webp" alt="Thumbnail 1">
+      </button>
+      <button class="thumbnail-btn" onclick="groundingSetImage(this, 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp')">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp" alt="Thumbnail 2">
+      </button>
+      <button class="thumbnail-btn" onclick="groundingSetImage(this, 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-fitted-sheet-sleep-benefits.webp')">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-fitted-sheet-sleep-benefits.webp" alt="Thumbnail 3">
+      </button>
+      <button class="thumbnail-btn" onclick="groundingSetImage(this, 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-sheet-premium-quality.webp')">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-sheet-premium-quality.webp" alt="Thumbnail 4">
+      </button>
+      <button class="thumbnail-btn" onclick="groundingSetImage(this, 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-conductive-fitted-sheet-earthing.webp')">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-conductive-fitted-sheet-earthing.webp" alt="Thumbnail 5">
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function groundingSetImage(btn, src) {
+    document.getElementById('grounding-main-image').src = src;
+    var btns = document.querySelectorAll('#grounding-gallery-block .thumbnail-btn');
+    btns.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+</script>

@@ -16,7 +16,7 @@ export function GroundingBenefitsVideoSection() {
             </h2>
             <p className="juujo-body-copy max-w-lg text-[var(--muted)]">
               While grounding outdoors offers great health benefits, staying
-              grounded indoors can be challenging. Thatâ€™s where our Grounding
+              grounded indoors can be challenging. That&apos;s where our Grounding
               Sheets come in. Simply cover your mattress with the sheets,
               connect the grounding cable to an outlet, and enjoy grounding
               benefits every night. Consistent grounding will improve your sleep
