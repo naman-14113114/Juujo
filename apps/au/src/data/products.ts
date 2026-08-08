@@ -446,13 +446,13 @@ export const groundingSheets: Product = {
   seoDescription:
     "Juujo Grounding Sheet with conductive silver threads and grounding cord. Soft, breathable, machine washable, available in three colours and multiple sizes.",
   currency: market.currency,
-  priceCents: 16900, // Queen price Ã¢â‚¬â€ the default selected size
+  priceCents: 16900, // Queen price — the default selected size
   compareAtCents: 33900,
   rating: 4.9,
   reviewCount: 4274,
   customerCount: "40,000+",
   cartImage: productMediaAsset(
-    "juujo-grounding-fitted-sheet-sleep-benefits.webp",
+    "juujo-grounding-bed-sheet-health.webp",
     "grounding-sheets",
     "images",
   ),

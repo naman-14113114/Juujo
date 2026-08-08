@@ -89,7 +89,11 @@ export function StickyAddToCart({ product }: { product: Product }) {
               fill
               loading="eager"
               sizes="56px"
-              src={product.cartImage}
+              src={
+                product.id === "grounding-sheets"
+                  ? "/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp"
+                  : product.cartImage
+              }
             />
           </div>
           <div className="min-w-0">
