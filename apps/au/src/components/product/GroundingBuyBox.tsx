@@ -456,7 +456,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </h2>
             <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-[11px] sm:text-[13px] font-bold tracking-widest text-[var(--ink)] bg-[color-mix(in_oklch,var(--gold)_15%,transparent)]">
               <span className="juujo-display text-[13px] sm:text-base font-extrabold normal-case text-[var(--ink)]">
-                {formatMoney(giftProduct.priceCents + 4900 + 4900, giftProduct.currency)}
+                {formatMoney(giftProduct.priceCents + 6900 + 4900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
