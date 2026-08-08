@@ -474,7 +474,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               id: "premium-eye-mask",
               name: "Premium Eye Mask",
               valueCents: 6900,
-              image: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
+              image: eyeMaskColor === 'Pink' 
+                ? "/media/products/grounding-sheets/images/juujo-premium-eye-mask-pink.png"
+                : eyeMaskColor === 'Black'
+                ? "/media/products/grounding-sheets/images/juujo-premium-eye-mask-black.png"
+                : "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
             },
             {
               id: "grounding-pillowcase",
