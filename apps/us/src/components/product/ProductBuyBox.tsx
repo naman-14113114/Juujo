@@ -16,6 +16,7 @@ import {
 import { market } from "@/lib/market";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingMatAccordions } from "./GroundingMatAccordions";
+import { SleepMaskAccordions } from "./SleepMaskAccordions";
 
 function formatMoney(cents: number, currency: string) {
   return new Intl.NumberFormat(market.locale, {
@@ -30,7 +31,7 @@ function formatMoney(cents: number, currency: string) {
  * quantity offer (recommended tier pre-selected) replaces the old free-gift
  * bundle. Add to cart and Buy now both resolve the selected variant.
  */
-export function ProductBuyBox({ product }: { product: Product }) {
+export function ProductBuyBox({ product, onColorChange }: { product: Product, onColorChange?: (colorId: string) => void }) {
   const { addToCartVariant } = useCart();
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
@@ -110,7 +111,10 @@ export function ProductBuyBox({ product }: { product: Product }) {
                 <button
                   key={color.id}
                   type="button"
-                  onClick={() => setColorId(color.id)}
+                  onClick={() => {
+                    setColorId(color.id);
+                    onColorChange?.(color.id);
+                  }}
                   aria-pressed={selected}
                   aria-label={color.name}
                   title={color.name}
@@ -179,10 +183,11 @@ export function ProductBuyBox({ product }: { product: Product }) {
       )}
 
       {/* Quantity offer: Buy 1 / Buy 2 / Buy 3 */}
-      <fieldset className="flex flex-col gap-2">
-        <legend className="text-sm font-medium text-[var(--ink)]">
-          Choose your bundle
-        </legend>
+      {product.quantityTiers.length > 1 && (
+        <fieldset className="flex flex-col gap-2">
+          <legend className="text-sm font-medium text-[var(--ink)]">
+            Choose your bundle
+          </legend>
         <div className="flex flex-col gap-2">
           {product.quantityTiers.map((offer: QuantityTier, index) => {
             const selected = index === tierIndex;
@@ -252,7 +257,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
             );
           })}
         </div>
-      </fieldset>
+        </fieldset>
+      )}
 
       {/* Live price + actions */}
       <div className="flex flex-col gap-3">
@@ -270,7 +276,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
                 style={{ visibility: "hidden" }}
                 className="relative z-20 whitespace-nowrap"
               >
-                Add To Cart + 3 Free gifts
+                {product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie
@@ -282,7 +288,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             </>
           ) : (
             <span className="relative z-20 whitespace-nowrap">
-              Add To Cart + 3 Free gifts
+              {product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}
             </span>
           )}
         </Button>
@@ -303,6 +309,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       )}
 
       {product.category === "grounding-mat" && <GroundingMatAccordions />}
+      {product.category === "premium-sleep-mask" && <SleepMaskAccordions />}
     </div>
   );
 }

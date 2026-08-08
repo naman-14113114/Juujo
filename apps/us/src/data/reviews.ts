@@ -1,6 +1,7 @@
 import groundingReviews from "./reviews/grounding-sheets-reviews.json";
 import fittedSheetsReviews from "./reviews/grounding-fitted-sheets-reviews.json";
 import pillowcaseReviews from "./reviews/grounding-pillowcase-reviews.json";
+import premiumSleepMaskReviews from "./reviews/premium-sleep-mask-reviews.json";
 import { market } from "@/lib/market";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
@@ -39,6 +40,7 @@ const reviewCollections = {
   "grounding-flat-sheet": groundingReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-pillowcase": pillowcaseReviews.map(normalizeStaticReview) as ProductReview[],
   "grounding-mat": groundingReviews.map(normalizeStaticReview) as ProductReview[],
+  "premium-sleep-mask": premiumSleepMaskReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;

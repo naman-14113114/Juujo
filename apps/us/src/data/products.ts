@@ -24,6 +24,7 @@ export type ProductCategory =
   | "grounding-mat"
   | "weighted-blankets"
   | "cooling-sheets"
+  | "premium-sleep-mask"
   | "pillows";
 
 export type ProductColor = {
@@ -1830,6 +1831,79 @@ export const groundingPillowcase: Product = {
   ],
 };
 
+const premiumSleepMaskColors: ProductColor[] = [
+  { id: "black", name: "Black", hex: "#000000" },
+  { id: "pink", name: "Pink", hex: "#FFC0CB" },
+  { id: "green", name: "Green", hex: "#008000" },
+];
+
+const premiumSleepMaskSizes: SizePricing[] = [
+  {
+    id: "one-size",
+    name: "One Size",
+    priceCents: 6900,
+    compareAtCents: 13900,
+  },
+];
+
+export const premiumSleepMask: Product = {
+  id: "premium-sleep-mask",
+  sku: "JUUJO-PREMIUM-SLEEP-MASK",
+  slug: "premium-sleep-mask",
+  category: "premium-sleep-mask",
+  categoryLabel: "Premium Sleep Mask",
+  name: "Premium Sleep Mask",
+  heroTitle: "Premium",
+  heroEmphasis: "Sleep Mask",
+  shortDescription: "Experience deep, uninterrupted sleep with our 100% blackout premium silk sleep mask.",
+  description: "Experience deep, uninterrupted sleep with our 100% blackout premium silk sleep mask designed for ultimate comfort.",
+  seoTitle: "Premium Sleep Mask | Juujo",
+  seoDescription: "100% blackout premium silk sleep mask available in Black, Pink, and Green.",
+  currency: market.currency,
+  priceCents: 6900,
+  compareAtCents: 13900,
+  rating: 4.9,
+  reviewCount: 152,
+  customerCount: "10,000+",
+  cartImage: productMediaAsset("juujo-premium-sleep-mask-black-1.png", "sleep-mask", "images"),
+  gallery: [
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-1.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-2.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-3.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-4.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-5.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-6.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-7.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-black-8.png", "sleep-mask", "images"), alt: "Black Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-1.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-2.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-3.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-4.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-5.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-6.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-7.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-8.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-pink-9.png", "sleep-mask", "images"), alt: "Pink Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-1.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-2.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-3.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-4.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-5.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-6.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-7.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-8.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+    { src: productMediaAsset("juujo-premium-sleep-mask-green-9.png", "sleep-mask", "images"), alt: "Green Premium Sleep Mask" },
+  ],
+  colors: premiumSleepMaskColors,
+  sizes: premiumSleepMaskSizes,
+  variants: buildVariants("PREMIUM-SLEEP-MASK", premiumSleepMaskColors, premiumSleepMaskSizes),
+  quantityTiers: [{ quantity: 1, label: "Buy 1", discountPct: 0 }],
+  specs: [],
+  highlights: [],
+  faqs: [],
+  badges: [],
+};
+
 /* ------------------------------------------------------------------ */
 /* Registry + helpers                                                  */
 /* ------------------------------------------------------------------ */
@@ -1840,6 +1914,7 @@ export const products = [
   groundingMat,
   groundingPillowcase,
   premiumEyeMask,
+  premiumSleepMask,
   // weightedBlanket,
   // coolingSheets,
   // pillows,
