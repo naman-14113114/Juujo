@@ -162,7 +162,7 @@ export function ProductGallery({
         /* 1. CONTAINER */
         .juujoGallery-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
-        .juujoGallery-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
+        .juujoGallery-main_wrapper { position: relative; width: 90%; padding-bottom: 90%; background-color: transparent; margin: 0 auto 20px auto; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .juujoGallery-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
         .juujoGallery-thumbs_container { position: relative; width: 100%; display: flex; align-items: center; gap: 12px; }
