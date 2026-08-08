@@ -300,14 +300,14 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                             Includes 3 Sheet Sets, 3 Cables
                             <br className="hidden sm:block" />
                             <span className="sm:hidden">, </span>
-                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.compareAtCents || giftProduct.priceCents, giftProduct.currency) : "$140"} Value)
+                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.priceCents, giftProduct.currency) : "$69"} Value)
                           </>
                         ) : t.id === "bundle-2" ? (
                           <>
                             Includes 2 Sheet Sets, 2 Cables
                             <br className="hidden sm:block" />
                             <span className="sm:hidden">, </span>
-                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.compareAtCents || giftProduct.priceCents, giftProduct.currency) : "$140"} Value)
+                            &amp; <strong>FREE Grounding Mat</strong> ({giftProduct ? formatMoney(giftProduct.priceCents, giftProduct.currency) : "$69"} Value)
                           </>
                         ) : (
                           <>Includes 1 Fitted Sheet, 1 Cable</>
@@ -455,7 +455,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             </h2>
             <p className="juujo-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded px-3 py-1 text-[11px] sm:text-[13px] font-bold tracking-widest text-[var(--ink)] bg-[color-mix(in_oklch,var(--gold)_15%,transparent)]">
               <span className="juujo-display text-[13px] sm:text-base font-extrabold normal-case text-[var(--ink)]">
-                {formatMoney((giftProduct.compareAtCents || giftProduct.priceCents) + 6900 + 4900, giftProduct.currency)}
+                {formatMoney(giftProduct.priceCents + 6900 + 4900, giftProduct.currency)}
               </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
@@ -465,7 +465,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             {
               id: "grounding-mat",
               name: giftProduct.name,
-              valueCents: giftProduct.compareAtCents || giftProduct.priceCents,
+              valueCents: giftProduct.priceCents,
               image: "/images/grounding_mat_gift.png",
             },
             {
@@ -496,7 +496,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 <span
                   className={`absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white ${isLocked ? 'bg-gray-400' : 'bg-[var(--night)]'}`}
                 >
-                  {isLocked ? "Locked" : "Free"}
+                  {isLocked ? (gift.id === "premium-eye-mask" ? "Buy 2 To Unlock" : "Buy 3 To Unlock") : "Free"}
                   {!isLocked && (
                     <span className="font-medium normal-case line-through opacity-80">
                       {formatMoney(gift.valueCents, giftProduct.currency)}
