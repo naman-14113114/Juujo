@@ -321,6 +321,7 @@ export function calculateCartTotals(lines: CartLine[], state?: CartState) {
     savingsCents,
     shippingCents: 0,
     totalCents: subtotalCents,
+    giftLines,
   };
 }
 

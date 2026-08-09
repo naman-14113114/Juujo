@@ -56,16 +56,18 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
           >
             <div className="overflow-hidden">
               <div className="space-y-3 pb-3 pt-2 text-sm">
-                {giftValueCents > 0 ? (
-                  <div className="flex justify-between gap-4">
-                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--muted)]"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                      FREE GROUNDING MAT
-                    </span>
-                    <span className="font-semibold text-[var(--muted)]">
-                      -{formatMoney(giftValueCents)}
-                    </span>
-                  </div>
+                {totals.giftLines && totals.giftLines.length > 0 ? (
+                  totals.giftLines.map((gift) => (
+                    <div key={gift.id} className="flex justify-between gap-4">
+                      <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--muted)]"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        FREE {gift.title.toUpperCase()}
+                      </span>
+                      <span className="font-semibold text-[var(--muted)]">
+                        -{formatMoney(gift.compareAtCents || 0)}
+                      </span>
+                    </div>
+                  ))
                 ) : null}
                 {totalSavingsCents - giftValueCents > 0 ? (
                   <div className="flex justify-between gap-4">

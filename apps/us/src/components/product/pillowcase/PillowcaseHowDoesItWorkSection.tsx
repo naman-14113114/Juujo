@@ -15,10 +15,10 @@ export function PillowcaseHowDoesItWorkSection() {
             </h2>
             <div className="juujo-body-copy max-w-lg text-[var(--muted)] space-y-4">
               <p>
-                The Juujo Grounding Pillowcase works in perfect harmony with our grounding bedsheets to securely connect your entire body to the Earth's natural energy. Our Pillowcase specifically targets and grounds your head and neck area. 
+                The Juujo Grounding Pillowcase works in perfect harmony with our grounding bedsheets to securely connect your entire body to the Earth&apos;s natural energy. Our Pillowcase specifically targets and grounds your head and neck area. 
               </p>
               <p>
-                This targeted coverage maximizes your exposure to the Earth's beneficial electrons. When you use both, it feels as though your entire body is embraced by the Earth's calming energy. Our community frequently reports that this helps them:
+                This targeted coverage maximizes your exposure to the Earth&apos;s beneficial electrons. When you use both, it feels as though your entire body is embraced by the Earth&apos;s calming energy. Our community frequently reports that this helps them:
               </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Achieve deeper, more restful sleep</li>
@@ -26,7 +26,7 @@ export function PillowcaseHowDoesItWorkSection() {
                 <li>Enjoy significantly more energy throughout the day</li>
               </ul>
               <p className="pt-2">
-                It's incredibly simple to use. Just place it over your favorite pillow, plug it in, and sleep as you normally would.
+                It&apos;s incredibly simple to use. Just place it over your favorite pillow, plug it in, and sleep as you normally would.
               </p>
             </div>
           </div>
