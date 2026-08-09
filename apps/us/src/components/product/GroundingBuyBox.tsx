@@ -271,11 +271,20 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 setExpandedTier(t.id);
               }}
             >
-              {/* Diagonal ribbon clipped only by the card's top and right walls. */}
-              {t.badge && (
-                <div className="pointer-events-none absolute right-0 top-0 z-20 h-[92px] w-[92px] overflow-hidden">
-                  <div className="absolute right-[-35px] top-[21px] w-[132px] origin-center rotate-45 bg-[var(--clay-deep)] py-1 text-center text-[8px] font-black uppercase tracking-widest text-white shadow-sm">
-                    {t.badge}
+              {/* Badges */}
+              {t.id === "bundle-2" && (
+                <div className="pointer-events-none absolute -right-3 -top-4 z-20 flex items-center justify-center">
+                  <div className="relative flex min-w-[70px] items-center justify-center rounded-[100%] border border-white/20 bg-[var(--night)] px-3 py-1.5 text-center text-[10px] font-bold leading-[1.1] text-white shadow-md sm:text-[11px]">
+                    <div className="absolute left-1 top-1/2 h-1 w-1 -translate-y-1/2 rotate-45 bg-white opacity-60"></div>
+                    <div className="absolute right-1 top-1/2 h-1 w-1 -translate-y-1/2 rotate-45 bg-white opacity-60"></div>
+                    Most<br />Popular
+                  </div>
+                </div>
+              )}
+              {t.id === "bundle-3" && (
+                <div className="pointer-events-none absolute top-0 right-4 z-20 sm:right-6">
+                  <div className="rounded-b-md border border-t-0 border-[var(--night)] bg-[var(--night)] px-4 py-1.5 text-[9px] font-black uppercase tracking-widest text-white shadow-sm sm:text-[10px]">
+                    BEST VALUE
                   </div>
                 </div>
               )}
@@ -287,7 +296,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                   setExpandedTier(t.id);
                 }}
                 aria-pressed={selected}
-                className="p-3 sm:p-4 flex flex-col w-full text-left relative z-10"
+                className={`flex flex-col w-full text-left relative z-10 ${t.id === "bundle-3" ? "p-3 pt-7 sm:p-4 sm:pt-8" : "p-3 sm:p-4"}`}
               >
                 <div className="flex items-start gap-3 w-full">
                   <div className={`mt-[2px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] ${selected ? "border-[var(--night)] bg-[var(--night)]" : "border-[var(--muted)]"}`}>
@@ -327,7 +336,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                       </p>
                     </div>
 
-                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5 ${t.badge ? 'pr-20 sm:pr-24' : ''}`}>
+                    <div className={`flex flex-col items-end text-right shrink-0 pt-0.5`}>
                       <div className="flex items-baseline gap-1.5 mb-1">
                         <span className="font-serif text-[1.25rem] sm:text-[1.4rem] font-semibold text-[var(--ink)] leading-none">
                           {formatMoney(total, product.currency)}
