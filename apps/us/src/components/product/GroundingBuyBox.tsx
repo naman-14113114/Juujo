@@ -98,8 +98,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     [product.colors, product.sizes],
   );
 
-  const [tierId, setTierId] = useState<Tier["id"]>("bundle-3");
-  const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>(null);
+  const [tierId, setTierId] = useState<Tier["id"]>("bundle-2");
+  const [expandedTier, setExpandedTier] = useState<Tier["id"] | null>("bundle-2");
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [eyeMaskColor, setEyeMaskColor] = useState('Green');
   const [pillowcaseColor, setPillowcaseColor] = useState('White');
@@ -209,6 +209,15 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <span className="block">Premium</span>
           <span className="block">Grounding Sheets</span>
         </h1>
+
+        <button
+          type="button"
+          onClick={() => setShowSizeGuide(true)}
+          className="mt-2.5 flex items-center gap-1.5 text-[15px] text-[var(--plum)] hover:opacity-70 transition-opacity"
+        >
+          <Info size={16} strokeWidth={1.5} />
+          <span>Size Guide</span>
+        </button>
 
         <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
           <li className="flex items-start gap-3">
@@ -364,22 +373,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
 
               {/* The expanded selection area for the CHOSEN tier */}
               {expandedTier === t.id && (
-                <div className="bg-[rgba(247,241,232,0.85)] border-t border-[var(--border)] rounded-b-[15px]">
-                  <div className="flex justify-between items-center px-4 sm:px-5 py-3 border-b border-[var(--border)] bg-[rgba(0,0,0,0.02)]">
-                    <div className="font-sans text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
-                      Customize Your Selection
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowSizeGuide(true);
-                      }}
-                      className="text-[11px] font-bold uppercase tracking-wider text-[var(--night)] hover:opacity-70 transition-opacity underline underline-offset-2"
-                    >
-                      Size Guide
-                    </button>
-                  </div>
+                <div className="border-t border-[var(--border)]">
                   <div className="p-3 sm:p-4 flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
                     {Array.from({ length: t.sheets }).map((_, index) => (
                       <SheetRow
