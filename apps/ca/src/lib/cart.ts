@@ -85,8 +85,8 @@ export function buildProductCartLines(
     sizeId: variant.sizeId,
     type: "product",
     title: product.name,
-    subtitle: variantLabel || product.shortDescription,
-    image: product.cartImage,
+      subtitle: variantLabel || product.shortDescription,
+      image: color?.image ?? product.cartImage,
     unitPriceCents: variant.priceCents,
     compareAtCents: variant.compareAtCents,
     quantity: normalizedQuantity,
@@ -248,7 +248,8 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
     if (pillowcaseProduct) {
       const pillowColor = (state?.pillowcaseColor || "white").toLowerCase();
       const pVariant = getVariant(pillowcaseProduct, pillowColor) || getDefaultVariant(pillowcaseProduct);
-      gifts.push({
+        const pColorObj = pillowcaseProduct.colors.find(c => c.id === pVariant.colorId);
+        gifts.push({
         id: "gift-pillowcase",
         productId: pillowcaseProduct.id,
         slug: pillowcaseProduct.slug,
@@ -256,8 +257,8 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
         checkoutProductId: pVariant.productId,
         type: "gift",
         title: pillowcaseProduct.name,
-        subtitle: pillowColor + " / Free gift",
-        image: pillowcaseProduct.cartImage,
+          subtitle: pillowColor + " / Free gift",
+          image: pColorObj?.image ?? pillowcaseProduct.cartImage,
         unitPriceCents: 0,
         compareAtCents: pVariant.priceCents,
         quantity: 1,

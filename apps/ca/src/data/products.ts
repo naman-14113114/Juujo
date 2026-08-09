@@ -1623,8 +1623,8 @@ export const pillows: Product = {
 /* ------------------------------------------------------------------ */
 
 const groundingPillowcaseColors: ProductColor[] = [
-  { id: "white", name: "White", hex: "#f2efe8" },
-  { id: "grey", name: "Grey", hex: "#9b9a95" },
+  { id: "white", name: "White", hex: "#f2efe8", image: "/images/products/grounding-pillowcases/pillowcase-white.png" },
+  { id: "grey", name: "Grey", hex: "#9b9a95", image: "/images/products/grounding-pillowcases/pillowcase-grey.png" },
 ];
 
 const groundingPillowcaseSizes: SizePricing[] = [
