@@ -73,7 +73,13 @@ export function buildProductCartLines(
 
   const color = product.colors.find((entry) => entry.id === variant.colorId);
   const size = product.sizes.find((entry) => entry.id === variant.sizeId);
-  const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
+  let sizeDisplay = size?.name;
+  if (sizeDisplay) {
+    if (product.id === "grounding-sheets") sizeDisplay = `Fitted - ${sizeDisplay}`;
+    else if (product.id === "grounding-flat-sheet") sizeDisplay = `Flat - ${sizeDisplay}`;
+    if (size?.dimensions) sizeDisplay += ` (${size.dimensions})`;
+  }
+  const variantLabel = [color?.name, sizeDisplay].filter(Boolean).join(" / ");
 
   const productLine: CartLine = {
     id: product.id,
@@ -121,7 +127,13 @@ export function buildSheetBundleLines(
 
     const color = product.colors.find((entry) => entry.id === variant.colorId);
     const size = product.sizes.find((entry) => entry.id === variant.sizeId);
-    const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
+    let sizeDisplay = size?.name;
+    if (sizeDisplay) {
+      if (product.id === "grounding-sheets") sizeDisplay = `Fitted - ${sizeDisplay}`;
+      else if (product.id === "grounding-flat-sheet") sizeDisplay = `Flat - ${sizeDisplay}`;
+      if (size?.dimensions) sizeDisplay += ` (${size.dimensions})`;
+    }
+    const variantLabel = [color?.name, sizeDisplay].filter(Boolean).join(" / ");
     const isFree = index >= paidCutoff;
     const discount = selection.discountPerSheetCents || 0;
 
@@ -172,7 +184,13 @@ export function normalizeCartLines(lines: CartLine[]) {
         getDefaultVariant(product);
       const color = product.colors.find((entry) => entry.id === variant.colorId);
       const size = product.sizes.find((entry) => entry.id === variant.sizeId);
-      const variantLabel = [color?.name, size?.name].filter(Boolean).join(" / ");
+      let sizeDisplay = size?.name;
+      if (sizeDisplay) {
+        if (product.id === "grounding-sheets") sizeDisplay = `Fitted - ${sizeDisplay}`;
+        else if (product.id === "grounding-flat-sheet") sizeDisplay = `Flat - ${sizeDisplay}`;
+        if (size?.dimensions) sizeDisplay += ` (${size.dimensions})`;
+      }
+      const variantLabel = [color?.name, sizeDisplay].filter(Boolean).join(" / ");
 
       return [
         {

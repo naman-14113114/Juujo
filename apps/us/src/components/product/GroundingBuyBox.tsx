@@ -659,6 +659,7 @@ function SheetRow({
           onChange={(sizeId) => onChange({ sizeId })}
           sizes={product.sizes}
           isSizeInStock={(sizeId) => isSizeInStock(choice.colorId, sizeId)}
+          productPrefix={product.id === "grounding-sheets" ? "Fitted - " : product.id === "grounding-flat-sheet" ? "Flat - " : ""}
         />
         {soldOut && (
           <span className="font-serif mt-1 block text-[11px] font-medium text-[var(--night)]">
@@ -685,7 +686,7 @@ function ColorSelect({
   const selected = colors.find((c) => c.id === value);
 
   return (
-    <div className="relative flex-[0.8] sm:flex-1">
+    <div className="relative flex-[0.55] sm:flex-[0.6]">
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -770,11 +771,13 @@ function SizeSelect({
   onChange,
   sizes,
   isSizeInStock,
+  productPrefix = "",
 }: {
   value: string;
   onChange: (val: string) => void;
   sizes: Product["sizes"];
   isSizeInStock: (sizeId: string) => boolean;
+  productPrefix?: string;
 }) {
   const [open, setOpen] = useState(false);
   const selected = sizes.find((s) => s.id === value);
@@ -789,7 +792,7 @@ function SizeSelect({
         style={{ borderColor: "var(--border)" }}
       >
         <span className="truncate block">
-          {selected?.name} {selected?.dimensions ? `(${selected.dimensions})` : ""}
+          {productPrefix}{selected?.name} {selected?.dimensions ? `(${selected.dimensions})` : ""}
         </span>
         <span className="pointer-events-none absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]">
           <svg
@@ -832,7 +835,7 @@ function SizeSelect({
                 >
                   <div className="flex w-full items-center justify-between">
                     <span>
-                      {size.name} {size.dimensions ? `(${size.dimensions})` : ""}
+                      {productPrefix}{size.name} {size.dimensions ? `(${size.dimensions})` : ""}
                     </span>
                     {!inStock && (
                       <span className="ml-2 text-[10px] sm:text-[11px] font-medium text-[var(--night)] whitespace-nowrap">
