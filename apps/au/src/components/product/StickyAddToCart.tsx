@@ -111,9 +111,15 @@ export function StickyAddToCart({ product }: { product: Product }) {
           className={`juujo-cart-wipe min-h-11 w-full flex-none px-3 text-[11px] sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm whitespace-nowrap ${!isNavigating ? "" : "disabled:!opacity-100"}`}
           disabled={isNavigating}
           onClick={() => {
-            setIsNavigating(true);
-            addProduct(product);
-            router.push("/cart");
+            const mainBtn = document.getElementById("hero-cta");
+            if (mainBtn) {
+              setIsNavigating(true);
+              mainBtn.click();
+            } else {
+              setIsNavigating(true);
+              addProduct(product);
+              router.push("/cart");
+            }
           }}
         >
           {isNavigating ? (
