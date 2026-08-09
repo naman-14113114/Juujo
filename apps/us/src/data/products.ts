@@ -196,8 +196,8 @@ const groundingSizes: SizePricing[] = [
     id: "single",
     name: "Single",
     dimensions: "27 x 78 in",
-    priceCents: 10900,
-    compareAtCents: 21900,
+    priceCents: 9900,
+    compareAtCents: 19900,
   },
   {
     id: "twin",
