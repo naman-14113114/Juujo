@@ -1832,9 +1832,36 @@ export const groundingPillowcase: Product = {
 };
 
 const premiumSleepMaskColors: ProductColor[] = [
-  { id: "black", name: "Black", hex: "#000000" },
-  { id: "pink", name: "Pink", hex: "#FFC0CB" },
-  { id: "green", name: "Green", hex: "#008000" },
+  {
+    id: "black",
+    name: "Black",
+    hex: "#000000",
+    image: productMediaAsset(
+      "juujo-premium-sleep-mask-black-1.png",
+      "sleep-mask",
+      "images",
+    ),
+  },
+  {
+    id: "pink",
+    name: "Pink",
+    hex: "#FFC0CB",
+    image: productMediaAsset(
+      "juujo-premium-sleep-mask-pink-1.png",
+      "sleep-mask",
+      "images",
+    ),
+  },
+  {
+    id: "green",
+    name: "Green",
+    hex: "#008000",
+    image: productMediaAsset(
+      "juujo-premium-sleep-mask-green-1.png",
+      "sleep-mask",
+      "images",
+    ),
+  },
 ];
 
 const premiumSleepMaskSizes: SizePricing[] = [

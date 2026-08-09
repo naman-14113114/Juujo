@@ -6,11 +6,33 @@ import { ProductGallery } from "./ProductGallery";
 import { ProductBuyBox } from "./ProductBuyBox";
 import { GroundingBuyBox } from "./GroundingBuyBox";
 import { GroundingMatBuyBox } from "./GroundingMatBuyBox";
+import type { ProductImage } from "@/lib/media";
 
-export function ProductHero({ product }: { product: Product }) {
-  const [activeColor, setActiveColor] = useState(product.colors[0]?.id);
+type ProductHeroProps = {
+  product: Product;
+  activeColor?: string;
+  galleryImages?: ProductImage[];
+  onColorChange?: (colorId: string) => void;
+};
+
+export function ProductHero({
+  product,
+  activeColor: controlledColor,
+  galleryImages,
+  onColorChange,
+}: ProductHeroProps) {
+  const [internalColor, setInternalColor] = useState(product.colors[0]?.id);
+  const activeColor = controlledColor ?? internalColor;
+
+  function handleColorChange(colorId: string) {
+    setInternalColor(colorId);
+    onColorChange?.(colorId);
+  }
 
   const displayImages = useMemo(() => {
+    if (galleryImages) {
+      return galleryImages;
+    }
     if (product.category === "premium-sleep-mask") {
        const colorName = product.colors.find((c) => c.id === activeColor)?.name;
        if (!colorName) return product.gallery;
@@ -21,7 +43,7 @@ export function ProductHero({ product }: { product: Product }) {
        );
     }
     return product.gallery;
-  }, [product, activeColor]);
+  }, [product, activeColor, galleryImages]);
 
   return (
     <section
@@ -30,7 +52,12 @@ export function ProductHero({ product }: { product: Product }) {
     >
       <div className="juujo-wrap relative z-10 grid gap-8 [overflow-anchor:none] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.05fr_1fr] xl:gap-16">
         <div className="lg:sticky lg:top-6 lg:self-start">
-          <ProductGallery key={activeColor} images={displayImages} hasGifts={false} />
+          <ProductGallery
+            eager={product.category === "premium-sleep-mask"}
+            hasGifts={false}
+            images={displayImages}
+            key={activeColor}
+          />
         </div>
         <div className="[overflow-anchor:none]">
           {product.category === "grounding-sheets" ? (
@@ -38,7 +65,11 @@ export function ProductHero({ product }: { product: Product }) {
           ) : product.category === "grounding-mat" ? (
             <GroundingMatBuyBox product={product} />
           ) : (
-            <ProductBuyBox product={product} onColorChange={setActiveColor} />
+            <ProductBuyBox
+              colorId={activeColor}
+              onColorChange={handleColorChange}
+              product={product}
+            />
           )}
         </div>
       </div>

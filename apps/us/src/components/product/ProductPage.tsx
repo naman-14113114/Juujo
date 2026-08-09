@@ -11,22 +11,14 @@ import { GroundingFlatSheetHowItWorksSection } from "./GroundingFlatSheetHowItWo
 import { GroundingExpectationsSection } from "./GroundingExpectationsSection";
 import { GroundingScienceSection } from "./GroundingScienceSection";
 import { GroundingComparisonSection } from "./GroundingComparisonSection";
-import { SleepMaskFeaturesSection } from "./SleepMaskFeaturesSection";
-import { SleepMaskBannerImagesSection } from "./SleepMaskBannerImagesSection";
-import { SleepMaskGetBenefitsSection } from "./SleepMaskGetBenefitsSection";
-import { SleepMaskSoGoodSection } from "./SleepMaskSoGoodSection";
-import { SleepMaskNextLevelBeautySection } from "./SleepMaskNextLevelBeautySection";
-import { SleepChoiceSection } from "./SleepChoiceSection";
-import { SleepMaskMarquee } from "./SleepMaskMarquee";
-import { SleepMaskAccordions } from "./SleepMaskAccordions";
 import { GroundingWhatIsItSection } from "./GroundingWhatIsItSection";
 import { GroundingBenefitsVideoSection } from "./GroundingBenefitsVideoSection";
 import { GroundingMatWhatIsItSection } from "./GroundingMatWhatIsItSection";
 import { GroundingMatBenefitsSection } from "./GroundingMatBenefitsSection";
 import { GroundingMatHowToUseSection } from "./GroundingMatHowToUseSection";
 import { GroundingMatTimelineSection } from "./GroundingMatTimelineSection";
-import { CompanionAppPromo } from "./CompanionAppPromo";
 import { VideoReviews } from "./VideoReviews";
+import { SleepMaskExperience } from "./SleepMaskExperience";
 
 /**
  * Category-agnostic Juujo product page. One flexible template for every bedding
@@ -35,6 +27,15 @@ import { VideoReviews } from "./VideoReviews";
  * fully grounding/bedding focused.
  */
 export function ProductPage({ product }: { product: Product }) {
+  if (product.category === "premium-sleep-mask") {
+    return (
+      <SleepMaskExperience
+        product={product}
+        reviews={<ProductReviewsSection productHandle={product.slug} />}
+      />
+    );
+  }
+
   return (
     <>
       <ProductHero product={product} />
@@ -69,22 +70,7 @@ export function ProductPage({ product }: { product: Product }) {
           <GroundingMatWhatIsItSection />
         </>
       )}
-      {product.category === "premium-sleep-mask" && (
-        <>
-          <SleepMaskNextLevelBeautySection />
-          <SleepMaskMarquee />
-          <SleepMaskBannerImagesSection />
-          <SleepMaskGetBenefitsSection />
-          <SleepMaskSoGoodSection />
-          <SleepChoiceSection />
-          <SleepMaskFeaturesSection />
-          <ProductReviewsSection productHandle={product.slug} />
-          <div className="juujo-wrap max-w-3xl mx-auto py-12">
-             <SleepMaskAccordions />
-          </div>
-        </>
-      )}
-      {product.category !== "grounding-sheets" && product.category !== "grounding-mat" && product.category !== "premium-sleep-mask" && (
+      {product.category !== "grounding-sheets" && product.category !== "grounding-mat" && (
         <ProductReviewsSection productHandle="grounding-sheets" />
       )}
       <FAQSection faqs={product.faqs} />

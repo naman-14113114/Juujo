@@ -11,8 +11,20 @@ import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartProvider";
 
-export function StickyAddToCart({ product }: { product: Product }) {
-  const { addProduct } = useCart();
+type StickyAddToCartProps = {
+  product: Product;
+  activeColorId?: string;
+  image?: string;
+  variantId?: string;
+};
+
+export function StickyAddToCart({
+  product,
+  activeColorId,
+  image,
+  variantId,
+}: StickyAddToCartProps) {
+  const { addProduct, addToCartVariant } = useCart();
   const [isNavigating, setIsNavigating] = useState(false);
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -38,9 +50,13 @@ export function StickyAddToCart({ product }: { product: Product }) {
       .catch((err) => console.error("Error loading sticky cart lottie", err));
   }, []);
 
-  const giftLabel = " + free shipping";
-
-  const subtitle = product.category === "premium-sleep-mask" ? "free shipping" : ` ${"·"} free shipping`;
+  const activeColorName = product.colors.find(
+    (color) => color.id === activeColorId,
+  )?.name;
+  const subtitle =
+    product.category === "premium-sleep-mask"
+      ? ` | ${activeColorName ? `${activeColorName} | ` : ""}free shipping`
+      : ` ${"·"} free shipping`;
 
   useEffect(() => {
     document.documentElement.classList.add("juujo-mask-sticky-cta");
@@ -103,9 +119,10 @@ export function StickyAddToCart({ product }: { product: Product }) {
               loading="eager"
               sizes="56px"
               src={
-                product.id === "grounding-sheets"
+                image ??
+                (product.id === "grounding-sheets"
                   ? "/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp"
-                  : product.cartImage
+                  : product.cartImage)
               }
             />
           </div>
@@ -130,7 +147,11 @@ export function StickyAddToCart({ product }: { product: Product }) {
               mainBtn.click();
             } else {
               setIsNavigating(true);
-              addProduct(product);
+              if (variantId) {
+                addToCartVariant(product, 1, variantId);
+              } else {
+                addProduct(product);
+              }
               router.push("/cart");
             }
           }}

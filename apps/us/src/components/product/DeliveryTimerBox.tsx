@@ -25,7 +25,7 @@ function useDeliveryDate(daysFromToday: number) {
   return dateLabel;
 }
 
-export function DeliveryTimerBox() {
+export function DeliveryTimerBox({ compact = false }: { compact?: boolean }) {
   const deliveryDate = useDeliveryDate(3);
   const [deliveryIconData, setDeliveryIconData] = useState<Record<
     string,
@@ -45,21 +45,35 @@ export function DeliveryTimerBox() {
   }, []);
 
   return (
-    <div className="mb-1 flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap">
+    <div
+      className={
+        compact
+          ? "mb-1 grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-x-2 gap-y-1 sm:flex sm:justify-center sm:gap-3 sm:whitespace-nowrap"
+          : "mb-1 flex items-center justify-center gap-2 whitespace-nowrap sm:gap-3"
+      }
+    >
       {deliveryIconData ? (
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center sm:h-12 sm:w-12">
+        <div
+          className={`flex flex-shrink-0 items-center justify-center sm:h-12 sm:w-12 ${compact ? "row-span-2 h-8 w-8" : "h-10 w-10"}`}
+        >
           <Lottie animationData={deliveryIconData} loop={true} />
         </div>
       ) : (
-        <div className="h-10 w-10 flex-shrink-0 sm:h-12 sm:w-12" />
+        <div
+          className={`flex-shrink-0 sm:h-12 sm:w-12 ${compact ? "row-span-2 h-8 w-8" : "h-10 w-10"}`}
+        />
       )}
-      <p className="font-sans m-0 pt-0.5 text-[18px] font-medium leading-none text-black">
+      <p
+        className={`m-0 pt-0.5 font-sans font-medium leading-none text-black ${compact ? "text-base sm:text-[18px]" : "text-[18px]"}`}
+      >
         FREE DELIVERY
       </p>
       <span className="hidden text-[18px] text-black opacity-40 sm:block">
         -
       </span>
-      <p className="font-sans pt-0.5 text-[18px] font-bold leading-none text-black">
+      <p
+        className={`pt-0.5 font-sans font-bold text-black ${compact ? "col-start-2 text-sm leading-tight sm:col-auto sm:text-[18px] sm:leading-none" : "text-[18px] leading-none"}`}
+      >
         {mounted ? `Arrives by ${deliveryDate || "soon"}` : "Loading..."}
       </p>
     </div>

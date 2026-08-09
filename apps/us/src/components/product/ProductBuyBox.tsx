@@ -16,7 +16,14 @@ import {
 import { market } from "@/lib/market";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingMatAccordions } from "./GroundingMatAccordions";
-import { SleepMaskAccordions } from "./SleepMaskAccordions";
+import {
+  Feather,
+  Moon,
+  RotateCcw,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+} from "lucide-react";
 
 function formatMoney(cents: number, currency: string) {
   return new Intl.NumberFormat(market.locale, {
@@ -31,12 +38,33 @@ function formatMoney(cents: number, currency: string) {
  * quantity offer (recommended tier pre-selected) replaces the old free-gift
  * bundle. Add to cart and Buy now both resolve the selected variant.
  */
-export function ProductBuyBox({ product, onColorChange }: { product: Product, onColorChange?: (colorId: string) => void }) {
+export function ProductBuyBox({
+  product,
+  colorId: controlledColorId,
+  onColorChange,
+}: {
+  product: Product;
+  colorId?: string;
+  onColorChange?: (colorId: string) => void;
+}) {
   const { addToCartVariant } = useCart();
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
 
-  const [colorId, setColorId] = useState(product.colors[0]?.id);
+  const [internalColorId, setInternalColorId] = useState(
+    product.colors[0]?.id,
+  );
+  const colorId = controlledColorId ?? internalColorId;
+  const colorOptions = useMemo(() => {
+    if (product.category !== "premium-sleep-mask") {
+      return product.colors;
+    }
+
+    const order = ["green", "pink", "black"];
+    return order
+      .map((id) => product.colors.find((color) => color.id === id))
+      .filter((color): color is Product["colors"][number] => Boolean(color));
+  }, [product]);
   const firstInStockSize =
     product.sizes.find((size) =>
       product.variants.some(
@@ -57,10 +85,11 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
   );
   const tier = product.quantityTiers[tierIndex] ?? product.quantityTiers[0];
 
-  const unitPrice = unitPriceForTier(variant, tier);
   const totalPrice = totalPriceForTier(variant, tier);
   const compareTotal = variant.compareAtCents * tier.quantity;
   const savings = Math.max(compareTotal - totalPrice, 0);
+  const salePercent =
+    compareTotal > 0 ? Math.round((savings / compareTotal) * 100) : 0;
 
   function sizeInStock(id: string) {
     return product.variants.some(
@@ -96,6 +125,46 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
         <p className="juujo-body-copy mt-4 max-w-prose text-[var(--muted)]">
           {product.shortDescription}
         </p>
+        {product.category === "premium-sleep-mask" && (
+          <>
+            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="juujo-display text-3xl font-semibold text-[var(--plum)]">
+                {formatMoney(totalPrice, product.currency)}
+              </span>
+              <span className="text-lg text-[var(--muted)] line-through">
+                {formatMoney(compareTotal, product.currency)}
+              </span>
+              {salePercent > 0 && (
+                <span className="rounded-full bg-[var(--gold)] px-3 py-1 text-xs font-semibold uppercase text-white">
+                  Save {salePercent}%
+                </span>
+              )}
+            </div>
+            <ul className="mt-5 grid gap-3 text-sm text-[var(--ink)] sm:grid-cols-3">
+              <li className="flex items-center gap-2">
+                <Sparkles
+                  aria-hidden="true"
+                  className="h-5 w-5 flex-none text-[var(--gold)]"
+                />
+                <span>22 Momme silk</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Feather
+                  aria-hidden="true"
+                  className="h-5 w-5 flex-none text-[var(--gold)]"
+                />
+                <span>Cloud-soft padding</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Moon
+                  aria-hidden="true"
+                  className="h-5 w-5 flex-none text-[var(--gold)]"
+                />
+                <span>True blackout</span>
+              </li>
+            </ul>
+          </>
+        )}
       </div>
 
       {/* Colour */}
@@ -105,14 +174,14 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
             Colour: {product.colors.find((c) => c.id === colorId)?.name}
           </legend>
           <div className="flex flex-wrap gap-3">
-            {product.colors.map((color) => {
+            {colorOptions.map((color) => {
               const selected = color.id === colorId;
               return (
                 <button
                   key={color.id}
                   type="button"
                   onClick={() => {
-                    setColorId(color.id);
+                    setInternalColorId(color.id);
                     onColorChange?.(color.id);
                   }}
                   aria-pressed={selected}
@@ -144,7 +213,8 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
       )}
 
       {/* Size */}
-      {product.sizes.length > 0 && (
+      {product.sizes.length > 0 &&
+        product.category !== "premium-sleep-mask" && (
         <fieldset className="flex flex-col gap-3">
           <legend className="text-sm font-medium text-[var(--ink)]">
             Size
@@ -262,7 +332,7 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
 
       {/* Live price + actions */}
       <div className="flex flex-col gap-3">
-        <DeliveryTimerBox />
+        <DeliveryTimerBox compact={product.category === "premium-sleep-mask"} />
 
         <Button
           id="hero-cta"
@@ -294,6 +364,32 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
         </Button>
       </div>
 
+      {product.category === "premium-sleep-mask" && (
+        <ul className="grid gap-3 border-y border-[var(--border)] py-4 text-sm text-[var(--muted)] sm:grid-cols-3">
+          <li className="flex items-center gap-2">
+            <ShieldCheck
+              aria-hidden="true"
+              className="h-5 w-5 flex-none text-[var(--gold)]"
+            />
+            <span>120-day money-back guarantee</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Truck
+              aria-hidden="true"
+              className="h-5 w-5 flex-none text-[var(--gold)]"
+            />
+            <span>Free shipping</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <RotateCcw
+              aria-hidden="true"
+              className="h-5 w-5 flex-none text-[var(--gold)]"
+            />
+            <span>Easy returns</span>
+          </li>
+        </ul>
+      )}
+
       {/* Trust row */}
       {product.badges.length > 0 && (
         <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)]">
@@ -309,7 +405,6 @@ export function ProductBuyBox({ product, onColorChange }: { product: Product, on
       )}
 
       {product.category === "grounding-mat" && <GroundingMatAccordions />}
-      {product.category === "premium-sleep-mask" && <SleepMaskAccordions />}
     </div>
   );
 }

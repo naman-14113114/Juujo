@@ -9,9 +9,11 @@ import { market } from "@/lib/market";
 export function ProductGallery({
   images,
   hasGifts = true,
+  eager = false,
 }: {
   images: ProductImage[];
   hasGifts?: boolean;
+  eager?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -68,7 +70,13 @@ export function ProductGallery({
 
   // 3. Auto-rotate effect
   useEffect(() => {
-    if (isLightboxOpen || isPaused) return;
+    if (
+      isLightboxOpen ||
+      isPaused ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
     const interval = setInterval(() => {
       goNext();
@@ -385,7 +393,7 @@ export function ProductGallery({
                     alt={image.alt}
                     decoding="async"
                     fetchPriority="low"
-                    loading="lazy"
+                    loading={eager ? "eager" : "lazy"}
                   />
                 )}
                 <span aria-hidden="true" className="juujoGallery-thumb_zoom">

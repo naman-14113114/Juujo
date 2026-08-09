@@ -1361,7 +1361,12 @@ export function ProductReviewsGrid({
           <SectionHeading
             eyebrow="Product reviews"
             title={
-              productHandle === "grounding-mat" ? (
+              productHandle === "premium-sleep-mask" ? (
+                <>
+                  Juujo Premium Sleep Mask{" "}
+                  <em className="juujo-italic">customer reviews</em>.
+                </>
+              ) : productHandle === "grounding-mat" ? (
                 <>
                   Juujo Grounding Mat <em className="juujo-italic">reviews</em>.
                 </>
@@ -1372,7 +1377,9 @@ export function ProductReviewsGrid({
               )
             }
             copy={
-              productHandle === "grounding-mat"
+              productHandle === "premium-sleep-mask"
+                ? "Real feedback from customers who made the Juujo Premium Sleep Mask part of their nightly routine."
+                : productHandle === "grounding-mat"
                 ? "Real feedback from customers who made the Juujo Grounding Mat part of their daily wellness ritual."
                 : "Real feedback from customers who made Juujo part of their at-home grounding ritual."
             }
@@ -1458,7 +1465,11 @@ export function ProductReviewsGrid({
         {error ? <p className="text-sm text-red-900">{error}</p> : null}
         {hasMore ? (
           <Button
-            aria-label="Load 20 more Juujo grounding reviews"
+            aria-label={`Load 20 more Juujo ${
+              productHandle === "premium-sleep-mask"
+                ? "sleep mask"
+                : "grounding"
+            } reviews`}
             className="min-w-48"
             disabled={isLoading}
             onClick={loadMoreReviews}
