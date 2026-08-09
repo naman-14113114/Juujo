@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
@@ -551,9 +552,9 @@ export function GroundingBuyBox({ product }: { product: Product }) {
       <GroundingAccordions />
       
       {/* Size Guide Modal */}
-      {showSizeGuide && (
+      {showSizeGuide && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onClick={() => setShowSizeGuide(false)}
         >
           <div
@@ -572,7 +573,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               className="max-w-[95vw] md:max-w-5xl max-h-[95vh] object-contain shadow-2xl"
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
