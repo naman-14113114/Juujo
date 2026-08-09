@@ -17,6 +17,19 @@ export function StickyAddToCart({ product }: { product: Product }) {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [cartIconData, setCartIconData] = useState<Record<string, unknown> | null>(null);
+  const [dynamicCtaText, setDynamicCtaText] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleCtaUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setDynamicCtaText(customEvent.detail);
+      }
+    };
+    window.addEventListener("update-sticky-cta", handleCtaUpdate);
+    window.dispatchEvent(new CustomEvent("request-sticky-cta-update"));
+    return () => window.removeEventListener("update-sticky-cta", handleCtaUpdate);
+  }, []);
 
   useEffect(() => {
     fetch("/media/products/grounding-sheets/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
@@ -126,7 +139,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
             <>
               <span style={{ visibility: "hidden" }} className="relative z-20 flex items-center gap-2">
                 <ShoppingBag size={17} />
-                <span>{product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}</span>
+                <span>{dynamicCtaText || (product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts")}</span>
               </span>
               <span className="absolute inset-0 z-20 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop className="h-10 w-16 scale-[1.35]" />
@@ -141,7 +154,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span>{product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}</span>
+              <span>{dynamicCtaText || (product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts")}</span>
             </>
           )}
         </Button>

@@ -104,6 +104,18 @@ export function GroundingBuyBox({ product }: { product: Product }) {
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [eyeMaskColor, setEyeMaskColor] = useState('Green');
   const [pillowcaseColor, setPillowcaseColor] = useState('White');
+
+  const unlockedGiftsCount = tierId === "single" ? 1 : tierId === "bundle-2" ? 2 : 3;
+  const giftText = `Add To Cart + ${unlockedGiftsCount} Free gift${unlockedGiftsCount > 1 ? 's' : ''}`;
+
+  useEffect(() => {
+    const fireUpdate = () => {
+      window.dispatchEvent(new CustomEvent("update-sticky-cta", { detail: giftText }));
+    };
+    fireUpdate();
+    window.addEventListener("request-sticky-cta-update", fireUpdate);
+    return () => window.removeEventListener("request-sticky-cta-update", fireUpdate);
+  }, [giftText]);
   const [choices, setChoices] = useState<Record<string, SheetChoice[]>>(() => {
     const init: Record<string, SheetChoice[]> = {};
     for (const t of TIERS) {
@@ -394,7 +406,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               style={{ visibility: "hidden" }}
               className="relative z-20 whitespace-nowrap"
             >
-              Add To Cart + 3 Free gifts
+              {giftText}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie
@@ -408,7 +420,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           <span className="relative z-20 whitespace-nowrap">
             {outOfStock
               ? "SELECTED SIZE OUT OF STOCK"
-              : "Add To Cart + 3 Free gifts"}
+              : giftText}
           </span>
         )}
       </Button>
