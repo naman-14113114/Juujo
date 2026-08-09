@@ -216,10 +216,10 @@ export function GroundingBuyBox({ product }: { product: Product }) {
           className="mt-2.5 flex items-center gap-1.5 text-[15px] text-[var(--plum)] hover:opacity-70 transition-opacity"
         >
           <Info size={16} strokeWidth={1.5} />
-          <span>Size Guide</span>
+          <span className="underline underline-offset-4 decoration-1">Size Guide</span>
         </button>
 
-        <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-serif text-[16px] lg:text-[18px] text-[var(--plum)]">
+        <ul className="mt-5 lg:mt-6 space-y-3 lg:space-y-4 font-sans text-[16px] lg:text-[18px] text-[var(--plum)]">
           <li className="flex items-start gap-3">
             <Moon className="text-[#219937] shrink-0 mt-0.5" strokeWidth={1.5} size={22} />
             <span className="leading-snug">
