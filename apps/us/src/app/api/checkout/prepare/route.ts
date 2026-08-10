@@ -10,6 +10,7 @@ type CheckoutItem = {
   productId: string | number;
   variantId: string | number;
   quantity?: number;
+  giftId?: string;
 };
 
 type CheckoutPrepareBody = {
@@ -29,6 +30,32 @@ const passthroughAttributionKeys = [
   "gclid",
   "fbclid",
 ];
+
+const freeGiftDiscounts = {
+  "gift-mat": {
+    productId: "1000000669152669",
+    code: "FREE_MAT",
+  },
+  "gift-eyemask": {
+    productId: "1000000673049614",
+    code: "FREE_SLEEPING_MASK",
+  },
+  "gift-pillowcase": {
+    productId: "1000000673049613",
+    code: "FREE_PILLOWCASE",
+  },
+} as const;
+
+function getFreeGiftDiscountCodes(items: CheckoutItem[]) {
+  const codes = items.flatMap((item) => {
+    const giftId = item.giftId as keyof typeof freeGiftDiscounts | undefined;
+    const rule = giftId ? freeGiftDiscounts[giftId] : undefined;
+
+    return rule && String(item.productId) === rule.productId ? [rule.code] : [];
+  });
+
+  return [...new Set(codes)];
+}
 
 function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
   const params: Record<string, string> = {};
@@ -155,6 +182,35 @@ async function createPlusbaseCheckout(items: CheckoutItem[]) {
   };
 }
 
+async function applyDiscountCodes(checkoutToken: string, codes: string[]) {
+  for (const code of codes) {
+    const response = await fetch(
+      `https://www.juujo.com/api/checkout/${encodeURIComponent(
+        checkoutToken,
+      )}/next/apply-coupon.json`,
+      {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "x-lang": "en-us",
+          "x-shopbase-checkout-token": checkoutToken,
+          "x-source-page": "checkout",
+        },
+        body: JSON.stringify({
+          code,
+          is_coupon_from_share_able_link: true,
+        }),
+      },
+    );
+    const json = await response.json().catch(() => null);
+
+    if (!response.ok || json?.code !== 200 || json?.result !== true) {
+      throw new Error(`Could not apply PlusBase discount code ${code}.`);
+    }
+  }
+}
+
 export async function POST(request: NextRequest) {
   const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
@@ -163,10 +219,15 @@ export async function POST(request: NextRequest) {
   const items = (Array.isArray(body.items) ? body.items : []).filter(
     (item) => Number(item.productId) && Number(item.variantId),
   );
+  const freeGiftDiscountCodes = getFreeGiftDiscountCodes(items);
 
   if (items.length > 0) {
     try {
       const checkout = await createPlusbaseCheckout(items);
+      await applyDiscountCodes(
+        checkout.checkoutToken,
+        freeGiftDiscountCodes,
+      );
 
       return NextResponse.json({
         checkoutToken: checkout.checkoutToken,

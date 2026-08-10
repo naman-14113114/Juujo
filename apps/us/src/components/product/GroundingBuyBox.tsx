@@ -51,7 +51,7 @@ const TIERS: Tier[] = [
     id: "bundle-3",
     label: "Buy 3",
     sheets: 3,
-    discountTotalCents: 6000,
+    discountTotalCents: 4000,
     badge: "Most Popular",
   },
 ];
@@ -194,7 +194,6 @@ export function GroundingBuyBox({ product }: { product: Product }) {
     const selections = activeChoices.map((choice) => ({
       product,
       variantId: getVariant(product, choice.colorId, choice.sizeId).variantId,
-      discountPerSheetCents: tier.sheets > 1 ? Math.round(tier.discountTotalCents / tier.sheets) : 0,
     }));
     setGiftColors(pillowcaseColor, eyeMaskColor);
     setSheetBundle(selections, 0); // No free sheets in this bundle model

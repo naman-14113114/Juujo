@@ -67,9 +67,8 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       window.removeEventListener("pageshow", handlePageShow);
     };
   }, []);
-  // Every purchasable unit that goes to the PlusBase cart: paid sheets, the
-  // free sheet, and the free mat gift, each with its real store ids. Free items
-  // are still sent (discounts are configured on PlusBase).
+  // Every paid product and derived free gift goes to PlusBase with its real
+  // store ids. The gift id lets the server apply only its allowlisted code.
   const checkoutItems = getDisplayLines(lines, {
     pillowcaseColor,
     eyeMaskColor,
@@ -79,6 +78,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       productId: line.checkoutProductId as string,
       variantId: line.variantId as string,
       quantity: line.quantity,
+      giftId: line.type === "gift" ? line.id : undefined,
     }));
   const totalUnits =
     checkoutItems.reduce((sum, item) => sum + item.quantity, 0) ||

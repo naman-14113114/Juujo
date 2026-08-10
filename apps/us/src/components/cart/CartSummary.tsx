@@ -18,8 +18,6 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
   const [detailsOpen, setDetailsOpen] = useState(false);
   const hasItems = totals.itemCount > 0;
 
-  // Savings = bundle discount (free sheet) + the value of the free mat gift.
-  const giftValueCents = totals.giftValueCents;
   const totalSavingsCents = totals.savingsCents;
 
   return (
@@ -69,14 +67,25 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                     </div>
                   ))
                 ) : null}
-                {totalSavingsCents - giftValueCents > 0 ? (
+                {totals.productSavingsCents > 0 ? (
+                  <div className="flex justify-between gap-4">
+                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--muted)]"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                      PRODUCT SAVINGS
+                    </span>
+                    <span className="font-semibold text-[var(--muted)]">
+                      -{formatMoney(totals.productSavingsCents)}
+                    </span>
+                  </div>
+                ) : null}
+                {totals.bundleDiscountCents > 0 ? (
                   <div className="flex justify-between gap-4">
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--muted)]"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
                       BUNDLE DISCOUNT
                     </span>
                     <span className="font-semibold text-[var(--muted)]">
-                      -{formatMoney(totalSavingsCents - giftValueCents)}
+                      -{formatMoney(totals.bundleDiscountCents)}
                     </span>
                   </div>
                 ) : null}

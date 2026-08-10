@@ -115,7 +115,6 @@ export function buildProductCartLines(
 export type BundleSelection = {
   product: Product;
   variantId?: string;
-  discountPerSheetCents?: number;
 };
 
 export function buildSheetBundleLines(
@@ -140,7 +139,6 @@ export function buildSheetBundleLines(
     }
     const variantLabel = [color?.name, sizeDisplay].filter(Boolean).join(" / ");
     const isFree = index >= paidCutoff;
-    const discount = selection.discountPerSheetCents || 0;
 
     return {
       id: `bundle-${index + 1}-${variant.variantId || "default"}`,
@@ -154,7 +152,7 @@ export function buildSheetBundleLines(
       title: product.name,
       subtitle: variantLabel || product.shortDescription,
       image: color?.image ?? product.cartImage,
-      unitPriceCents: isFree ? 0 : Math.max(0, variant.priceCents - discount),
+      unitPriceCents: isFree ? 0 : variant.priceCents,
       compareAtCents: variant.compareAtCents,
       quantity: 1,
       bundle: true,
@@ -207,7 +205,7 @@ export function normalizeCartLines(lines: CartLine[]) {
           title: product.name,
           subtitle: variantLabel || product.shortDescription,
           image: color?.image ?? product.cartImage,
-          unitPriceCents: line.free ? 0 : line.unitPriceCents,
+          unitPriceCents: line.free ? 0 : variant.priceCents,
           compareAtCents: variant.compareAtCents,
           quantity: 1,
         } satisfies CartLine,
@@ -338,7 +336,7 @@ export function calculateCartTotals(
   const giftLines = deriveGiftLines(lines, state);
   const displayLines = [...productLines, ...giftLines];
 
-  const subtotalCents = displayLines.reduce(
+  const subtotalCents = productLines.reduce(
     (total, line) => total + line.unitPriceCents * line.quantity,
     0,
   );
@@ -347,18 +345,39 @@ export function calculateCartTotals(
       total + (line.compareAtCents ?? line.unitPriceCents) * line.quantity,
     0,
   );
-  const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
-
-  const giftValueCents = giftLines.reduce((total, line) => total + (line.compareAtCents ?? 0) * line.quantity, 0);
+  const productSavingsCents = productLines.reduce(
+    (total, line) =>
+      total +
+      Math.max((line.compareAtCents ?? line.unitPriceCents) - line.unitPriceCents, 0) *
+        line.quantity,
+    0,
+  );
+  const giftValueCents = giftLines.reduce(
+    (total, line) => total + (line.compareAtCents ?? 0) * line.quantity,
+    0,
+  );
+  const groundingSheetCount = productLines.reduce((total, line) => {
+    const product = findProductForLine(line);
+    return product?.category === "grounding-sheets" && !line.free
+      ? total + line.quantity
+      : total;
+  }, 0);
+  const bundleDiscountCents =
+    groundingSheetCount >= 3 ? 4000 : groundingSheetCount >= 2 ? 2000 : 0;
+  const totalCents = Math.max(subtotalCents - bundleDiscountCents, 0);
+  const savingsCents =
+    productSavingsCents + giftValueCents + bundleDiscountCents;
 
   return {
     itemCount: displayLines.reduce((total, line) => total + line.quantity, 0),
     subtotalCents,
     compareAtCents,
+    productSavingsCents,
+    bundleDiscountCents,
     giftValueCents,
     savingsCents,
     shippingCents: 0,
-    totalCents: subtotalCents,
+    totalCents,
     giftLines,
   };
 }
