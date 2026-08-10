@@ -6,10 +6,11 @@ export type SleepMaskMediaSet = {
   gallery: ProductImage[];
   nextLevel: ProductImage;
   transform: ProductImage;
+  soGoodHero: ProductImage;
   blackout: ProductImage;
   wraparound: ProductImage;
   comfort: ProductImage;
-  comparison: ProductImage;
+  swatch: ProductImage;
 };
 
 const imagePath = (fileName: string) =>
@@ -36,19 +37,23 @@ export const sleepMaskMedia: Record<SleepMaskColor, SleepMaskMediaSet> = {
       "juujo-premium-sleep-mask-green-9.png",
       "Woman wearing the Green Premium Sleep Mask in bed",
     ),
-    blackout: image(
+    soGoodHero: image(
       "juujo-premium-sleep-mask-green-7.png",
+      "Woman enjoying the Green Premium Sleep Mask in soft sunlight",
+    ),
+    blackout: image(
+      "juujo-premium-sleep-mask-green-5.png",
       "Green Premium Sleep Mask blocking bright light",
     ),
     wraparound: image(
-      "juujo-premium-sleep-mask-green-8.png",
-      "Close view of the Green Premium Sleep Mask wraparound design",
+      "juujo-premium-sleep-mask-green-1.png",
+      "Wide wraparound shape of the Green Premium Sleep Mask",
     ),
     comfort: image(
-      "juujo-premium-sleep-mask-green-6.png",
-      "Couple sleeping comfortably in Green Premium Sleep Masks",
+      "juujo-premium-sleep-mask-green-8.png",
+      "Woman sleeping comfortably in the Green Premium Sleep Mask",
     ),
-    comparison: image(
+    swatch: image(
       "juujo-premium-sleep-mask-banner-3.png",
       "Green Juujo Premium Sleep Mask",
     ),
@@ -61,15 +66,19 @@ export const sleepMaskMedia: Record<SleepMaskColor, SleepMaskMediaSet> = {
       ),
     ),
     nextLevel: image(
-      "juujo-premium-sleep-mask-pink-3.png",
-      "Woman resting in the Pink Premium Sleep Mask on silk bedding",
+      "juujo-premium-sleep-mask-pink-5.png",
+      "Woman adjusting the Pink Premium Sleep Mask",
     ),
     transform: image(
-      "juujo-premium-sleep-mask-pink-9.png",
+      "juujo-premium-sleep-mask-pink-8.png",
       "Woman wearing the Pink Premium Sleep Mask in bed",
     ),
+    soGoodHero: image(
+      "juujo-premium-sleep-mask-pink-9.png",
+      "Woman enjoying the Pink Premium Sleep Mask during a calm evening",
+    ),
     blackout: image(
-      "juujo-premium-sleep-mask-pink-8.png",
+      "juujo-premium-sleep-mask-pink-5.png",
       "Pink Premium Sleep Mask creating a dark sleep environment",
     ),
     wraparound: image(
@@ -77,10 +86,10 @@ export const sleepMaskMedia: Record<SleepMaskColor, SleepMaskMediaSet> = {
       "Wide wraparound shape of the Pink Premium Sleep Mask",
     ),
     comfort: image(
-      "juujo-premium-sleep-mask-pink-7.png",
-      "Woman settling the Pink Premium Sleep Mask comfortably",
+      "juujo-premium-sleep-mask-pink-1.png",
+      "Woman resting comfortably in the Pink Premium Sleep Mask",
     ),
-    comparison: image(
+    swatch: image(
       "juujo-premium-sleep-mask-pink-4.png",
       "Pink Juujo Premium Sleep Mask",
     ),
@@ -100,19 +109,23 @@ export const sleepMaskMedia: Record<SleepMaskColor, SleepMaskMediaSet> = {
       "juujo-premium-sleep-mask-black-banner-2.png",
       "Woman wearing the Black Premium Sleep Mask in bed",
     ),
-    blackout: image(
+    soGoodHero: image(
       "juujo-premium-sleep-mask-black-banner-1.png",
+      "Woman enjoying the Black Premium Sleep Mask in a calm bedroom",
+    ),
+    blackout: image(
+      "juujo-premium-sleep-mask-black-1.png",
       "Black Premium Sleep Mask creating total darkness",
     ),
     wraparound: image(
-      "juujo-premium-sleep-mask-black-4.png",
+      "juujo-premium-sleep-mask-black-3.png",
       "Wide wraparound shape of the Black Premium Sleep Mask",
     ),
     comfort: image(
-      "juujo-premium-sleep-mask-black-7.png",
+      "juujo-premium-sleep-mask-black-4.png",
       "Woman sleeping comfortably in the Black Premium Sleep Mask",
     ),
-    comparison: image(
+    swatch: image(
       "juujo-premium-sleep-mask-banner-7.png",
       "Black Juujo Premium Sleep Mask",
     ),
@@ -121,22 +134,34 @@ export const sleepMaskMedia: Record<SleepMaskColor, SleepMaskMediaSet> = {
 
 export const sleepMaskSharedMedia = {
   skinIcon: image(
-    "juujo-premium-sleep-mask-banner-4.png",
+    "juujo-premium-sleep-mask-banner-5.png",
     "Silk skin care benefit",
   ),
   hairIcon: image(
-    "juujo-premium-sleep-mask-banner-5.png",
+    "juujo-premium-sleep-mask-banner-6.png",
     "Silk hair care benefit",
   ),
   wellnessIcon: image(
-    "juujo-premium-sleep-mask-banner-6.png",
+    "juujo-premium-sleep-mask-banner-4.png",
     "Rest and wellness benefit",
+  ),
+  juujoComparison: image(
+    "juujo-premium-sleep-mask-banner-7.png",
+    "Black Juujo Premium Sleep Mask",
   ),
   alternative: image(
     "juujo-premium-sleep-mask-comparison.png",
     "Typical thin sleep mask alternative",
   ),
 };
+
+export const sleepMaskPressMedia = [
+  image("juujo-press-logo-elle.png", "Elle"),
+  image("juujo-press-logo-glamour.png", "Glamour"),
+  image("juujo-press-logo-woman-and-home.png", "Woman and Home"),
+  image("juujo-press-logo-gq.png", "GQ"),
+  image("juujo-press-logo-marie-claire.png", "Marie Claire"),
+];
 
 export function isSleepMaskColor(value?: string): value is SleepMaskColor {
   return value === "green" || value === "pink" || value === "black";
@@ -151,10 +176,11 @@ export function getSleepMaskPreloadOrder(initialColor: SleepMaskColor) {
     return [
       media.nextLevel,
       media.transform,
+      media.soGoodHero,
       media.blackout,
       media.wraparound,
       media.comfort,
-      media.comparison,
+      media.swatch,
     ];
   };
 
@@ -164,6 +190,7 @@ export function getSleepMaskPreloadOrder(initialColor: SleepMaskColor) {
     ...lowerImages(initialColor),
     ...otherColors.flatMap(lowerImages),
     ...Object.values(sleepMaskSharedMedia),
+    ...sleepMaskPressMedia,
   ];
 
   return ordered.filter(

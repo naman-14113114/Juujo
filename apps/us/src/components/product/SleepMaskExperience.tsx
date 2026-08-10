@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element -- Direct URLs let the initial preloader warm the exact assets used during color swaps. */
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Check, Quote, X } from "lucide-react";
 import type { Product } from "@/data/products";
 import {
@@ -10,23 +10,14 @@ import {
   isSleepMaskColor,
   sleepMaskHeroImageCount,
   sleepMaskMedia,
+  sleepMaskPressMedia,
   sleepMaskSharedMedia,
   type SleepMaskColor,
 } from "@/data/sleepMaskMedia";
 import { ProductHero } from "./ProductHero";
-import { SleepMaskAccordions } from "./SleepMaskAccordions";
 import { StickyAddToCart } from "./StickyAddToCart";
 
 const INITIAL_COLOR: SleepMaskColor = "green";
-
-const introBenefits = [
-  "100% true blackout coverage",
-  "22 Momme mulberry silk",
-  "Cloud-soft wraparound padding",
-  "Fully adjustable fit",
-  "No pressure on eyelids or lashes",
-  "Helps protect skin and hair",
-];
 
 const juujoAdvantages = [
   "Stays on all night",
@@ -98,48 +89,6 @@ function SleepMaskMediaPreloader() {
   );
 }
 
-function ProductIntroduction() {
-  return (
-    <section className="border-y border-[var(--border)] bg-[var(--cream)] py-12 md:py-20">
-      <div className="juujo-wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <div>
-          <p className="juujo-eyebrow">The Juujo difference</p>
-          <h2 className="juujo-display mt-3 text-[2.25rem] leading-[1.08] text-[var(--plum)] md:text-5xl">
-            Your nightly ritual, wrapped in silk.
-          </h2>
-          <p className="juujo-body-copy mt-6 max-w-xl text-[var(--muted)]">
-            The Juujo Premium Sleep Mask combines generous cloud padding with a
-            wide silk profile that wraps gently around the face. It shuts out
-            distracting light while helping reduce friction against delicate
-            skin and hair.
-          </p>
-        </div>
-
-        <div>
-          <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
-            {introBenefits.map((benefit) => (
-              <li
-                className="juujo-body-copy flex items-start gap-3 text-[var(--ink)]"
-                key={benefit}
-              >
-                <Check
-                  aria-hidden="true"
-                  className="mt-1 h-5 w-5 flex-none text-[var(--gold)]"
-                  strokeWidth={2}
-                />
-                <span>{benefit}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8">
-            <SleepMaskAccordions />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function NextLevelSection({ color }: { color: SleepMaskColor }) {
   const media = sleepMaskMedia[color];
 
@@ -172,27 +121,107 @@ function NextLevelSection({ color }: { color: SleepMaskColor }) {
   );
 }
 
+const pressQuotes = [
+  {
+    quote: "This silk mask is exactly what the doctor ordered.",
+    author: "Vanessa Powell",
+    logo: sleepMaskPressMedia[0],
+  },
+  {
+    quote: "The new must-have in the beauty industry.",
+    author: "Hannah Lynn Tan",
+    logo: sleepMaskPressMedia[1],
+  },
+  {
+    quote: "The Rolls Royce of the eye mask world.",
+    author: "Jayne Cherrington",
+    logo: sleepMaskPressMedia[2],
+  },
+  {
+    quote: "You will be in the land of nod in no time.",
+    author: "Zak Maoui",
+    logo: sleepMaskPressMedia[3],
+  },
+  {
+    quote: "Loved by celebrities and beauty editors alike.",
+    author: "Grace Lindsay",
+    logo: sleepMaskPressMedia[4],
+  },
+];
+
 function EditorialQuote() {
+  const [activeQuote, setActiveQuote] = useState(0);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    if (reducedMotion.matches) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveQuote((current) => (current + 1) % pressQuotes.length);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
-    <section className="border-y border-[var(--border)] bg-[var(--cream)] py-12 text-center md:py-20">
-      <div className="juujo-wrap max-w-5xl">
+    <section className="border-y border-[var(--border)] bg-[var(--cream)] py-12 text-center md:py-16">
+      <div className="juujo-wrap max-w-4xl">
         <Quote
           aria-hidden="true"
-          className="mx-auto h-8 w-8 text-[var(--gold)]"
+          className="mx-auto h-7 w-7 text-[var(--gold)]"
           strokeWidth={1.5}
         />
-        <blockquote className="juujo-display mx-auto mt-6 max-w-4xl text-[1.8rem] leading-[1.25] text-[var(--plum)] md:text-[2.5rem]">
-          A cloud-soft silk mask that turns any bedroom, flight, or afternoon
-          nap into a darker, calmer place to rest.
-        </blockquote>
+        <div className="relative mx-auto mt-5 min-h-[108px] max-w-3xl sm:min-h-[96px]">
+          {pressQuotes.map((pressQuote, index) => (
+            <blockquote
+              aria-hidden={index !== activeQuote}
+              className={`absolute inset-0 flex flex-col items-center justify-start transition-opacity duration-300 ${
+                index === activeQuote ? "opacity-100" : "opacity-0"
+              }`}
+              key={pressQuote.quote}
+            >
+              <p className="juujo-display text-xl leading-[1.35] text-[var(--plum)] sm:text-2xl">
+                &ldquo;{pressQuote.quote}&rdquo;
+              </p>
+              <cite className="mt-3 text-xs font-semibold uppercase not-italic tracking-[0.12em] text-[var(--muted)]">
+                {pressQuote.author}
+              </cite>
+            </blockquote>
+          ))}
+        </div>
         <div
           aria-label="Editorial features"
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 text-[var(--muted)]"
+          className="mt-7 grid grid-cols-3 items-center justify-center gap-x-4 gap-y-4 sm:grid-cols-5 sm:gap-x-7"
         >
-          <span className="juujo-display text-2xl">Forbes</span>
-          <span className="text-xl font-semibold tracking-[0.12em]">VOGUE</span>
-          <span className="juujo-display text-2xl font-semibold">GQ</span>
-          <span className="text-lg font-semibold tracking-[0.12em]">GLAMOUR</span>
+          {pressQuotes.map((pressQuote, index) => (
+            <button
+              aria-label={`Show ${pressQuote.logo.alt} quote`}
+              aria-pressed={index === activeQuote}
+              className={`mx-auto flex h-11 w-full max-w-[132px] items-center justify-center border-b-2 px-1 transition-opacity duration-200 active:scale-[0.97] ${
+                index === activeQuote
+                  ? "border-[var(--gold)] opacity-100"
+                  : "border-transparent opacity-45 hover:opacity-75"
+              }`}
+              key={pressQuote.logo.src}
+              onClick={() => setActiveQuote(index)}
+              type="button"
+            >
+              <img
+                alt={pressQuote.logo.alt}
+                className="max-h-8 w-auto max-w-full object-contain"
+                decoding="async"
+                fetchPriority="low"
+                height={80}
+                loading="eager"
+                src={pressQuote.logo.src}
+                width={240}
+              />
+            </button>
+          ))}
         </div>
       </div>
     </section>
@@ -211,14 +240,39 @@ function TransformSection({ color }: { color: SleepMaskColor }) {
         src={media.transform.src}
       />
       <div className="absolute inset-0 bg-black/35" />
-      <div className="juujo-wrap relative flex min-h-[520px] items-end pb-14 pt-24 md:min-h-[680px] md:pb-20">
-        <div className="max-w-3xl text-[var(--cream)]">
-          <p className="juujo-mono text-sm uppercase text-[var(--cream)]">
-            Darkness, wherever you need it
-          </p>
-          <h2 className="juujo-display mt-4 text-[2.5rem] leading-[1.05] md:text-6xl">
-            Transform your life through better sleep.
+      <div className="juujo-wrap relative flex min-h-[520px] items-end justify-center pb-14 pt-24 text-center md:min-h-[680px] md:pb-20">
+        <div className="max-w-4xl text-[var(--cream)]">
+          <h2 className="juujo-display text-[2.5rem] leading-[1.05] md:text-6xl">
+            Transform your life with Juujo silk.
           </h2>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SoGoodHero({ color }: { color: SleepMaskColor }) {
+  const media = sleepMaskMedia[color];
+
+  return (
+    <section className="relative min-h-[500px] overflow-hidden md:min-h-[650px]">
+      <VariantImage
+        alt={media.soGoodHero.alt}
+        className="absolute inset-0 !h-full !w-full object-cover"
+        color={color}
+        src={media.soGoodHero.src}
+      />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="juujo-wrap relative flex min-h-[500px] items-end justify-center pb-14 pt-24 text-center md:min-h-[650px] md:pb-20">
+        <div className="max-w-4xl text-[var(--cream)]">
+          <h2 className="juujo-display text-[2.4rem] leading-[1.08] md:text-5xl">
+            So good, you will never want to take it off.
+          </h2>
+          <p className="juujo-body-copy mx-auto mt-5 max-w-3xl text-[rgba(247,241,232,.86)]">
+            Unlike an average sleep mask, double lining and cloud-soft padding
+            block even the tiniest ray of light for a softer retreat from the
+            world.
+          </p>
         </div>
       </div>
     </section>
@@ -230,16 +284,19 @@ function BenefitsSection() {
     {
       title: "Skin",
       image: sleepMaskSharedMedia.skinIcon,
+      iconMaskSize: "70%",
       body: "Smooth silk helps reduce friction, pulling, and morning creases around the delicate eye area.",
     },
     {
       title: "Hair",
       image: sleepMaskSharedMedia.hairIcon,
+      iconMaskSize: "100%",
       body: "The soft wraparound surface is gentle on hair and helps avoid the snagging of narrow elastic straps.",
     },
     {
       title: "Wellness",
       image: sleepMaskSharedMedia.wellnessIcon,
+      iconMaskSize: "100%",
       body: "A darker sleep environment supports an easier wind-down at home, while travelling, or during daytime rest.",
     },
   ];
@@ -256,15 +313,20 @@ function BenefitsSection() {
         <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-16">
           {benefits.map((benefit) => (
             <article className="text-center" key={benefit.title}>
-              <img
-                alt={benefit.image.alt}
-                className="mx-auto h-24 w-24 object-contain"
-                decoding="async"
-                fetchPriority="low"
-                height={1024}
-                loading="eager"
-                src={benefit.image.src}
-                width={1024}
+              <span
+                aria-label={benefit.image.alt}
+                className="mx-auto block h-20 w-20 bg-[#219937]"
+                role="img"
+                style={{
+                  WebkitMaskImage: `url(${benefit.image.src})`,
+                  WebkitMaskPosition: "center",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskSize: benefit.iconMaskSize,
+                  maskImage: `url(${benefit.image.src})`,
+                  maskPosition: "center",
+                  maskRepeat: "no-repeat",
+                  maskSize: benefit.iconMaskSize,
+                }}
               />
               <h3 className="juujo-display mt-6 text-3xl text-[var(--plum)]">
                 {benefit.title}
@@ -303,19 +365,7 @@ function SoGoodSection({ color }: { color: SleepMaskColor }) {
   return (
     <section className="bg-[var(--night)] py-14 text-[var(--cream)] md:py-24">
       <div className="juujo-wrap">
-        <div className="max-w-4xl">
-          <p className="juujo-mono text-sm uppercase text-[var(--gold)]">
-            Made for lights out
-          </p>
-          <h2 className="juujo-display mt-4 text-[2.4rem] leading-[1.08] md:text-5xl">
-            So good, you will never want to take it off.
-          </h2>
-          <p className="juujo-body-copy mt-5 max-w-2xl text-[rgba(247,241,232,.78)]">
-            Every detail is designed to feel softer, stay in place longer, and
-            create the kind of darkness that makes switching off feel easy.
-          </p>
-        </div>
-        <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-6 lg:mt-16">
+        <div className="grid gap-10 md:grid-cols-3 md:gap-6">
           {features.map((feature) => (
             <article key={feature.title}>
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-[var(--night-soft)]">
@@ -341,8 +391,6 @@ function SoGoodSection({ color }: { color: SleepMaskColor }) {
 }
 
 function SleepChoiceSection({ color }: { color: SleepMaskColor }) {
-  const media = sleepMaskMedia[color];
-
   return (
     <section className="bg-[var(--sand)] py-14 md:py-24">
       <div className="juujo-wrap">
@@ -356,10 +404,10 @@ function SleepChoiceSection({ color }: { color: SleepMaskColor }) {
           <div className="border-t border-[var(--border)] p-8 lg:border-l lg:border-t-0">
             <div className="flex h-32 items-center justify-center">
               <VariantImage
-                alt={media.comparison.alt}
+                alt={sleepMaskSharedMedia.juujoComparison.alt}
                 className="max-h-28 w-auto max-w-full object-contain"
                 color={color}
-                src={media.comparison.src}
+                src={sleepMaskSharedMedia.juujoComparison.src}
               />
             </div>
             <h3 className="juujo-display mt-3 text-3xl text-[var(--plum)]">
@@ -444,11 +492,11 @@ export function SleepMaskExperience({
         }}
         product={product}
       />
-      <ProductIntroduction />
       <NextLevelSection color={activeColor} />
       <EditorialQuote />
       <TransformSection color={activeColor} />
       <BenefitsSection />
+      <SoGoodHero color={activeColor} />
       <SoGoodSection color={activeColor} />
       <SleepChoiceSection color={activeColor} />
       {reviews}

@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Sleep-mask swatches reuse the exact preloaded product source URLs. */
+
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
@@ -16,6 +18,11 @@ import {
 import { market } from "@/lib/market";
 import { DeliveryTimerBox } from "./DeliveryTimerBox";
 import { GroundingMatAccordions } from "./GroundingMatAccordions";
+import { SleepMaskAccordions } from "./SleepMaskAccordions";
+import {
+  isSleepMaskColor,
+  sleepMaskMedia,
+} from "@/data/sleepMaskMedia";
 import {
   Feather,
   Moon,
@@ -109,61 +116,94 @@ export function ProductBuyBox({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="juujo-eyebrow">{product.categoryLabel}</p>
+        {product.category === "premium-sleep-mask" ? (
+          <a
+            className="flex w-fit items-center gap-2 no-underline hover:no-underline"
+            href="#reviews"
+          >
+            <span
+              aria-hidden="true"
+              className="text-xl leading-none text-[var(--gold)] sm:text-2xl"
+            >
+              {"★★★★★"}
+            </span>
+            <span className="pt-[2px] text-xs font-bold tracking-wide text-[var(--plum)] sm:pt-[3px] sm:text-[13px]">
+              {product.rating.toFixed(1)} ·{" "}
+              {product.reviewCount.toLocaleString()} REVIEWS
+            </span>
+          </a>
+        ) : (
+          <p className="juujo-eyebrow">{product.categoryLabel}</p>
+        )}
         <h1 className="font-serif text-[var(--plum)] mt-2 !text-[clamp(1.3rem,4.5vw,2.6rem)] whitespace-nowrap tracking-tight leading-[1.02]">
           {product.name}
         </h1>
-        <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">
-          <span aria-hidden className="text-[var(--gold)]">
-            {"★★★★★"}
-          </span>
-          <span>
-            {product.rating.toFixed(1)} from{" "}
-            {product.reviewCount.toLocaleString()} reviews
-          </span>
-        </p>
-        <p className="juujo-body-copy mt-4 max-w-prose text-[var(--muted)]">
-          {product.shortDescription}
-        </p>
-        {product.category === "premium-sleep-mask" && (
+        {product.category === "premium-sleep-mask" ? (
+          <ul className="mt-5 space-y-3 text-[16px] text-[var(--plum)] lg:mt-6 lg:space-y-4 lg:text-[18px]">
+            <li className="flex items-start gap-3">
+              <Moon
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-[#219937]"
+                size={22}
+                strokeWidth={1.5}
+              />
+              <span className="leading-snug">
+                Block every distracting ray with 100% blackout coverage.
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Sparkles
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-[#219937]"
+                size={22}
+                strokeWidth={1.5}
+              />
+              <span className="leading-snug">
+                Rest against smooth, breathable 22 Momme mulberry silk.
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Feather
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-[#219937]"
+                size={22}
+                strokeWidth={1.5}
+              />
+              <span className="leading-snug">
+                Stay comfortably secure with cloud-soft wraparound padding.
+              </span>
+            </li>
+          </ul>
+        ) : (
           <>
-            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="juujo-display text-3xl font-semibold text-[var(--plum)]">
-                {formatMoney(totalPrice, product.currency)}
+            <p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]">
+              <span aria-hidden className="text-[var(--gold)]">
+                {"★★★★★"}
               </span>
-              <span className="text-lg text-[var(--muted)] line-through">
-                {formatMoney(compareTotal, product.currency)}
+              <span>
+                {product.rating.toFixed(1)} from{" "}
+                {product.reviewCount.toLocaleString()} reviews
               </span>
-              {salePercent > 0 && (
-                <span className="rounded-full bg-[var(--gold)] px-3 py-1 text-xs font-semibold uppercase text-white">
-                  Save {salePercent}%
-                </span>
-              )}
-            </div>
-            <ul className="mt-5 grid gap-3 text-sm text-[var(--ink)] sm:grid-cols-3">
-              <li className="flex items-center gap-2">
-                <Sparkles
-                  aria-hidden="true"
-                  className="h-5 w-5 flex-none text-[var(--gold)]"
-                />
-                <span>22 Momme silk</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Feather
-                  aria-hidden="true"
-                  className="h-5 w-5 flex-none text-[var(--gold)]"
-                />
-                <span>Cloud-soft padding</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Moon
-                  aria-hidden="true"
-                  className="h-5 w-5 flex-none text-[var(--gold)]"
-                />
-                <span>True blackout</span>
-              </li>
-            </ul>
+            </p>
+            <p className="juujo-body-copy mt-4 max-w-prose text-[var(--muted)]">
+              {product.shortDescription}
+            </p>
           </>
+        )}
+        {product.category === "premium-sleep-mask" && (
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="juujo-display text-3xl font-semibold text-[var(--plum)]">
+              {formatMoney(totalPrice, product.currency)}
+            </span>
+            <span className="text-lg text-[var(--muted)] line-through">
+              {formatMoney(compareTotal, product.currency)}
+            </span>
+            {salePercent > 0 && (
+              <span className="rounded-full bg-[var(--ink)] px-3 py-1 text-xs font-semibold uppercase text-[var(--cream)]">
+                Save {salePercent}%
+              </span>
+            )}
+          </div>
         )}
       </div>
 
@@ -176,6 +216,51 @@ export function ProductBuyBox({
           <div className="flex flex-wrap gap-3">
             {colorOptions.map((color) => {
               const selected = color.id === colorId;
+              const sleepMaskSwatch = isSleepMaskColor(color.id)
+                ? sleepMaskMedia[color.id].swatch
+                : undefined;
+
+              if (product.category === "premium-sleep-mask" && sleepMaskSwatch) {
+                return (
+                  <button
+                    aria-label={color.name}
+                    aria-pressed={selected}
+                    className="relative h-[72px] w-[84px] overflow-hidden rounded-md border bg-white p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
+                    key={color.id}
+                    onClick={() => {
+                      setInternalColorId(color.id);
+                      onColorChange?.(color.id);
+                    }}
+                    style={{
+                      borderColor: selected ? "var(--ink)" : "var(--border)",
+                      boxShadow: selected
+                        ? "0 0 0 2px var(--paper), 0 0 0 4px var(--ink)"
+                        : "none",
+                    }}
+                    title={color.name}
+                    type="button"
+                  >
+                    <img
+                      alt=""
+                      className="h-full w-full object-contain"
+                      decoding="async"
+                      height={72}
+                      loading="eager"
+                      src={sleepMaskSwatch.src}
+                      width={84}
+                    />
+                    {selected && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--ink)] text-xs font-bold text-[var(--cream)]"
+                      >
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                );
+              }
+
               return (
                 <button
                   key={color.id}
@@ -405,6 +490,7 @@ export function ProductBuyBox({
       )}
 
       {product.category === "grounding-mat" && <GroundingMatAccordions />}
+      {product.category === "premium-sleep-mask" && <SleepMaskAccordions />}
     </div>
   );
 }
