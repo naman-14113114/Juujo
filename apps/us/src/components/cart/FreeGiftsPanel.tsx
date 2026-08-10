@@ -6,9 +6,8 @@ import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
 
 export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
-  const { lines, totals } = useCart();
-  const giftLines = lines
-    .filter((line) => line.type === "gift")
+  const { totals } = useCart();
+  const giftLines = [...totals.giftLines]
     .sort((first, second) => {
       const order = ["care-guide", "grounding-mat"];
       const firstIndex = order.findIndex((id) => first.id.includes(id));

@@ -64,14 +64,22 @@ export function CartPageContent({
 }: {
   initialCustomer: CheckoutCustomer;
 }) {
-  const { isHydrated, lines, totals, giftMessage, setGiftMessage } = useCart();
+  const {
+    isHydrated,
+    lines,
+    totals,
+    giftMessage,
+    pillowcaseColor,
+    eyeMaskColor,
+    setGiftMessage,
+  } = useCart();
   const [giftMessageOpen, setGiftMessageOpen] = useState(Boolean(giftMessage));
   const [showSaved, setShowSaved] = useState(false);
   const timer = useCheckoutCountdown(10 * 60 - 1);
   const deliveryDate = useDeliveryDate(3);
   const visibleLines = useMemo(
-    () => getDisplayLines(lines),
-    [lines],
+    () => getDisplayLines(lines, { pillowcaseColor, eyeMaskColor }),
+    [lines, pillowcaseColor, eyeMaskColor],
   );
   const digitalGift = useMemo(
     () => lines.find((line) => line.id.includes(digitalGiftId)),

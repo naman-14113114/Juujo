@@ -187,7 +187,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [hydrated, state]);
 
-  const totals = useMemo(() => calculateCartTotals(state.lines), [state.lines]);
+  const { pillowcaseColor, eyeMaskColor } = state;
+  const totals = useMemo(
+    () =>
+      calculateCartTotals(state.lines, {
+        pillowcaseColor,
+        eyeMaskColor,
+      }),
+    [state.lines, pillowcaseColor, eyeMaskColor],
+  );
   const activePromoCodes = state.appliedPromoCodes || [];
 
   function applyPromoCode(code: string) {

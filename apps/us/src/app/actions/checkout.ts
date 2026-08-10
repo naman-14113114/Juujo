@@ -53,6 +53,10 @@ function parseCart(cartJson: string): CartState | null {
       promoCode: typeof parsed.promoCode === "string" ? parsed.promoCode : "AUTO",
       giftMessage:
         typeof parsed.giftMessage === "string" ? parsed.giftMessage.slice(0, 300) : "",
+      pillowcaseColor:
+        typeof parsed.pillowcaseColor === "string" ? parsed.pillowcaseColor : undefined,
+      eyeMaskColor:
+        typeof parsed.eyeMaskColor === "string" ? parsed.eyeMaskColor : undefined,
     };
   } catch {
     return null;
@@ -113,7 +117,7 @@ export async function recordCheckoutAction(
     };
   }
 
-  const totals = calculateCartTotals(lines);
+  const totals = calculateCartTotals(lines, cart);
   const userId = await getSignedInUserId();
   const admin = createSupabaseAdminClient();
   // Juujo has no per-product promo codes; pricing is driven by the variant and

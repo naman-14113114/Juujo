@@ -42,6 +42,11 @@ export type CartState = {
   eyeMaskColor?: string;
 };
 
+export type GiftSelectionState = Pick<
+  CartState,
+  "pillowcaseColor" | "eyeMaskColor"
+>;
+
 export const promoCode = "AUTO";
 
 export const emptyCart: CartState = {
@@ -223,7 +228,10 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity, variantId)];
 }
 
-function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
+function deriveGiftLines(
+  lines: CartLine[],
+  state?: GiftSelectionState,
+): CartLine[] {
   const productLines = lines.filter((line) => line.type === "product");
   const hasSheet = productLines.some((line) => {
     const product = findProductForLine(line);
@@ -262,35 +270,15 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
   }, 0);
 
   if (sheetCount >= 2) {
-    const pillowcaseProduct = getProductBySlug("grounding-pillowcase");
-    if (pillowcaseProduct) {
-      const pillowColor = (state?.pillowcaseColor || "white").toLowerCase();
-      const pVariant = getVariant(pillowcaseProduct, pillowColor) || getDefaultVariant(pillowcaseProduct);
-        const pColorObj = pillowcaseProduct.colors.find(c => c.id === pVariant.colorId);
-        gifts.push({
-        id: "gift-pillowcase",
-        productId: pillowcaseProduct.id,
-        slug: pillowcaseProduct.slug,
-        variantId: pVariant.variantId,
-        checkoutProductId: pVariant.productId,
-        type: "gift",
-        title: pillowcaseProduct.name,
-          subtitle: pillowColor + " / Free gift",
-          image: pColorObj?.image ?? pillowcaseProduct.cartImage,
-        unitPriceCents: 0,
-        compareAtCents: pVariant.priceCents,
-        quantity: 1,
-        locked: true,
-        free: true,
-      });
-    }
-  }
-
-  if (sheetCount >= 3) {
     const eyeMaskProduct = getProductBySlug("premium-eye-mask");
     if (eyeMaskProduct) {
       const eyeColor = (state?.eyeMaskColor || "green").toLowerCase();
-      const eVariant = getVariant(eyeMaskProduct, eyeColor) || getDefaultVariant(eyeMaskProduct);
+      const eVariant =
+        getVariant(eyeMaskProduct, eyeColor) ||
+        getDefaultVariant(eyeMaskProduct);
+      const eColorObj = eyeMaskProduct.colors.find(
+        (color) => color.id === eVariant.colorId,
+      );
       gifts.push({
         id: "gift-eyemask",
         productId: eyeMaskProduct.id,
@@ -300,9 +288,38 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
         type: "gift",
         title: eyeMaskProduct.name,
         subtitle: eyeColor + " / Free gift",
-        image: eyeMaskProduct.cartImage,
+        image: eColorObj?.image ?? eyeMaskProduct.cartImage,
         unitPriceCents: 0,
         compareAtCents: eVariant.priceCents,
+        quantity: 1,
+        locked: true,
+        free: true,
+      });
+    }
+  }
+
+  if (sheetCount >= 3) {
+    const pillowcaseProduct = getProductBySlug("grounding-pillowcase");
+    if (pillowcaseProduct) {
+      const pillowColor = (state?.pillowcaseColor || "white").toLowerCase();
+      const pVariant =
+        getVariant(pillowcaseProduct, pillowColor) ||
+        getDefaultVariant(pillowcaseProduct);
+      const pColorObj = pillowcaseProduct.colors.find(
+        (color) => color.id === pVariant.colorId,
+      );
+      gifts.push({
+        id: "gift-pillowcase",
+        productId: pillowcaseProduct.id,
+        slug: pillowcaseProduct.slug,
+        variantId: pVariant.variantId,
+        checkoutProductId: pVariant.productId,
+        type: "gift",
+        title: pillowcaseProduct.name,
+        subtitle: pillowColor + " / Free gift",
+        image: pColorObj?.image ?? pillowcaseProduct.cartImage,
+        unitPriceCents: 0,
+        compareAtCents: pVariant.priceCents,
         quantity: 1,
         locked: true,
         free: true,
@@ -313,7 +330,10 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
   return gifts;
 }
 
-export function calculateCartTotals(lines: CartLine[], state?: CartState) {
+export function calculateCartTotals(
+  lines: CartLine[],
+  state?: GiftSelectionState,
+) {
   const productLines = lines.filter((line) => line.type === "product");
   const giftLines = deriveGiftLines(lines, state);
   const displayLines = [...productLines, ...giftLines];
@@ -343,7 +363,10 @@ export function calculateCartTotals(lines: CartLine[], state?: CartState) {
   };
 }
 
-export function getDisplayLines(lines: CartLine[]): CartLine[] {
+export function getDisplayLines(
+  lines: CartLine[],
+  state?: GiftSelectionState,
+): CartLine[] {
   const productLines = lines.filter((line) => line.type === "product");
-  return [...productLines, ...deriveGiftLines(lines)];
+  return [...productLines, ...deriveGiftLines(lines, state)];
 }

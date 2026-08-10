@@ -9,8 +9,19 @@ import { CartSummary } from "./CartSummary";
 import { getDisplayLines } from "@/lib/cart";
 
 export function CartDrawer() {
-  const { lines, isHydrated, isOpen, closeCart, totals } = useCart();
-  const visibleLines = getDisplayLines(lines);
+  const {
+    lines,
+    pillowcaseColor,
+    eyeMaskColor,
+    isHydrated,
+    isOpen,
+    closeCart,
+    totals,
+  } = useCart();
+  const visibleLines = getDisplayLines(lines, {
+    pillowcaseColor,
+    eyeMaskColor,
+  });
   const hasItems = totals.itemCount > 0;
 
   return (

@@ -28,7 +28,14 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes } = useCart();
+  const {
+    totals,
+    lines,
+    giftMessage,
+    pillowcaseColor,
+    eyeMaskColor,
+    activePromoCodes,
+  } = useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
@@ -63,7 +70,10 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   // Every purchasable unit that goes to the PlusBase cart: paid sheets, the
   // free sheet, and the free mat gift, each with its real store ids. Free items
   // are still sent (discounts are configured on PlusBase).
-  const checkoutItems = getDisplayLines(lines)
+  const checkoutItems = getDisplayLines(lines, {
+    pillowcaseColor,
+    eyeMaskColor,
+  })
     .filter((line) => line.checkoutProductId && line.variantId)
     .map((line) => ({
       productId: line.checkoutProductId as string,
@@ -115,7 +125,14 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode, appliedPromoCodes: activePromoCodes });
+    writeCheckoutSnapshot({
+      lines,
+      giftMessage,
+      promoCode,
+      appliedPromoCodes: activePromoCodes,
+      pillowcaseColor,
+      eyeMaskColor,
+    });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
@@ -141,6 +158,8 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
             lines,
             giftMessage,
             promoCodes: activePromoCodes,
+            pillowcaseColor,
+            eyeMaskColor,
           },
           totals,
           attribution,
