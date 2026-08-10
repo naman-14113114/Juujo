@@ -289,7 +289,7 @@ function deriveGiftLines(lines: CartLine[], state?: CartState): CartLine[] {
   if (sheetCount >= 3) {
     const eyeMaskProduct = getProductBySlug("premium-eye-mask");
     if (eyeMaskProduct) {
-      const eyeColor = (state?.eyeMaskColor || "black").toLowerCase();
+      const eyeColor = (state?.eyeMaskColor || "green").toLowerCase();
       const eVariant = getVariant(eyeMaskProduct, eyeColor) || getDefaultVariant(eyeMaskProduct);
       gifts.push({
         id: "gift-eyemask",

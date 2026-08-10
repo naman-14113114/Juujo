@@ -54,7 +54,17 @@ export function CartLineItem({ line }: { line: CartLine }) {
             <p className="juujo-display text-lg leading-tight text-[var(--plum)]">
               {line.title}
             </p>
-            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{line.subtitle}</p>
+            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+              {(() => {
+                let s = line.subtitle || "";
+                s = s.replace(/ in\)/g, " In)");
+                if (isGift || isFree) {
+                  s = s.replace(/\s*\/?\s*Free gift/gi, "").trim();
+                  if (line.title.includes("Mat") && !s) s = "Black";
+                }
+                return s ? s.charAt(0).toUpperCase() + s.slice(1) : "";
+              })()}
+            </p>
           </div>
           <div className="text-right">
             <p className="juujo-display text-lg text-[var(--plum)]">
