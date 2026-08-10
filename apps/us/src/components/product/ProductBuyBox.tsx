@@ -25,7 +25,9 @@ import {
 } from "@/data/sleepMaskMedia";
 import {
   Feather,
+  Leaf,
   Moon,
+  RefreshCw,
   RotateCcw,
   ShieldCheck,
   Sparkles,
@@ -118,18 +120,17 @@ export function ProductBuyBox({
       <div>
         {product.category === "premium-sleep-mask" ? (
           <a
-            className="flex w-fit items-center gap-2 no-underline hover:no-underline"
             href="#reviews"
+            className="flex w-fit items-center gap-2 no-underline hover:no-underline cursor-pointer"
           >
-            <span
+            <div
+              className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
               aria-hidden="true"
-              className="text-xl leading-none text-[var(--gold)] sm:text-2xl"
             >
-              {"★★★★★"}
-            </span>
-            <span className="pt-[2px] text-xs font-bold tracking-wide text-[var(--plum)] sm:pt-[3px] sm:text-[13px]">
-              {product.rating.toFixed(1)} ·{" "}
-              {product.reviewCount.toLocaleString()} REVIEWS
+              ★★★★★
+            </div>
+            <span className="font-sans pt-[2px] sm:pt-[3px] text-xs sm:text-[13px] font-bold tracking-wide text-[var(--plum)]">
+              {product.rating.toFixed(1)} · TRUSTED BY 40,000+ CUSTOMERS
             </span>
           </a>
         ) : (
@@ -209,7 +210,7 @@ export function ProductBuyBox({
 
       {/* Colour */}
       {product.colors.length > 0 && (
-        <fieldset className="flex flex-col gap-3">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-[var(--ink)]">
             Colour: {product.colors.find((c) => c.id === colorId)?.name}
           </legend>
@@ -225,7 +226,7 @@ export function ProductBuyBox({
                   <button
                     aria-label={color.name}
                     aria-pressed={selected}
-                    className="relative h-[72px] w-[84px] overflow-hidden rounded-md border bg-white p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
+                    className="relative h-[72px] w-[72px] overflow-hidden rounded-full border bg-white p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
                     key={color.id}
                     onClick={() => {
                       setInternalColorId(color.id);
@@ -234,7 +235,7 @@ export function ProductBuyBox({
                     style={{
                       borderColor: selected ? "var(--ink)" : "var(--border)",
                       boxShadow: selected
-                        ? "0 0 0 2px var(--paper), 0 0 0 4px var(--ink)"
+                        ? "0 0 0 1px var(--ink)"
                         : "none",
                     }}
                     title={color.name}
@@ -249,14 +250,6 @@ export function ProductBuyBox({
                       src={sleepMaskSwatch.src}
                       width={84}
                     />
-                    {selected && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--ink)] text-xs font-bold text-[var(--cream)]"
-                      >
-                        ✓
-                      </span>
-                    )}
                   </button>
                 );
               }
@@ -431,7 +424,7 @@ export function ProductBuyBox({
                 style={{ visibility: "hidden" }}
                 className="relative z-20 whitespace-nowrap"
               >
-                {product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}
+                {product.category === "premium-sleep-mask" ? "Add To Cart + Free Shipping" : "Add To Cart + 3 Free gifts"}
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie
@@ -443,36 +436,27 @@ export function ProductBuyBox({
             </>
           ) : (
             <span className="relative z-20 whitespace-nowrap">
-              {product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts"}
+              {product.category === "premium-sleep-mask" ? "Add To Cart + Free Shipping" : "Add To Cart + 3 Free gifts"}
             </span>
           )}
         </Button>
       </div>
 
       {product.category === "premium-sleep-mask" && (
-        <ul className="grid gap-3 border-y border-[var(--border)] py-4 text-sm text-[var(--muted)] sm:grid-cols-3">
-          <li className="flex items-center gap-2">
-            <ShieldCheck
-              aria-hidden="true"
-              className="h-5 w-5 flex-none text-[var(--gold)]"
-            />
-            <span>120-day money-back guarantee</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <Truck
-              aria-hidden="true"
-              className="h-5 w-5 flex-none text-[var(--gold)]"
-            />
-            <span>Free shipping</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <RotateCcw
-              aria-hidden="true"
-              className="h-5 w-5 flex-none text-[var(--gold)]"
-            />
-            <span>Easy returns</span>
-          </li>
-        </ul>
+        <div className="grid grid-cols-3 gap-2 mt-3 px-1">
+          <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+            <ShieldCheck className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+            <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">FDA<br/>Cleared</span>
+          </div>
+          <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+            <RefreshCw className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+            <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">120-Night<br/>Guarantee</span>
+          </div>
+          <div className="flex flex-col items-center text-center gap-1.5 opacity-85">
+            <Leaf className="text-[var(--ink)]" size={32} strokeWidth={1.5} />
+            <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest text-[var(--ink)] leading-tight">Eco-Friendly<br/>Materials</span>
+          </div>
+        </div>
       )}
 
       {/* Trust row */}

@@ -55,7 +55,7 @@ export function StickyAddToCart({
   )?.name;
   const subtitle =
     product.category === "premium-sleep-mask"
-      ? ` | ${activeColorName ? `${activeColorName} | ` : ""}free shipping`
+      ? ` ${"·"} ${activeColorName ? `${activeColorName} ${"·"} ` : ""}free shipping`
       : ` ${"·"} free shipping`;
 
   useEffect(() => {
@@ -160,7 +160,7 @@ export function StickyAddToCart({
             <>
               <span style={{ visibility: "hidden" }} className="relative z-20 flex items-center gap-2">
                 <ShoppingBag size={17} />
-                <span>{dynamicCtaText || (product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts")}</span>
+                <span>{dynamicCtaText || (product.category === "premium-sleep-mask" || product.category === "grounding-mat" ? "Add To Cart + Free Shipping" : "Add To Cart + 3 Free gifts")}</span>
               </span>
               <span className="absolute inset-0 z-20 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop className="h-10 w-16 scale-[1.35]" />
@@ -175,7 +175,7 @@ export function StickyAddToCart({
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span>{dynamicCtaText || (product.category === "premium-sleep-mask" ? "Add To Cart" : "Add To Cart + 3 Free gifts")}</span>
+              <span>{dynamicCtaText || (product.category === "premium-sleep-mask" || product.category === "grounding-mat" ? "Add To Cart + Free Shipping" : "Add To Cart + 3 Free gifts")}</span>
             </>
           )}
         </Button>

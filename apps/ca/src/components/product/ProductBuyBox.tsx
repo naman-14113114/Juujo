@@ -7,6 +7,14 @@ import Lottie from "lottie-react";
 import loadingLottie from "../cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import {
+  Feather,
+  Leaf,
+  Moon,
+  RefreshCw,
+  RotateCcw,
+  ShieldCheck,
+} from "lucide-react";
+import {
   getVariant,
   totalPriceForTier,
   unitPriceForTier,
@@ -99,7 +107,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
       {/* Colour */}
       {product.colors.length > 0 && (
-        <fieldset className="flex flex-col gap-3">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-[var(--ink)]">
             Colour: {product.colors.find((c) => c.id === colorId)?.name}
           </legend>
