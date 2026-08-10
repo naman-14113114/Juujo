@@ -3,6 +3,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 import Lottie from "lottie-react";
@@ -497,14 +498,12 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                 <span
                   className={`absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white ${isLocked ? 'bg-gray-400' : 'bg-[var(--night)]'}`}
                 >
-                  {isLocked ? (gift.id === "premium-eye-mask" ? "Buy 2 To Unlock" : "Buy 3 To Unlock") : "Free"}
-                  {!isLocked && (
-                    <span className="font-medium normal-case line-through opacity-80">
-                      {formatMoney(gift.valueCents, giftProduct.currency)}
-                    </span>
-                  )}
+                  Free
+                  <span className="font-medium normal-case line-through opacity-80">
+                    {formatMoney(gift.valueCents, giftProduct.currency)}
+                  </span>
                 </span>
-                <span className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply">
+                <Link href={`/products/${gift.id}`} className="relative mt-2 aspect-square w-full overflow-hidden mix-blend-multiply block">
                   <Image
                     alt={gift.name}
                     className="rounded-xl object-cover transition-transform group-hover:scale-105"
@@ -512,11 +511,11 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     sizes="120px"
                     src={gift.image}
                   />
-                </span>
+                </Link>
                 <div className="mt-2 flex flex-col items-center">
-                    <span className="text-[14px] sm:text-[18px] font-semibold leading-tight text-[var(--ink)]">
+                    <Link href={`/products/${gift.id}`} className="text-[14px] sm:text-[18px] font-semibold leading-tight text-[var(--ink)] hover:underline">
                       {gift.name}
-                    </span>
+                    </Link>
                     {gift.id === "premium-eye-mask" && (
                       <div className="mt-2 flex items-center gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
                         {[
@@ -550,6 +549,13 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                             style={{ backgroundColor: color.hex }}
                           />
                         ))}
+                      </div>
+                    )}
+                    {isLocked && (
+                      <div className="mt-3 mb-1 flex justify-center">
+                        <span className="whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white bg-gray-400">
+                          {gift.id === "premium-eye-mask" ? "Buy 2 To Unlock" : "Buy 3 To Unlock"}
+                        </span>
                       </div>
                     )}
                   </div>
