@@ -35,7 +35,7 @@ export function PillowcaseHowDoesItWorkSection() {
           <div className="w-full order-1 md:order-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-lg">
               <img
-                src={productMediaAsset("juujo-earthing-pillow-cover-health-benefits.png", "grounding-pillowcases", "images")}
+                src={productMediaAsset("juujo-grounding-pillowcase-how-it-works.png", "grounding-pillowcases", "images")}
                 alt="How Juujo Grounding Pillowcase Works"
                 className="h-full w-full object-cover"
               />

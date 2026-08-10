@@ -27,7 +27,7 @@ export function PillowcaseWhyUseSection() {
           <div className="w-full order-1">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-lg">
               <img
-                src={productMediaAsset("juujo-earthing-grounding-pillowcase-benefits.png", "grounding-pillowcases", "images")}
+                src={productMediaAsset("juujo-grounding-pillowcase-benefits.webp", "grounding-pillowcases", "images")}
                 alt="Why you need a Juujo Grounding Pillowcase"
                 className="h-full w-full object-cover"
               />
