@@ -3,6 +3,7 @@ import {
   getDefaultVariant,
   getProductById,
   getProductBySlug,
+  premiumSleepMaskGift,
   type Product,
 } from "@/data/products";
 
@@ -268,25 +269,25 @@ function deriveGiftLines(
   }, 0);
 
   if (sheetCount >= 2) {
-    const eyeMaskProduct = getProductBySlug("premium-eye-mask");
-    if (eyeMaskProduct) {
+    const sleepMaskProduct = premiumSleepMaskGift;
+    if (sleepMaskProduct) {
       const eyeColor = (state?.eyeMaskColor || "green").toLowerCase();
       const eVariant =
-        getVariant(eyeMaskProduct, eyeColor) ||
-        getDefaultVariant(eyeMaskProduct);
-      const eColorObj = eyeMaskProduct.colors.find(
+        getVariant(sleepMaskProduct, eyeColor) ||
+        getDefaultVariant(sleepMaskProduct);
+      const eColorObj = sleepMaskProduct.colors.find(
         (color) => color.id === eVariant.colorId,
       );
       gifts.push({
-        id: "gift-eyemask",
-        productId: eyeMaskProduct.id,
-        slug: eyeMaskProduct.slug,
+        id: "gift-sleep-mask",
+        productId: sleepMaskProduct.id,
+        slug: sleepMaskProduct.slug,
         variantId: eVariant.variantId,
         checkoutProductId: eVariant.productId,
         type: "gift",
-        title: eyeMaskProduct.name,
+        title: sleepMaskProduct.name,
         subtitle: eyeColor + " / Free gift",
-        image: eColorObj?.image ?? eyeMaskProduct.cartImage,
+        image: eColorObj?.image ?? sleepMaskProduct.cartImage,
         unitPriceCents: 0,
         compareAtCents: eVariant.priceCents,
         quantity: 1,

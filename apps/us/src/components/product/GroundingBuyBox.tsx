@@ -465,8 +465,8 @@ export function GroundingBuyBox({ product }: { product: Product }) {
               image: "/images/grounding_mat_gift.png",
             },
             {
-              id: "premium-eye-mask",
-              name: "Premium Eye Mask",
+              id: "premium-sleep-mask",
+              name: "Premium Sleep Mask",
               valueCents: 6900,
               image: eyeMaskColor === 'Pink' 
                 ? "/media/products/grounding-sheets/images/juujo-premium-eye-mask-pink.png"
@@ -484,7 +484,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
             }
           ].map((gift) => {
             const isLocked =
-              gift.id === "premium-eye-mask"
+              gift.id === "premium-sleep-mask"
                 ? tierId === "single"
                 : gift.id === "grounding-pillowcase"
                   ? tierId !== "bundle-3"
@@ -516,7 +516,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     <Link href={`/products/${gift.id}`} className="text-[14px] sm:text-[18px] font-semibold leading-tight text-[var(--ink)] hover:underline">
                       {gift.name}
                     </Link>
-                    {gift.id === "premium-eye-mask" && (
+                    {gift.id === "premium-sleep-mask" && (
                       <div className="mt-2 flex items-center gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
                         {[
                           { name: 'Green', hex: '#066B73' },
@@ -527,7 +527,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                             key={color.name}
                             type="button"
                             onClick={(e) => { e.preventDefault(); setEyeMaskColor(color.name); }}
-                            aria-label={`Select ${color.name} Eye Mask`}
+                            aria-label={`Select ${color.name} Sleep Mask`}
                             className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all ${eyeMaskColor === color.name ? 'ring-2 ring-offset-1 ring-[var(--night)] border border-transparent' : 'border border-gray-300 hover:scale-110'}`}
                             style={{ backgroundColor: color.hex }}
                           />
@@ -554,7 +554,7 @@ export function GroundingBuyBox({ product }: { product: Product }) {
                     {isLocked && (
                       <div className="mt-3 mb-1 flex justify-center">
                         <span className="whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-wide text-white bg-gray-400">
-                          {gift.id === "premium-eye-mask" ? "Buy 2 To Unlock" : "Buy 3 To Unlock"}
+                          {gift.id === "premium-sleep-mask" ? "Buy 2 To Unlock" : "Buy 3 To Unlock"}
                         </span>
                       </div>
                     )}

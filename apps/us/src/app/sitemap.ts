@@ -27,6 +27,12 @@ const routes = [
     priority: 1,
   },
   {
+    path: "/products/premium-sleep-mask",
+    lastModified: "2026-08-12",
+    changeFrequency: "weekly",
+    priority: 0.8,
+  },
+  {
     path: "/cart",
     lastModified: "2026-07-03",
     changeFrequency: "monthly",

@@ -1132,22 +1132,22 @@ export const groundingMat: Product = {
 
 
 /* ------------------------------------------------------------------ */
-/* Premium Eye Mask                                                    */
+/* Premium Sleep Mask gift                                             */
 /* ------------------------------------------------------------------ */
 
-export const premiumEyeMask: Product = {
-  id: "premium-eye-mask",
-  sku: "JUUJO-PREMIUM-EYE-MASK",
-  slug: "premium-eye-mask",
-  category: "grounding-sheets",
-  categoryLabel: "Eye Mask",
-  name: "Premium Eye Mask",
+export const premiumSleepMaskGift: Product = {
+  id: "premium-sleep-mask-gift",
+  sku: "JUUJO-PREMIUM-SLEEP-MASK-GIFT",
+  slug: "premium-sleep-mask",
+  category: "premium-sleep-mask",
+  categoryLabel: "Sleep Mask",
+  name: "Premium Sleep Mask",
   heroTitle: "Premium",
-  heroEmphasis: "Eye Mask",
-  shortDescription: "A comfortable eye mask for a restful sleep.",
-  description: "Experience deep, uninterrupted sleep with our premium eye mask.",
-  seoTitle: "Premium Eye Mask | Juujo",
-  seoDescription: "Juujo Premium Eye Mask for restful sleep.",
+  heroEmphasis: "Sleep Mask",
+  shortDescription: "A comfortable sleep mask for restful nights.",
+  description: "Experience deep, uninterrupted sleep with our premium sleep mask.",
+  seoTitle: "Premium Sleep Mask | Juujo",
+  seoDescription: "Juujo Premium Sleep Mask for restful sleep.",
   currency: market.currency,
   priceCents: 6900,
   compareAtCents: 6900,
@@ -1155,7 +1155,7 @@ export const premiumEyeMask: Product = {
   reviewCount: 100,
   customerCount: "10,000+",
   cartImage: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png",
-  gallery: [{ src: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png", alt: "Premium Eye Mask" }],
+  gallery: [{ src: "/media/products/grounding-sheets/images/juujo-premium-eye-mask.png", alt: "Premium Sleep Mask" }],
   colors: [
     {
       id: "black",
@@ -1955,7 +1955,6 @@ export const products = [
   groundingFlatSheet,
   groundingMat,
   groundingPillowcase,
-  premiumEyeMask,
   premiumSleepMask,
   // weightedBlanket,
   // coolingSheets,

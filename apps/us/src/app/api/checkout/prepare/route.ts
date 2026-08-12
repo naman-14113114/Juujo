@@ -36,7 +36,7 @@ const freeGiftDiscounts = {
     productId: "1000000669152669",
     code: "FREE_MAT",
   },
-  "gift-eyemask": {
+  "gift-sleep-mask": {
     productId: "1000000673049614",
     code: "FREE_SLEEPING_MASK",
   },
