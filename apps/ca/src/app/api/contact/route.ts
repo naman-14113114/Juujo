@@ -101,7 +101,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim() || "4299c06e-02e2-4e3a-9503-c164a932ec4b";
 
   if (!accessKey) {
     return jsonResponse(

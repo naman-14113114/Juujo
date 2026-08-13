@@ -47,7 +47,7 @@ function buildMailto(formData: FormData) {
 }
 
 async function getContactConfig() {
-  const bundledAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+  const bundledAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() || "4299c06e-02e2-4e3a-9503-c164a932ec4b";
 
   contactConfigPromise ??= fetch(contactConfigEndpoint, {
     cache: "no-store",
