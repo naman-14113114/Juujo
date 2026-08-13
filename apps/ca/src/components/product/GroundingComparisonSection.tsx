@@ -1,5 +1,5 @@
 import React from "react";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 function CheckIcon() {
   return (
@@ -11,23 +11,9 @@ function CheckIcon() {
 
 function CrossIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      className="w-5 h-5 text-[#c2bcb1] mx-auto"
-    >
-      <circle cx="10" cy="10" r="9.375" stroke="currentColor" strokeWidth="1.25" />
-      <path
-        d="M6.5 6.5L13.5 13.5M13.5 6.5L6.5 13.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <div className="bg-red-500/20 text-red-500 rounded-full p-1 mx-auto flex items-center justify-center w-8 h-8">
+      <X size={20} strokeWidth={3} />
+    </div>
   );
 }
 

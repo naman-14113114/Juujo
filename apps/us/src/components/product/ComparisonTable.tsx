@@ -31,7 +31,7 @@ function CrossIcon() {
       height="20"
       viewBox="0 0 20 20"
       fill="none"
-      className="w-5 h-5 text-[#c2bcb1]"
+      className="w-5 h-5 text-red-500"
     >
       <circle cx="10" cy="10" r="9.375" stroke="currentColor" strokeWidth="1.25" />
       <path
