@@ -10,6 +10,8 @@ import {
   Leaf,
   RefreshCw,
   ShieldCheck,
+} from "lucide-react";
+import {
   getVariant,
   totalPriceForTier,
   unitPriceForTier,

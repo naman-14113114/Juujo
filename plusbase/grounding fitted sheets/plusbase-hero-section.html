@@ -1,0 +1,2387 @@
+<!-- ========================================================================== -->
+<!-- JUUJO PREMIUM GROUNDING SHEETS - PLUSBASE HERO SECTION (GALLERY + BUY BOX)  -->
+<!-- ========================================================================== -->
+
+<style>
+/* -------------------------------------------------- */
+/* ROOT DESIGN TOKENS & SCOPED STYLES                 */
+/* -------------------------------------------------- */
+#juujo-product-hero-root {
+  --juujo-cream: #FAF7F2;
+  --juujo-card-bg: #FFFFFF;
+  --juujo-ink: #111111;
+  --juujo-plum: #2D1A2E;
+  --juujo-plum-soft: #4A2433;
+  --juujo-gold: #C89B3F;
+  --juujo-gold-light: rgba(200, 155, 63, 0.12);
+  --juujo-night: #18181B;
+  --juujo-muted: #6B7280;
+  --juujo-border: #E5E0D8;
+  --juujo-border-dark: #27272A;
+  --juujo-green: #219937;
+  --juujo-green-bg: rgba(33, 153, 55, 0.08);
+  --juujo-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --juujo-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --juujo-shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
+  --juujo-radius-sm: 8px;
+  --juujo-radius-md: 14px;
+  --juujo-radius-lg: 20px;
+  --juujo-radius-full: 9999px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--juujo-ink);
+  background-color: var(--juujo-cream);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+#juujo-product-hero-root *,
+#juujo-product-hero-root *::before,
+#juujo-product-hero-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container Wrap */
+.juujo-hero-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .juujo-hero-container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    gap: 48px;
+    align-items: start;
+  }
+}
+
+/* -------------------------------------------------- */
+/* LEFT COLUMN: GALLERY                               */
+/* -------------------------------------------------- */
+.juujo-gallery-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .juujo-gallery-wrapper {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+/* Main Display */
+.juujo-gallery-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--juujo-radius-lg);
+  overflow: hidden;
+  background-color: #EDE8DF;
+  box-shadow: var(--juujo-shadow-md);
+  border: 1px solid var(--juujo-border);
+  cursor: zoom-in;
+}
+
+.juujo-gallery-main img,
+.juujo-gallery-main video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+/* Badges on Gallery */
+.juujo-gallery-badge-gifts {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: var(--juujo-night);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: var(--juujo-radius-full);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Zoom button */
+.juujo-gallery-zoom-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+  color: var(--juujo-ink);
+  box-shadow: var(--juujo-shadow-sm);
+}
+
+.juujo-gallery-main:hover .juujo-gallery-zoom-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.juujo-gallery-zoom-btn:hover {
+  background: #FFFFFF;
+  transform: scale(1.08);
+}
+
+/* Gallery Navigation Arrows */
+.juujo-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  color: var(--juujo-ink);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+.juujo-gallery-arrow:hover {
+  background: #FFFFFF;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.juujo-gallery-arrow.prev { left: 14px; }
+.juujo-gallery-arrow.next { right: 14px; }
+
+/* Thumbnails Strip */
+.juujo-gallery-thumbs-outer {
+  position: relative;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.juujo-gallery-thumbs-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 2px;
+  width: 100%;
+}
+
+.juujo-gallery-thumbs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.juujo-thumb-btn {
+  flex: 0 0 74px;
+  height: 74px;
+  border-radius: var(--juujo-radius-md);
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #EDE8DF;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: var(--juujo-shadow-sm);
+}
+
+.juujo-thumb-btn img,
+.juujo-thumb-btn video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.juujo-thumb-btn.active {
+  border-color: var(--juujo-night);
+  box-shadow: 0 0 0 1px var(--juujo-night);
+  transform: translateY(-2px);
+}
+
+.juujo-thumb-btn:hover:not(.active) {
+  border-color: var(--juujo-muted);
+}
+
+.juujo-thumb-nav-btn {
+  flex: 0 0 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--juujo-border);
+  color: var(--juujo-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--juujo-shadow-sm);
+}
+
+.juujo-thumb-nav-btn:hover {
+  background: #FFFFFF;
+  transform: scale(1.06);
+}
+
+/* Doctor & Guarantee Badges below Gallery */
+.juujo-gallery-trust-bar {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-md);
+  box-shadow: var(--juujo-shadow-sm);
+}
+
+.juujo-doctor-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.juujo-doctor-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--juujo-gold);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.juujo-doctor-text h4 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--juujo-night);
+  margin-bottom: 2px;
+}
+
+.juujo-doctor-text p {
+  font-size: 11.5px;
+  color: var(--juujo-muted);
+  line-height: 1.35;
+}
+
+.juujo-guarantee-seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FBF8F2 60%, #E8DFD0 100%);
+  border: 2px dashed #C89B3F;
+  text-align: center;
+  padding: 4px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 6px rgba(200, 155, 63, 0.2);
+}
+
+.juujo-guarantee-seal .g-top {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #785A1D;
+  line-height: 1;
+}
+
+.juujo-guarantee-seal .g-num {
+  font-size: 17px;
+  font-weight: 900;
+  color: #18181B;
+  line-height: 1.1;
+  font-family: Georgia, serif;
+}
+
+.juujo-guarantee-seal .g-bot {
+  font-size: 7.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #18181B;
+  color: #FFFFFF;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-top: 1px;
+}
+
+/* -------------------------------------------------- */
+/* RIGHT COLUMN: PRODUCT BUY BOX                      */
+/* -------------------------------------------------- */
+.juujo-buybox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Rating Header */
+.juujo-rating-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.juujo-stars {
+  color: var(--juujo-green);
+  font-size: 19px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.juujo-rating-text {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--juujo-ink);
+}
+
+/* Product Title */
+.juujo-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.6rem;
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--juujo-plum);
+  margin-top: -8px;
+}
+
+@media (min-width: 768px) {
+  .juujo-title {
+    font-size: 3.2rem;
+  }
+}
+
+.juujo-title span {
+  display: block;
+}
+
+/* Size Guide Trigger */
+.juujo-size-guide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 14.5px;
+  color: var(--juujo-plum);
+  cursor: pointer;
+  padding: 0;
+  width: fit-content;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.2s;
+}
+
+.juujo-size-guide-btn:hover {
+  opacity: 0.7;
+}
+
+/* Transformation Benefits List */
+.juujo-benefits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 4px 0 6px;
+}
+
+.juujo-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--juujo-plum);
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .juujo-benefit-item {
+    font-size: 17.5px;
+  }
+}
+
+.juujo-benefit-item svg {
+  color: var(--juujo-green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Divider */
+.juujo-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2px 0;
+}
+
+.juujo-divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--juujo-border);
+}
+
+.juujo-divider-text {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--juujo-plum);
+  text-align: center;
+}
+
+/* -------------------------------------------------- */
+/* BUNDLE TIERS (BUY 1, BUY 2, BUY 3)                 */
+/* -------------------------------------------------- */
+.juujo-tiers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.juujo-tier-card {
+  position: relative;
+  border-radius: var(--juujo-radius-md);
+  border: 1.5px solid var(--juujo-border);
+  background: var(--juujo-card-bg);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.juujo-tier-card:hover {
+  border-color: #C0B7A8;
+}
+
+.juujo-tier-card.selected {
+  border-color: var(--juujo-night);
+  border-width: 2px;
+  background: #FCFAF6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Most Popular / Best Value Badges */
+.juujo-badge-popular {
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  background: var(--juujo-night);
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 9.5px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border: 2px solid #FFFFFF;
+}
+
+.juujo-badge-value {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  background: var(--juujo-night);
+  color: #FFFFFF;
+  border-radius: 0 0 6px 6px;
+  padding: 4px 12px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header Button */
+.juujo-tier-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.juujo-tier-card.tier-3 .juujo-tier-btn {
+  padding-top: 22px;
+}
+
+/* Radio button */
+.juujo-radio-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--juujo-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.juujo-tier-card.selected .juujo-radio-circle {
+  border-color: var(--juujo-night);
+  background: var(--juujo-night);
+}
+
+.juujo-radio-inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: none;
+}
+
+.juujo-tier-card.selected .juujo-radio-inner {
+  display: block;
+}
+
+/* Tier Content Header */
+.juujo-tier-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.juujo-tier-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--juujo-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.juujo-tier-discount-tag {
+  background: var(--juujo-night);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.juujo-tier-desc {
+  font-size: 13.5px;
+  color: var(--juujo-muted);
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.juujo-tier-desc strong {
+  color: var(--juujo-ink);
+}
+
+/* Tier Pricing */
+.juujo-tier-pricing {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.juujo-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.juujo-price-current {
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--juujo-ink);
+}
+
+.juujo-price-compare {
+  font-family: Georgia, serif;
+  font-size: 13.5px;
+  color: var(--juujo-muted);
+  text-decoration: line-through;
+}
+
+.juujo-save-tag {
+  display: inline-block;
+  background: var(--juujo-night);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+/* -------------------------------------------------- */
+/* EXPANDED SELECTIONS (SHEET ROWS)                   */
+/* -------------------------------------------------- */
+.juujo-tier-options {
+  border-top: 1px solid var(--juujo-border);
+  padding: 14px 16px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.juujo-tier-card.selected .juujo-tier-options {
+  display: flex;
+}
+
+.juujo-sheet-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.juujo-sheet-index {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  color: var(--juujo-muted);
+  width: 22px;
+  flex-shrink: 0;
+}
+
+/* Custom Select Dropdowns */
+.juujo-custom-select {
+  position: relative;
+}
+
+.juujo-custom-select.color-select {
+  flex: 0.55;
+}
+
+.juujo-custom-select.size-select {
+  flex: 1;
+}
+
+.juujo-select-trigger {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-sm);
+  padding: 8px 26px 8px 10px;
+  font-size: 13px;
+  color: var(--juujo-ink);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: border-color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.juujo-select-trigger:focus,
+.juujo-select-trigger.open {
+  border-color: var(--juujo-night);
+  outline: none;
+}
+
+.juujo-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.juujo-select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--juujo-muted);
+}
+
+.juujo-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  min-width: 180px;
+  background: #FFFFFF;
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-sm);
+  box-shadow: var(--juujo-shadow-lg);
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  padding: 4px 0;
+}
+
+.juujo-select-dropdown.open {
+  display: block;
+}
+
+.juujo-select-option {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--juujo-ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.juujo-select-option:hover {
+  background: #F4F0E8;
+}
+
+.juujo-select-option.selected {
+  font-weight: 700;
+  background: #EDE7DC;
+}
+
+.juujo-select-option.out-of-stock {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.juujo-opt-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.juujo-opt-stock {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #DC2626;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* FREE DELIVERY BANNER                               */
+/* -------------------------------------------------- */
+.juujo-delivery-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-md);
+  margin-top: 4px;
+}
+
+.juujo-delivery-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--juujo-green);
+  flex-shrink: 0;
+}
+
+.juujo-delivery-text {
+  font-size: 14px;
+  color: var(--juujo-ink);
+}
+
+.juujo-delivery-text strong {
+  font-weight: 800;
+}
+
+/* -------------------------------------------------- */
+/* ADD TO CART BUTTON                                 */
+/* -------------------------------------------------- */
+.juujo-atc-btn {
+  width: 100%;
+  background: var(--juujo-night);
+  color: #FFFFFF !important;
+  border: 2px solid var(--juujo-night);
+  border-radius: var(--juujo-radius-full);
+  padding: 18px 24px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .juujo-atc-btn {
+    font-size: 1.3rem;
+  }
+}
+
+.juujo-atc-btn:hover {
+  background: #000000;
+  border-color: #000000;
+  transform: scale(1.015);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.juujo-atc-btn:active {
+  transform: scale(0.985);
+}
+
+.juujo-atc-btn.loading {
+  pointer-events: none;
+}
+
+.juujo-atc-spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: juujo-spin 0.8s linear infinite;
+}
+
+.juujo-atc-btn.loading .juujo-atc-spinner {
+  display: block;
+}
+
+.juujo-atc-btn.loading .juujo-atc-text {
+  display: none;
+}
+
+@keyframes juujo-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Trust Icons Below ATC */
+.juujo-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.juujo-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.juujo-trust-item svg {
+  color: var(--juujo-ink);
+  opacity: 0.8;
+}
+
+.juujo-trust-item span {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--juujo-ink);
+  line-height: 1.2;
+}
+
+/* -------------------------------------------------- */
+/* FREE GIFTS BUNDLE SECTION                          */
+/* -------------------------------------------------- */
+.juujo-gifts-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--juujo-border);
+}
+
+.juujo-gifts-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.juujo-gifts-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--juujo-ink);
+  font-weight: 500;
+}
+
+.juujo-gifts-value-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(200, 155, 63, 0.15);
+  padding: 4px 14px;
+  border-radius: var(--juujo-radius-full);
+  margin-top: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--juujo-ink);
+}
+
+.juujo-gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.juujo-gift-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-md);
+  padding: 18px 8px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.juujo-gift-card.featured {
+  border-color: #C89B3F;
+  box-shadow: 0 4px 14px rgba(200, 155, 63, 0.15);
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+.juujo-gift-card.locked {
+  opacity: 0.65;
+  filter: grayscale(0.4);
+}
+
+.juujo-gift-badge-free {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--juujo-night);
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: var(--juujo-radius-full);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.juujo-gift-card.locked .juujo-gift-badge-free {
+  background: #9CA3AF;
+}
+
+.juujo-gift-badge-free span {
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: line-through;
+  opacity: 0.8;
+  margin-left: 2px;
+}
+
+.juujo-gift-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--juujo-radius-sm);
+  margin-bottom: 8px;
+}
+
+.juujo-gift-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.juujo-gift-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--juujo-ink);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  .juujo-gift-title {
+    font-size: 14.5px;
+  }
+}
+
+/* Gift Color Swatches */
+.juujo-gift-swatches {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.juujo-swatch-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  padding: 0;
+}
+
+.juujo-swatch-dot:hover {
+  transform: scale(1.15);
+}
+
+.juujo-swatch-dot.active {
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--juujo-night);
+}
+
+.juujo-gift-unlock-tag {
+  background: #9CA3AF;
+  color: #FFFFFF;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--juujo-radius-full);
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* ACCORDIONS                                         */
+/* -------------------------------------------------- */
+.juujo-accordions-wrap {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-md);
+  padding: 0 18px;
+}
+
+.juujo-accordion-item {
+  border-bottom: 1px solid var(--juujo-border);
+}
+
+.juujo-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.juujo-acc-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+
+.juujo-acc-header-left .eyebrow {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--juujo-gold);
+  display: block;
+}
+
+.juujo-acc-header-left .title {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  color: var(--juujo-plum);
+  margin-top: 2px;
+  display: block;
+}
+
+.juujo-acc-arrow {
+  color: var(--juujo-plum);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.juujo-accordion-item.open .juujo-acc-arrow {
+  transform: rotate(180deg);
+}
+
+.juujo-acc-body {
+  display: none;
+  padding-bottom: 18px;
+  font-size: 14.5px;
+  color: var(--juujo-muted);
+  line-height: 1.55;
+}
+
+.juujo-accordion-item.open .juujo-acc-body {
+  display: block;
+}
+
+.juujo-feature-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+}
+
+.juujo-feature-card {
+  border: 1px solid var(--juujo-border);
+  background: #FFFFFF;
+  border-radius: var(--juujo-radius-sm);
+  padding: 12px 14px;
+}
+
+.juujo-feature-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.juujo-feature-title {
+  font-weight: 700;
+  color: var(--juujo-plum);
+  font-size: 14px;
+}
+
+.juujo-feature-kicker {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--juujo-gold);
+}
+
+.juujo-feature-num {
+  font-family: Georgia, serif;
+  color: var(--juujo-gold);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* -------------------------------------------------- */
+/* MODALS (LIGHTBOX & SIZE GUIDE)                     */
+/* -------------------------------------------------- */
+.juujo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.juujo-modal-overlay.open {
+  display: flex;
+}
+
+.juujo-modal-content {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.juujo-modal-content img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--juujo-radius-md);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.juujo-modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transition: transform 0.2s;
+}
+
+.juujo-modal-close:hover {
+  transform: scale(1.1);
+}
+
+/* -------------------------------------------------- */
+/* STICKY ADD TO CART FLOATING BAR                    */
+/* -------------------------------------------------- */
+.juujo-sticky-cta {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.juujo-sticky-cta.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.juujo-sticky-inner {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 840px;
+  background: #FFFFFF;
+  border: 1px solid var(--juujo-border);
+  border-radius: var(--juujo-radius-full);
+  padding: 8px 10px 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+}
+
+.juujo-sticky-left {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .juujo-sticky-left {
+    display: flex;
+  }
+}
+
+.juujo-sticky-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #EDE8DF;
+  border: 1px solid var(--juujo-border);
+  flex-shrink: 0;
+}
+
+.juujo-sticky-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.juujo-sticky-info {
+  min-width: 0;
+}
+
+.juujo-sticky-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--juujo-plum);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.juujo-sticky-price {
+  font-size: 13.5px;
+  color: var(--juujo-muted);
+}
+
+.juujo-sticky-atc-btn {
+  flex: 1;
+  background: var(--juujo-night);
+  color: #FFFFFF !important;
+  border: 1px solid var(--juujo-night);
+  border-radius: var(--juujo-radius-full);
+  padding: 12px 24px;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .juujo-sticky-atc-btn {
+    flex: initial;
+  }
+}
+
+.juujo-sticky-atc-btn:hover {
+  background: #000000;
+  transform: scale(1.02);
+}
+</style>
+
+<!-- ========================================================================== -->
+<!-- HERO DOM STRUCTURE                                                         -->
+<!-- ========================================================================== -->
+
+<div id="juujo-product-hero-root">
+  <div class="juujo-hero-container">
+    
+    <!-- ---------------------------------------------------- -->
+    <!-- LEFT: PRODUCT GALLERY                                -->
+    <!-- ---------------------------------------------------- -->
+    <div class="juujo-gallery-wrapper">
+      
+      <!-- Main Media Display -->
+      <div class="juujo-gallery-main" id="juujo-gallery-main-view">
+        <span class="juujo-gallery-badge-gifts">3 Free Gifts</span>
+        
+        <img id="juujo-gallery-active-img" 
+             src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-fitted-sheet-silver-thread.webp" 
+             alt="Juujo Grounding Fitted Sheet">
+             
+        <video id="juujo-gallery-active-video" 
+               src="" 
+               autoplay loop muted playsinline 
+               style="display: none;"></video>
+        
+        <button type="button" class="juujo-gallery-zoom-btn" id="juujo-gallery-zoom-trigger" aria-label="Zoom Image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <button type="button" class="juujo-gallery-arrow prev" id="juujo-gallery-prev-btn" aria-label="Previous image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button type="button" class="juujo-gallery-arrow next" id="juujo-gallery-next-btn" aria-label="Next image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Thumbnail Carousel Strip -->
+      <div class="juujo-gallery-thumbs-outer">
+        <button type="button" class="juujo-thumb-nav-btn" id="juujo-thumb-nav-prev" aria-label="Scroll thumbnails left">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        
+        <div class="juujo-gallery-thumbs-scroll" id="juujo-thumbs-scroll-container">
+          <!-- Thumbnails injected via JS -->
+        </div>
+
+        <button type="button" class="juujo-thumb-nav-btn" id="juujo-thumb-nav-next" aria-label="Scroll thumbnails right">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Doctor Recommended & 120-Night Guarantee Trust Bar -->
+      <div class="juujo-gallery-trust-bar">
+        <div class="juujo-doctor-badge">
+          <img class="juujo-doctor-avatar" 
+               src="https://grounding.juujo.com/media/products/grounding-sheets/images/revv3_ac5e8476-c8cf-4382-a0f5-9cdc51a1b8ad.jpg" 
+               alt="Doctor Avatar"
+               onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=120&auto=format&fit=crop&q=80'">
+          <div class="juujo-doctor-text">
+            <h4>Doctor Recommended</h4>
+            <p>Supports healthy sleep, circulation, and recovery through natural grounding contact.</p>
+          </div>
+        </div>
+        
+        <div class="juujo-guarantee-seal">
+          <span class="g-top">Money Back</span>
+          <span class="g-num">120</span>
+          <span class="g-bot">Night Guarantee</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- RIGHT: PRODUCT BUY BOX                               -->
+    <!-- ---------------------------------------------------- -->
+    <div class="juujo-buybox">
+      
+      <!-- Reviews Header -->
+      <a href="#reviews" class="juujo-rating-header">
+        <div class="juujo-stars" aria-label="5 stars">★★★★★</div>
+        <span class="juujo-rating-text">4.9 · TRUSTED BY 40,000+ CUSTOMERS</span>
+      </a>
+
+      <!-- Title -->
+      <h1 class="juujo-title">
+        <span>Premium</span>
+        <span>Grounding Sheets</span>
+      </h1>
+
+      <!-- Size Guide Link -->
+      <button type="button" class="juujo-size-guide-btn" id="juujo-open-size-guide">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span>Size Guide</span>
+      </button>
+
+      <!-- Transformation Bullets -->
+      <ul class="juujo-benefits-list">
+        <li class="juujo-benefit-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+          <span>Fall asleep faster by easing tension and relaxing your body.</span>
+        </li>
+        <li class="juujo-benefit-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a1.73 1.73 0 0 1 2.45.06l1.44 1.44"></path></svg>
+          <span>Wake up with less joint and muscle stiffness.</span>
+        </li>
+        <li class="juujo-benefit-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+          <span>Sleep more deeply and feel energized throughout the day.</span>
+        </li>
+      </ul>
+
+      <!-- Divider -->
+      <div class="juujo-divider">
+        <span class="juujo-divider-line"></span>
+        <span class="juujo-divider-text">Bundle & Save + Free Shipping & Gifts</span>
+        <span class="juujo-divider-line"></span>
+      </div>
+
+      <!-- Bundle Tiers List -->
+      <div class="juujo-tiers-container">
+        
+        <!-- TIER 1: BUY 1 -->
+        <div class="juujo-tier-card" data-tier="single" id="tier-card-single">
+          <button type="button" class="juujo-tier-btn" onclick="juujoSelectTier('single')">
+            <div class="juujo-radio-circle"><div class="juujo-radio-inner"></div></div>
+            <div class="juujo-tier-content">
+              <div class="juujo-tier-left">
+                <h3>Buy 1</h3>
+                <p class="juujo-tier-desc">Includes 1 Fitted Sheet, 1 Cable</p>
+              </div>
+              <div class="juujo-tier-pricing">
+                <div class="juujo-price-row">
+                  <span class="juujo-price-current" id="price-val-single">$169</span>
+                  <span class="juujo-price-compare" id="compare-val-single">$339</span>
+                </div>
+                <span class="juujo-save-tag" id="save-tag-single">SAVE $170</span>
+              </div>
+            </div>
+          </button>
+          
+          <div class="juujo-tier-options" id="tier-options-single">
+            <!-- Sheet 1 Selectors -->
+            <div class="juujo-sheet-row" id="single-sheet-0"></div>
+          </div>
+        </div>
+
+        <!-- TIER 2: BUY 2 (Recommended / Most Popular) -->
+        <div class="juujo-tier-card selected" data-tier="bundle-2" id="tier-card-bundle-2">
+          <div class="juujo-badge-popular">Most<br>Popular</div>
+          
+          <button type="button" class="juujo-tier-btn" onclick="juujoSelectTier('bundle-2')">
+            <div class="juujo-radio-circle"><div class="juujo-radio-inner"></div></div>
+            <div class="juujo-tier-content">
+              <div class="juujo-tier-left">
+                <h3>Buy 2 <span class="juujo-tier-discount-tag">$20 OFF</span></h3>
+                <p class="juujo-tier-desc">
+                  Includes 2 Sheet Sets, 2 Cables<br>
+                  & <strong>FREE Grounding Mat</strong> ($69 Value)
+                </p>
+              </div>
+              <div class="juujo-tier-pricing">
+                <div class="juujo-price-row">
+                  <span class="juujo-price-current" id="price-val-bundle-2">$318</span>
+                  <span class="juujo-price-compare" id="compare-val-bundle-2">$678</span>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <div class="juujo-tier-options" id="tier-options-bundle-2">
+            <!-- Sheet 1 & 2 Selectors -->
+            <div class="juujo-sheet-row" id="bundle-2-sheet-0"></div>
+            <div class="juujo-sheet-row" id="bundle-2-sheet-1"></div>
+          </div>
+        </div>
+
+        <!-- TIER 3: BUY 3 (Best Value) -->
+        <div class="juujo-tier-card tier-3" data-tier="bundle-3" id="tier-card-bundle-3">
+          <div class="juujo-badge-value">BEST VALUE</div>
+          
+          <button type="button" class="juujo-tier-btn" onclick="juujoSelectTier('bundle-3')">
+            <div class="juujo-radio-circle"><div class="juujo-radio-inner"></div></div>
+            <div class="juujo-tier-content">
+              <div class="juujo-tier-left">
+                <h3>Buy 3 <span class="juujo-tier-discount-tag">$40 OFF</span></h3>
+                <p class="juujo-tier-desc">
+                  Includes 3 Sheet Sets, 3 Cables<br>
+                  & <strong>FREE Grounding Mat</strong> ($69 Value)
+                </p>
+              </div>
+              <div class="juujo-tier-pricing">
+                <div class="juujo-price-row">
+                  <span class="juujo-price-current" id="price-val-bundle-3">$467</span>
+                  <span class="juujo-price-compare" id="compare-val-bundle-3">$1,017</span>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <div class="juujo-tier-options" id="tier-options-bundle-3">
+            <!-- Sheet 1, 2, 3 Selectors -->
+            <div class="juujo-sheet-row" id="bundle-3-sheet-0"></div>
+            <div class="juujo-sheet-row" id="bundle-3-sheet-1"></div>
+            <div class="juujo-sheet-row" id="bundle-3-sheet-2"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Free Delivery Banner with Dynamic Arrival Date -->
+      <div class="juujo-delivery-banner">
+        <div class="juujo-delivery-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        </div>
+        <div class="juujo-delivery-text">
+          <strong>FREE DELIVERY</strong> — Arrives by <strong id="juujo-dynamic-delivery-date">Thursday 28 May</strong>
+        </div>
+      </div>
+
+      <!-- Main Add To Cart CTA Button -->
+      <button type="button" class="juujo-atc-btn" id="juujo-main-atc-btn" onclick="juujoHandleAddToCart()">
+        <span class="juujo-atc-spinner"></span>
+        <span class="juujo-atc-text" id="juujo-main-atc-label">ADD TO CART + 2 FREE GIFTS</span>
+      </button>
+
+      <!-- Trust Badges directly below CTA -->
+      <div class="juujo-trust-grid">
+        <div class="juujo-trust-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+          <span>FDA<br>Cleared</span>
+        </div>
+        <div class="juujo-trust-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+          <span>120-Night<br>Guarantee</span>
+        </div>
+        <div class="juujo-trust-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+          <span>Eco-Friendly<br>Materials</span>
+        </div>
+      </div>
+
+      <!-- Summer Sleep Sale - Free Gifts Section -->
+      <div class="juujo-gifts-section">
+        <div class="juujo-gifts-header">
+          <h2>Summer Sleep Sale</h2>
+          <div class="juujo-gifts-value-pill">
+            <span id="juujo-gifts-total-value">$187.00</span> VALUE OF FREE GIFTS FOR TODAY ONLY
+          </div>
+        </div>
+
+        <div class="juujo-gifts-grid">
+          
+          <!-- Gift 1: Grounding Mat -->
+          <div class="juujo-gift-card featured" id="gift-card-mat">
+            <span class="juujo-gift-badge-free">FREE <span>$69.00</span></span>
+            <div class="juujo-gift-img-wrap">
+              <img src="https://grounding.juujo.com/images/grounding_mat_gift.png" 
+                   alt="Grounding Mat"
+                   onerror="this.src='https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-mat-cart.png'">
+            </div>
+            <div class="juujo-gift-title">Grounding Mat</div>
+          </div>
+
+          <!-- Gift 2: Premium Sleep Mask -->
+          <div class="juujo-gift-card" id="gift-card-mask">
+            <span class="juujo-gift-badge-free">FREE <span>$69.00</span></span>
+            <div class="juujo-gift-img-wrap">
+              <img id="juujo-mask-gift-img" 
+                   src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-premium-eye-mask.png" 
+                   alt="Premium Sleep Mask">
+            </div>
+            <div class="juujo-gift-title">Premium Sleep Mask</div>
+            
+            <div class="juujo-gift-swatches">
+              <button type="button" class="juujo-swatch-dot active" style="background-color: #066B73;" onclick="juujoSetGiftColor('mask', 'Green', this)" aria-label="Green Mask"></button>
+              <button type="button" class="juujo-swatch-dot" style="background-color: #28282B;" onclick="juujoSetGiftColor('mask', 'Black', this)" aria-label="Black Mask"></button>
+              <button type="button" class="juujo-swatch-dot" style="background-color: #C48B9F;" onclick="juujoSetGiftColor('mask', 'Pink', this)" aria-label="Pink Mask"></button>
+            </div>
+            <span class="juujo-gift-unlock-tag" id="mask-unlock-tag" style="display: none;">Buy 2 To Unlock</span>
+          </div>
+
+          <!-- Gift 3: Grounding Pillowcase -->
+          <div class="juujo-gift-card locked" id="gift-card-pillow">
+            <span class="juujo-gift-badge-free">FREE <span>$49.00</span></span>
+            <div class="juujo-gift-img-wrap">
+              <img id="juujo-pillow-gift-img" 
+                   src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-pillowcase-gift.webp" 
+                   alt="Grounding Pillowcase">
+            </div>
+            <div class="juujo-gift-title">Grounding Pillowcase</div>
+            
+            <div class="juujo-gift-swatches">
+              <button type="button" class="juujo-swatch-dot active" style="background-color: #FFFFFF;" onclick="juujoSetGiftColor('pillow', 'White', this)" aria-label="White Pillowcase"></button>
+              <button type="button" class="juujo-swatch-dot" style="background-color: #95949B;" onclick="juujoSetGiftColor('pillow', 'Grey', this)" aria-label="Grey Pillowcase"></button>
+            </div>
+            <span class="juujo-gift-unlock-tag" id="pillow-unlock-tag">Buy 3 To Unlock</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Accordions -->
+      <div class="juujo-accordions-wrap">
+        
+        <!-- Accordion 1: Unique Features -->
+        <div class="juujo-accordion-item">
+          <button type="button" class="juujo-acc-header" onclick="juujoToggleAccordion(this)">
+            <div class="juujo-acc-header-left">
+              <span class="eyebrow">Features</span>
+              <span class="title">What makes our sheets unique?</span>
+            </div>
+            <svg class="juujo-acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="juujo-acc-body">
+            <ul class="juujo-feature-list">
+              <li class="juujo-feature-card">
+                <div class="juujo-feature-card-header">
+                  <div>
+                    <div class="juujo-feature-title">Silver Thread Blend</div>
+                    <div class="juujo-feature-kicker">Conductive Power</div>
+                  </div>
+                  <span class="juujo-feature-num">01</span>
+                </div>
+                <p>Utilizing a high-conductivity 10% silver thread blend to connect you to Earth's natural energy.</p>
+              </li>
+              <li class="juujo-feature-card">
+                <div class="juujo-feature-card-header">
+                  <div>
+                    <div class="juujo-feature-title">Organic Cotton</div>
+                    <div class="juujo-feature-kicker">Gentle & Soft</div>
+                  </div>
+                  <span class="juujo-feature-num">02</span>
+                </div>
+                <p>Soft, hypoallergenic organic cotton that breathes easily, regulates temperature, and stays gentle on sensitive skin.</p>
+              </li>
+              <li class="juujo-feature-card">
+                <div class="juujo-feature-card-header">
+                  <div>
+                    <div class="juujo-feature-title">Naturally Antimicrobial</div>
+                    <div class="juujo-feature-kicker">Clean & Fresh</div>
+                  </div>
+                  <span class="juujo-feature-num">03</span>
+                </div>
+                <p>Pure silver helps prevent odor-causing bacteria, keeping sheets fresher and more hygienic between washes.</p>
+              </li>
+              <li class="juujo-feature-card">
+                <div class="juujo-feature-card-header">
+                  <div>
+                    <div class="juujo-feature-title">Machine Washable</div>
+                    <div class="juujo-feature-kicker">Easy Care</div>
+                  </div>
+                  <span class="juujo-feature-num">04</span>
+                </div>
+                <p>Machine washable and built to maintain conductivity, comfort, and shape with regular use.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accordion 2: Product Details -->
+        <div class="juujo-accordion-item">
+          <button type="button" class="juujo-acc-header" onclick="juujoToggleAccordion(this)">
+            <div class="juujo-acc-header-left">
+              <span class="eyebrow">Specifications</span>
+              <span class="title">Product Details</span>
+            </div>
+            <svg class="juujo-acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="juujo-acc-body">
+            <p style="margin-bottom: 12px;">Our grounding fitted sheet is crafted to seamlessly replace your everyday bedding while providing direct conductive contact.</p>
+            <p><strong>Materials:</strong> 90% Breathable Organic Cotton, 10% Conductive Silver Threads.</p>
+            <p style="margin-top: 6px;"><strong>Sizes & Fit:</strong> Deep fitted elastic skirt designed for mattresses up to 15" (38cm) deep.</p>
+            <p style="margin-top: 6px;"><strong>Care:</strong> Machine wash cold gentle cycle. Tumble dry low or line dry. Do not use bleach.</p>
+          </div>
+        </div>
+
+        <!-- Accordion 3: What's Included -->
+        <div class="juujo-accordion-item">
+          <button type="button" class="juujo-acc-header" onclick="juujoToggleAccordion(this)">
+            <div class="juujo-acc-header-left">
+              <span class="eyebrow">In the box</span>
+              <span class="title">What's Included</span>
+            </div>
+            <svg class="juujo-acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="juujo-acc-body">
+            <ul style="list-style: disc; padding-left: 20px; line-height: 1.6;">
+              <li>1x Premium Grounding Fitted Sheet</li>
+              <li>1x 15ft (4.5m) Grounding Connection Cord</li>
+              <li>1x Wall Outlet Safety Adaptor (region specific)</li>
+              <li>1x Quick Start & Care Guide</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accordion 4: How Does It Work -->
+        <div class="juujo-accordion-item">
+          <button type="button" class="juujo-acc-header" onclick="juujoToggleAccordion(this)">
+            <div class="juujo-acc-header-left">
+              <span class="eyebrow">Usage</span>
+              <span class="title">How Does it Work?</span>
+            </div>
+            <svg class="juujo-acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="juujo-acc-body">
+            <p>The grounding sheet snaps onto the included cord and connects directly to the grounded third pin of your electrical wall outlet. No electricity flows through the sheet — it utilizes the Earth's natural negative charge to neutralize free radicals while you sleep.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- MODALS: LIGHTBOX & SIZE GUIDE                                              -->
+<!-- ========================================================================== -->
+
+<!-- Gallery Lightbox Modal -->
+<div class="juujo-modal-overlay" id="juujo-lightbox-modal" onclick="juujoCloseLightbox(event)">
+  <div class="juujo-modal-content">
+    <button type="button" class="juujo-modal-close" onclick="juujoCloseLightbox()" aria-label="Close">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <img id="juujo-lightbox-img" src="" alt="Expanded View">
+  </div>
+</div>
+
+<!-- Size Guide Modal -->
+<div class="juujo-modal-overlay" id="juujo-size-guide-modal" onclick="juujoCloseSizeGuide(event)">
+  <div class="juujo-modal-content">
+    <button type="button" class="juujo-modal-close" onclick="juujoCloseSizeGuide()" aria-label="Close">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-size-guide.png" 
+         alt="Juujo Grounding Sheets Size Guide"
+         style="max-width: 95vw; max-height: 90vh;">
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- STICKY ADD TO CART FLOATING BAR                                            -->
+<!-- ========================================================================== -->
+
+<div class="juujo-sticky-cta" id="juujo-sticky-cta-bar">
+  <div class="juujo-sticky-inner">
+    <div class="juujo-sticky-left">
+      <div class="juujo-sticky-thumb">
+        <img src="https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp" alt="Juujo Grounding Sheet">
+      </div>
+      <div class="juujo-sticky-info">
+        <div class="juujo-sticky-title">Premium Grounding Bed Sheet</div>
+        <div class="juujo-sticky-price"><span id="juujo-sticky-price-text">$318.00</span> · Free Shipping</div>
+      </div>
+    </div>
+    <button type="button" class="juujo-sticky-atc-btn" onclick="juujoHandleAddToCart()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <span id="juujo-sticky-atc-label">ADD TO CART + 2 FREE GIFTS</span>
+    </button>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- JAVASCRIPT LOGIC (SELF-CONTAINED IIFE)                                     -->
+<!-- ========================================================================== -->
+
+<script>
+(function() {
+  // Prevent duplicate execution in dynamic SPAs
+  var root = document.getElementById('juujo-product-hero-root');
+  if (!root || root.getAttribute('data-initialized') === 'true') return;
+  root.setAttribute('data-initialized', 'true');
+
+  /* ------------------------------------------------------------------ */
+  /* PRODUCT DATA & VARIANT MATRIX                                      */
+  /* ------------------------------------------------------------------ */
+  var GALLERY_ITEMS = [
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-fitted-sheet-silver-thread.webp', alt: 'Juujo Earthing Fitted Sheet Silver Thread' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-bed-sheet-health.webp', alt: 'Juujo Grounding Bed Sheet Health' },
+    { type: 'video', src: 'https://grounding.juujo.com/media/products/grounding-sheets/videos/juujo-grounding-fitted-sheet-demo.mp4', alt: 'Juujo Grounding Fitted Sheet Demo' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-fitted-sheet-sleep-benefits.webp', alt: 'Juujo Grounding Fitted Sheet Sleep Benefits' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-sheet-benefits.gif', alt: 'Juujo Earthing Sheet Benefits' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-sheet-premium-quality.webp', alt: 'Juujo Earthing Sheet Premium Quality' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-conductive-fitted-sheet-earthing.webp', alt: 'Juujo Conductive Fitted Sheet Earthing' },
+    { type: 'video', src: 'https://grounding.juujo.com/media/products/grounding-sheets/videos/juujo-earthing-sheet-setup-guide.mp4', alt: 'Juujo Earthing Sheet Setup Guide' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounded-sleep-fitted-sheet.webp', alt: 'Juujo Grounded Sleep Fitted Sheet' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-organic-cotton-grounding-sheet.webp', alt: 'Juujo Organic Cotton Grounding Sheet' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-therapy-fitted-sheet.webp', alt: 'Juujo Grounding Therapy Fitted Sheet' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-conductive-bedding-fitted-sheet.webp', alt: 'Juujo Conductive Bedding Fitted Sheet' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-earthing-bed-sheet-setup.webp', alt: 'Juujo Earthing Bed Sheet Setup' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-fitted-sheet-lifestyle.webp', alt: 'Juujo Grounding Fitted Sheet Lifestyle' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-natural-earthing-fitted-sheet.webp', alt: 'Juujo Natural Earthing Fitted Sheet' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-sheet-restful-sleep.webp', alt: 'Juujo Grounding Sheet Restful Sleep' },
+    { type: 'image', src: 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-fitted-sheet-details.webp', alt: 'Juujo Grounding Fitted Sheet Details' }
+  ];
+
+  var SIZES = [
+    { id: 'single', name: 'Single', dim: '27 x 78 in', price: 99, compare: 199 },
+    { id: 'twin', name: 'Twin', dim: '39 x 75 in', price: 149, compare: 299 },
+    { id: 'twin-xl', name: 'Twin XL', dim: '39 x 80 in', price: 159, compare: 319 },
+    { id: 'full', name: 'Full', dim: '54 x 75 in', price: 169, compare: 339 },
+    { id: 'queen', name: 'Queen', dim: '60 x 80 in', price: 169, compare: 339 },
+    { id: 'king', name: 'King', dim: '76 x 80 in', price: 189, compare: 379 },
+    { id: 'cali-king', name: 'Cali King', dim: '72 x 84 in', price: 189, compare: 379 }
+  ];
+
+  var COLORS = [
+    { id: 'white', name: 'White', hex: '#F2EFE8' },
+    { id: 'grey', name: 'Grey', hex: '#9B9A95' },
+    { id: 'green', name: 'Green', hex: '#5C6B52' }
+  ];
+
+  var VARIANT_IDS = {
+    'white-single': '1000020490757976',
+    'white-twin': '1000020490760779',
+    'white-twin-xl': '1000020490757981',
+    'white-full': '1000020490760780',
+    'white-queen': '1000020490757983',
+    'white-king': '1000020490759920',
+    'white-cali-king': '1000020490760772',
+    'grey-single': '1000020490757995',
+    'grey-twin': '1000020490760803',
+    'grey-twin-xl': '1000020490757998',
+    'grey-full': '1000020490760804',
+    'grey-queen': '1000020490757994',
+    'grey-king': '1000020490759921',
+    'grey-cali-king': '1000020490760792',
+    'green-single': '1000020490760742',
+    'green-twin': '1000020490760739',
+    'green-twin-xl': null, // out of stock
+    'green-full': '1000020490760740',
+    'green-queen': '1000020490760729',
+    'green-king': '1000020490760730',
+    'green-cali-king': '1000020490760728'
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* STATE                                                              */
+  /* ------------------------------------------------------------------ */
+  var currentGalleryIndex = 0;
+  var currentTier = 'bundle-2'; // Default selected
+  var giftMaskColor = 'Green';
+  var giftPillowColor = 'White';
+
+  var choices = {
+    'single': [{ color: 'white', size: 'queen' }],
+    'bundle-2': [
+      { color: 'white', size: 'queen' },
+      { color: 'grey', size: 'queen' }
+    ],
+    'bundle-3': [
+      { color: 'white', size: 'queen' },
+      { color: 'grey', size: 'queen' },
+      { color: 'green', size: 'queen' }
+    ]
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* GALLERY CONTROLS                                                   */
+  /* ------------------------------------------------------------------ */
+  function renderGalleryThumbs() {
+    var container = document.getElementById('juujo-thumbs-scroll-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    GALLERY_ITEMS.forEach(function(item, idx) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'juujo-thumb-btn' + (idx === currentGalleryIndex ? ' active' : '');
+      btn.setAttribute('aria-label', 'View ' + item.alt);
+      btn.onclick = function() { setGalleryIndex(idx); };
+
+      if (item.type === 'video') {
+        btn.innerHTML = '<video src="' + item.src + '" muted playsinline preload="metadata"></video>';
+      } else {
+        btn.innerHTML = '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy">';
+      }
+      container.appendChild(btn);
+    });
+  }
+
+  function setGalleryIndex(idx) {
+    currentGalleryIndex = (idx + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+    var item = GALLERY_ITEMS[currentGalleryIndex];
+    
+    var imgEl = document.getElementById('juujo-gallery-active-img');
+    var vidEl = document.getElementById('juujo-gallery-active-video');
+    
+    if (item.type === 'video') {
+      imgEl.style.display = 'none';
+      vidEl.src = item.src;
+      vidEl.style.display = 'block';
+      vidEl.play().catch(function(){});
+    } else {
+      vidEl.style.display = 'none';
+      vidEl.pause();
+      imgEl.src = item.src;
+      imgEl.alt = item.alt;
+      imgEl.style.display = 'block';
+    }
+
+    // Update thumbs active state
+    var thumbs = document.querySelectorAll('#juujo-thumbs-scroll-container .juujo-thumb-btn');
+    thumbs.forEach(function(th, i) {
+      if (i === currentGalleryIndex) {
+        th.classList.add('active');
+        th.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        th.classList.remove('active');
+      }
+    });
+  }
+
+  document.getElementById('juujo-gallery-prev-btn').onclick = function() { setGalleryIndex(currentGalleryIndex - 1); };
+  document.getElementById('juujo-gallery-next-btn').onclick = function() { setGalleryIndex(currentGalleryIndex + 1); };
+  
+  document.getElementById('juujo-thumb-nav-prev').onclick = function() {
+    document.getElementById('juujo-thumbs-scroll-container').scrollBy({ left: -160, behavior: 'smooth' });
+  };
+  document.getElementById('juujo-thumb-nav-next').onclick = function() {
+    document.getElementById('juujo-thumbs-scroll-container').scrollBy({ left: 160, behavior: 'smooth' });
+  };
+
+  // Lightbox
+  window.juujoOpenLightbox = function() {
+    var item = GALLERY_ITEMS[currentGalleryIndex];
+    if (item.type === 'video') return;
+    var modal = document.getElementById('juujo-lightbox-modal');
+    var modalImg = document.getElementById('juujo-lightbox-img');
+    modalImg.src = item.src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.juujoCloseLightbox = function(e) {
+    if (!e || e.target === document.getElementById('juujo-lightbox-modal') || e.target.closest('.juujo-modal-close')) {
+      document.getElementById('juujo-lightbox-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+
+  document.getElementById('juujo-gallery-main-view').onclick = function(e) {
+    if (e.target.closest('.juujo-gallery-arrow')) return;
+    juujoOpenLightbox();
+  };
+  document.getElementById('juujo-gallery-zoom-trigger').onclick = function(e) {
+    e.stopPropagation();
+    juujoOpenLightbox();
+  };
+
+  // Size Guide Modal
+  document.getElementById('juujo-open-size-guide').onclick = function() {
+    document.getElementById('juujo-size-guide-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.juujoCloseSizeGuide = function(e) {
+    if (!e || e.target === document.getElementById('juujo-size-guide-modal') || e.target.closest('.juujo-modal-close')) {
+      document.getElementById('juujo-size-guide-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* DYNAMIC DATE & TIMER                                               */
+  /* ------------------------------------------------------------------ */
+  function updateDeliveryDate() {
+    var d = new Date();
+    d.setDate(d.getDate() + 3);
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var str = days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()];
+    var el = document.getElementById('juujo-dynamic-delivery-date');
+    if (el) el.innerText = str;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* TIER & PRICING CALCULATIONS                                        */
+  /* ------------------------------------------------------------------ */
+  function getTierDiscount(tierId) {
+    if (tierId === 'bundle-2') return 20;
+    if (tierId === 'bundle-3') return 40;
+    return 0;
+  }
+
+  function calculateTierPrices(tierId) {
+    var tierChoices = choices[tierId];
+    var subtotal = 0;
+    var compareTotal = 0;
+
+    tierChoices.forEach(function(choice) {
+      var sObj = SIZES.find(function(s) { return s.id === choice.size; }) || SIZES[4];
+      subtotal += sObj.price;
+      compareTotal += sObj.compare;
+    });
+
+    var discount = getTierDiscount(tierId);
+    var finalPrice = subtotal - discount;
+    var totalSavings = compareTotal - finalPrice;
+
+    return {
+      price: finalPrice,
+      compare: compareTotal,
+      savings: totalSavings
+    };
+  }
+
+  function updateAllPricingDisplay() {
+    ['single', 'bundle-2', 'bundle-3'].forEach(function(tId) {
+      var res = calculateTierPrices(tId);
+      var pEl = document.getElementById('price-val-' + tId);
+      var cEl = document.getElementById('compare-val-' + tId);
+      var sEl = document.getElementById('save-tag-' + tId);
+
+      if (pEl) pEl.innerText = '$' + res.price;
+      if (cEl) cEl.innerText = '$' + res.compare;
+      if (sEl) sEl.innerText = 'SAVE $' + res.savings;
+    });
+
+    // Update ATC Button Text
+    var activeRes = calculateTierPrices(currentTier);
+    var giftsCount = currentTier === 'single' ? 1 : currentTier === 'bundle-2' ? 2 : 3;
+    var atcText = 'ADD TO CART + ' + giftsCount + ' FREE GIFT' + (giftsCount > 1 ? 'S' : '');
+
+    var mainAtcLabel = document.getElementById('juujo-main-atc-label');
+    var stickyAtcLabel = document.getElementById('juujo-sticky-atc-label');
+    var stickyPriceText = document.getElementById('juujo-sticky-price-text');
+
+    if (mainAtcLabel) mainAtcLabel.innerText = atcText;
+    if (stickyAtcLabel) stickyAtcLabel.innerText = atcText;
+    if (stickyPriceText) stickyPriceText.innerText = '$' + activeRes.price + '.00';
+
+    // Update Gift Lock States
+    var cardMask = document.getElementById('gift-card-mask');
+    var cardPillow = document.getElementById('gift-card-pillow');
+    var tagMask = document.getElementById('mask-unlock-tag');
+    var tagPillow = document.getElementById('pillow-unlock-tag');
+
+    if (currentTier === 'single') {
+      if (cardMask) cardMask.classList.add('locked');
+      if (tagMask) tagMask.style.display = 'inline-block';
+      if (cardPillow) cardPillow.classList.add('locked');
+      if (tagPillow) tagPillow.style.display = 'inline-block';
+    } else if (currentTier === 'bundle-2') {
+      if (cardMask) cardMask.classList.remove('locked');
+      if (tagMask) tagMask.style.display = 'none';
+      if (cardPillow) cardPillow.classList.add('locked');
+      if (tagPillow) tagPillow.style.display = 'inline-block';
+    } else {
+      if (cardMask) cardMask.classList.remove('locked');
+      if (tagMask) tagMask.style.display = 'none';
+      if (cardPillow) cardPillow.classList.remove('locked');
+      if (tagPillow) tagPillow.style.display = 'none';
+    }
+  }
+
+  window.juujoSelectTier = function(tierId) {
+    currentTier = tierId;
+    ['single', 'bundle-2', 'bundle-3'].forEach(function(tId) {
+      var card = document.getElementById('tier-card-' + tId);
+      if (tId === tierId) {
+        card.classList.add('selected');
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+    updateAllPricingDisplay();
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* SHEET SELECTORS (COLOR & SIZE DROPDOWNS)                            */
+  /* ------------------------------------------------------------------ */
+  function renderSheetRows() {
+    ['single', 'bundle-2', 'bundle-3'].forEach(function(tId) {
+      var count = tId === 'single' ? 1 : tId === 'bundle-2' ? 2 : 3;
+      for (var i = 0; i < count; i++) {
+        var containerId = tId + '-sheet-' + i;
+        var rowEl = document.getElementById(containerId);
+        if (!rowEl) continue;
+
+        var choice = choices[tId][i];
+        var selectedColor = COLORS.find(function(c){ return c.id === choice.color; }) || COLORS[0];
+        var selectedSize = SIZES.find(function(s){ return s.id === choice.size; }) || SIZES[4];
+
+        var indexHtml = count > 1 ? '<span class="juujo-sheet-index">#' + (i + 1) + '</span>' : '';
+
+        rowEl.innerHTML = 
+          indexHtml +
+          // Color Select
+          '<div class="juujo-custom-select color-select">' +
+            '<button type="button" class="juujo-select-trigger" onclick="juujoToggleDropdown(this)">' +
+              '<span class="juujo-color-dot" style="background-color:' + selectedColor.hex + ';"></span>' +
+              '<span>' + selectedColor.name + '</span>' +
+              '<svg class="juujo-select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+            '</button>' +
+            '<div class="juujo-select-dropdown">' +
+              COLORS.map(function(c) {
+                return '<div class="juujo-select-option ' + (c.id === selectedColor.id ? 'selected' : '') + '" onclick="juujoUpdateSheetChoice(\'' + tId + '\', ' + i + ', \'color\', \'' + c.id + '\')">' +
+                  '<div class="juujo-opt-left">' +
+                    '<span class="juujo-color-dot" style="background-color:' + c.hex + ';"></span>' +
+                    '<span>' + c.name + '</span>' +
+                  '</div>' +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+          // Size Select
+          '<div class="juujo-custom-select size-select">' +
+            '<button type="button" class="juujo-select-trigger" onclick="juujoToggleDropdown(this)">' +
+              '<span>Fitted - ' + selectedSize.name + ' (' + selectedSize.dim + ')</span>' +
+              '<svg class="juujo-select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+            '</button>' +
+            '<div class="juujo-select-dropdown">' +
+              SIZES.map(function(s) {
+                var vKey = choice.color + '-' + s.id;
+                var inStock = VARIANT_IDS[vKey] !== null;
+                return '<div class="juujo-select-option ' + (s.id === selectedSize.id ? 'selected' : '') + ' ' + (!inStock ? 'out-of-stock' : '') + '" onclick="' + (inStock ? 'juujoUpdateSheetChoice(\'' + tId + '\', ' + i + ', \'size\', \'' + s.id + '\')' : '') + '">' +
+                  '<div class="juujo-opt-left">' +
+                    '<span>Fitted - ' + s.name + ' (' + s.dim + ')</span>' +
+                  '</div>' +
+                  (!inStock ? '<span class="juujo-opt-stock">Out of stock</span>' : '') +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>';
+      }
+    });
+  }
+
+  window.juujoToggleDropdown = function(btn) {
+    var dropdown = btn.nextElementSibling;
+    var isOpen = dropdown.classList.contains('open');
+    // Close all open dropdowns
+    document.querySelectorAll('.juujo-select-dropdown.open').forEach(function(d) {
+      d.classList.remove('open');
+      d.previousElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      dropdown.classList.add('open');
+      btn.classList.add('open');
+    }
+  };
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.juujo-custom-select')) {
+      document.querySelectorAll('.juujo-select-dropdown.open').forEach(function(d) {
+        d.classList.remove('open');
+        d.previousElementSibling.classList.remove('open');
+      });
+    }
+  });
+
+  window.juujoUpdateSheetChoice = function(tierId, index, key, value) {
+    choices[tierId][index][key] = value;
+    renderSheetRows();
+    updateAllPricingDisplay();
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* GIFT SWATCHES & ACCORDIONS                                         */
+  /* ------------------------------------------------------------------ */
+  window.juujoSetGiftColor = function(giftType, colorName, btn) {
+    var card = btn.closest('.juujo-gift-card');
+    card.querySelectorAll('.juujo-swatch-dot').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+
+    if (giftType === 'mask') {
+      giftMaskColor = colorName;
+      var maskImg = document.getElementById('juujo-mask-gift-img');
+      if (colorName === 'Pink') {
+        maskImg.src = 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-premium-eye-mask-pink.png';
+      } else if (colorName === 'Black') {
+        maskImg.src = 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-premium-eye-mask-black.png';
+      } else {
+        maskImg.src = 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-premium-eye-mask.png';
+      }
+    } else if (giftType === 'pillow') {
+      giftPillowColor = colorName;
+      var pillowImg = document.getElementById('juujo-pillow-gift-img');
+      if (colorName === 'Grey') {
+        pillowImg.src = 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-pillowcase-grey-gift.png';
+      } else {
+        pillowImg.src = 'https://grounding.juujo.com/media/products/grounding-sheets/images/juujo-grounding-pillowcase-gift.webp';
+      }
+    }
+  };
+
+  window.juujoToggleAccordion = function(headerBtn) {
+    var item = headerBtn.closest('.juujo-accordion-item');
+    var isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* STICKY ADD TO CART OBSERVER                                        */
+  /* ------------------------------------------------------------------ */
+  function initStickyObserver() {
+    var mainBtn = document.getElementById('juujo-main-atc-btn');
+    var stickyBar = document.getElementById('juujo-sticky-cta-bar');
+    if (!mainBtn || !stickyBar) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      });
+    }, { threshold: [0, 1] });
+
+    observer.observe(mainBtn);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* ADD TO CART ACTION (PLUSBASE NATIVE / CART API)                    */
+  /* ------------------------------------------------------------------ */
+  window.juujoHandleAddToCart = function() {
+    var activeChoices = choices[currentTier];
+    
+    // Check out of stock
+    var hasOutOfStock = activeChoices.some(function(c) {
+      return VARIANT_IDS[c.color + '-' + c.size] === null;
+    });
+
+    if (hasOutOfStock) {
+      alert('One of your selected sheets is out of stock. Please choose another color or size.');
+      return;
+    }
+
+    var mainBtn = document.getElementById('juujo-main-atc-btn');
+    if (mainBtn) mainBtn.classList.add('loading');
+
+    // Collect variant IDs for PlusBase checkout
+    var itemsToAdd = activeChoices.map(function(c) {
+      var vId = VARIANT_IDS[c.color + '-' + c.size];
+      return { id: vId, quantity: 1 };
+    });
+
+    // 1. Try PlusBase / ShopBase SDK if available
+    if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
+      try {
+        itemsToAdd.forEach(function(item) {
+          window.sbsdk.cart.add(item.id, item.quantity);
+        });
+        setTimeout(function() { window.location.href = '/cart'; }, 500);
+        return;
+      } catch(e) {
+        console.warn('SBSDK add error, trying fetch fallback', e);
+      }
+    }
+
+    // 2. Try standard PlusBase / Shopify /cart/add.js endpoint
+    var firstItem = itemsToAdd[0];
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(firstItem)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        window.location.href = '/cart';
+      } else {
+        throw new Error('Direct cart API failed');
+      }
+    })
+    .catch(function() {
+      // 3. Fallback: Trigger PlusBase native form button if present on page
+      var nativeBtn = document.querySelector('form[action*="/cart/add"] button[type="submit"], button[name="add"], .product-form__cart-submit, button.add-to-cart');
+      if (nativeBtn) {
+        nativeBtn.click();
+      } else {
+        // 4. Final Fallback: Direct navigate to cart
+        window.location.href = '/cart';
+      }
+    });
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* INITIALIZATION                                                     */
+  /* ------------------------------------------------------------------ */
+  renderGalleryThumbs();
+  renderSheetRows();
+  updateDeliveryDate();
+  updateAllPricingDisplay();
+  initStickyObserver();
+
+})();
+</script>
